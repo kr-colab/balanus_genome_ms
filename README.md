@@ -291,11 +291,16 @@ N:1013
 ```
 
 <!--- TODO --->
-Purge Dups
-Hi-C scaffolding
-Tigmint checks
-re-scaffolding
-inspector
+Continue in:
+```
+/sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff
+```
+
+* Purge Dups
+* Hi-C scaffolding
+* Tigmint checks
+* re-scaffolding
+* inspector
 
 ### Genome annotation
 <!--- TODO --->
