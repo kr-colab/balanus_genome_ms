@@ -276,7 +276,7 @@ cat ${name}.hic.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
     gzip > ${name}.p_ctg.fasta.gz
 ```
 
-This assembly was composed of 2,218 contigs, with a total length of 1.29 Gbp, and a contig N50 of 1.16 Gbp. Largest contig was 6.37 Mbp (checked with `quast` version `5.2.0`).
+This assembly is composed of 2,218 contigs, with a total length of 1.29 Gbp, a largest contig of 6.37 Mbp, and a contig N50 of 1.16 Gbp (checked with `quast` version `5.2.0`).
 
 We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went down to 21% form 50%.
 
@@ -300,6 +300,7 @@ Continue in:
 * Hi-C scaffolding
 * Tigmint checks
 * re-scaffolding
+* re-Purge Dups
 * inspector
 
 ### Genome annotation
@@ -324,7 +325,55 @@ Path to raw data:
 /sietch_colab/data_share/balanus/balanus_crenatus/hifi_reads
 ```
 
+### Genome assembly
+
+#### Contig-level assembly
+
+Generated a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contained strict parameter for the identification and purging of haplotig sequences.
+
+```sh
+cmd=(
+    hifiasm
+    -o $name
+    --hom-cov 40
+    -t 24
+    -s 0.25
+    --hg-size 800m
+    --dual-scaf
+    --purge-max 40
+    -D 10.0
+    -l 3
+    $reads/m64047_240125_175314.ccs.fastq.gz
+    $reads/m64047_240127_045016.ccs.fastq.gz
+)
+
+echo "${cmd[@]}"
+"${cmd[@]}" > $log 2>&1
+
+# Convert the GFA to fasta
+cat ${name}.bp.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
+    gzip > ${name}.p_ctg.fasta.gz
+```
+
+This assembly is composed of 2,932 contigs, a total length of 1.20 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 746 Kbp (checked with `quast` version `5.2.0`).
+
+We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went at ~20%.
+
+```
+## lineage: arthropoda_odb10
+S:75.32%, 763
+D:19.64%, 199
+F:0.89%, 9
+I:0.00%, 0
+M:4.15%, 42
+N:1013
+```
+
 <!--- TODO --->
+* MMseqs2
+* Purge Dups
+* Reference-guided scaffolding
+* inspector
 
 ## *Balanus nubilis* genome assembly and annotation
 
@@ -334,7 +383,14 @@ Path to raw data:
 <!--- TODO --->
 
 ## Other genome assemblies
+
+See:
+
+```
+/sietch_colab/ariverac/balanus_genome/ncbi_data/orthodb_v11_Crustacea
+```
 <!--- TODO --->
+
 
 ## Comparative analysis
 <!--- TODO --->
