@@ -276,9 +276,9 @@ cat ${name}.hic.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
     gzip > ${name}.p_ctg.fasta.gz
 ```
 
-This assembly is composed of 2,218 contigs, with a total length of 1.29 Gbp, a largest contig of 6.37 Mbp, and a contig N50 of 1.16 Gbp (checked with `quast` version `5.2.0`).
+This assembly is composed of 2,218 contigs, with a total length of 1.29 Gbp, a largest contig of 6.37 Mbp, and a contig N50 of 1.16 Mbp (checked with `quast` version `5.2.0`).
 
-We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went down to 21% form 50%.
+We verified gene-completeness using `compleasm` version `0.12-r237` (95.36% complete). Duplicates went down to 21% form 50%.
 
 ```
 ## lineage: arthropoda_odb10
@@ -290,13 +290,83 @@ M:3.75%, 38
 N:1013
 ```
 
+### Purging haplotig sequences
+
+We purges haplotig sequences using `purge_dups` version `1.2.5`.
+
+First, aligned the PacBio HiFi to the genome and did the assembly self-alignment using `minimap2` version `2.26-r1175`.
+
+```sh
+# Align the reads to the reference
+minimap2 -x map-hifi -t 16 $genome $reads | gzip -c - > $paf
+
+# Calculate read-depth histogram
+pbcstat -O $alns_out $paf
+
+# Calculate base-level depth
+calcuts PB.stat > cutoffs 2>calcults.log
+
+# Do an assembly self-alignment
+split_fa $genome > $split
+minimap2 -x asm5 -t 16 -DP $split $split | gzip -c - > $self
+```
+
+We then tan `purge_dups` and the `get_seqs` utility to identify and filter haplotig sequences.
+
+```sh
+# Mark the duplicates in a bed file
+cmd=(
+    purge_dups
+    -2
+    -T $alns/cutoffs
+    -c $alns/PB.base.cov
+    $paf
+)
+echo "${cmd[@]}"
+"${cmd[@]}" > dups.bed 2> purge_dups.log
+
+
+# Process the assembly
+cmd=(
+    get_seqs
+    -e
+    -s
+    -p $name
+    dups.bed
+    $geno
+)
+echo "${cmd[@]}"
+"${cmd[@]}" > get_seqs.log 2>&1
+```
+
+The purged assembly is composed of 1,342 contigs, a total length of 1.05 Gbp,largest contig of 6.37 Mbp, and a contig N50 of 1.35 Mbp (checked with `quast` version `5.2.0`).
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (93.88% complete.)
+
+```
+## lineage: arthropoda_odb10
+S:89.04%, 902
+D:4.84%, 49
+F:1.18%, 12
+I:0.00%, 0
+M:4.94%, 50
+N:1013
+```
+
+In comparison with the un-purged assembly:
+
+* Number of contigs went from 2.2 K to 1.3 K
+* Total length went from 1.29 Gbp to 1.05 Gbp
+* Contig N50 went from 1.16 Mbp to 1.31 Mbp
+* BUSCO C went from 95.36% to 93.88%
+* BUSCO D went from 21.82% to 4.84%
+
 <!--- TODO --->
 Continue in:
 ```
 /sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff
 ```
 
-* Purge Dups
 * Hi-C scaffolding
 * Tigmint checks
 * re-scaffolding
