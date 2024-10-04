@@ -79,6 +79,10 @@ Note: Sample used for the scaffolding was `Bgland_1`
 
 ### Genome assembly
 
+#### K-mer estimation
+
+TODO: Ask @Andy for the originail results or redo in the pooled data.
+
 #### Initial contig-level assembly
 
 The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using defeault parameters.
@@ -397,6 +401,10 @@ Path to raw data:
 
 ### Genome assembly
 
+#### K-mer estimation
+
+TODO: Redo in the pooled data.
+
 #### Contig-level assembly
 
 Generated a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contained strict parameter for the identification and purging of haplotig sequences.
@@ -459,6 +467,27 @@ See:
 ```
 /sietch_colab/ariverac/balanus_genome/ncbi_data/orthodb_v11_Crustacea
 ```
+
+Crustacean specues in OrthoDB v11 ([link](https://www.orthodb.org/?level=6657&species=6657))
+
+* Amphibalanus amphitrite, genome GCF_019059575.1
+* Daphnia magna, genome GCF_020631705.1
+* Daphnia pulex, genome GCF_021134715.1
+* Daphnia pulicaria, genome GCF_021234035.1
+* Eurytemora affinis, genome GCF_000591075.1
+* Homarus americanus, genome GCF_018991925.1
+* Hyalella azteca, genome GCF_000764305.2
+* Lepeophtheirus salmonis, genome GCF_016086655.2
+* Penaeus chinensis, genome GCF_019202785.1
+* Penaeus japonicus, genome GCF_017312705.1
+* Penaeus monodon, genome GCF_015228065.1
+* Penaeus vannamei, genome GCF_003789085.1
+* Pollicipes pollicipes, genome GCF_011947565.2
+* Portunus trituberculatus, genome GCF_017591435.1
+* Procambarus clarkii, genome GCF_020424385.1
+* Tigriopus californicus, genome 0
+
+
 <!--- TODO --->
 
 
