@@ -1,4 +1,4 @@
-# Barnacle genome paper
+ # Barnacle genome paper
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
 
@@ -465,28 +465,50 @@ N:1013
 See:
 
 ```
+/sietch_colab/data_share/balanus/crustacean_outgroup_assemblies
+```
+
+All the ones downloaded:
+
+| Spp name | Class | Family | Spp Code | NCBI Accession | Assembly ID | In OrthoDB v11<sup>1</sup> | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCF_019059575.1` | NRLGWU_Aamphi_draft | yes | -- |
+| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCA_037642225.1` | ASM3764222v1 | no | Annotation from Han et al. 2024<sup>2</sup> |
+| *Artemia franciscana* | Branchiopoda | Artemiidae | `ArtFra` | `GCF_032884065.1` | ASM3288406v1 | no | -- |
+| *Capitulum mitella* | Thecostraca | Pollicipedidae | `CapMit` | `GCA_030062745.1` | GCA_030062745.1 | no | No annotation |
+| *Cherax quadricarinatus* | Malacostraca | Parastacidae | `CheQua` | `GCF_026875155.1` | ASM2687515v2 | no | -- |
+| *Daphnia magna* | Branchiopoda | Daphniidae | `DapMag` | `GCF_020631705.1` | ASM2063170v1.1 | yes | -- |
+| *Daphnia pulicaria* | Branchiopoda | Daphniidae | `DapPui` | `GCF_021234035.1` | SC_F0-13Bv2  | yes | -- |
+| *Daphania pulex* | Branchiopoda | Daphniidae | `DapPul` | `GCF_021134715.1` | ASM2113471v1 | yes | -- |
+| *Eriocheir sinensis* | Malacostraca | Varunidae | `EriSin` | `GCF_024679095.1` | ASM2467909v1 | no | -- |
+| *Eurytemora carolleeae/affinis* | Hexanauplia/Copepoda | Temoridae | `EurAff` | `GCF_000591075.1` | Eaff_2.0 | yes | -- |
+| *Homarus americanus* | Malacostraca | Nephropidae | `HomAme` | `GCF_018991925.1` | GMGI_Hamer_2.0 | yes | -- |
+| *Hyalella azteca* | Malacostraca | Hyalellidae | `HyaAzt` | `GCF_000764305.2` | Hazt_2.0.2 |  yes | -- |
+| *Lepeophtheirus salmonis* | Hexanauplia/Copepoda | Caligidae | `LepSal` | `GCF_016086655.3` | UVic_Lsal_1.2 | yes | -- |
+| *Macrobrachium rosenbergii* | Malacostraca | Palaemonidae | `MacRos` | `GCF_040412425.1` | ASM4041242v1 | no | -- |
+| *Penaeus chinensis* | Malacostraca | Penaeidae | `PenChi` | `GCF_019202785.1` | ASM1920278v2 | yes | -- |
+| *Penaeus japonicus* | Malacostraca | Penaeidae | `PenJap` | `GCF_017312705.1` | Mj_TUMSAT_v1.0 | yes | -- |
+| *Penaeus monodon* | Malacostraca | Penaeidae | `PenMon` | `GCF_015228065.2` | NSTDA_Pmon_1 | yes | -- |
+| *Penaeus vannamei* | Malacostraca | Penaeidae | `PenVan` | `GCF_019202785.1` | ASM1920278v2 | yes | -- |
+| *Pollicipes pollicipes* | Thecostraca |  Pollicipedidae | `PolPol` | `GCF_011947565.3` | Ppol_2.1 | yes | -- |
+| *Portunus trituberculatus* | Malacostraca | Portunidae |  `PorTri` | `GCF_017591435.1` | ASM1759143v1 | yes | -- |
+| *Procambarus clarkii* | Malacostraca | Cambaridae | `ProCla` | `GCF_020424385.1` | ASM2042438v2 | yes | -- |
+| *Sacculina carcini* | Thecostraca | Sacculinidae | `SacCar` | `GCA_916048095.2` | qxSacCarc1.2 | no | No annotation |
+| *Scylla paramamosain*  | Malacostraca | Portunidae | `ScyPar` | `GCF_035594125.1` | ASM3559412v1 | no | -- |
+| *Tigriopus californicus* | Hexanauplia/Copepoda | Harpacticidae | `TigCal` | `GCF_007210705.1` | Tcal_SD_v2.1 | yes | -- |
+
+
+<sup>1</sup>Crustacean species in OrthoDB v11 ([link](https://www.orthodb.org/?level=6657&species=6657)). See:
+
+```
 /sietch_colab/ariverac/balanus_genome/ncbi_data/orthodb_v11_Crustacea
 ```
 
-Crustacean specues in OrthoDB v11 ([link](https://www.orthodb.org/?level=6657&species=6657))
+<sup>2</sup> *A. amphitrite* assembly by Han et al. 2024:
 
-* Amphibalanus amphitrite, genome GCF_019059575.1
-* Daphnia magna, genome GCF_020631705.1
-* Daphnia pulex, genome GCF_021134715.1
-* Daphnia pulicaria, genome GCF_021234035.1
-* Eurytemora affinis, genome GCF_000591075.1
-* Homarus americanus, genome GCF_018991925.1
-* Hyalella azteca, genome GCF_000764305.2
-* Lepeophtheirus salmonis, genome GCF_016086655.2
-* Penaeus chinensis, genome GCF_019202785.1
-* Penaeus japonicus, genome GCF_017312705.1
-* Penaeus monodon, genome GCF_015228065.1
-* Penaeus vannamei, genome GCF_003789085.1
-* Pollicipes pollicipes, genome GCF_011947565.2
-* Portunus trituberculatus, genome GCF_017591435.1
-* Procambarus clarkii, genome GCF_020424385.1
-* Tigriopus californicus, genome 0
+>Han, Z., Wang, Z., Rittschof, D. et al. New genes helped acorn barnacles adapt to a sessile lifestyle. *Nat Genet 56*, 970-981 (2024). <https://doi.org/10.1038/s41588-024-01733-7>
 
+Assembly is on NCBI ([link](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_037642225.1/)), annotation is provided by the authors on Figshare ([link](https://doi.org/10.6084/m9.figshare.21310305)).
 
 <!--- TODO --->
 
