@@ -329,7 +329,6 @@ cmd=(
 echo "${cmd[@]}"
 "${cmd[@]}" > dups.bed 2> purge_dups.log
 
-
 # Process the assembly
 cmd=(
     get_seqs
@@ -366,16 +365,291 @@ In comparison with the un-purged assembly:
 * BUSCO D went from 21.82% to 4.84%
 
 <!--- TODO --->
-Continue in:
-```
-/sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff
+
+### Hi-C scaffolding
+
+After haplotig purging, the contigs were assembled using Hi-C data. The alignment and processing of Hi-C read pairs was done following the Omni-C pipeline ([link](https://omni-c.readthedocs.io/en/latest/fastq_to_bam.html)), in accordance to the `yahs` documentation.
+
+Path to this data:
+
+```sh
+/sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff/hi-c/yahs-scaffolding
 ```
 
-* Hi-C scaffolding
-* Tigmint checks
-* re-scaffolding
-* re-Purge Dups
-* inspector
+#### Aliging Hi-C reads
+
+The raw Hi-C reads were aligned to the genome using `bwa` version `0.7.17-r1188`. The base alignments were processed using `samtools` version `1.18`.
+
+For `bwa`, we are splitting alignments and skipping mate rescue and pairing.
+
+```sh
+# Index the reference genome
+echo "Indexing reference..."
+bwa index -p $db $fasta
+
+# Align and and store the "base" alignment
+echo "Aligning reads..."
+bwa mem -5SP -T0 -t $thr $db $r1 $r2 | \
+    samtools view -bh -@ $thr -o $base_bam
+```
+
+#### Processing Hi-C read pairs
+
+Following alignment and base processing, the aligned Hi-C read pairs were processed with `pairtools` version `1.0.2` in order to:
+
+1) Record valid ligation events (`pairtools parse`)
+2) Sorting the pairs (`pairtools sort`)
+3) Remove PCR duplicates (`pairtools dedup`)
+4) Splitting into corresponding aligment and read pairs file (`pairtools split`)
+
+```sh
+samtools view -h $base_bam | \
+    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 \
+        --nproc-in $npr --nproc-out $npr --chroms-path $geno | \
+    pairtools sort --tmpdir $tmp --nproc $npr | \
+    pairtools dedup --nproc-in $npr --nproc-out $npr --mark-dups --output-stats $dups | \
+    pairtools split --nproc-in $npr --nproc-out $npr --output-pairs $pairs --output-sam - | \
+    samtools view -bS -@ $npr | \
+    samtools sort -@ $npr -o $proc_bam
+
+# Index the final bam
+echo "Indexing BAM..."
+```
+
+#### Scaffolding the genome
+
+Following alignment, the contigs were scaffolded using `yahs` version `1.2a.1`.
+
+Since the contigs are fragmented, we reduced the minimum size of in `-r` to 1,000.
+
+```sh
+cmd=(
+    yahs
+    -o $outp
+    -q 10
+    -r 1000,5000,10000,20000,50000,100000,200000,500000,1000000,2000000,5000000,10000000,20000000,50000000,100000000,200000000,500000000
+    $fasta
+    $bam
+)
+
+echo "${cmd[@]}"
+"${cmd[@]}" > $log 2>&1
+```
+
+#### Generating contact map
+
+Following the `yahs` documentation, we generated a contact map using `juicer` version `1.1`.
+
+First, the base contact map (`*.hic` files) were generated:
+
+```sh
+# Juicer pre to  make the juicer input
+juicer pre $bin $agp $fai 2> $log | \
+    LC_ALL=C sort -k2,2d -k6,6d -T $outd --parallel=8 -S32G | \
+    awk 'NF' > ${outb}.part
+mv ${outb}.part ${outb}.sorted.txt
+
+# Get the adjusted chr sizes
+cat $log | grep "PRE_C_SIZE" | cut -d' ' -f2- > $chrom_sizes
+
+# Run the actual juicer tools
+juicer_tools pre \
+    ${outb}.sorted.txt \
+    ${outb}.hic.part \
+    $chrom_sizes
+mv ${outb}.hic.part ${outb}.out.hic
+```
+
+Then, we generated the `*.assembly` files, which can be edited using `juicebox`.
+
+```sh
+# Prepare the juicer pre run with assembly (-a) mode
+outf=${outb}.jbat
+log=${outf}.log
+juicer pre -a -o $outf $bin $agp $fai > $log 2>&1
+
+# Extract the adjusted assembly size
+asm_size=${outb}.assembly_size.tsv
+cat $log | grep "PRE_C_SIZE" | cut -d' ' -f2- > $asm_size
+
+# Rerun juicer_tools with the new files
+juicer_tools pre ${outf}.txt ${outf}.hic.part $asm_size
+mv ${outf}.hic.part ${outf}.hic
+```
+
+#### Validating the scaffolded assembly
+
+Checked with `quast` version `5.2.0`
+
+| statistic | value |
+| --------- | ----- |
+| Total size | 1.05 Gbp |
+| # scaffolds | 626 |
+| # contigs | 1,878 |
+| Largest scaffold | 79.9 Mbp |
+| Scaffold N50 | 34.2 Mbp |
+| Contig N50 | 1.2 Mbp |
+| Scaffold L50 | 10 |
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (94.18% complete.)
+
+```
+## lineage: arthropoda_odb10
+S:89.44%, 906
+D:4.74%, 48
+F:0.99%, 10
+I:0.00%, 0
+M:4.84%, 49
+N:1013
+```
+
+#### Manual curation of the contact map
+
+Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes. Resulting in:
+
+Checked with `quast` version `5.2.0`
+
+| statistic | value |
+| --------- | ----- |
+| Total size | 1.05 Gbp |
+| # scaffolds | 650 |
+| # contigs | 1,900 |
+| Largest scaffold | 80.3 Mbp |
+| Scaffold N50 | 50.96 Mbp |
+| Contig N50 | 1.18 Mbp |
+| Scaffold L50 | 9 |
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (93.98% complete).
+
+```
+## lineage: arthropoda_odb10
+S:89.24%, 904
+D:4.74%, 48
+F:0.89%, 9
+I:0.00%, 0
+M:5.13%, 52
+N:1013
+```
+
+### Missasembly correction
+
+#### Tigmint
+
+<!--- Check details with @Scott --->
+
+We used `tigmint` version `X.XX` using TELLseq data to generate "breaktigs" represening the split of missasembled regions.
+
+```sh
+# TODO: Add tigmint stuff here
+```
+
+#### Re-scaffolding
+
+We extracted all breaktigs larger than 10 Kbp into a new FASTA (267 fragments total).
+
+The total size of this portion is 933.16 Mbp. The gene-completeness of these breaktigs is (BUSCO C = 92.01%):
+
+```sh
+## lineage: arthropoda_odb10
+S:88.06%, 892
+D:3.95%, 40
+F:1.28%, 13
+I:0.00%, 0
+M:6.71%, 68
+N:1013
+```
+
+These were re-scaffolded with Hi-C reads using the same process as before (`bwa` -> `samtools` -> `pairtools` -> `yahs` -> `juicer`).
+
+This resulted in:
+
+Checked with `quast` version `5.2.0`
+
+| statistic | value |
+| --------- | ----- |
+| Total size | 933.1 Mbp |
+| # scaffolds | 176 |
+| # contigs | 1,555 |
+| Largest scaffold | 128.5 Mbp |
+| Scaffold N50 | 59.2 Mbp |
+| Contig N50 | 1.22 Mbp |
+| Scaffold L50 | 6 |
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (92.20% complete).
+
+```
+## lineage: arthropoda_odb10
+S:88.55%, 897
+D:3.65%, 37
+F:1.09%, 11
+I:0.00%, 0
+M:6.71%, 68
+N:1013
+```
+
+#### Curating Hi-C re-scaffolding
+
+Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes. Resulting in:
+
+Checked with `quast` version `5.2.0`
+
+| statistic | value |
+| --------- | ----- |
+| Total size | 933.2 Mbp |
+| # scaffolds | 237 |
+| # contigs | 1,643 |
+| Largest scaffold | 80.2 Mbp |
+| Scaffold N50 | 50.96 Mbp |
+| Contig N50 | 1.17 Mbp |
+| Scaffold L50 | 8 |
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (91.9% complete.)
+
+```
+## lineage: arthropoda_odb10
+S:88.15%, 893
+D:3.75%, 38
+F:1.28%, 13
+I:0.00%, 0
+M:6.81%, 69
+N:1013
+```
+
+In comparison before the manual curation:
+
+* Number of fragments went from 176 to 237
+* Total length remained the same
+* Largest fragment went from 128.5 Mbp to 80.2 Mbp
+* BUSCO C went from 92.2% to 91.9%
+* BUSCO D went from 21.82% to 4.84%
+
+### Inspector
+
+We performed one additional round of curation using `inspector` version `1.0.1`.
+
+```sh
+cmd=(
+    inspector.py
+    --contig $fasta
+    --read $hifi
+    --thread $thr
+    --outpath $outdir
+    --datatype "hifi"
+)
+
+echo "${cmd[@]}"
+"${cmd[@]}"
+```
+
+<!--- TODO --->
+
+
+
+Continue in: 
+
+```sh
+/sietch_colab/data_share/balanus/tellseq_analysis/hic_scaffolding/tigmint_1mb_ctgs/inspector
+```
 
 ### Genome annotation
 <!--- TODO --->
@@ -449,6 +723,13 @@ N:1013
 
 <!--- TODO --->
 * MMseqs2
+
+see:
+
+```
+/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2
+```
+
 * Purge Dups
 * Reference-guided scaffolding
 * inspector
@@ -475,7 +756,7 @@ All the ones downloaded:
 | *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCF_019059575.1` | NRLGWU_Aamphi_draft | yes | -- |
 | *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCA_037642225.1` | ASM3764222v1 | no | Annotation from Han et al. 2024<sup>2</sup> |
 | *Artemia franciscana* | Branchiopoda | Artemiidae | `ArtFra` | `GCF_032884065.1` | ASM3288406v1 | no | -- |
-| *Capitulum mitella* | Thecostraca | Pollicipedidae | `CapMit` | `GCA_030062745.1` | GCA_030062745.1 | no | No annotation |
+| *Capitulum mitella* | Thecostraca | Pollicipedidae | `CapMit` | `GCA_030062745.1` | ASM3006274v1 | no | No annotation |
 | *Cherax quadricarinatus* | Malacostraca | Parastacidae | `CheQua` | `GCF_026875155.1` | ASM2687515v2 | no | -- |
 | *Daphnia magna* | Branchiopoda | Daphniidae | `DapMag` | `GCF_020631705.1` | ASM2063170v1.1 | yes | -- |
 | *Daphnia pulicaria* | Branchiopoda | Daphniidae | `DapPui` | `GCF_021234035.1` | SC_F0-13Bv2  | yes | -- |
@@ -504,7 +785,7 @@ All the ones downloaded:
 /sietch_colab/ariverac/balanus_genome/ncbi_data/orthodb_v11_Crustacea
 ```
 
-<sup>2</sup> *A. amphitrite* assembly by Han et al. 2024:
+<sup>2</sup>*A. amphitrite* assembly by Han et al. 2024:
 
 >Han, Z., Wang, Z., Rittschof, D. et al. New genes helped acorn barnacles adapt to a sessile lifestyle. *Nat Genet 56*, 970-981 (2024). <https://doi.org/10.1038/s41588-024-01733-7>
 
