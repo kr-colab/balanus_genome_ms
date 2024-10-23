@@ -414,6 +414,7 @@ samtools view -h $base_bam | \
 
 # Index the final bam
 echo "Indexing BAM..."
+samtools index -@ $thr $proc_bam
 ```
 
 #### Scaffolding the genome
@@ -438,7 +439,7 @@ echo "${cmd[@]}"
 
 #### Generating contact map
 
-Following the `yahs` documentation, we generated a contact map using `juicer` version `1.1`.
+Following the `yahs` documentation, we generated a contact map using `juicer pre` version `1.1` and `juicer tools` version `1.9.9`.
 
 First, the base contact map (`*.hic` files) were generated:
 
@@ -505,7 +506,23 @@ N:1013
 
 #### Manual curation of the contact map
 
-Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes. Resulting in:
+Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes.
+
+Re-generated the assembly using `juicer post`:
+
+```sh
+cmd=(
+    juicer post
+    -o $name
+    $assm
+    $agp
+    $ctgs
+)
+echo "${cmd[@]}"
+"${cmd[@]}"
+```
+
+Resulting in:
 
 Checked with `quast` version `5.2.0`
 
