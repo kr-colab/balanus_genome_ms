@@ -790,16 +790,16 @@ Note: There might be other ways to do this straight from `mmseqs2`.
 
 This assembly is composed of 2,696 contigs, a total length of 1.18 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 758.4 Kbp (checked with `quast` version `5.2.0`).
 
-We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went at ~20%.
+We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 94.57%, `D` = 19.45%.
 
 ```sh
 ## lineage: arthropoda_odb10
-TODO
-```
-
-waiting for
-```sh
-/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/filter_asm/out_genome/stats/balCre.compleasm.arthropoda_odb10
+S:75.12%, 761
+D:19.45%, 197
+F:0.89%, 9
+I:0.00%, 0
+M:4.54%, 46
+N:1013
 ```
 
 ### Purging haplotig sequences
