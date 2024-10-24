@@ -645,6 +645,7 @@ In comparison before the manual curation:
 We performed one additional round of curation using `inspector` version `1.0.1`.
 
 ```sh
+# Inspector evaluate
 cmd=(
     inspector.py
     --contig $fasta
@@ -653,14 +654,23 @@ cmd=(
     --outpath $outdir
     --datatype "hifi"
 )
+echo "${cmd[@]}"
+"${cmd[@]}"
 
+# Inspector correct
+cmd=(
+    inspector-correct.py
+    --inspector $outdir
+    --outpath $cordir
+    --datatype "pacbio-hifi"
+    --thread $thr
+)
 echo "${cmd[@]}"
 "${cmd[@]}"
 ```
 
+#### Stats
 <!--- TODO --->
-
-
 
 Continue in: 
 
@@ -813,6 +823,17 @@ Assembly is on NCBI ([link](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_037
 
 ## Comparative analysis
 <!--- TODO --->
+
+Add `orthofinder` code info.
+
+For downstream processing, Generating the counts table using
+
+```sh
+$ orthogroup_gene_count.py Phylogenetic_Hierarchical_Orthogroups/N0.tsv
+```
+
+This is described in the orthofinder issues
+([link](https://github.com/davidemms/OrthoFinder/issues/511)).
 
 ## Popgen analysis
 <!--- TODO --->
