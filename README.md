@@ -701,10 +701,16 @@ Checked with `quast` version `5.2.0`
 | Fragments > 10 Mbp | 15 |
 | % len >  10 Mbp | 89.2% |
 
-We verified gene-completeness using `compleasm` version `0.12-r237` (91.9% complete.)
+We verified gene-completeness using `compleasm` version `0.12-r237` (91.41 % complete.)
 
-```
+```ls
 ## lineage: arthropoda_odb10
+S:87.66%, 888
+D:3.75%, 38
+F:1.38%, 14
+I:0.00%, 0
+M:7.21%, 73
+N:1013
 ```
 
 In comparison before `inspector` correction:
@@ -712,8 +718,8 @@ In comparison before `inspector` correction:
 * Number of fragments went from 237 to 233
 * Total length decreased by ~4 Mbp
 * Largest fragment went from 80.2 to  80.3 Mbp
-* BUSCO C went from 91.9% to ____.
-* BUSCO D went from 4.84% to ____.
+* BUSCO C went from 91.9% to 91.4.
+* BUSCO D remained at 3.75%.
 
 ### Genome annotation
 <!--- TODO --->
