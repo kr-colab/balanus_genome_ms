@@ -591,6 +591,12 @@ Checked with `quast` version `5.2.0`
 | Scaffold N50 | 59.2 Mbp |
 | Contig N50 | 1.22 Mbp |
 | Scaffold L50 | 6 |
+| Total len > 1 Mbp | 915.8 Mbp |
+| Fragments > 1 Mbp | 46 |
+| % leb >  1 Mbp | 98.1% |
+| Total len > 10 Mbp | 850.5 Mbp |
+| Fragments > 10 Mbp | 14 |
+| % len >  10 Mbp | 91.1% |
 
 We verified gene-completeness using `compleasm` version `0.12-r237` (92.20% complete).
 
@@ -619,6 +625,12 @@ Checked with `quast` version `5.2.0`
 | Scaffold N50 | 50.96 Mbp |
 | Contig N50 | 1.17 Mbp |
 | Scaffold L50 | 8 |
+| Total len > 1 Mbp | 896.2 Mbp |
+| Fragments > 1 Mbp | 50 |
+| % leb >  1 Mbp | 96.3% |
+| Total len > 10 Mbp | 832.6 Mbp |
+| Fragments > 10 Mbp | 15 |
+| % len >  10 Mbp | 89.2% |
 
 We verified gene-completeness using `compleasm` version `0.12-r237` (91.9% complete.)
 
@@ -638,7 +650,7 @@ In comparison before the manual curation:
 * Total length remained the same
 * Largest fragment went from 128.5 Mbp to 80.2 Mbp
 * BUSCO C went from 92.2% to 91.9%
-* BUSCO D went from 21.82% to 4.84%
+* BUSCO D went from 4.84% to 3.75%.
 
 ### Inspector
 
@@ -670,13 +682,38 @@ echo "${cmd[@]}"
 ```
 
 #### Stats
-<!--- TODO --->
 
-Continue in: 
+Checked with `quast` version `5.2.0`
 
-```sh
-/sietch_colab/data_share/balanus/tellseq_analysis/hic_scaffolding/tigmint_1mb_ctgs/inspector
+| statistic | value |
+| --------- | ----- |
+| Total size | 929.2 Mbp |
+| # scaffolds | 233 |
+| # contigs | 1,575 |
+| Largest scaffold | 80.3 Mbp |
+| Scaffold N50 | 52.86 Mbp |
+| Contig N50 | 1.22 Mbp |
+| Scaffold L50 | 8 |
+| Total len > 1 Mbp | 892.2 Mbp |
+| Fragments > 1 Mbp | 50 |
+| % leb >  1 Mbp | 96.0% |
+| Total len > 10 Mbp | 828.7 Mbp |
+| Fragments > 10 Mbp | 15 |
+| % len >  10 Mbp | 89.2% |
+
+We verified gene-completeness using `compleasm` version `0.12-r237` (91.9% complete.)
+
 ```
+## lineage: arthropoda_odb10
+```
+
+In comparison before `inspector` correction:
+
+* Number of fragments went from 237 to 233
+* Total length decreased by ~4 Mbp
+* Largest fragment went from 80.2 to  80.3 Mbp
+* BUSCO C went from 91.9% to ____.
+* BUSCO D went from 4.84% to ____.
 
 ### Genome annotation
 <!--- TODO --->
