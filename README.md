@@ -736,7 +736,7 @@ cat ${name}.bp.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
 
 This assembly is composed of 2,932 contigs, a total length of 1.20 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 746 Kbp (checked with `quast` version `5.2.0`).
 
-We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went at ~20%.
+We verified gene-completeness using `compleasm` version `0.12-r237`, `C` = 94.96%, `D` = 19.64%.
 
 ```
 ## lineage: arthropoda_odb10
@@ -748,16 +748,118 @@ M:4.15%, 42
 N:1013
 ```
 
-<!--- TODO --->
-* MMseqs2
+### Filtering contamination
 
+Filtering contamination by running `mmseqs2` version `X.XX`.
+
+<!--- TODO --->
 see:
 
 ```
 /sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2
 ```
 
-* Purge Dups
+After finishing taxonomical assignment, we only selected sequences matching the target NCBI taxonomical ID (Thecostraca: [116172](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=116172&lvl=3&lin=f&keep=1&srchmode=1&unlock)).
+
+```sh
+# Input FASTA (must be indexed)
+in_fasta=$work/in_genome/balCre.hmc40_D10_s25.p_ctg.fasta
+
+# Taxonomy output table from MMSeqs2
+tsv=$work/balCre_tax.tsv
+
+# NCBI taxonomy category for checking
+tax=116172 # Thecostraca
+
+# Filter the contig IDs in TSV to only include those matching the target ID
+matches=$work/${tax}_ctgs.tsv
+cat $tsv | grep "\b${tax}\b" | cut -f1 | sort -u > $matches
+
+# Select the subset of matching sequences from the FASTA
+out_fasta=$work/out_genome/balCre_${tax}_ctgs.fasta
+samtools faidx --region-file $matches $in_fasta | \
+    fold -w 60 > $out_fasta
+
+# Index the resulting genome
+samtools faidx $out_genome
+```
+
+Note: There might be other ways to do this straight from `mmseqs2`.
+
+#### Check the post-cleanup genome
+
+This assembly is composed of 2,696 contigs, a total length of 1.18 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 758.4 Kbp (checked with `quast` version `5.2.0`).
+
+We verified gene-completeness using `compleasm` version `0.12-r237`. Duplicates went at ~20%.
+
+```sh
+## lineage: arthropoda_odb10
+TODO
+```
+
+waiting for
+```sh
+/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/filter_asm/out_genome/stats/balCre.compleasm.arthropoda_odb10
+```
+
+### Purging haplotig sequences
+
+We purges haplotig sequences using `purge_dups` version `1.2.5`.
+
+First, aligned the PacBio HiFi to the genome and did the assembly self-alignment using `minimap2` version `2.26-r1175`.
+
+```sh
+# Align the reads to the reference
+minimap2 -x map-hifi -t 16 $genome $reads | gzip -c - > $paf
+
+# Calculate read-depth histogram
+pbcstat -O $alns_out $paf
+
+# Calculate base-level depth
+calcuts PB.stat > cutoffs 2>calcults.log
+
+# Do an assembly self-alignment
+split_fa $genome > $split
+minimap2 -x asm20 -t 16 -DP $split $split | gzip -c - > $self
+```
+
+We then tan `purge_dups` and the `get_seqs` utility to identify and filter haplotig sequences.
+
+```sh
+# Mark the duplicates in a bed file
+cmd=(
+    purge_dups
+    -2
+    -T $alns/cutoffs
+    -c $alns/PB.base.cov
+    $paf
+)
+echo "${cmd[@]}"
+"${cmd[@]}" > dups.bed 2> purge_dups.log
+
+# Process the assembly
+cmd=(
+    get_seqs
+    -e
+    -s
+    -p $name
+    dups.bed
+    $geno
+)
+echo "${cmd[@]}"
+"${cmd[@]}" > get_seqs.log 2>&1
+```
+
+#### Post-Purge Dups stats
+
+<!---TODO--->
+
+See:
+
+```
+/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/purge_dups
+```
+
 * Reference-guided scaffolding
 * inspector
 
