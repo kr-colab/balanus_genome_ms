@@ -895,13 +895,27 @@ echo "${cmd[@]}"
 
 #### Post-Purge Dups stats
 
-<!---TODO--->
+This assembly is composed of 1,548 contigs, a total length of 907.4 Mbp,largest contig of 3.51 Mbp, and a contig N50 of 925.5 Kbp (checked with `quast` version `5.2.0`).
 
-See:
+We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 93.39%, `D` = 3.16%.
 
+```sh
+## lineage: arthropoda_odb10
+S:90.23%, 914
+D:3.16%, 32
+F:0.89%, 9
+I:0.00%, 0
+M:5.73%, 58
+N:1013
 ```
-/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/purge_dups
-```
+
+In comparison with the un-purged assembly:
+
+* Number of contigs went from 2.9 K to 1.5 K
+* Total length went from 1.20 Gbp to 907 Mbp
+* Contig N50 went from 746 Mbp to 1.31 Mbp
+* BUSCO C went from 94.96% to 93.39%
+* BUSCO D went from 19.64% to 3.16%
 
 * Reference-guided scaffolding
 * inspector
