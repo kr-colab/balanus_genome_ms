@@ -917,8 +917,36 @@ In comparison with the un-purged assembly:
 * BUSCO C went from 94.96% to 93.39%
 * BUSCO D went from 19.64% to 3.16%
 
+### Correct sequences
+
+We performed one additional round of curation using `inspector` version `1.0.1`.
+
+```sh
+# Inspector evaluate
+cmd=(
+    inspector.py
+    --contig $fasta
+    --read $hifi
+    --thread $thr
+    --outpath $outdir
+    --datatype "hifi"
+)
+echo "${cmd[@]}"
+"${cmd[@]}"
+
+# Inspector correct
+cmd=(
+    inspector-correct.py
+    --inspector $outdir
+    --outpath $cordir
+    --datatype "pacbio-hifi"
+    --thread $thr
+)
+echo "${cmd[@]}"
+"${cmd[@]}"
+```
+
 * Reference-guided scaffolding
-* inspector
 
 ## *Balanus nubilis* genome assembly and annotation
 
