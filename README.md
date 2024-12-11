@@ -946,6 +946,31 @@ echo "${cmd[@]}"
 "${cmd[@]}"
 ```
 
+#### Post-Inspector stats
+
+
+This assembly is composed of 1,548 contigs, a total length of 907.3 Mbp,largest contig of 3.51 Mbp, and a contig N50 of 925.6 Kbp (checked with `quast` version `5.2.0`).
+
+We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 93.39%, `D` = 3.26%.
+
+```sh
+## lineage: arthropoda_odb10
+S:90.13%, 913
+D:3.26%, 33
+F:0.89%, 9
+I:0.00%, 0
+M:5.73%, 58
+N:1013
+```
+
+In comparison with the un-purged assembly:
+
+* Number of contigs stayed the same
+* Total length went from 907.4 Mbp to 907.3 Mbp
+* Contig N50 went from 925.5 Kbp to 925.6 Kbp
+* BUSCO C stayed the same
+* BUSCO D went from 3.16% to 3.26%
+
 * Reference-guided scaffolding
 
 ## *Balanus nubilis* genome assembly and annotation
