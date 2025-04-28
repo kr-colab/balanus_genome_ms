@@ -25,7 +25,7 @@ Path to raw data (all paths on `Poppy`):
 
 #### Hi-C
 
-One of several individuals collected on August 2024 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
+One of several individuals collected on August 2023 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
 
 <!--- Cape Perpetua or Bob Creek? --->
 
@@ -39,7 +39,7 @@ Path to raw data:
 
 #### RNAseq & Iso-Seq
 
-One of several individuals collected on August 2024 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
+One of several individuals collected on August 2023 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
 
 <!--- Cape Perpetua or Bob Creek? --->
 
