@@ -2,6 +2,10 @@
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
 
+## Working Overleaf doc
+
+<https://www.overleaf.com/project/682b8a7df249ffae37220a61>
+
 ## *Balanus glandula* genome assembly and annotation
 
 * The Pacfic acorn barnacle (*Balanus glandula*).
