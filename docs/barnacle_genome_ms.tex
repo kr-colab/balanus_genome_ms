@@ -47,15 +47,38 @@
 \begin{abstract}
 \lipsum[5]
 \end{abstract}
+
 \section*{Introduction}
 \lipsum[20]
+
 \section*{Results}
-\lipsum[20]
+\subsection*{Genome Assembly}
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, a contig N50 of 734 kbp, and a \texttt{BUSCO} [Huang\&Li2023; Manni2021; Tegenfeldt2024] completeness of 95.66\% ([\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species.
+\vspace{0.25cm}
+
+Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}).
+\vspace{0.25cm}
+
+Lastly, this scaffold-level assembly was curated by performing manual curation of the Hi-C contact map and self-correction using the software \texttt{Inspector} [Chen2021]. This curated assembly was composed of 592 fragments, a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base quility value (QV) of 30.49. This assembly was 94.08\% gene-complete ([\texttt{S}:89.44\%; \texttt{D}:4.64\%; \texttt{F}:0.89\%; \texttt{M}:5.03\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover, the 16 largest sequences (larger than 8.5 Mbp) contain 841.2 Mbp (80.61\%) of the total sequence, and likely represent 16 putative chromosomes.
+
+\subsection*{Genome Annotation}
+
+Once the assembly and scaffolding was completed, we identified and masked repeat sequences in the \textit{B. glandula} assembly using the \texttt{EarlGrey} software [Baril2024].
+
+%TODO: Check the results here: /sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff/hi-c/20250129.curation/repeats/250211.earl_grey.arthropoda.6657/BalGla_EarlGrey/BalGla_summaryFiles %
+
 \section*{Discussion}
 \lipsum[20]
+
 \section*{Materials and Methods}
 \lipsum[20]
-Data Availability: \url{https://github.com/arcolon14/balanus_genome_ms}
+
+\subsection*{Data Availability}
+\url{https://github.com/arcolon14/balanus_genome_ms}
+
 \section*{Acknowledgments}
 \lipsum[2]
+
+\section*{Supplements}
+
 \end{document}
