@@ -52,7 +52,9 @@
 \lipsum[20]
 
 \section*{Results}
-\subsection*{Genome Assembly}
+
+\subsection*{Genome assembly}
+
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% ([\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013]) for the \texttt{arthropoda\_odb10} single-copy ortholog set. The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species.
 \vspace{0.2cm}
 
@@ -61,7 +63,7 @@ Following optimzation, both in the integration of additional data types and in t
 
 This scaffold-level assembly was further processed by performing manual curation of the Hi-C contact map and self-correction using the software \texttt{Inspector} [Chen2021]. This curated assembly was composed of 592 fragments, a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base quility value (QV) of 30.49. When assessing completeness, the curated assembly was 94.08\% ([\texttt{S}:89.44\%; \texttt{D}:4.64\%; \texttt{F}:0.89\%; \texttt{M}:5.03\%; \texttt{N}:1,013]) and 92.77\% (\texttt{S}:87.77\%; \texttt{D}:5.40\%; \texttt{F}:2.93\%; \texttt{M}:4.30\%; \texttt{N}:1,536) gene-complete for the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover, the 16 largest sequences (larger than 8.5 Mbp) contain 841.2 Mbp (80.61\%) of the total sequence, and likely represent 16 putative chromosomes. This karyptype number, N=16, is in agreement with that observed for the genus \textit{Balanus} [Austin1958] and other acorn barnacle species in the family Balanidae [Han2024].
 
-\subsection*{Genome Annotation}
+\subsection*{Genome annotation}
 
 Once the assembly and scaffolding was completed, we annotated and masked repeat sequences in the \textit{B. glandula} reference assembly using the \texttt{EarlGrey} software [Baril2024]. This analysis identified 698.6 Mbp (66.94\%) of the assembly as repetitive elements; however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remain unclassified among the major repeat element types. This large proportion of unclassified repeat elements is likely the product of the very small number of representative barnacle sequences among curated repeat reference libraries, reflecting barnacle's status as a genomically understudied group. Among the classified repeats, DNA and LINE elements were the two most abundant repeats classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 \vspace{0.2cm}
@@ -70,6 +72,17 @@ Following repeat annotation and masking of the reference genome, we annotated pr
 \vspace{0.2cm}
 
 In addition to protein-coding genes, we also annotated non-coding elements in the \textit{B. glandula} reference assembly. We identified 7,532 lncRNA, 1,203 tRNA, and 24 rRNA genes. In total, across protein-coding and non-coding transcripts, we were able to annotate 28,993 genes in the genome.
+
+\subsection*{Conserved synteny across barnacle genome}
+
+We performed a conserved synteny analysis using the software \texttt{Genespace} to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022].
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
+    \caption{Conserved synteny across barnacle genomes.}
+    \label{fig:synteny}
+\end{figure}
 
 \section*{Discussion}
 \lipsum[20]
