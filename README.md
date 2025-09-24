@@ -1,4 +1,4 @@
- # Barnacle genome paper
+# Barnacle genome paper
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
 
@@ -66,6 +66,8 @@ Path to raw reads:
 ```
 
 #### TELLseq
+
+<!-- TODO: Remove this-->
 
 One of several individuals collected on August 2024 by the Kern-Ralph co-lab at Bob Creek, OR ([map](https://maps.app.goo.gl/Kzq9TssYcpcbbqvP6)). More TELLseq was performed on other individuals for collecting popgen data.
 
@@ -555,7 +557,7 @@ N:1013
 ### Missasembly correction
 
 #### Tigmint
-
+<!-- TODO: Remove this-->
 <!--- Check details with @Scott --->
 
 We used `tigmint` version `X.XX` using TELLseq data to generate "breaktigs" represening the split of missasembled regions.
@@ -616,6 +618,7 @@ N:1013
 
 #### Curating Hi-C re-scaffolding
 
+<!-- TODO: Remove this-->
 Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes. Resulting in:
 
 Checked with `quast` version `5.2.0`
@@ -658,6 +661,7 @@ In comparison before the manual curation:
 
 ### Inspector
 
+<!-- TODO: update this with exact commands -->
 We performed one additional round of curation using `inspector` version `1.0.1`.
 
 ```sh
