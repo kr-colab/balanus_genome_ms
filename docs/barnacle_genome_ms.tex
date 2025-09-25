@@ -55,7 +55,7 @@
 
 \subsection*{Genome assembly}
 
-We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set. The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species.
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set. The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species. Assembly statistics are summarized in Table~\ref{tab:assembly_stats}.
 \vspace{0.2cm}
 
 \begin{table}[htbp]
@@ -70,8 +70,7 @@ We assembled a chromosome-level reference genome for the Pacific acorn barnacle 
         Hi-C scaffolds & 1.05 & 50.96 & 93.98 \\
         Curated assembly & 1.04 & 51.41 & 94.08 \\
         \bottomrule
-    \end{tabular}
-    \label{tab:assembly_stats}
+    \end{tabular}\label{tab:assembly_stats}
 \end{table}
 
 Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}).
@@ -91,18 +90,28 @@ In addition to protein-coding genes, we also annotated non-coding elements in th
 
 \subsection*{Conserved architecture across barnacle genomes}
 
-We performed a conserved synteny analysis using the software \texttt{Genespace} [Lovell2022] to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022]. These genomes display consevation in their large-scale organization, including correspondance between 16 one-to-one orthologous chromosomes across the three species. This finding both shows that our scaffolding of the \textit{B. glandula} assembly likely reflects the biological structure of the genome and is not the product of technical artifacts, but also indicates the conservation in the genome architecture of barnacle genomes across \~165 Mya of evolution [Han 2024; Bernot2022].
-
-
+We performed a conserved synteny analysis using the software \texttt{Genespace} [Lovell2022] to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022]. These genomes display consevation in their large-scale organization, including correspondance between 16 one-to-one orthologous chromosomes across the three species (Figure~\ref{fig:synteny}). This finding both shows that our scaffolding of the \textit{B. glandula} assembly likely reflects the biological structure of the genome and is not the product of technical artifacts, but also indicates the conservation in the genome architecture of barnacle genomes across \~165 Mya of evolution [Han 2024; Bernot2022].
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
-    \caption{Conserved synteny across barnacle genomes. Genome-wide riparian synteny plots showing one-to-one correspondence across 16 orthologous chromosomes between the genomes of \textit{Balanus glandula}} (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes pollicipes} (bottom). Each set of colored lines shows orthologous genes across the three assemblies, colored according to their chromosome of origin. Chromosomes are drawn according their order in \textit{A. amphitrite}. Cladogram on the left shows the evolutionary relationship among the three species.
-\label{fig:synteny} 
+    \caption{Conserved synteny across barnacle genomes. Genome-wide riparian synteny plots showing one-to-one correspondence across 16 orthologous chromosomes between the genomes of \textit{Balanus glandula}} (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes pollicipes} (bottom). Each set of colored lines shows orthologous genes across the three assemblies, colored according to their chromosome of origin. Chromosomes are drawn according their order in \textit{A. amphitrite}. Cladogram on the left shows the evolutionary relationship among the three species.\label{fig:synteny}
 \end{figure}
 
+\subsection*{dN/dS}
+
+\subsection*{MK-test}
+
+\subsection*{phastCons}
+
+\subsection*{Diversity in Ref individual}
+
+\subsection*{Diversity Oregon population}
+
 \section*{Discussion}
+\lipsum[20]
+
+\section*{Conclusion}
 \lipsum[20]
 
 \section*{Materials and Methods}
@@ -112,7 +121,7 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
 \url{https://github.com/arcolon14/balanus_genome_ms}
 
 \section*{Acknowledgments}
-\lipsum[2]
+\lipsum[20]
 
 \section*{Supplements}
 
