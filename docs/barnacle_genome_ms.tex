@@ -19,6 +19,12 @@
 \usepackage{amsmath}
 \usepackage{lipsum}
 
+% For supplemental table numbering
+% TODO: Not working
+\newcounter{suptable}
+\renewcommand{\thesuptable}{S\arabic{suptable}}
+\newcommand{\suptable}{\refstepcounter{suptable}\thesuptable}
+
 % for hyperlinks
 \hypersetup{  
     colorlinks=true,
@@ -55,23 +61,7 @@
 
 \subsection*{Genome assembly}
 
-We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set. The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species. Assembly statistics are summarized in Table~\ref{tab:assembly_stats}.
-\vspace{0.2cm}
-
-\begin{table}[htbp]
-    \centering
-    \caption{Assembly statistics for the \textit{Balanus glandula} genome at different stages of the assembly process.}
-    \begin{tabular}{lrrr}
-        \toprule
-        Assembly Stage & Total Length (Gbp) & N50 (Mbp) & BUSCO (\%) \\
-        \midrule
-        Default contigs & 1.64 & 0.734 & 95.66 \\
-        Optimized contigs & 1.05 & 1.35 & 93.88 \\
-        Hi-C scaffolds & 1.05 & 50.96 & 93.98 \\
-        Curated assembly & 1.04 & 51.41 & 94.08 \\
-        \bottomrule
-    \end{tabular}\label{tab:assembly_stats}
-\end{table}
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species.\vspace{0.2cm}
 
 Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}).
 \vspace{0.2cm}
@@ -90,7 +80,7 @@ In addition to protein-coding genes, we also annotated non-coding elements in th
 
 \subsection*{Conserved architecture across barnacle genomes}
 
-We performed a conserved synteny analysis using the software \texttt{Genespace} [Lovell2022] to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022]. These genomes display consevation in their large-scale organization, including correspondance between 16 one-to-one orthologous chromosomes across the three species (Figure~\ref{fig:synteny}). This finding both shows that our scaffolding of the \textit{B. glandula} assembly likely reflects the biological structure of the genome and is not the product of technical artifacts, but also indicates the conservation in the genome architecture of barnacle genomes across \~165 Mya of evolution [Han 2024; Bernot2022].
+We performed a conserved synteny analysis using the software \texttt{Genespace} [Lovell2022] to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022]. These genomes display consevation in their large-scale organization, including correspondance between 16 one-to-one orthologous chromosomes across the three species (Figure~\ref{fig:synteny}). This finding both shows that our scaffolding of the \textit{B. glandula} assembly likely reflects the biological structure of the genome and is not the product of technical artifacts, but also indicates the conservation in the genome architecture of barnacle genomes across $\sim$165 Mya of evolution [Han 2024; Bernot2022].
 
 \begin{figure}[htbp]
     \centering
@@ -98,13 +88,42 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
     \caption{Conserved synteny across barnacle genomes. Genome-wide riparian synteny plots showing one-to-one correspondence across 16 orthologous chromosomes between the genomes of \textit{Balanus glandula}} (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes pollicipes} (bottom). Each set of colored lines shows orthologous genes across the three assemblies, colored according to their chromosome of origin. Chromosomes are drawn according their order in \textit{A. amphitrite}. Cladogram on the left shows the evolutionary relationship among the three species.\label{fig:synteny}
 \end{figure}
 
+\subsection*{Diversity in the barnacle reference assembly}
+
+We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover,we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
+
+% TODO: Do we need all of this? Also the header is dumb.
+\begin{table}[htbp]
+    \centering
+    \caption{Genetic variation in the \textit{B. glandula} reference individual.}
+    \begin{tabular}{lr}
+        \toprule
+        Metric & Value \\
+        \midrule
+        Reference sequence length (bp) & 904,940,360 \\
+        Genotyped sites post-filtering (bp) & 314,105,136 \\
+        Total variant sites (bp) & 9,081,889 \\
+        Percent variant sites (\%) & 2.89 \\
+        SNPs (N) & 8,725,877 \\
+        Indels (N) & 356,012 \\
+        Mean variant sites per kbp (N) & 14.66 \\
+        Median variant sites per kbp (N) & 6 \\
+        St Dev variant sites per kbp (N) & 19.86 \\
+        Variant sites in CDSs (N) & 398,773 \\
+        Percent variants in CDS (\%) & 4.69 \\
+        Mean variants per CDS (N) & 4.34 \\
+        Median variants per CDS (N) & 1 \\
+        St Dev variants per CDS (N) & 11.75 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:ref_var_stats}
+\end{table}
+
 \subsection*{dN/dS}
 
 \subsection*{MK-test}
 
 \subsection*{phastCons}
-
-\subsection*{Diversity in Ref individual}
 
 \subsection*{Diversity Oregon population}
 
@@ -124,5 +143,29 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
 \lipsum[20]
 
 \section*{Supplements}
+
+% TODO: have the right numbering for this.
+\begin{table}[htbp]
+    \centering
+    \caption{Supplemental Table: Assembly statistics for the \textit{Balanus glandula} genome at different stages of the assembly process. \texttt{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.}
+    \begin{tabular}{lrrrr}
+        \toprule
+        Assembly Stage & Default contigs & Optimized contigs & Hi-C scaffolds & Curated assembly \\
+        \midrule
+        Sequence length (Mbp) & 1.64 & 1.05 & 1.05 & 1.04 \\
+        Fragments (N) & 4,212 & 1,342 & 650 & 592 \\
+        Contig N50 (Mbp) & 0.734 & 1.35 & 1.18 & 1.18 \\
+        Scaffold N50 (Mbp) & NA & NA & 50.96 & 51.41 \\
+        \texttt{BUSCO} Complete (\%) & 95.66 & 93.88 & 93.98 & 94.08 \\
+        \texttt{BUSCO} Single (\%) & 45.31 & 89.04 & 89.24 & 89.44 \\
+        \texttt{BUSCO} Duplicates (\%) & 50.35 & 4.84 & 4.74 & 4.64 \\
+        \texttt{BUSCO} Fragmented (\%) & 0.79 & 1.18 & 0.89 & 0.89 \\
+        \texttt{BUSCO} Missing (\%) & 3.55 & 4.94 & 5.13 & 5.03 \\
+        \texttt{BUSCO} size (N) & 1,013 & 1,013 & 1,013 & 1,013 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_asm_stats}
+\end{table}
+
 
 \end{document}
