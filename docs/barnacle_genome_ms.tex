@@ -70,7 +70,7 @@ This scaffold-level assembly was further processed by performing manual curation
 
 \subsection*{Genome annotation}
 
-Once the assembly and scaffolding was completed, we annotated and masked repeat sequences in the \textit{B. glandula} reference assembly using the \texttt{EarlGrey} software [Baril2024]. This analysis identified 698.6 Mbp (66.94\%) of the assembly as repetitive elements; however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remain unclassified among the major repeat element types. This large proportion of unclassified repeat elements is likely the product of the very small number of representative barnacle sequences among curated repeat reference libraries, reflecting barnacle's status as a genomically understudied group. Among the classified repeats, DNA and LINE elements were the two most abundant repeats classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
+Once the assembly and scaffolding was completed, we annotated and masked repeat sequences in the \textit{B. glandula} reference assembly using the \texttt{EarlGrey} software [Baril2024]. This analysis identified 698.6 Mbp (66.94\%) of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary}); however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remain unclassified among the major repeat element types. This large proportion of unclassified repeat elements is likely the product of the very small number of representative barnacle sequences among curated repeat reference libraries, reflecting barnacle's status as a genomically understudied group. Among the classified repeats, DNA and LINE elements were the two most abundant repeats classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 \vspace{0.2cm}
 
 Following repeat annotation and masking of the reference genome, we annotated protein-coding genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining and curating annotations generated across the two data types. This process resulted in 20,234 protein-coding genes annotated in the genome. The resulting annotation was 93.58\% (\texttt{S}:79.76\%; \texttt{D}:13.82\%; \texttt{F}:1.78\%; \texttt{M}:4.64\%; \texttt{N}:1,013) and 84.77\% (\texttt{S}:72.66\%; \texttt{D}:12.11\%; \texttt{F}:4.10\%; \texttt{M}:11.13\%; \texttt{N}:1,536) gene-complete when compared against the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Additionally, we compared our annotation against the proteome of four other barnacle species (see Methods) using \texttt{OrthoFinder} [Emms\&Kelly2015; Emms\&Kelly2019], resulting in the assignment of 16,978 (83.91\%) \textit{B. glandula} genes to orthologous groups across barnacles and the identification of 2,576 single-copy orthologs across all five species.
@@ -90,7 +90,7 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
 
 \subsection*{Diversity in the barnacle reference assembly}
 
-We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover,we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
+We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
 
 % TODO: Do we need all of this? Also the header is dumb.
 \begin{table}[htbp]
@@ -110,7 +110,7 @@ We calculated estimates of diversity present in the barnacle genome by genotypin
         Median variant sites per kbp (N) & 6 \\
         St Dev variant sites per kbp (N) & 19.86 \\
         Variant sites in CDSs (N) & 398,773 \\
-        Percent variants in CDS (\%) & 4.69 \\
+        Percent variants in CDS (\%) & 4.39 \\
         Mean variants per CDS (N) & 4.34 \\
         Median variants per CDS (N) & 1 \\
         St Dev variants per CDS (N) & 11.75 \\
@@ -119,11 +119,24 @@ We calculated estimates of diversity present in the barnacle genome by genotypin
     \label{tab:ref_var_stats}
 \end{table}
 
+\subsection*{Conservation of functional elements in barnacle genomes}
+
+We used the \texttt{phastCons} software [Siepel2005] on the \texttt{cactus} whole-genome alignment [Armstrong2020] between six barnacle species to identify highly conserved sites in the Pacific acorn barnacle genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly, \texttt{phastCons} identified 196,141 highly-conserved elements (HCEs), spanning 50.85 Mbp of sequence and 4.92\% of the assembled genome. In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp, standard deviation: 990.40 bp).
+\vspace{0.2cm}
+
+Following the identification of HCEs, we compared their sequence composition against the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlayed the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). Among our target features, including an ``other'' and ``multiple'' class for the unannotated fraction of the genome and annotation overlaps, respectively, all but one is present among HCEs. We do not observe any rRNA sites among our conserved sites; however, this is likely the product of the whole-genome alignment (given rRNA's repetitive nature and alignment difficulty [e.g., Gillispie2004]) and not an accurate measure of conservation. Aside from the absence of rRNAs, the sequence composition of HCE largely follows the composition of the whole genome. Most annotated features do not appear substantially enriched amiong HCE sites (Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs (mean: 1.96, median: 1.98, standard deviation: 0.846), reflecting the conservation of coding sequences among barnacle genomes. Similarly, tRNAs are five-fold enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product of the strong functional constraint expected for these sequences.
+
+% For the rRNA thing, see: https://doi.org/10.1016/j.ympev.2004.08.004 for an example. The idea is citing that rRNAs are difficult to align based on sequence alone, so cactus is probably not aligning them well.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/phastcons.pdf}
+    \caption{Highly conserved elements in the \textit{Balanus glandula}} assembly. \textbf{A.} Proportion of annotated features between the whole genome (left colum) and \texttt{phastCons}-conserved elements (right column). Values are shown only for elements with proportions larger than 0.01. Sites that span more than one annotatation type are represented by the ``multiple'' feature. \textbf{B.} Relative enrichment of annotated features in the highly conserved elements. The enrichment values for each individual chromosomes are shown as points. The diamond in the boxplot indicates the mean enrichment.\label{fig:phastcons}
+\end{figure}
+
 \subsection*{dN/dS}
 
 \subsection*{MK-test}
-
-\subsection*{phastCons}
 
 \subsection*{Diversity Oregon population}
 
@@ -165,6 +178,50 @@ We calculated estimates of diversity present in the barnacle genome by genotypin
         \bottomrule
     \end{tabular}
     \label{tab:sup_asm_stats}
+\end{table}
+
+% TODO: have the right numbering for this.
+\begin{table}[htbp]
+    \centering
+    \caption{\texttt{EarlGrey} high-level annotation of the \textit{B. glandula} assembly}
+    \label{tab:sup_earlgrey_summary}
+    \begin{tabular}{lrrrr}
+        \toprule
+        Classification & N Sites bp & Count & Proportion & N Distinct Classifications \\
+        \midrule
+        DNA & 88,203,702 & 217,040 & 0.08 & 335 \\
+        LINE & 95,553,328 & 199,835 & 0.09 & 511 \\
+        LTR & 39,476,928 & 87,021 & 0.04 & 362 \\
+        Other (Simple Repeat, Microsatellite, RNA) & 37,933,124 & 77,043 & 0.04 & 112 \\
+        Penelope & 25,187,297 & 61,172 & 0.02 & 112 \\
+        Rolling Circle & 6,897,773 & 17,411 & 0.01 &  45 \\
+        SINE & 828,944 & 2039 & 0.00 &   6 \\
+        Unclassified & 404,513,462 & 966,499 & 0.39 & 1520 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% TODO: have the right numbering for this.
+\begin{table}[htbp]
+    \centering
+    \caption{Enchrichment of annotated features among HCEs} 
+    \label{tab:sup_phastcons_enrichment}
+    \begin{tabular}{lrrrr}
+        \toprule
+        Feature & Mean Enrichment & Median Enrichment & StDev Enrichment & N\ Chromosomes \\ 
+        \midrule
+        3' UTR & 0.99 & 1.02 & 0.26 &  16 \\ 
+        5' UTR & 0.81 & 0.78 & 0.37 &  16 \\ 
+        CDS & 1.94 & 1.98 & 0.85 &  16 \\ 
+        TE & 0.79 & 0.81 & 0.09 &  16 \\ 
+        intron & 1.42 & 1.23 & 0.67 &  16 \\ 
+        lncRNA & 0.95 & 0.91 & 0.35 &  16 \\ 
+        multiple & 1.34 & 1.35 & 0.15 &  16 \\ 
+        other & 0.90 & 0.88 & 0.11 &  16 \\ 
+        rRNA & 0.00 & 0.00 & 0.00 &   6 \\ 
+        tRNA & 4.99 & 4.10 & 3.36 &  16 \\ 
+        \bottomrule
+    \end{tabular}
 \end{table}
 
 
