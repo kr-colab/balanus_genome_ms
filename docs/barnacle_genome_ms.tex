@@ -19,11 +19,28 @@
 \usepackage{amsmath}
 \usepackage{lipsum}
 
-% For supplemental table numbering
-% TODO: Not working
+% For supplemental figure and table numbering
+\newcounter{supfigure}
 \newcounter{suptable}
-\renewcommand{\thesuptable}{S\arabic{suptable}}
-\newcommand{\suptable}{\refstepcounter{suptable}\thesuptable}
+
+% Commands for supplemental tables and figures
+\newcommand{\suptablecaption}[1]{%
+    \addtocounter{table}{-1}% Step back the table counter
+    \refstepcounter{suptable}% Step forward our supplemental counter
+    \renewcommand{\thetable}{S\arabic{suptable}}% Temporarily change table numbering
+    \caption{#1}%
+    \addtocounter{table}{1}% Restore table counter
+    \renewcommand{\thetable}{\arabic{table}}% Restore normal table numbering
+}
+
+\newcommand{\supfigurecaption}[1]{%
+    \addtocounter{figure}{-1}% Step back the figure counter  
+    \refstepcounter{supfigure}% Step forward our supplemental counter
+    \renewcommand{\thefigure}{S\arabic{supfigure}}% Temporarily change figure numbering
+    \caption{#1}%
+    \addtocounter{figure}{1}% Restore figure counter
+    \renewcommand{\thefigure}{\arabic{figure}}% Restore normal figure numbering
+}
 
 % for hyperlinks
 \hypersetup{  
@@ -61,12 +78,16 @@
 
 \subsection*{Genome assembly}
 
-We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity expected for the species.\vspace{0.2cm}
-
-Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}).
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Preliminary assembly of the PacBio Hi-Fi data using k-mers revealed an expected genome size of around 845 Mbp, with a heterozygosity of over 3\%.
 \vspace{0.2cm}
 
-This scaffold-level assembly was further processed by performing manual curation of the Hi-C contact map and self-correction using the software \texttt{Inspector} [Chen2021]. This curated assembly was composed of 592 fragments, a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base quility value (QV) of 30.49. When assessing completeness, the curated assembly was 94.08\% (\texttt{S}:89.44\%; \texttt{D}:4.64\%; \texttt{F}:0.89\%; \texttt{M}:5.03\%; \texttt{N}:1,013) and 92.77\% (\texttt{S}:87.77\%; \texttt{D}:5.40\%; \texttt{F}:2.93\%; \texttt{M}:4.30\%; \texttt{N}:1,536) gene-complete for the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover, the 16 largest sequences (larger than 8.5 Mbp) contain 841.2 Mbp (80.61\%) of the total sequence, and likely represent 16 putative chromosomes. This karyptype number, N=16, is in agreement with that observed for the genus \textit{Balanus} [Austin1958] and other acorn barnacle species in the family Balanidae [Han2024].
+Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity observed for the species.
+\vspace{0.2cm}
+
+Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
+\vspace{0.2cm}
+
+This scaffold-level assembly was further processed by performing manual curation of the Hi-C contact map and self-correction using the software \texttt{Inspector} [Chen2021]. This curated assembly was composed of 592 fragments, a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base quility value (QV) of 30.49. When assessing completeness, the curated assembly was 94.08\% (\texttt{S}:89.44\%; \texttt{D}:4.64\%; \texttt{F}:0.89\%; \texttt{M}:5.03\%; \texttt{N}:1,013) and 92.77\% (\texttt{S}:87.77\%; \texttt{D}:5.40\%; \texttt{F}:2.93\%; \texttt{M}:4.30\%; \texttt{N}:1,536) gene-complete for the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively (Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover, the 16 largest sequences (larger than 8.5 Mbp) contain 841.2 Mbp (80.61\%) of the total sequence, and likely represent 16 putative chromosomes. This karyptype number, N=16, is in agreement with that observed for the genus \textit{Balanus} [Austin1958] and other acorn barnacle species in the family Balanidae [Han2024].
 
 \subsection*{Genome annotation}
 
@@ -110,7 +131,7 @@ We calculated estimates of diversity present in the barnacle genome by genotypin
         Median variant sites per kbp (N) & 6 \\
         St Dev variant sites per kbp (N) & 19.86 \\
         Variant sites in CDSs (N) & 398,773 \\
-        Percent variants in CDS (\%) & 4.39 \\
+        Percent variants in CDS (\%) & 4.69 \\
         Mean variants per CDS (N) & 4.34 \\
         Median variants per CDS (N) & 1 \\
         St Dev variants per CDS (N) & 11.75 \\
@@ -124,7 +145,7 @@ We calculated estimates of diversity present in the barnacle genome by genotypin
 We used the \texttt{phastCons} software [Siepel2005] on the \texttt{cactus} whole-genome alignment [Armstrong2020] between six barnacle species to identify highly conserved sites in the Pacific acorn barnacle genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly, \texttt{phastCons} identified 196,141 highly-conserved elements (HCEs), spanning 50.85 Mbp of sequence and 4.92\% of the assembled genome. In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp, standard deviation: 990.40 bp).
 \vspace{0.2cm}
 
-Following the identification of HCEs, we compared their sequence composition against the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlayed the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). Among our target features, including an ``other'' and ``multiple'' class for the unannotated fraction of the genome and annotation overlaps, respectively, all but one is present among HCEs. We do not observe any rRNA sites among our conserved sites; however, this is likely the product of the whole-genome alignment (given rRNA's repetitive nature and alignment difficulty [e.g., Gillispie2004]) and not an accurate measure of conservation. Aside from the absence of rRNAs, the sequence composition of HCE largely follows the composition of the whole genome. Most annotated features do not appear substantially enriched amiong HCE sites (Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs (mean: 1.96, median: 1.98, standard deviation: 0.846), reflecting the conservation of coding sequences among barnacle genomes. Similarly, tRNAs are five-fold enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product of the strong functional constraint expected for these sequences.
+Following the identification of HCEs, we compared their sequence composition against the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlayed the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). Among our target features, including an ``other'' and ``multiple'' class for the unannotated fraction of the genome and annotation overlaps, respectively, all but one is present among HCEs. We do not observe any rRNA sites among our conserved sites; however, this is likely the product of the whole-genome alignment (given rRNA's repetitive nature and alignment difficulty [e.g., Gillispie2004]) and not an accurate measure of conservation. Aside from the absence of rRNAs, the sequence composition of HCE largely follows the composition of the whole genome. Most annotated features do not appear substantially enriched amiong HCE sites (Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs (mean: 1.96, median: 1.98, standard deviation: 0.846), reflecting the conservation of protein-coding genes among barnacle genomes. Similarly, tRNAs are five-fold enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product of the strong functional constraint expected for these sequences.
 
 % For the rRNA thing, see: https://doi.org/10.1016/j.ympev.2004.08.004 for an example. The idea is citing that rRNAs are difficult to align based on sequence alone, so cactus is probably not aligning them well.
 
@@ -160,7 +181,7 @@ Following the identification of HCEs, we compared their sequence composition aga
 % TODO: have the right numbering for this.
 \begin{table}[htbp]
     \centering
-    \caption{Supplemental Table: Assembly statistics for the \textit{Balanus glandula} genome at different stages of the assembly process. \texttt{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.}
+    \suptablecaption{Assembly statistics for the \textit{Balanus glandula} genome at different stages of the assembly process. \texttt{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.}
     \begin{tabular}{lrrrr}
         \toprule
         Assembly Stage & Default contigs & Optimized contigs & Hi-C scaffolds & Curated assembly \\
@@ -183,7 +204,7 @@ Following the identification of HCEs, we compared their sequence composition aga
 % TODO: have the right numbering for this.
 \begin{table}[htbp]
     \centering
-    \caption{\texttt{EarlGrey} high-level annotation of the \textit{B. glandula} assembly}
+    \suptablecaption{\texttt{EarlGrey} high-level annotation of the \textit{B. glandula} assembly}
     \label{tab:sup_earlgrey_summary}
     \begin{tabular}{lrrrr}
         \toprule
@@ -204,7 +225,7 @@ Following the identification of HCEs, we compared their sequence composition aga
 % TODO: have the right numbering for this.
 \begin{table}[htbp]
     \centering
-    \caption{Enchrichment of annotated features among HCEs} 
+    \suptablecaption{Enrichment of annotated features among HCEs} 
     \label{tab:sup_phastcons_enrichment}
     \begin{tabular}{lrrrr}
         \toprule
