@@ -78,10 +78,7 @@
 
 \subsection*{Genome assembly}
 
-We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Preliminary assembly of the PacBio Hi-Fi data using k-mers revealed an expected genome size of around 845 Mbp, with a heterozygosity of over 3\%.
-\vspace{0.2cm}
-
-Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 contigs, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity observed for the species.
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Preliminary assessment of the PacBio Hi-Fi data using k-mers revealed an expected genome size of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}). Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 fragments, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleseam} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
 Following optimzation, both in the integration of additional data types and in the increased stringency of the purging of haplotig and contaminant sequences (see Methods), we generated a contig-level assembly composed of 1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; \texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded with Hi-C data using the \texttt{YAHS} software [Zhou2022]. Our scaffolding process generated an assembly with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; \texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], \texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
@@ -245,5 +242,10 @@ Following the identification of HCEs, we compared their sequence composition aga
     \end{tabular}
 \end{table}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sups_kmers.png}
+    \supfigurecaption{\texttt{GenomeScope} profile of the raw PacBio Hi-Fi data.} Distribution of 21-mers shows an estimated genome size of 845.01 Mbp and a heterozygosity of 3.3\% in the \textit{B. glandula} reference assembly.\label{fig:sup_kmers}
+\end{figure}
 
 \end{document}
