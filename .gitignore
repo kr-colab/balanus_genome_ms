@@ -1,1 +1,6 @@
 .Rhistory
+.DS_Store
+.gitignore
+docs/.vscode/ltex.hiddenFalsePositives.en-US.txt
+docs/barnacle_genome_ms.synctex.gz
+docs/.vscode/ltex.dictionary.en-US.txt
