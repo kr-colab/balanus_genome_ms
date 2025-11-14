@@ -9,6 +9,7 @@
 \usepackage{siunitx}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{textgreek}
 \pagestyle{fancy}
 \fancyhead[R]{\textbf{\textit{B. glandula} genome}}
 % for figures
@@ -335,6 +336,32 @@ TODO:
         \bottomrule
     \end{tabular}
 \end{table}
+
+% This needs to be cleaned up and organized a little. It is still too wide.
+\begin{table}[htbp]
+    \centering
+    \footnotesize
+    \suptablecaption{Nucleotide diversity (\textpi{}) across different genomic features} 
+    \label{tab:sup_feature_pi}
+    \begin{tabular}{p{1cm}rrrrrrrrrrr}
+        \toprule
+        Feature & Mean \textpi{} & Median \textpi{} & StDev \textpi{} & N Windows & \shortstack{Mean \\ Window \\ Length} & \shortstack{Median \\ Window \\ Length} & \shortstack{StDev \\ Window \\ Length} & N Sites & \shortstack{Mean \\ Sites Per \\ Window} & \shortstack{Median \\ Sites Per \\ Window} & \shortstack{StDev \\ Sites Per \\ Window} \\ 
+        \midrule
+        Genome wide & 0.0506 & 0.0531 & 0.0188 & 44,599 & 9,998.570 & 10,000 & 103.774 & 93,583,599 & 2098.334 & 1,932 & 821.464 \\ 
+        Intergenic & 0.0507 & 0.0526 & 0.0210 & 29,219 & 7,688.054 & 10,000 & 3531.991 & 45,677,153 & 1563.269 & 1431 & 956.166 \\ 
+        CDS & 0.0302 & 0.0270 & 0.0221 & 78,630 & 270.688 & 161 & 405.314 & 9,447,233 & 120.148 & 80 & 163.758 \\ 
+        Intron & 0.0646 & 0.0650 & 0.0299 &   67,638 & 2,182.716 & 686 & 5,257.832 & 34,345,262 & 507.781 & 209 & 1,090.0254 \\ 
+        5' UTR & 0.0398 & 0.0338 & 0.0309 &    6,013 & 153.063 & 114 & 148.787 & 424,412 & 70.582 & 54 & 63.678 \\ 
+        3' UTR & 0.0489 & 0.0468 & 0.0294 & 8,218 & 648.360 & 542 & 485.406 & 2,083,933 & 253.582 & 210 & 194.076 \\ 
+        lncRNA & 0.0341 & 0.0302 & 0.0246 & 27,168 & 399.958 & 184 & 511.811 & 4,557,588 & 167.756 & 91 & 200.540 \\ 
+        tRNA & 0.0118 & 0.00521 & 0.0236 &     430 & 66.177 & 72 & 16.982 & 13,804 & 32.102 & 32 & 14.305 \\ 
+        0-fold degenerate & 0.0107 & 0.00292 & 0.0178 & 75,895 & 269.321 & 162 & 401.035 & 5,397,246 & 71.115 & 46 & 96.221 \\ 
+        4-fold degenerate & 0.0790 & 0.0750 & 0.0483 & 39,170 & 281.364 & 176 & 380.879 & 1,410,361 & 36.006 & 23 & 46.585 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+% Supplemental Figures
 
 \begin{figure}[htbp]
     \centering
