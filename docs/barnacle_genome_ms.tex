@@ -242,7 +242,7 @@ Most of them had no functional annotation (mention the two ``good'' genes with),
     \centering
     \includegraphics[width=0.6\textwidth]{figures/dnds.pdf}
     \caption{Distribution of the pairwise rate of non-synonymous to synonymous substitutions (d\textsubscript{N}/d\textsubscript{S}).}
-    The distribution is calculated across 9,082 single-copy orthologs identified between \textit{B. glandula} and \textit{B. crenatus}. The solid grey line marks boundary between genes under positive (d\textsubscript{N}/d\textsubscript{S} $>$ 1) and genes under purifying selection (d\textsubscript{N}/d\textsubscript{S} $<$ 1). The dashed line shows the mean d\textsubscript{N}/d\textsubscript{S} (0.206), while the dotted line shows the median (0.158).\label{fig:dnds}
+    The distribution is calculated across 9,082 single-copy orthologs identified between \textit{B. glandula} and \textit{B. crenatus}. The solid grey line marks the boundary between genes under positive selection (d\textsubscript{N}/d\textsubscript{S} $>$ 1) and genes under purifying selection (d\textsubscript{N}/d\textsubscript{S} $<$ 1). The dashed line shows the mean d\textsubscript{N}/d\textsubscript{S} (0.206), while the dotted line shows the median (0.158).\label{fig:dnds}
 \end{figure}
 
 % TODO: Add MK test results.
@@ -268,6 +268,14 @@ Mention DEST 2.0 [Nunez2025] and [Li2025]. Both show pi 10x higher in barnacles.
 
 % Nunez2025: https://doi.org/10.1093/molbev/msaf132
 % Li2025: https://doi.org/10.1101/2025.10.02.680045
+
+\subsection*{Molecular evolution stuff}
+
+One important thing to note that that all of our analyses are based on the whole gene. However, in barnacles there is evidence for selection acting at the single-exon level, which can result in different exons of a single gene being under different selection regimes, e.g., \textit{Mpi} in \textit{S. balanoides} [Nunez2020]. It would be good to explore the patterns of molecular evolution (e.g., d\textsubscript{N}/d\textsubscript{S} and McDonald-Kreitman test) at the level of the single exon to better uncover these patterns. Moreover, we expect the population-scaled recombination rate ($\rho = 4N_{e}r$) to be very high, as a function of the large effective population size in the species. This means that selection and diversity would breakdown at very short scales along the genome.
+
+\subsection*{Diversity and population size}
+
+Based on the observed diversity we have N\textsubscript{e} of 10\textsuperscript{6}. However, we based on the density of 10\textsuperscript{4} per m\textsuperscript{2}, the sensus size of the population in OR should be in the billions (if not more) barnacles. Why this disparity? This is a key example of Lewontin's paradox. This species might be a great system to study the mechanisms underlying this disparity between diversity and sensus size.
 
 \section*{Conclusion}
 \lipsum[20]
