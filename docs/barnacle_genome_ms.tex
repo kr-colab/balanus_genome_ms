@@ -19,6 +19,7 @@
 \usepackage{nameref}
 \usepackage{amsmath}
 \usepackage{lipsum}
+\usepackage{rotating}
 
 % For supplemental figure and table numbering
 \newcounter{supfigure}
@@ -184,34 +185,7 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
 
 % Talking about the diversity on just our reference sample. There is tons of variation on just one individual, so I thought it was important just to say that. We delve more on this on the later popgen section, but this individual is not included there.
 
-We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
-
-% TODO: Do we need all of this? Supplemental? Also the header is dumb.
-\begin{table}[htbp]
-    \centering
-    \caption{Genetic variation in the \textit{B. glandula} reference individual.}
-    \begin{tabular}{lr}
-        \toprule
-        Metric & Value \\
-        \midrule
-        Reference sequence length (bp) & 904,940,360 \\
-        Genotyped sites post-filtering (bp) & 314,105,136 \\
-        Total variant sites (bp) & 9,081,889 \\
-        Percent variant sites (\%) & 2.89 \\
-        SNPs (N) & 8,725,877 \\
-        Indels (N) & 356,012 \\
-        Mean variant sites per kbp (N) & 14.66 \\
-        Median variant sites per kbp (N) & 6 \\
-        St Dev variant sites per kbp (N) & 19.86 \\
-        Variant sites in CDSs (N) & 398,773 \\
-        Percent variants in CDS (\%) & 4.69 \\
-        Mean variants per CDS (N) & 4.34 \\
-        Median variants per CDS (N) & 1 \\
-        St Dev variants per CDS (N) & 11.75 \\
-        \bottomrule
-    \end{tabular}
-\label{tab:ref_var_stats}
-\end{table}
+We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
 
 \subsection*{Conservation of functional elements in barnacle genomes}
 
@@ -347,6 +321,33 @@ TODO:
     \end{tabular}
 \end{table}
 
+% TODO: Do we need all of this? Also the header is dumb.
+\begin{table}[htbp]
+    \centering
+    \suptablecaption{Genetic variation in the \textit{B. glandula} reference individual.}
+    \begin{tabular}{lr}
+        \toprule
+        Metric & Value \\
+        \midrule
+        Reference sequence length (bp) & 904,940,360 \\
+        Genotyped sites post-filtering (bp) & 314,105,136 \\
+        Total variant sites (bp) & 9,081,889 \\
+        Percent variant sites (\%) & 2.89 \\
+        SNPs (N) & 8,725,877 \\
+        Indels (N) & 356,012 \\
+        Mean variant sites per kbp (N) & 14.66 \\
+        Median variant sites per kbp (N) & 6 \\
+        St Dev variant sites per kbp (N) & 19.86 \\
+        Variant sites in CDSs (N) & 398,773 \\
+        Percent variants in CDS (\%) & 4.69 \\
+        Mean variants per CDS (N) & 4.34 \\
+        Median variants per CDS (N) & 1 \\
+        St Dev variants per CDS (N) & 11.75 \\
+        \bottomrule
+    \end{tabular}
+\label{tab:sup_ref_var_stats}
+\end{table}
+
 \begin{table}[htbp]
     \centering
     \suptablecaption{Enrichment of annotated features among HCEs} 
@@ -371,12 +372,11 @@ TODO:
 
 % This needs to be cleaned up and organized a little. It is still too wide.
 % Make text smaller? Rotate 90 degs?
-\begin{table}[htbp]
+\begin{sidewaystable}[htbp]
     \centering
-    \footnotesize
     \suptablecaption{Nucleotide diversity (\textpi{}) across different genomic features} 
     \label{tab:sup_feature_pi}
-    \begin{tabular}{p{1cm}rrrrrrrrrrr}
+    \begin{tabular}{p{2cm}rrrrrrrrrrr}
         \toprule
         Feature & Mean \textpi{} & Median \textpi{} & StDev \textpi{} & N Windows & \shortstack{Mean \\ Window \\ Length} & \shortstack{Median \\ Window \\ Length} & \shortstack{StDev \\ Window \\ Length} & N Sites & \shortstack{Mean \\ Sites Per \\ Window} & \shortstack{Median \\ Sites Per \\ Window} & \shortstack{StDev \\ Sites Per \\ Window} \\ 
         \midrule
@@ -392,7 +392,7 @@ TODO:
         4-fold degenerate & 0.0790 & 0.0750 & 0.0483 & 39,170 & 281.364 & 176 & 380.879 & 1,410,361 & 36.006 & 23 & 46.585 \\
     \bottomrule
     \end{tabular}
-\end{table}
+\end{sidewaystable}
 
 % Supplemental Figures
 
