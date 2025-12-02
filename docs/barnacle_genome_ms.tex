@@ -138,7 +138,7 @@ Similarly, while there has been extensive prior genetic work in \textit{B. gland
 % Carlson2025: https://doi.org/10.1093/jhered/esaf052
 % Blaxter2023: https://doi.org/10.12688/wellcomeopenres.18936.1
 
-In this work, we describe a high-quality, chromosome-level genome assembly for the Pacific acorn barnacle. We use this assembly to perform whole-genome comparative analysis, revealing conservation in genome architecture across 165 million years of barnacle evolution. We additionally perform the first assessment of genome-wide genetic variation in this system, revealing extreme levels of nucleotide diversity across the genome, with nearly 24 million SNPs in just six individuals. In accordance to theoretical expectations, we observe a reduction in diversity in protein-coding sequences, reflecting strong background selection and functional constraints in barnacle populations. Overall, our new assembly provides a key resource for future research in this system, setting the stage for \textit{B. glandula} as a model for the study of evolution in large, highly polymorphic populations.
+In this work, we describe a high-quality, chromosome-level genome assembly for the Pacific acorn barnacle. We use this assembly to perform whole-genome comparative analysis, revealing conservation in genome architecture across 165 million years of barnacle evolution. We additionally perform the first assessment of genome-wide genetic variation in this system, revealing extreme levels of nucleotide diversity across the genome, with over 20 million SNPs observed in just six individuals. In accordance to theoretical expectations, we observe a reduction in diversity in protein-coding sequences, reflecting strong background selection and functional constraints in barnacle populations. Overall, our new assembly provides a key resource for future research in this system, setting the stage for \textit{B. glandula} as a model for the study of evolution in large, highly polymorphic populations.
 \vspace{0.2cm}
 
 \section*{Results}
@@ -224,8 +224,21 @@ Looking at purifying selection, 98 genes (1.08\%) had low ($<$ 0.01) d\textsubsc
 
 % TODO: Add MK test results.
 
-
 \subsection*{Diversity Oregon population}
+
+We sequenced the whole genomes of six \textit{B. glandula} individuals collected from the central Oregon coast. 
+
+% /sietch_colab/data_share/balanus/popgen/202503-analysis/genotyping/filt_Q30_FMTDP10_GQ30_fm0_noReps_allSites_withIndels/Bgland_all.filtered.stats
+% # SN    [2]id   [3]key  [4]value
+% SN      0       number of samples:      6
+% SN      0       number of records:      111668206
+% SN      0       number of no-ALTs:      90272989
+% SN      0       number of SNPs: 20501788
+% SN      0       number of MNPs: 0
+% SN      0       number of indels:       893429
+% SN      0       number of others:       0
+% SN      0       number of multiallelic sites:   1031508
+% SN      0       number of multiallelic SNP sites:       996103
 
 \begin{figure}[htbp]
     \centering
@@ -370,8 +383,7 @@ TODO:
     \end{tabular}
 \end{table}
 
-% This needs to be cleaned up and organized a little. It is still too wide.
-% Make text smaller? Rotate 90 degs?
+% Breakdown of the feature Pi
 \begin{sidewaystable}[htbp]
     \centering
     \suptablecaption{Nucleotide diversity (\textpi{}) across different genomic features} 
