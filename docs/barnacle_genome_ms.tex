@@ -181,11 +181,11 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
     \caption{Conserved synteny across barnacle genomes. Genome-wide riparian synteny plots showing one-to-one correspondence across 16 orthologous chromosomes between the genomes of \textit{Balanus glandula}} (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes pollicipes} (bottom). Each set of colored lines shows orthologous genes across the three assemblies, colored according to their chromosome of origin. Chromosomes are drawn according their order in \textit{A. amphitrite}. Cladogram on the left shows the evolutionary relationship among the three species.\label{fig:synteny}
 \end{figure}
 
-\subsection*{Diversity in the barnacle reference assembly}
+\subsection*{Genetic diversity in the \textit{B. glandula} reference assembly}
 
 % Talking about the diversity on just our reference sample. There is tons of variation on just one individual, so I thought it was important just to say that. We delve more on this on the later popgen section, but this individual is not included there.
 
-We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_ref_var_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
+We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
 
 \subsection*{Conservation of functional elements in barnacle genomes}
 
@@ -200,7 +200,7 @@ Following the identification of HCEs, we compared their sequence composition aga
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/phastcons.pdf}
+    \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
     \caption{Highly conserved elements in the \textit{Balanus glandula} assembly.} \textbf{A.} Proportion of annotated features between the whole genome (left column) and \texttt{phastCons}-conserved elements (right column). Values are shown only for elements with proportions larger than 0.01. Sites that span more than one annotation type are represented by the ``multiple'' feature. \textbf{B.} Relative enrichment of annotated features in the highly conserved elements. The enrichment values for each of the 16 chromosomes are shown as points. The diamonds in the boxplot indicate the mean enrichment across the genome.\label{fig:phastcons}
 \end{figure}
 
@@ -224,21 +224,29 @@ Looking at purifying selection, 98 genes (1.08\%) had low ($<$ 0.01) d\textsubsc
 
 % TODO: Add MK test results.
 
-\subsection*{Diversity Oregon population}
+\subsection*{Genetic diversity of central Oregon barnacles}
 
-We sequenced the whole genomes of six \textit{B. glandula} individuals collected from the central Oregon coast. 
+We sequenced the whole genomes of six \textit{B. glandula} individuals collected from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites with low coverage, low quality, and/or missing genotypes, we retained a total of 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the sequenced individuals. Among these variant sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that were multiallelic in this set of just six individuals. In total, the amount of polymorphism observed in our sampling translates to a mean density of 214.26 variant site per kbp (median: 198, standard deviation: 157.06). Moreover, 1.12 million of these variant sites (5.23\%) were located within the span of coding regions and represent a substantial proportion of coding variation segregating in this central Oregon population.
 
-% /sietch_colab/data_share/balanus/popgen/202503-analysis/genotyping/filt_Q30_FMTDP10_GQ30_fm0_noReps_allSites_withIndels/Bgland_all.filtered.stats
-% # SN    [2]id   [3]key  [4]value
-% SN      0       number of samples:      6
-% SN      0       number of records:      111668206
-% SN      0       number of no-ALTs:      90272989
-% SN      0       number of SNPs: 20501788
-% SN      0       number of MNPs: 0
-% SN      0       number of indels:       893429
-% SN      0       number of others:       0
-% SN      0       number of multiallelic sites:   1031508
-% SN      0       number of multiallelic SNP sites:       996103
+% TODO: Shoulw we talk more about coding variation? We have snpEff results, but I
+% haven't done much with them. I can parse and get some metrics of non-synonymous 
+% variants, for example.
+\vspace{0.2cm}
+
+This \textit{B. glandula} population displayed a mean genome-wide nucleotide diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; Fig~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). Along each chromosome, we did not observe any strong correlation between the density of specific genomic features (e.g., CDS, lncRNA, tRNA, introns, and repeats) and \textpi{}, particularly not at the scale of 10 kbp (Fig~\ref{fig:genome_pi}; Fig~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present at smaller genomic intervals (see below). The strongest correlation was, expectedly, observed between the density of segregating sites along 10 kbp windows and \textpi{} (Spearman's $\rho$: 0.706; Fig~\ref{fig:sup_pi_pairplot}). The proportion of segregating sites in itself was not correlated with the density of particular genomic features, except for repeats; however, this is likely an artifact of the masking of genotypes located within repetitive intervals in the reference (see Methods).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/genome_pi.pdf}
+    \caption{Nucleotide diversity (\textpi{}) and coding and repeat density along the \textit{Balanus glandula} genome.}
+    \textbf{A.} Density of coding sequences (CDS) along the genome, defined as the proportion of bases annotated as CDS within 10 kbp windows. Line reflects the values kernel-smoothed along a 1 Mbp interval. Alternating colors show the values show the values for different chromosomes. Top and bottom horizontal axes show the chromosome number and genomic position, respectively. Dashed horizontal line shows the genome-wide average proportion of CDS bases (0.0288).
+    \textbf{B.} Density of repeat elements annotated within 10 kbp windows, smoothed along 1 Mbp intervals. Dashed horizontal line shows the genome-wide average proportion of repeat bases (0.597).
+    \textbf{C.} Density of segregating sites, calculated as the proportion of SNPs within 10 kbp windows, smoothed along 1 Mbp intervals. Dashed horizontal line shows the genome-wide average of proportion of segregating SNPs per 10 kbp (0.0307).
+    \textbf{D.} \textpi{} within 10 kbp windows, smoothed along 1 Mbp intervals. Horizontal dashed line shows the mean genome-wide \textpi{} (0.0506).
+    \label{fig:genome_pi}
+\end{figure}
+
+% TODO: Talk about CDS pi vs intergenic, etc. 
 
 \begin{figure}[htbp]
     \centering
@@ -292,6 +300,7 @@ TODO:
 
 \subsection*{Supplemental Tables and Figures}
 
+% Stats for the different stages of the assembly
 \begin{table}[htbp]
     \centering
     \suptablecaption{Assembly statistics for the \textit{Balanus glandula} genome at different stages of the assembly process. \texttt{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.}
@@ -314,6 +323,7 @@ TODO:
 \label{tab:sup_asm_stats}
 \end{table}
 
+% Repeat annotation
 \begin{table}[htbp]
     \centering
     \suptablecaption{\texttt{EarlGrey} high-level annotation of the \textit{B. glandula} assembly}
@@ -325,7 +335,7 @@ TODO:
         DNA & 88,203,702 & 217,040 & 0.08 & 335 \\
         LINE & 95,553,328 & 199,835 & 0.09 & 511 \\
         LTR & 39,476,928 & 87,021 & 0.04 & 362 \\
-        Other (Simple Repeat, Microsatellite, RNA) & 37,933,124 & 77,043 & 0.04 & 112 \\
+        \shortstack[l]{Other (Simple Repeat, \\ Microsatellite, RNA)} & 37,933,124 & 77,043 & 0.04 & 112 \\
         Penelope & 25,187,297 & 61,172 & 0.02 & 112 \\
         Rolling Circle & 6,897,773 & 17,411 & 0.01 &  45 \\
         SINE & 828,944 & 2039 & 0.00 &   6 \\
@@ -334,40 +344,42 @@ TODO:
     \end{tabular}
 \end{table}
 
-% TODO: Do we need all of this? Also the header is dumb.
+% Stats about polymorphism in the reference individual and the popgen samples.
 \begin{table}[htbp]
     \centering
-    \suptablecaption{Genetic variation in the \textit{B. glandula} reference individual.}
-    \begin{tabular}{lr}
+    \suptablecaption{Genetic variation in central Oregon \textit{B. glandula}.}
+    \begin{tabular}{lrr}
         \toprule
-        Metric & Value \\
+        Metric & Reference Individual & Cape Perpetua N=6\\
         \midrule
-        Reference sequence length (bp) & 904,940,360 \\
-        Genotyped sites post-filtering (bp) & 314,105,136 \\
-        Total variant sites (bp) & 9,081,889 \\
-        Percent variant sites (\%) & 2.89 \\
-        SNPs (N) & 8,725,877 \\
-        Indels (N) & 356,012 \\
-        Mean variant sites per kbp (N) & 14.66 \\
-        Median variant sites per kbp (N) & 6 \\
-        St Dev variant sites per kbp (N) & 19.86 \\
-        Variant sites in CDSs (N) & 398,773 \\
-        Percent variants in CDS (\%) & 4.69 \\
-        Mean variants per CDS (N) & 4.34 \\
-        Median variants per CDS (N) & 1 \\
-        St Dev variants per CDS (N) & 11.75 \\
+        Reference sequence length (bp) & 904,940,360 & 904,940,360 \\
+        Genotyped sites post-filtering (bp) & 314,105,136 & 111,668,206 \\
+        Total variant sites (bp) & 9,081,889 & 21,395,217 \\
+        Percent variant sites (\%) & 2.89 & 19.16 \\
+        SNPs (N) & 8,725,877 & 20,501,788 \\
+        Indels (N) & 356,012 & 893,429 \\
+        Multiallelic SNPs (N) & NA & 996,103 \\
+        Mean variant sites per kbp (N) & 14.66 & 214.26 \\
+        Median variant sites per kbp (N) & 6 & 198 \\
+        St Dev variant sites per kbp (N) & 19.86 & 157.06 \\
+        Variant sites in CDSs (N) & 398,773 & 1,118,874 \\
+        Percent variants in CDS (\%) & 4.69 & 5.23 \\
+        Mean variants per CDS (N) & 4.34 & 12.19 \\
+        Median variants per CDS (N) & 1 & 6 \\
+        St Dev variants per CDS (N) & 11.75 & 25.84 \\
         \bottomrule
     \end{tabular}
-\label{tab:sup_ref_var_stats}
+\label{tab:sup_popgen_stats}
 \end{table}
 
+% Stats about the phasCons conserved elements and enrichment of genomic elements.
 \begin{table}[htbp]
     \centering
     \suptablecaption{Enrichment of annotated features among HCEs} 
     \label{tab:sup_phastcons_enrichment}
     \begin{tabular}{lrrrr}
         \toprule
-        Feature & Mean Enrichment & Median Enrichment & StDev Enrichment & N\ Chromosomes \\ 
+        Feature & \shortstack{Mean \\ Enrichment} & \shortstack{Median \\ Enrichment} & \shortstack{StDev \\ Enrichment} & \shortstack{N Chromosomes \\ With Feature} \\ 
         \midrule
         3' UTR & 0.99 & 1.02 & 0.26 &  16 \\ 
         5' UTR & 0.81 & 0.78 & 0.37 &  16 \\ 
@@ -383,7 +395,7 @@ TODO:
     \end{tabular}
 \end{table}
 
-% Breakdown of the feature Pi
+% Breakdown of the per-feature Pi
 \begin{sidewaystable}[htbp]
     \centering
     \suptablecaption{Nucleotide diversity (\textpi{}) across different genomic features} 
@@ -400,34 +412,38 @@ TODO:
         3' UTR & 0.0489 & 0.0468 & 0.0294 & 8,218 & 648.360 & 542 & 485.406 & 2,083,933 & 253.582 & 210 & 194.076 \\ 
         lncRNA & 0.0341 & 0.0302 & 0.0246 & 27,168 & 399.958 & 184 & 511.811 & 4,557,588 & 167.756 & 91 & 200.540 \\ 
         tRNA & 0.0118 & 0.00521 & 0.0236 &     430 & 66.177 & 72 & 16.982 & 13,804 & 32.102 & 32 & 14.305 \\ 
-        0-fold degenerate & 0.0107 & 0.00292 & 0.0178 & 75,895 & 269.321 & 162 & 401.035 & 5,397,246 & 71.115 & 46 & 96.221 \\ 
-        4-fold degenerate & 0.0790 & 0.0750 & 0.0483 & 39,170 & 281.364 & 176 & 380.879 & 1,410,361 & 36.006 & 23 & 46.585 \\
+        \shortstack[l]{0-fold \\ degenerate} & 0.0107 & 0.00292 & 0.0178 & 75,895 & 269.321 & 162 & 401.035 & 5,397,246 & 71.115 & 46 & 96.221 \\ 
+        \shortstack[l]{4-fold \\ degenerate} & 0.0790 & 0.0750 & 0.0483 & 39,170 & 281.364 & 176 & 380.879 & 1,410,361 & 36.006 & 23 & 46.585 \\
     \bottomrule
     \end{tabular}
 \end{sidewaystable}
 
 % Supplemental Figures
 
+% k-mer distribution of the raw hi-fi reads
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/sups_kmers.png}
     \supfigurecaption{\texttt{GenomeScope} profile of the raw PacBio Hi-Fi data.} Distribution of 21-mers shows an estimated genome size of 845.01 Mbp and a heterozygosity of 3.3\% in the \textit{B. glandula} reference assembly.\label{fig:sup_kmers}
 \end{figure}
 
+% Hi-C contact map
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_hic.pdf}
     \supfigurecaption{Hi-C contact map of the \textit{B. glandula} assembly.} The contact map shows the assembly following manual curation in \texttt{Juicebox}. The numbers (1-16) denote the 16 chromosome-level scaffolds. The dashed lines show the boundary between these 16 chromosome-level scaffolds and the unplaced contigs. Note that this numbering does not reflect the final ID of the assembled sequences. IDs were re-assigned following additional curation and sorting of the sequences.\label{fig:sup_hic}
 \end{figure}
 
-% TODO: Add info
-% Figure like needs some cleaning.
+% TODO: Genetic diversity of different genomic features. Similar to the figure
+% in the main text, but histogram instead of density plot.
+% TODO: Figure likely needs some cleaning.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/sups_feature_pi_hist.pdf}
     \supfigurecaption{Histogram of nucleotide diversity (\textpi{}) across different genomic features in Oregon \textit{Balanus glandula}.} The histogram shows the distribution of windowed \textpi{} values across different genomic features annotated in the \textit{B. glandula} assembly. The dotted lines show the median \textpi{}, while the crosses show the mean \textpi{}. Legend: gwide = genome-wide, degen0 = 0-fold degenerate sites, degen4 = 4-fold degenerate sites.\label{fig:sup_pi_hist}
 \end{figure}
 
+% Pairwise correlation among different genomic feature and diversity metrics.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
