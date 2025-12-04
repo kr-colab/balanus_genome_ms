@@ -250,6 +250,12 @@ Zooming in further on coding sequences, we further explored the patterns of \tex
     \caption{Nucleotide diversity (\textpi{}) across genomic features in Oregon \textit{Balanus glandula}.} The density histogram shows the distribution of windowed \textpi{} values across different genomic features annotated in the \textit{B. glandula} assembly. The vertical lines show the 50th quantile (median) of the distribution, while the crosses show the mean value.\label{fig:feature_pi}
 \end{figure}
 
+\subsection*{Estimating effective population size}
+
+We estimated the effective population size (N\textsubscript{e}) of this central Oregon \textit{B. glandula} population using the whole-genome genotypes. First, we calculated N\textsubscript{e} using the Watterson's estimator of genetic diversity ($\theta_W$), observing a genome-wide mean $\theta_W$ of 0.0617 (median: 0.0635, standard deviation: 0.0224; Fig~\ref{fig:sup_theta_ne}). Using the expected relationship between the effective population size and the Watterson's estimator, $\theta_W=4N_{e}\mu$, we estimated the mean effective size of this population as 5,137,172 (median: 5,289,211, standard deviation: 1,862,683), according to a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$ [Nunez2020].
+
+% mention the msmc2 run and say there is no good resolution from 7 pairs of haplotypes.
+
 \section*{Discussion}
 
 \subsection*{Genome assembly in highly polymorphic species}
@@ -453,5 +459,23 @@ TODO:
     \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
     \supfigurecaption{Pairplot of genomic features and genetic variation in Oregon \textit{Balanus glandula}.} Diagonal shows the density histogram of the proportion of the genomics elements (e.g., CDS, lncRNA, tRNA, repeats, and introns), proportion of variant sites, proportion of callable sites post-filtering, and nucleotide diversity (\textpi{}). All values computed across 10 kbp windows. Below the diagonal, plots show the correlation across all pairwise comparisons. Red and blue lines show the linear and Loess regression, respectively. Above the diagonal, panels show the Spearman's rank correlation coefficient ($\rho$) for the given pairwise comparison.\label{fig:sup_pi_pairplot}
 \end{figure}
+
+% Theta_W Ne
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/sups_theta_ne.pdf}
+    \supfigurecaption{Effective population (N\textsubscript{e}) size estimation of \textit{Balanus glandula} based on the Watterson's estimator ($\theta_W$).}
+    Effective size of the population was calculated according to the relationship $\theta_W=4N_{e}\mu$, using a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$.\label{fig:sup_theta_ne}
+\end{figure}
+
+% Theta_W Ne
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sups_msmc2_ne.pdf}
+    \supfigurecaption{Coalescent estimation of the effective population (N\textsubscript{e}) size estimation of \textit{Balanus glandula}.}
+    Estimation of N\textsubscript{e} through time was using the \texttt{mscm2} software, using a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$, and fixing the generation time ($g$) to 1. Each line represents the N\textsubscript{e} for each sample, with \texttt{Bgland\_00} denoting the individual used to generate the reference assembly. Using just these seven diploid samples, we do not obtain enough resolution to resolve N\textsubscript{e} at recent ($<10^{5}$) time intervals.\label{fig:sup_mcmc_ne}
+\end{figure}
+
+
 
 \end{document}
