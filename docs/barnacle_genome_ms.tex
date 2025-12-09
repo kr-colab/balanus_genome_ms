@@ -215,7 +215,19 @@ Of the 9 thousand genes assessed, 70 (0.77\%) displayed a d\textsubscript{N}/d\t
 % Yan2021: https://doi.org/10.1016/j.gene.2020.145346
 % Lui2019: https://doi.org/10.1016/j.dci.2019.103405
 
-We expanded on our d\textsubscript{N}/d\textsubscript{S} measures of positive selection in protein-coding sequences in the \textit{B. glandula} genome by using the McDonald-Kreitman (MK) test [McDonald\&Kreitman1991]. To achieve this, we incorporated polymorphism observed in a \textit{B. glandula} population by taking genetic variants present across the whole-genome of seven individuals (including our reference individual and six additional samples, see below), and comparing those against the orthologous coding sequences in the \textit{B. crenatus} outgroup.
+We expanded on our d\textsubscript{N}/d\textsubscript{S} measures of positive selection in protein-coding sequences in the \textit{B. glandula} genome by using the McDonald-Kreitman test [McDonald\&Kreitman1991]. To achieve this, we incorporated polymorphism observed in a \textit{B. glandula} population by taking genetic variants present across the whole-genome of seven individuals (including our reference individual and six additional samples, see below), and comparing those against the orthologous coding sequences in the \textit{B. crenatus} outgroup.
+\vspace{0.2cm}
+
+After filtering alignments both by length ($<$100 bp) and by the presence of premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman tests for 7,702 orthologs sequences between \textit{B. glandula} and \textit{B. crenatus}. Eight-hundred and thirty-nine (839, 10.89\%) of these orthologs showed a significant deviation from the expected ratio of non-synonymous and synonymous substitutions and polymorphisms, following \textit{p}-value correction (Fig~\ref{fig:mkTest}). After calculating the Neutrality Index (NI) at each ortholog, we determined that 387 of these showed an excess of non-synonymous substitutions, a clear signal of positive directional selection when compared to the outgroup sequence. Moreover, after calculating the average genome-wide $\alpha$, a measure of the proportion of non-synonymous substitutions fixed by positive selection [Smith\&Eyre-Walker2002], we observe 47.49\% of non-synonymous substitutions as being positively selected in this \textit{B. glandula} population.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
+    \caption{Signatures of positive selection in \textit{Balanus glandula} protein-coding genes as determined by the McDonald-Kreitman test.} X-axis denotes the $-\log_{10}$ of the Neutrality Index, with positive values representing sequences evolving from an excess of non-synonymous substitutions due to positive selection. Negative values represent an excess of non-synonymous polymorphisms. Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test, generated from the Fisher's Exact Test of the $2\times2$ contigency table of synonymous and non-synonymous substitutions and polymorphism. The dashed line in light blue shows the raw \textit{p}-value cutoff of 0.05, while the dot-dashed line in dark blue shows the Bonferroni-corrected \textit{p}-value cutoff of $6.49\times10^{-6}$. Points in red show the 837 genes displaying a significant \textit{p}-value in the McDonald-Kreitman test and an excess of fixed non-synonymous substitutions indicating positive selection. Points in green show the two genes with significant McDonald-Kreitman results showing an excess of non-synonymous polymorphism.\label{fig:mkTest}
+\end{figure}
+
+% Mention a few mkTest genes.
+
 
 \subsection*{Genetic diversity of central Oregon barnacles}
 
