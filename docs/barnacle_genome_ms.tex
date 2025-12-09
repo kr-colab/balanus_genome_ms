@@ -277,7 +277,7 @@ One important thing to note that that all of our analyses are based on the whole
 
 \subsection*{Diversity and population size}
 
-We are definitely in hyperpolymorphic territory. Diversity >5\%. 
+We are definitely in hyperpolymorphic territory. Diversity $>5$\%. 
 
 Based on the observed diversity we have N\textsubscript{e} of 10\textsuperscript{6}. However, we based on the density of 10\textsuperscript{4} per m\textsuperscript{2}, the census size of the population in OR should be in the billions (if not more) barnacles. Why this disparity? This is a key example of Lewontin's paradox. This species might be a great system to study the mechanisms underlying this disparity between diversity and census size.
 
@@ -285,7 +285,38 @@ Based on the observed diversity we have N\textsubscript{e} of 10\textsuperscript
 \lipsum[20]
 
 \section*{Materials and Methods}
-\lipsum[20]
+
+\subsection*{Genome assembly and annotation}
+
+\subsubsection*{High-molecular weight DNA and PacBio sequencing}
+
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{B. glandula} individuals from the docks in the Oregon Institute of Marine Biology, in Charleston, Oregon, USA (43.356 N, 124.326 W). Individuals were hand collected at low tide in February 2023. High-molecular weight (HMW) DNA was extracted from the dissected testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using fluorometric quantification of concentration (Qubit; Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA of a single individual was sequenced using on three SMRTcells of a PacBio Sequel II machine at the University of Oregon's Genomics and Cell Characterization Core Facility (GC3F). These three sequencing runs yielded a total of 5.93 million reads with a read N50 of 12.4 kbp.
+% Some of this happened before me, so we might need some more details on the library and sequencing, e.g., library prep? specific machine?
+
+\subsubsection*{Chromosome conformation capture}
+
+We generated chromosome conformation capture (Hi-C) libraries from a \textit{B. glandula} individual collected from Cape Perpetua, Oregon, USA (44.279 N, 124.112 W) in August 2023. Library construction was performed by Phase Genomics, Inc.\ using its proprietary Phase Hi-C kit. The final library was sequenced on an Illumina NovaSeq6000 S4 lane at the University of Oregon's GC3F, yielding 414.3 million read pairs.
+
+\subsubsection*{ONT sequencing}
+
+\subsubsection*{RNA sequencing}
+
+\subsection*{Synteny}
+
+\subsection*{phastCons}
+
+\subsection*{Analysis of molecular evolution}
+
+\subsubsection*{McDonald-Kreitman test}
+
+Calculating alpha:
+% from matt hahn's book. check reference.
+
+$\overline{\alpha}=1-\frac{\sum_{i}^{m}\frac{D_{S_{i}}P_{N_{i}}}{P_{S_{i}}+D_{S_{i}}}}{\sum_{i}^{m}\frac{P_{S_{i}}D_{N_{i}}}{P_{S_{i}}+D_{S_{i}}}}$
+
+\subsection*{Popgen}
+
+\subsection*{Demographic inference}
 
 \subsection*{Data Availability}
 \url{https://github.com/arcolon14/balanus_genome_ms}
