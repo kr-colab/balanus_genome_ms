@@ -4,3 +4,24 @@
 docs/.vscode/ltex.hiddenFalsePositives.en-US.txt
 docs/barnacle_genome_ms.synctex.gz
 docs/.vscode/ltex.dictionary.en-US.txt
+
+# LaTeX build artifacts
+*.log
+*.aux
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
+
+# LaTeX temporary files
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.idx
+*.ind
+*.ilg
+
+# PDFLaTeX specific
+pdflatex*.fls

@@ -185,7 +185,7 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
 
 % Talking about the diversity on just our reference sample. There is tons of variation on just one individual, so I thought it was important just to say that. We delve more on this on the later popgen section, but this individual is not included there.
 
-We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, indicating a substantial proportion of coding variants in just a single barnacle individual.
+We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, including 144 thousand non-synonymous point mutations, as catergorized by the \texttt{snpEff} software [Cingolani2012]. In this reference individual, the average transcript showed a mean number of 7.74 (median: 3, standard deviation: 14.97) non-synonymous variants, indicating a substantial proportion of coding variation in just a single barnacle individual.
 
 \subsection*{Conservation of functional elements in barnacle genomes}
 
@@ -218,7 +218,11 @@ Of the 9 thousand genes assessed, 70 (0.77\%) displayed a d\textsubscript{N}/d\t
 We expanded on our d\textsubscript{N}/d\textsubscript{S} measures of positive selection in protein-coding sequences in the \textit{B. glandula} genome by using the McDonald-Kreitman test [McDonald\&Kreitman1991]. To achieve this, we incorporated polymorphism observed in a \textit{B. glandula} population by taking genetic variants present across the whole-genome of seven individuals (including our reference individual and six additional samples, see below), and comparing those against the orthologous coding sequences in the \textit{B. crenatus} outgroup.
 \vspace{0.2cm}
 
-After filtering alignments both by length ($<$100 bp) and by the presence of premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman tests for 7,702 orthologs sequences between \textit{B. glandula} and \textit{B. crenatus}. Eight-hundred and thirty-nine (839, 10.89\%) of these orthologs showed a significant deviation from the expected ratio of non-synonymous and synonymous substitutions and polymorphisms, following \textit{p}-value correction (Fig~\ref{fig:mkTest}). After calculating the Neutrality Index (NI) at each ortholog, we determined that 387 of these showed an excess of non-synonymous substitutions, a clear signal of positive directional selection when compared to the outgroup sequence. Moreover, after calculating the average genome-wide $\alpha$, a measure of the proportion of non-synonymous substitutions fixed by positive selection [Smith\&Eyre-Walker2002], we observe 47.49\% of non-synonymous substitutions as being positively selected in this \textit{B. glandula} population.
+After filtering alignments both by length ($<$100 bp) and by the presence of premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman tests for 7,702 orthologs sequences between \textit{B. glandula} and \textit{B. crenatus}. Eight-hundred and thirty-nine (839, 10.89\%) of these orthologs showed a significant deviation from the expected ratio of non-synonymous and synonymous substitutions and polymorphisms, following \textit{p}-value correction (Fig~\ref{fig:mkTest}). After calculating the Neutrality Index (NI) [Rand\&Kann1996] at each ortholog, we determined that 387 of these showed an excess of non-synonymous substitutions, a clear signal of positive directional selection when compared to the outgroup sequence. Additionally, we calculated the average genome-wide $\alpha$, a measure of the proportion of non-synonymous substitutions fixed by positive selection [Smith\&Eyre-Walker2002; Stoletzki\&Eyre-Walker], finding that 47.49\% of non-synonymous substitutions in this \textit{B. glandula} population were fixed as a product of positive selection.
+
+% Rand\&Kann1996: https://doi.org/10.1093/oxfordjournals.molbev.a025634
+% Stoletzki\&Eyre-Walker: https://doi.org/10.1093/molbev/msq249
+% Smith\&Eyre-Walker2002: https://doi.org/10.1038/4151022a
 
 \begin{figure}[htbp]
     \centering
@@ -231,11 +235,7 @@ After filtering alignments both by length ($<$100 bp) and by the presence of pre
 
 \subsection*{Genetic diversity of central Oregon barnacles}
 
-We sequenced the whole genomes of six \textit{B. glandula} individuals collected from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites with low coverage, low quality, and/or missing genotypes, we retained a total of 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the sequenced individuals. Among these variant sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that were multiallelic in this set of just six individuals. In total, the amount of polymorphism observed in our sampling translates to a mean density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of these variant sites (5.23\%) were located within the span of coding regions and represent a substantial proportion of coding variation segregating in this central Oregon population.
-
-% TODO: Shoulw we talk more about coding variation? We have snpEff results, but I
-% haven't done much with them. I can parse and get some metrics of non-synonymous 
-% variants, for example.
+We sequenced the whole genomes of six \textit{B. glandula} individuals collected from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites with low coverage, low quality, and/or missing genotypes, we retained a total of 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the sequenced individuals. Among these variant sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that were multiallelic in this set of just six individuals. In total, the amount of polymorphism observed in our sampling translates to a mean density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of these variant sites (5.23\%) were located within the span of coding sequences. These coding variants included 360 thousand missense (non-synonymous) mutations, corresponding to an average (mean) of 18.93 non-synonymous variants per transcript (median: 10, standard deviation: 28.50). Overall, these represent a substantial proportion of coding variation segregating in this central Oregon population.
 \vspace{0.2cm}
 
 This \textit{B. glandula} population displayed a mean genome-wide nucleotide diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; Fig~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). Along each chromosome, we did not observe any strong correlation between the density of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and \textpi{}, particularly not at the scale of 10 kbp (Fig~\ref{fig:genome_pi}; Fig~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present at smaller genomic intervals (see below). The strongest correlation was, expectedly, observed between the density of segregating sites along 10 kbp windows and \textpi{} (Spearman's $\rho$: 0.706; Fig~\ref{fig:sup_pi_pairplot}). The proportion of segregating sites in itself was not correlated with the density of particular genomic features, except for repeats; however, this is likely an artifact of the masking of genotypes located within repetitive intervals in the reference (see Methods).
@@ -274,7 +274,7 @@ Additionally, we did a coalescent-based estimation of N\textsubscript{e} through
 
 \subsection*{Genome assembly in highly polymorphic species}
 
-It is a very difficult.
+It is a very difficult and there is not a ton of info about it out there. Heterozygosity is still a problem even with highly accurate long reads. We can purge haplotigs but that can only do so much if the initial assembly is fragmented.
 
 \subsection*{Pi vs other species}
 
@@ -302,7 +302,7 @@ Based on the observed diversity we have N\textsubscript{e} of 10\textsuperscript
 
 \subsubsection*{High-molecular weight DNA and PacBio sequencing}
 
-For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{B. glandula} individuals from the docks in the Oregon Institute of Marine Biology, in Charleston, Oregon, USA (43.356 N, 124.326 W). Individuals were hand collected at low tide in February 2023. High-molecular weight (HMW) DNA was extracted from the dissected testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using fluorometric quantification of concentration (Qubit; Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA of a single individual was sequenced using on three SMRTcells of a PacBio Sequel II machine at the University of Oregon's Genomics and Cell Characterization Core Facility (GC3F). These three sequencing runs yielded a total of 5.93 million reads with a read N50 of 12.4 kbp.
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{B. glandula} individuals from the docks in the Oregon Institute of Marine Biology, in Charleston, Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected at low tide in February 2023. High-molecular weight (HMW) DNA was extracted from the dissected testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using fluorometric quantification of concentration (Qubit; Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA of a single individual was sequenced using on three SMRTcells of a PacBio Sequel II machine at the University of Oregon's Genomics and Cell Characterization Core Facility (GC3F). These three sequencing runs yielded a total of 5.93 million reads with a read N50 of 12.4 kbp.
 % Some of this happened before me, so we might need some more details on the library and sequencing, e.g., library prep? specific machine?
 
 \subsubsection*{Chromosome conformation capture}
@@ -331,10 +331,12 @@ $\overline{\alpha}=1-\frac{\sum_{i}^{m}\frac{D_{S_{i}}P_{N_{i}}}{P_{S_{i}}+D_{S_
 \subsection*{Demographic inference}
 
 \subsection*{Data Availability}
-\url{https://github.com/arcolon14/balanus_genome_ms}
+
+Assembly and annotation on PRJNA1378260. Popgen Illumina data on PRJNAXXXXXXX. Code repo: \url{https://github.com/arcolon14/balanus_genome_ms}
 
 \section*{Acknowledgments}
-\lipsum[20]
+
+Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB. Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
 
 \section*{Supplements}
 
