@@ -181,13 +181,13 @@ We performed a conserved synteny analysis using the software \texttt{Genespace} 
     \caption{Conserved synteny across barnacle genomes.} Genome-wide riparian synteny plots showing one-to-one correspondence across 16 orthologous chromosomes between the genomes of \textit{Balanus glandula} (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes pollicipes} (bottom). Each set of colored lines shows orthologous genes across the three assemblies, colored according to their chromosome of origin. Chromosomes are drawn according their order in \textit{A. amphitrite}. Cladogram on the left shows the evolutionary relationship among the three species.\label{fig:synteny}
 \end{figure}
 
-\subsection*{Genetic diversity in the \textit{B. glandula} reference assembly}
+\subsection*{High genetic diversity in the \textit{B. glandula} reference assembly}
 
 % Talking about the diversity on just our reference sample. There is tons of variation on just one individual, so I thought it was important just to say that. We delve more on this on the later popgen section, but this individual is not included there.
 
 We calculated estimates of diversity present in the barnacle genome by genotyping our \textit{B. glandula} reference individual. After filtering low-quality genotypes and masking regions with annotated repeats, we obtained genotypes for 314 million sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73 million SNPs and 356 thousand indels. In total, this variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant sites within the span of protein-coding sequences, including 144 thousand non-synonymous point mutations, as catergorized by the \texttt{snpEff} software [Cingolani2012]. In this reference individual, the average transcript showed a mean number of 7.74 (median: 3, standard deviation: 14.97) non-synonymous variants, indicating a substantial proportion of coding variation in just a single barnacle individual.
 
-\subsection*{Conservation of functional elements in barnacle genomes}
+\subsection*{Functional elements are conserved in barnacle genomes}
 
 % For phastCons, mostly saying how we found the hughly conserved stuff and what it is. The enrichment results are generally expected (tRNAs and CDSs are conserved). Not sure what else to say there.
 
@@ -204,7 +204,7 @@ Following the identification of HCEs, we compared their sequence composition aga
     \caption{Highly conserved elements in the \textit{Balanus glandula} assembly.} \textbf{A.} Proportion of annotated features between the whole genome (left column) and \texttt{phastCons}-conserved elements (right column). Values are shown only for elements with proportions larger than 0.01. Sites that span more than one annotation type are represented by the ``multiple'' feature. \textbf{B.} Relative enrichment of annotated features in the highly conserved elements. The enrichment values for each of the 16 chromosomes are shown as points. The diamonds in the boxplot indicate the mean enrichment across the genome.\label{fig:phastcons}
 \end{figure}
 
-\subsection*{Analysis of molecular evolution}
+\subsection*{Patterns of molecular evolution in protein-coding genes}
 
 To look at the rate of molecular evolution in protein coding sequences, we calculated at the pairwise rate of non-synonymous to synonymous substitutions (d\textsubscript{N}/d\textsubscript{S}) between \textit{B. glandula} and its congener, the wrinkled barnacle \textit{Balanus crenatus}. We identified and aligned 9,082 single-copy orthologs between both species. The mean pairwise d\textsubscript{N}/d\textsubscript{S} was 0.206 (median: 0.158, standard deviation: 0.191; Fig~\ref{fig:sup_dnds}). This ratio indicates that, on average, protein coding sequencing in these barnacle genomes are under purifying selection, reflecting the expected evolutionary constraints over sequences of functional importance.
 \vspace{0.2cm}
@@ -233,7 +233,7 @@ After filtering alignments both by length ($<$100 bp) and by the presence of pre
 % Mention a few mkTest genes.
 
 
-\subsection*{Genetic diversity of central Oregon barnacles}
+\subsection*{Natural barnacle populations exhibit elevated genetic polymorphism}
 
 We sequenced the whole genomes of six \textit{B. glandula} individuals collected from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites with low coverage, low quality, and/or missing genotypes, we retained a total of 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the sequenced individuals. Among these variant sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that were multiallelic in this set of just six individuals. In total, the amount of polymorphism observed in our sampling translates to a mean density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of these variant sites (5.23\%) were located within the span of coding sequences. These coding variants included 360 thousand missense (non-synonymous) mutations, corresponding to an average (mean) of 18.93 non-synonymous variants per transcript (median: 10, standard deviation: 28.50). Overall, these represent a substantial proportion of coding variation segregating in this central Oregon population.
 \vspace{0.2cm}
@@ -263,7 +263,7 @@ Zooming in further on coding sequences, we further explored the patterns of \tex
     \caption{Nucleotide diversity (\textpi{}) across genomic features in Oregon \textit{Balanus glandula}.} The density histogram shows the distribution of windowed \textpi{} values across different genomic features annotated in the \textit{B. glandula} assembly. The vertical lines show the 50th quantile (median) of the distribution, while the crosses show the mean value.\label{fig:feature_pi}
 \end{figure}
 
-\subsection*{Estimating effective population size}
+\subsection*{\textit{B. glandula} exhibits large effective population sizes}
 
 We estimated the effective population size (N\textsubscript{e}) of this central Oregon \textit{B. glandula} population using the whole-genome genotypes. First, we calculated N\textsubscript{e} using the Watterson's estimator of genetic diversity ($\theta_W$), observing a genome-wide mean $\theta_W$ of 0.0617 (median: 0.0635, standard deviation: 0.0224; Fig~\ref{fig:sup_theta_ne}). Using the relationship between the effective population size and the Watterson's estimator, $\theta_W=4N_{e}\mu$, we calculated the mean effective size of this population as 5,137,172 (median: 5,289,211, standard deviation: 1,862,683), according to a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$ (as estimated by [Nunez2020] for the acorn barnacle \textit{S. balanoides}).
 \vspace{0.2cm}
