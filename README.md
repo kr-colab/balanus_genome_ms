@@ -87,7 +87,39 @@ Note: Sample used for the scaffolding was `Bgland_1`
 
 #### K-mer estimation
 
-TODO: Ask @Andy for the originail results or redo in the pooled data.
+First, generate a distribution of k-mers using `jellyfish` version `2.2.10`. Default k-mer size (21). Only modifying the size of the output database (`--size`).
+
+```sh
+# Run the k-mer counts
+jellyfish count \
+    --canonical \
+    --mer-len 21 \
+    --size 1000000000 \
+    --threads $THR \
+    --output $jf \
+    $reads
+```
+
+After k-mers are counted (and stored in the `*.jf` file), generate a k-mer histogram.
+
+```sh
+# Generate a k-mer histogram
+jellyfish histo \
+    --threads $THR \
+    --output $histo \
+    $jf
+```
+
+Generate a `GenomeScope2` (version `2.0`) plot using the k-mer histogram. Set the same k-mer length (21) and fix the ploidy (2).
+
+```sh
+genomescope2 \
+    --input $histo \
+    --ploidy 2 \
+    --kmer_length 21 \
+    --output $outdir \
+    --name_prefix $name \
+```
 
 #### Initial contig-level assembly
 
