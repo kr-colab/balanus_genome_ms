@@ -368,9 +368,13 @@ The processed Hi-C alignments were used to scaffold the genome using the \texttt
 
 \subsubsection*{Polishing}
 
-After manual curation of the scaffolded genome, we performed one round of polishing and automatic curation using the \texttt{Inspector} software version \texttt{1.0.1} [Chen2021]. First, we evaluated the assembly using \texttt{inspector.py}, aligning the PacBio HiFi reads against the assembly. The assembly was then corrected using \texttt{inspector-correct.py}.
+After manual curation of the scaffolded genome, we performed one round of polishing and automatic curation using the \texttt{Inspector} software version \texttt{1.0.1} [Chen2021]. First, we evaluated the assembly using \texttt{inspector.py}, mapping the PacBio HiFi reads against the assembly. The assembly was then corrected using \texttt{inspector-correct.py}.
 
 \subsection*{Genome annotation}
+
+\subsubsection*{Repeat annotation}
+
+We identified and classified repetitive elements in the \textit{B. glandula} genome using the \texttt{EarlGrey} software version \texttt{4.1.0} [Baril2024]. Before running \texttt{EarlGrey}, we first downloaded the \texttt{Dfam 3.8} database [Storer2021], extracting the annotated arthropod repeat sequences to generate an initial consensus masking library. We provided this initial consensus library to \texttt{EarlGrey} (\texttt{-l}). We also used ``arthropoda'' as the search term for \texttt{RepeatMasker} version \texttt{4.1.2} [Smit2013]. In addition, we clusterd the final TE library to reduce redundancy (\texttt{-c yes}) and generated a soft-masked genome (\texttt{-d yes}).
 
 \subsection*{Synteny}
 
