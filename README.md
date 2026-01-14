@@ -586,114 +586,8 @@ M:5.13%, 52
 N:1013
 ```
 
-### Missasembly correction
-
-#### Tigmint
-<!-- TODO: Remove this-->
-<!--- Check details with @Scott --->
-
-We used `tigmint` version `X.XX` using TELLseq data to generate "breaktigs" represening the split of missasembled regions.
-
-```sh
-# TODO: Add tigmint stuff here
-```
-
-#### Re-scaffolding
-
-We extracted all breaktigs larger than 10 Kbp into a new FASTA (267 fragments total).
-
-The total size of this portion is 933.16 Mbp. The gene-completeness of these breaktigs is (BUSCO C = 92.01%):
-
-```sh
-## lineage: arthropoda_odb10
-S:88.06%, 892
-D:3.95%, 40
-F:1.28%, 13
-I:0.00%, 0
-M:6.71%, 68
-N:1013
-```
-
-These were re-scaffolded with Hi-C reads using the same process as before (`bwa` -> `samtools` -> `pairtools` -> `yahs` -> `juicer`).
-
-This resulted in:
-
-Checked with `quast` version `5.2.0`
-
-| statistic | value |
-| --------- | ----- |
-| Total size | 933.1 Mbp |
-| # scaffolds | 176 |
-| # contigs | 1,555 |
-| Largest scaffold | 128.5 Mbp |
-| Scaffold N50 | 59.2 Mbp |
-| Contig N50 | 1.22 Mbp |
-| Scaffold L50 | 6 |
-| Total len > 1 Mbp | 915.8 Mbp |
-| Fragments > 1 Mbp | 46 |
-| % leb >  1 Mbp | 98.1% |
-| Total len > 10 Mbp | 850.5 Mbp |
-| Fragments > 10 Mbp | 14 |
-| % len >  10 Mbp | 91.1% |
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (92.20% complete).
-
-```
-## lineage: arthropoda_odb10
-S:88.55%, 897
-D:3.65%, 37
-F:1.09%, 11
-I:0.00%, 0
-M:6.71%, 68
-N:1013
-```
-
-#### Curating Hi-C re-scaffolding
-
-<!-- TODO: Remove this-->
-Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes. Resulting in:
-
-Checked with `quast` version `5.2.0`
-
-| statistic | value |
-| --------- | ----- |
-| Total size | 933.2 Mbp |
-| # scaffolds | 237 |
-| # contigs | 1,643 |
-| Largest scaffold | 80.2 Mbp |
-| Scaffold N50 | 50.96 Mbp |
-| Contig N50 | 1.17 Mbp |
-| Scaffold L50 | 8 |
-| Total len > 1 Mbp | 896.2 Mbp |
-| Fragments > 1 Mbp | 50 |
-| % leb >  1 Mbp | 96.3% |
-| Total len > 10 Mbp | 832.6 Mbp |
-| Fragments > 10 Mbp | 15 |
-| % len >  10 Mbp | 89.2% |
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (91.9% complete.)
-
-```
-## lineage: arthropoda_odb10
-S:88.15%, 893
-D:3.75%, 38
-F:1.28%, 13
-I:0.00%, 0
-M:6.81%, 69
-N:1013
-```
-
-In comparison before the manual curation:
-
-* Number of fragments went from 176 to 237
-* Total length remained the same
-* Largest fragment went from 128.5 Mbp to 80.2 Mbp
-* BUSCO C went from 92.2% to 91.9%
-* BUSCO D went from 4.84% to 3.75%.
-
 ### Inspector
 
-<!-- TODO: update this with exact commands -->
 We performed one additional round of curation using `inspector` version `1.0.1`.
 
 ```sh
@@ -727,39 +621,31 @@ Checked with `quast` version `5.2.0`
 
 | statistic | value |
 | --------- | ----- |
-| Total size | 929.2 Mbp |
-| # scaffolds | 233 |
-| # contigs | 1,575 |
+| Total size | 1.04 Gbp |
+| # scaffolds | 592 |
+| # contigs | 1,802 |
 | Largest scaffold | 80.3 Mbp |
-| Scaffold N50 | 52.86 Mbp |
-| Contig N50 | 1.22 Mbp |
-| Scaffold L50 | 8 |
-| Total len > 1 Mbp | 892.2 Mbp |
-| Fragments > 1 Mbp | 50 |
-| % leb >  1 Mbp | 96.0% |
-| Total len > 10 Mbp | 828.7 Mbp |
-| Fragments > 10 Mbp | 15 |
-| % len >  10 Mbp | 89.2% |
+| Scaffold N50 | 51.41 Mbp |
+| Contig N50 | 1.18 Mbp |
+| Scaffold L50 | 9 |
+| Total len > 1 Mbp | 906.6 Mbp |
+| Fragments > 1 Mbp | 58 |
+| % len >  1 Mbp | 86.74% |
+| Total len > 8.5 Mbp | 841.2 Mbp |
+| Fragments > 8.5 Mbp | 16 |
+| % len >  10 Mbp | 80.61% |
 
-We verified gene-completeness using `compleasm` version `0.12-r237` (91.41 % complete.)
+We verified gene-completeness using `compleasm` version `0.12-r237` (94.08 % complete.)
 
 ```ls
 ## lineage: arthropoda_odb10
-S:87.66%, 888
-D:3.75%, 38
-F:1.38%, 14
+S:89.44%, 906
+D:4.64%, 47
+F:0.89%, 9
 I:0.00%, 0
-M:7.21%, 73
+M:5.03%, 51
 N:1013
 ```
-
-In comparison before `inspector` correction:
-
-* Number of fragments went from 237 to 233
-* Total length decreased by ~4 Mbp
-* Largest fragment went from 80.2 to  80.3 Mbp
-* BUSCO C went from 91.9% to 91.4.
-* BUSCO D remained at 3.75%.
 
 ### Genome annotation
 <!--- TODO --->
