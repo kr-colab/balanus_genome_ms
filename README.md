@@ -648,7 +648,59 @@ N:1013
 ```
 
 ### Genome annotation
-<!--- TODO --->
+
+#### Repeat annotation
+
+Done with `EarlGrey` version `4.0.1`.
+
+First, we downloaded `Dfam 3.8` and extracted the repeat sequences for Arthropoda. These were used as an initial repeat database for `EarlGrey`.
+
+```sh
+# Existing starting databse
+# This is the files extracted from Dfam 3.8
+# 6657 is for Crustacea
+taxid=6657
+rep_db=$work/Repbase_db/dfam3.8_${taxid}.fa
+# Set the input sequence
+in_fasta=${work}/in_genome/BalGla.fasta
+# Search term
+term=arthropoda
+# Target Species name
+name="BalGla"
+# Make an output directory for run
+outp=$(date +${work}/%y%m%d.earl_grey.${term}.${taxid})
+mkdir -p $outp
+cd $outp
+
+# Repeat Masker command
+cmd=(
+    earlGrey
+    -g $in_fasta
+    -s $name
+    -o $outp
+    -t $thr
+    -l $rep_db # Starting consensus library for an inital mask
+    -r $term   # RepeatMasker search term
+    -c yes     # Cluster TE library to reduce redundancy
+    -d yes     # Create soft-masked genome
+)
+
+echo "${cmd[@]}"
+"${cmd[@]}"
+```
+
+Results:
+
+| tclassif | cov | count | proportion | gen | N Distinct Classifications |
+| -------- | --- | ----- | ---------- | --- | -----| 
+| DNA | 88203702 | 217040 | 0.084525 | 1043519078 |335 |
+| LINE | 95553328 | 199835 | 0.091568 | 1043519078 | 511 |
+| LTR | 39476928 | 87021 | 0.037830 | 1043519078 | 362 |
+| Other (Simple Repeat, Microsatellite, RNA) | 37933124 | 77043 | 0.036351 | 1043519078 | 112 |
+| Penelope | 25187297 | 61172 | 0.024136 | 1043519078 | 112 |
+| Rolling Circle | 6897773 | 17411 | 0.006610 | 1043519078 | 45 |
+| SINE | 828944 | 2039 | 0.000794 | 1043519078 | 6 |
+| Unclassified | 404513462 | 966499 | 0.387643 | 1043519078 | 1520 |
 
 ## *Balanus crenatus* genome assembly and annotation
 
