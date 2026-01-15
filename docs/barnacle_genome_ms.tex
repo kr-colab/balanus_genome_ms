@@ -148,6 +148,8 @@ In this work, we describe a high-quality, chromosome-level genome assembly for t
 \subsection*{Genome assembly}
 
 % General stats on assembly. Confirming the quality and status of the genome.
+% Note from lab meeting 2026/01/15:
+% This is a lot of reporting of the genome early in the results and I agree. We can definitely removed this out somewhere else. My idea was to describe that the assembly was not easy and the difficulty is based on the biology. Not a big point, so we can move it somewhere else.
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Preliminary assessment of the PacBio Hi-Fi data using k-mers revealed an expected genome size of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}). Our initial contig-level assembly, generated using \texttt{hifiasm} [Cheng2021; Cheng2022] with default parameters, generated sequences with a total length of 1.64 Gbp, composed of 4,212 fragments, and a contig N50 of 734 kbp. We also assessed gene-completeness using \texttt{BUSCO}s [Manni2021; Tegenfeldt2024], as implemented in \texttt{compleasm} [Huang\&Li2023], resulting in a completeness of 95.66\% (\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; \texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set (Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, suggested the presence of a large fraction of haplotig sequences, reflecting the high heterozygosity observed for the species.
 \vspace{0.2cm}
@@ -174,6 +176,7 @@ In addition to protein-coding genes, we also annotated non-coding elements in th
 \subsection*{Conserved architecture across barnacle genomes}
 
 % Just touching on synteny. Things are fairly clean, so not much to say for now.
+% Note 2026/01/15: Instead of orthologous chromosomes, we have macro-synteny but not micro-synteny. This might be a better way of describing these relationships give that we do not know the ancestral karyotype for this types.
 
 We performed a conserved synteny analysis using the software \texttt{Genespace} [Lovell2022] to identify patterns of large-scale structure across barnacle genomes. We compared our \textit{B. glandula} genome against the chromosome-level genome assemblies of the striped barnacle \textit{Amphibalanus amphitrite} (Balanidae) [Han2024] and the gooseneck barnacle \textit{Pollicipes pollicipes} (Pollicipedidae) [Bernot2022]. These genomes display conservation in their large-scale organization, including one-to-one correspondence between 16 putatively orthologous chromosomes across the three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding of the \textit{B. glandula} assembly likely reflects the biological structure of the genome and is not the product of technical artifacts, but also suggests the conservation in the genome architecture of barnacle genomes across $\sim$165 Mya of evolution [Han 2024; Bernot2022].
 
@@ -199,6 +202,11 @@ We used the \texttt{phastCons} software [Siepel2005] on the \texttt{cactus} whol
 Following the identification of HCEs, we compared their sequence composition against the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlaid the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). Among our target features, including an ``other'' and ``multiple'' class for the unannotated fraction of the genome and annotation overlaps, respectively, all but one is present among HCEs. We do not observe any rRNA sites among our conserved sites; however, this is likely the product of the whole-genome alignment, given rRNA's repetitive nature and alignment difficulty [e.g., Gillispie2004], and not an accurate measure of conservation. Aside from the absence of rRNAs, the sequence composition of HCE largely follows the composition of the whole genome. Most annotated features do not appear substantially enriched among HCE sites (Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs (mean: 1.96, median: 1.98, standard deviation: 0.846), reflecting the conservation of protein-coding genes among barnacle genomes. Similarly, tRNAs are five-fold enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product of the strong functional constraint expected for these sequences.
 
 % For the rRNA thing, see: https://doi.org/10.1016/j.ympev.2004.08.004 for an example. The idea is citing that rRNAs are difficult to align based on sequence alone, so cactus is probably not aligning them well.
+
+% Notes lab meeting 2026/01/15
+% Convert panel B to log2. Easier to read.
+% Changing named of "other" catagories?
+% For "multiple", maybe mentioning some in the text (if not in figure). For example, we have Intron+TE
 
 \begin{figure}[htbp]
     \centering
@@ -303,6 +311,12 @@ The magnitude of diversity observed in barnacles solidly places them among hyper
 \vspace{0.2cm}
 
 Moreover, barnacles appear to be an emerging model for the study of the dynamics between effective and census population sizes. From our results on diversity, we observe that this barnacle population has an effective size approximately 10\textsuperscript{6}. However, these populations also exhibit densities of 10\textsuperscript{4} individuals per m\textsuperscript{2} [Menge2000]. Based on this estimate, the census size of the Pacific barnacle population in central Oregon should be in the billions (if not more) of barnacles. While the general disparity between these two population size estimates has been long known, i.e., Lewontin's Paradox [Lewontin1974], the mechanisms underlying the differences have been long debated [Gillespie1999; Gillespie2000; MaynardSmith1974; Kimura1983] and are still the subjects of study [Buffalo2021]. Our work on the Pacific acorn barnacle provides an opportunity to study these process empirically.
+
+% Notes from lab meeting 2026/01/15:
+% Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match? We see small dN/dS and large MKT, so at first glance this is counterintuive. But is it?
+
+% Also, we can also discuss the issues with our current metrics, e.g., recurrent mutation and effects in theta, psmc, etc.
+% How much we should discuss here?
 
 \section*{Conclusion}
 
@@ -521,6 +535,7 @@ Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB. Kern
 \end{table}
 
 % Stats about the phasCons conserved elements and enrichment of genomic elements.
+% TODO: Add the total ammounts and proportions for genome and HCE classes
 \begin{table}[htbp]
     \centering
     \suptablecaption{Enrichment of annotated features among HCEs} 
