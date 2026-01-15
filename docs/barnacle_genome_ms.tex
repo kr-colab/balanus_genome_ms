@@ -232,15 +232,15 @@ After filtering alignments both by length ($<$100 bp) and by the presence of pre
     \caption{Signatures of positive selection in \textit{Balanus glandula} protein-coding genes as determined by the McDonald-Kreitman test.} X-axis denotes the $-\log_{10}$ of the Neutrality Index, with positive values representing sequences evolving from an excess of non-synonymous substitutions due to positive selection. Negative values represent an excess of non-synonymous polymorphisms. Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test, generated from the Fisher's Exact Test of the $2\times2$ contigency table of synonymous and non-synonymous substitutions and polymorphism. The dashed line in light blue shows the raw \textit{p}-value cutoff of 0.05, while the dot-dashed line in dark blue shows the Bonferroni-corrected \textit{p}-value cutoff of $6.49\times10^{-6}$. Points in red show the 837 genes displaying a significant \textit{p}-value in the McDonald-Kreitman test and an excess of fixed non-synonymous substitutions indicating positive selection. Points in green show the two genes with significant McDonald-Kreitman results showing an excess of non-synonymous polymorphism.\label{fig:mkTest}
 \end{figure}
 
-% Mention a few mkTest genes.
+% Mention a few mkTest genes?.
 
-
-\subsection*{Natural barnacle populations exhibit elevated genetic polymorphism}
+\subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
 We sequenced the whole genomes of six \textit{B. glandula} individuals collected from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites with low coverage, low quality, and/or missing genotypes, we retained a total of 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the sequenced individuals. Among these variant sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that were multiallelic in this set of just six individuals. In total, the amount of polymorphism observed in our sampling translates to a mean density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of these variant sites (5.23\%) were located within the span of coding sequences. These coding variants included 360 thousand missense (non-synonymous) mutations, corresponding to an average (mean) of 18.93 non-synonymous variants per transcript (median: 10, standard deviation: 28.50). Overall, these represent a substantial proportion of coding variation segregating in this central Oregon population.
 \vspace{0.2cm}
 
 This \textit{B. glandula} population displayed a mean genome-wide nucleotide diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; Fig~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). Along each chromosome, we did not observe any strong correlation between the density of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and \textpi{}, particularly not at the scale of 10 kbp (Fig~\ref{fig:genome_pi}; Fig~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present at smaller genomic intervals (see below). The strongest correlation was, expectedly, observed between the density of segregating sites along 10 kbp windows and \textpi{} (Spearman's $\rho$: 0.706; Fig~\ref{fig:sup_pi_pairplot}). The proportion of segregating sites in itself was not correlated with the density of particular genomic features, except for repeats; however, this is likely an artifact of the masking of genotypes located within repetitive intervals in the reference (see Methods).
+\vspace{0.2cm}
 
 \begin{figure}[htbp]
     \centering
@@ -274,35 +274,41 @@ Additionally, we did a coalescent-based estimation of N\textsubscript{e} through
 
 \section*{Discussion}
 
+% All of this needs to be re-worked some more. These are mainly my general ideas.
+
 \subsection*{Genome assembly in highly polymorphic species}
 
-Increases in the affordability and accuracy in sequencing technologies has increased the access in the generation of high quality reference genomes across the tree of life. Over the last decade, we have seen the research outcomes of large genome assembly consortiums, e.g., the Vertebrate Genome Project [Rhie2021] and the Earth BioGenome Project [Blaxter2025], tackling the generation of high quality genomes across diverse taxa. We have also seen the generation of complete genomes, sequencing chromosomes at a telomore-to-telomere scale [Nurk2022; Yoo2025], as well as the sequencing and assembly of some of the largest and most repetitive genomes known in nature [Campos-Dominguez2025]. Alongside these advances, there has also been access to cutting-edge best practice protocols for the application of these analyses to new taxa in a reproducible fashion [e.g., Lawniczak2025; Li\&Durbin2025].
+% The idea here is to say that we have all these improvement in assembly and data analysis for genomes. These are all good, but not really applicable for these very diverse system. Just highlighting the gap in knowledge and the need for improvements in the field. Good hook for cyclothone and other projects.
+
+Improvements in the affordability, accessibility, and accuracy in sequencing technologies has increased the generation of high quality reference genomes across the tree of life. Over the last decade, we have seen the research outcomes of large genome assembly consortiums, e.g., the Vertebrate Genome Project [Rhie2021] and the Earth BioGenome Project [Blaxter2025], tackling the production of high quality genomes across diverse taxa. We have also seen the generation of complete genomes, sequencing chromosomes at a telomore-to-telomere scale [Nurk2022; Yoo2025], as well as the sequencing and assembly of some of the largest and most repetitive genomes known in nature [Campos-Dominguez2025]. Alongside these advances, there has also been access to cutting-edge best practice protocols for the application of these analyses to new taxa in a reproducible fashion [e.g., Lawniczak2025; Li\&Durbin2025].
 \vspace{0.2cm}
 
-Despite these advances, there appears to be a gap in knowledge in the analysis of highly diverse organisms, such as in barnacles. High heterozygosity presents problems during the assembly process, e.g., making the differentiation between paralogs and haplotypes more difficult, which often results in the inflation of the genome size and a high proportion of duplicates sequences [Guiglielmoni2024; Asalone2020; Mochizuki2023; Roach2018]. The most common approach is to manage these haplotypes \textit{a posteriori}, purging them after initial assembly [Guan2020; Roach2018]; however, while this approach can be successful in generating haploid assemblies, as we have shown here, it is not without its drawbacks. First, purging haplotypes could lead to a reduction in the gene completeness in the main assembly, as primary haplotypes might be incorrectly labelled as haplotigs, leading to their removal. Secondly, the ability to identify and remove haplotypes is dependent on the properties of the assembly. Sequences that are too fragmented and/or two divergent from one another are likely harder to purge due to difficulties in mapping. Moreover, when performing phased diploid assemblies, the excessive presence of haplotypes will interfere with phasing, leading to a main assembly that is a mosaic between the two haplotypes and/or the poor quality of the secondary assembly.
+Despite these advances, there appears to be a gap in knowledge in the analysis of highly polymorphic organisms, such as barnacles. High heterozygosity presents problems during the assembly process, e.g., hindering the differentiation between paralogs and haplotypes, which often results in the inflation of the genome size and a high proportion of duplicates sequences [Guiglielmoni2024; Asalone2020; Mochizuki2023; Roach2018]. The most common approach is to manage these haplotypes \textit{a posteriori}, purging them after initial assembly [Guan2020; Roach2018]; however, while this approach can be successful in generating haploid assemblies, as we have shown here, it is not without its drawbacks. First, purging haplotypes could lead to a reduction in the gene completeness in the main assembly, as primary haplotypes might be incorrectly labelled as haplotigs, leading to their removal. Secondly, the ability to identify and remove haplotypes is dependent on the properties of the assembly. Sequences that are too fragmented and/or two divergent from one another are likely harder to purge due to difficulties in mapping. Moreover, when performing phased diploid assemblies, the excessive presence of haplotypes will interfere with phasing, leading to a main haploid assembly that is a mosaic between the two haplotypes and/or the poor quality of the secondary assembly.
 \vspace{0.2cm}
 
 These difficulties drive the need for the development of methods and analysis best practices focused on the assembly of highly heterozygous genomes, and for a further exploration of how elevated heterozygosity affects \textit{de novo} assembly parameters. While some improvements have been made in recent years, e.g., in \texttt{hifiasm} with the direct purging of haplotigs during assembly and the integration of Hi-C data to phase haplotypes without the need of parental genomes [Cheng2022], further work is likely needed before we can obtain haplotype-resolved genome assemblies for hyper polymorphic organisms.
 
-\subsection*{Pi vs other species}
+\subsection*{The magnitude of genetic diversity in barnacle populations}
 
-Mention DEST 2.0 [Nunez2025] and [Li2025]. Both show pi 10x higher in barnacles. Even pi at 0-fold degenerate sites is 10x higher.
+% Point here is reiterating the level of diversity we observe and how it compares to other systems. I mention Drosophila, but do we need something else? There's humans too (because of large cohorts, e.g., Bergstrom2020), but that nowhere near the same ballpark in terms of diversity.
 
-% Nunez2025: https://doi.org/10.1093/molbev/msaf132
-% Li2025: https://doi.org/10.1101/2025.10.02.680045
+Our work here shows that a Pacific acorn barnacle population from the central Oregon coast exhibits genetic diversity of over 5\% (mean genome-wide \textpi{} of 0.0506). These levels of genetic diversity are higher than those observed for other model systems known for their relatively large population sizes. For example, the genome-wide nucleotide diversity we observe here in barnacles is tenfold higher than that observed in large-scale surveys in \textit{Drosophila} [Nunez2025; Li2025]. Even the diversity observed at zero-fold degenerate sites, our least diverse in the genome as the likely product of functional constraint, is still an order of magnitude higher than the diverse observed in these diverse \textit{Drosophila} populations.
+\vspace{0.2cm}
 
-\subsection*{Molecular evolution stuff}
+% Now, bringing the hyperpolymorphic stuff. We are above the "cutfoff" of hyperpolymorphic. But also,
 
-One important thing to note that that all of our analyses are based on the whole gene. However, in barnacles there is evidence for selection acting at the single-exon level, which can result in different exons of a single gene being under different selection regimes, e.g., \textit{Mpi} in \textit{S. balanoides} [Nunez2020]. It would be good to explore the patterns of molecular evolution (e.g., d\textsubscript{N}/d\textsubscript{S} and McDonald-Kreitman test) at the level of the single exon to better uncover these patterns. Moreover, we expect the population-scaled recombination rate ($\rho = 4N_{e}r$) to be very high, as a function of the large effective population size in the species. This means that selection and diversity would break down at very short scales along the genome.
+The magnitude of diversity observed in barnacles solidly places them among hyper-polymorphic populations, those who exhibit diversity above 5\% [Cutter2013]. This adds barnacles to growing list of emerging hyperpolymorphic models systems, which are key to studying the limits of biological variation and molecular in natural populations. Moreover, our finding of diversity also has important implications for the study of species boundaries. For example, recent work by [Hart2025] denotes how levels of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the definition of species. Barnacles and other hyperpolymorphic populations puts these putative cutoffs into question. We observe levels of genome-wide diversity of 5\% in just a very small portion of the biological range of the Pacific acorn barnacle. Given the species' broader geographical and ecological distribution, genetic diversity is likely to increase when looking across the whole range. This observation reiterates the importance of future studies of genetic diversity of this species over a broader geographic range, providing some insights on the mechanisms mantaining population and species boundaries in the presence of extreme diversity.
 
-\subsection*{Diversity and population size}
-
-We are definitely in hyperpolymorphic territory. Diversity $>5$\%. 
 
 Based on the observed diversity we have N\textsubscript{e} of 10\textsuperscript{6}. However, we based on the density of 10\textsuperscript{4} per m\textsuperscript{2}, the census size of the population in OR should be in the billions (if not more) barnacles. Why this disparity? This is a key example of Lewontin's paradox. This species might be a great system to study the mechanisms underlying this disparity between diversity and census size.
 
+\subsection*{Popgen in hyperpolymorphic populations}
+
+Do the stats even hold?
+
 \section*{Conclusion}
-\lipsum[20]
+
+In this work, we describe the first high-quality, chromosome-level genome assembly for the Pacific acorn barnacle, \textit{Balanus glandula}. Using this new assembly, we first identify conserved synteny among barnacle genomes despite 165 Mya of divergence. Functional elements are highly conserved in the genome of the species; however, patterns of molecular evolution highlight the precense of positive selection as a key driver in the divergence of coding sequences between closely related barnacle species. At a population level, Oregon populations of \textit{B. glanula} appear to be hyperpolymorphic, showing levels of genetic diversity of over 5\% along the genome. Yet, we find preliminary evidence of background selection over protein-coding and non-coding genes, reiterating the functional constraint genes. Overall, our work highlights the role of the Pacific acorn barnacle as an emerging model for the study of genetic variation and the mechanisms of evolution at biological extremes.
 
 \section*{Materials and Methods}
 
@@ -352,7 +358,7 @@ To add depth of coverage to this database, we aligned our PacBio HiFi sequencing
 We did a taxonomical assignment of each sequence in the assembly by first aligning our contigs against NCBI's non-redundant database (downloaded on 2023/12/13). We aligned each contig against the database using \texttt{blastn} version \texttt{2.15.0+}, as implemented in \texttt{BLAST+} [Camacho2009], specifying a minimum e-value cutoff (\texttt{-evalue}) of $1\times10^{-10}$, a maximum of 25 target sequence exported in the output (\texttt{-max\_target\_seqs 25}), and exporting in tabular format (\texttt{-outfmt 6}). These BLAST allginments were then added to the \texttt{blobtools} database using the \texttt{add} command, specifying the rule for taxonomical assignment (\texttt{--taxrule bestsumorder}). Using this approach, the \texttt{blobtools} database provides a single taxonomic assignment to each assembled contig.
 \vspace{0.2cm}
 
-Following taxonomical assignment of the assembled contigs, we used the \texttt{blobtools filter} command to obtain the IDs of sequencings reads that were assigned to a given taxon. We specified paths of our reference contigs (\texttt{--fasta}), alignments (\texttt{--cov}), and sequencing reads (\texttt{--fastq}). For filtering, we specified the parameters to select the reads aligned to contigs assigned to the class Thecostraca (\texttt{--Keys=Thecostraca})using a given taxonomic assignment rule (\texttt{--param bestsumorder\_class}). We then specified the (\texttt{--invert}) option to specify that we wished to export the IDs of reads matching this assignment (i.e., keeping only reads specific to the barnacle class Thecostraca).
+Following taxonomical assignment of the assembled contigs, we used the \texttt{blobtools filter} command to obtain the IDs of sequencings reads that were assigned to a given taxon. We specified paths of our reference contigs (\texttt{--fasta}), alignments (\texttt{--cov}), and sequencing reads (\texttt{--fastq}). For filtering, we specified the parameters to select the reads aligned to contigs assigned to the class Thecostraca (\texttt{--Keys=Thecostraca}) using a given taxonomic assignment rule (\texttt{--param bestsumorder\_class}). We then specified the (\texttt{--invert}) option to specify that we wished to export the IDs of reads matching this assignment (i.e., keeping only reads specific to the barnacle class Thecostraca).
 \vspace{0.2cm}
 
 Lastly, we used the IDs of the Thecostraca-assigned reads to filter our raw PacBio HiFi FASTQ file using the \texttt{subseq} command from the \texttt{seqtk} software version \texttt{1.4-r130} (\url{https://github.com/lh3/seqtk}). This filtering in 5.74 million Thecostraca-specific PacBio HiFi reads, representing 96.8\% of the total sequencing library. This taxonomic assignment and read filtering was also performed on the ONT reads, retaining 371 thousand (95.8\%) reads.
@@ -435,12 +441,12 @@ Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB. Kern
 
 \subsection*{Supplemental Text}
 
-TODO:
+% TODO:
 
-\begin{itemize}
-    \item BalCre assembly and annotation.
-    \item ``Annotation'' of the other barnacle genomes.
-\end{itemize}
+% \begin{itemize}
+%     \item BalCre assembly and annotation.
+%     \item ``Annotation'' of the other barnacle genomes.
+% \end{itemize}
 
 \subsection*{Supplemental Tables and Figures}
 
@@ -578,15 +584,15 @@ TODO:
     \supfigurecaption{Hi-C contact map of the \textit{B. glandula} assembly.} The contact map shows the assembly following manual curation in \texttt{Juicebox}. The numbers (1-16) denote the 16 chromosome-level scaffolds. The dashed lines show the boundary between these 16 chromosome-level scaffolds and the unplaced contigs. Note that this numbering does not reflect the final ID of the assembled sequences. IDs were re-assigned following additional curation and sorting of the sequences.\label{fig:sup_hic}
 \end{figure}
 
-% Supplemental?
+% dN/dS
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/dnds.pdf}
+    \includegraphics[width=0.5\textwidth]{figures/dnds.pdf}
     \supfigurecaption{Distribution of the pairwise rate of non-synonymous to synonymous substitutions (d\textsubscript{N}/d\textsubscript{S}).}
     The distribution is calculated across 9,082 single-copy orthologs identified between \textit{Balanus glandula} and \textit{Balanus crenatus}. The solid gray line marks the boundary between genes under positive selection (d\textsubscript{N}/d\textsubscript{S} $>$ 1) and genes under purifying selection (d\textsubscript{N}/d\textsubscript{S} $<$ 1). The dashed line shows the mean d\textsubscript{N}/d\textsubscript{S} (0.206), while the dotted line shows the median (0.158).\label{fig:sup_dnds}
 \end{figure}
 
-% TODO: Genetic diversity of different genomic features. Similar to the figure
+% Genetic diversity of different genomic features. Similar to the figure
 % in the main text, but histogram instead of density plot.
 % TODO: Figure likely needs some cleaning.
 \begin{figure}[htbp]
@@ -605,15 +611,15 @@ TODO:
 % Theta_W Ne
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/sups_theta_ne.pdf}
+    \includegraphics[width=0.5\textwidth]{figures/sups_theta_ne.pdf}
     \supfigurecaption{Effective population (N\textsubscript{e}) size estimation of \textit{Balanus glandula} based on the Watterson's estimator ($\theta_W$).}
     Effective size of the population was calculated according to the relationship $\theta_W=4N_{e}\mu$, using a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$.\label{fig:sup_theta_ne}
 \end{figure}
 
-% Theta_W Ne
+% msmc2 Ne
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/sups_msmc2_ne.pdf}
+    \includegraphics[width=0.6\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{Coalescent estimation of the effective population (N\textsubscript{e}) size estimation of \textit{Balanus glandula}.}
     Estimation of N\textsubscript{e} through time was using the \texttt{mscm2} software, using a mutation rate per-base, per-generation ($\mu$) of $3\times10^{-9}$, and fixing the generation time ($g$) to 1. Each line represents the N\textsubscript{e} for each sample, with \texttt{Bgland\_00} denoting the individual used to generate the reference assembly. Using just these seven diploid samples, and estimating only between pairs of unphased diploid genotypes within samples, we do not obtain enough resolution to resolve N\textsubscript{e} at recent ($<10^{5}$) time intervals.\label{fig:sup_mcmc_ne}
 \end{figure}
