@@ -408,12 +408,6 @@ of protein-coding genes among barnacle genomes. Similarly, tRNAs are five-fold
 enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product 
 of the strong functional constraint expected for these sequences.
 
-% Notes lab meeting 2026/01/15
-% Convert panel B to log2. Easier to read.
-% Changing named of "other" catagories?
-% For "multiple", maybe mentioning some in the text (if not in figure). For example, 
-% we have Intron+TE
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
@@ -421,11 +415,12 @@ of the strong functional constraint expected for these sequences.
     \textbf{A.} Proportion of annotated features between the whole genome 
     (left column) and \texttt{phastCons}-conserved elements (right column). Values 
     are shown only for elements with proportions larger than 0.01. Sites that span 
-    more than one annotation type are represented by the ``multiple'' feature. 
-    \textbf{B.} Relative enrichment of annotated features in the highly conserved 
-    elements. The enrichment values for each of the 16 chromosomes are shown as 
-    points. The diamonds in the boxplot indicate the mean enrichment across the 
-    genome.\label{fig:phastcons}
+    more than one non-intergenic annotation type are represented by the ``multiple'' feature. 
+    \textbf{B.} Enrichment of the annotated features in the highly conserved 
+    elements compared to the genome-wide background, calculated as the $\log_2$ of the relative 
+    enrichment. The $\log_2$ enrichment values for each of the 16 chromosomes are shown as points. 
+    The diamonds in the boxplot indicate the mean enrichment across the genome.
+    \label{fig:phastcons}
 \end{figure}
 
 \subsection*{Patterns of molecular evolution in protein-coding genes}
@@ -1212,6 +1207,30 @@ Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
         tRNA & 4.99 & 4.10 & 3.36 &  16 \\ 
         \bottomrule
     \end{tabular}
+\end{table}
+
+% TODO: Clean this up.
+
+\begin{table}[ht]
+\centering
+\caption{Enchrichment of annotated features among HCEs} 
+\label{tab:phastcons_enrichment}
+\begin{tabular}{lrrrrrrrr}
+  \toprule
+Feature & feature.total.len & feature.total.prop & pcFeature.total.len & pcFeature.total.prop & mean.log2enrichment & median.log2enrichment & std.log2enrichment & n\_chromosomes \\ 
+  \midrule
+3' UTR & 2358104.00 & 0.00 & 152598.00 & 0.00 & -0.09 & 0.03 & 0.51 &  16 \\ 
+  5' UTR & 530151.00 & 0.00 & 27679.00 & 0.00 & -0.29 & -0.33 & 0.45 &  16 \\ 
+  CDS & 16273411.00 & 0.02 & 2225138.00 & 0.04 & 0.75 & 0.98 & 0.93 &  16 \\ 
+  TE & 370573528.00 & 0.44 & 17505920.00 & 0.34 & -0.36 & -0.31 & 0.18 &  16 \\ 
+  intergenic & 196612776.00 & 0.23 & 10688761.00 & 0.21 & -0.17 & -0.18 & 0.17 &  16 \\ 
+  intron & 111562654.00 & 0.13 & 8575960.00 & 0.17 & 0.42 & 0.30 & 0.43 &  16 \\ 
+  lncRNA & 2211027.00 & 0.00 & 130744.00 & 0.00 & -0.17 & -0.13 & 0.57 &  16 \\ 
+  multiple & 141022121.00 & 0.17 & 11537936.00 & 0.23 & 0.42 & 0.44 & 0.17 &  16 \\ 
+  rRNA & 2106.00 & 0.00 & 0.00 & 0.00 &  &  &  &   6 \\ 
+  tRNA & 20220.00 & 0.00 & 5162.00 & 0.00 & 2.14 & 2.04 & 0.96 &  16 \\ 
+   \bottomrule
+\end{tabular}
 \end{table}
 
 % Breakdown of the per-feature Pi
