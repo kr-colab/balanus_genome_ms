@@ -383,30 +383,31 @@ We used the \texttt{phastCons} software (\cite{siepel_evolutionarily_2005}) on t
 six barnacle species to identify highly conserved sites in the Pacific acorn barnacle 
 genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly, 
 \texttt{phastCons} identified 196,141 highly-conserved elements (HCEs), spanning 
-50.85 Mbp of sequence and 4.92\% of the assembled genome. In \textit{B. glandula}, 
-the HCEs had a mean length of 259.25 bp (median: 42 bp, standard deviation: 990.40 
-bp).
+50.85 Mbp of sequence and 6.05\% of the sequence spanning the 16 assembled chromosomes.
+In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp, 
+standard deviation: 990.40 bp).
 \vspace{0.2cm}
 
 Following the identification of HCEs, we compared their sequence composition against 
 the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlaid 
 the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, 
-obtaining the proportion of annotated features among HCE sites 
-(Figure~\ref{fig:phastcons}A). Among our target features, including an ``other'' 
-and ``multiple'' class for the unannotated fraction of the genome and annotation 
-overlaps, respectively, all but one is present among HCEs. We do not observe any 
-rRNA sites among our conserved sites; however, this is likely the product of the 
-whole-genome alignment, given rRNA's repetitive nature and alignment difficulty 
-(\cite{gillespie_characterizing_2004}), and not an accurate measure of conservation. 
-Aside from the absence of rRNAs, the sequence composition of HCE largely follows the 
-composition of the whole genome. Most annotated features do not appear substantially 
-enriched among HCE sites (Figure~\ref{fig:phastcons}B, 
+obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). 
+Among our target features, including an ``intergenic'' and ``multiple'' class for 
+the unannotated fraction of the genome and annotation overlaps (e.g., a site spanning 
+both a transposable element and an intron), respectively, all but one is present 
+among HCEs. We do not observe any rRNA sites among our conserved sites; however, this 
+is likely the product of the whole-genome alignment, given rRNA's repetitive nature 
+and alignment difficulty (\cite{gillespie_characterizing_2004}), and not an accurate 
+measure of conservation (or lack therof). Aside from the absence of rRNAs, the 
+sequence composition of HCE largely follows that of the whole genome. Most annotated 
+features do not appear substantially enriched among HCE sites (Figure~\ref{fig:phastcons}B, 
 Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding 
 sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs 
-(mean: 1.96, median: 1.98, standard deviation: 0.846), reflecting the conservation 
-of protein-coding genes among barnacle genomes. Similarly, tRNAs are five-fold 
-enriched in HCEs (mean: 4.99, median: 4.10, standard deviation:), the likely product 
-of the strong functional constraint expected for these sequences.
+(mean $\log_2$ enrichment: 0.75, median: 0.98, standard deviation: 0.93), reflecting 
+the conservation of protein-coding genes among barnacle genomes. Similarly, tRNAs exhibit 
+four-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14, median: 2.04, standard 
+deviation: 0.96), the likely product of the strong functional constraint expected for 
+these biologically-important sequences.
 
 \begin{figure}[htbp]
     \centering
@@ -722,18 +723,16 @@ of extreme genetic diversity.
 
 Moreover, barnacles appear to be an emerging model for the study of the dynamics 
 between effective and census population sizes. From our results on diversity, we 
-observe that this barnacle population has an effective size approximately 
-10\textsuperscript{6}. However, these populations also exhibit densities of 
-10\textsuperscript{4} individuals per m\textsuperscript{2} 
-(\cite{menge_recruitment_2000}). Based on this estimate, the census size of the 
-Pacific barnacle population in central Oregon should be in the billions (if not 
-more) of barnacles. While the general disparity between these two population 
-size estimates has been long known, i.e., Lewontin's Paradox 
-(\cite{lewontin_genetic_1974}), the mechanisms underlying the differences have 
-been long debated (\cite{gillespie_role_1999,gillespie_genetic_2000,
-smith_hitch-hiking_1974,kimura_neutral_1983}) and are still the subjects of 
-study (\cite{buffalo_quantifying_2021}). Our work on the Pacific acorn barnacle 
-provides an opportunity to study these process empirically.
+observe that this barnacle population has an effective size approximately $10^{6}$. 
+However, these populations also exhibit densities of $10^{4}$ individuals per $m^{2}$ 
+(\cite{menge_recruitment_2000}). Based on this estimate, the census size of the Pacific 
+barnacle population in central Oregon should be in the billions (if not more) of 
+barnacles. While the general disparity between these two population size estimates has 
+been long known, i.e., Lewontin's Paradox (\cite{lewontin_genetic_1974}), the 
+mechanisms underlying the differences have been long debated (\cite{gillespie_role_1999,
+gillespie_genetic_2000, smith_hitch-hiking_1974,kimura_neutral_1983}) and are still 
+the subjects of study (\cite{buffalo_quantifying_2021}). Our work on the Pacific 
+acorn barnacle provides an opportunity to study these process empirically.
 
 % Notes from lab meeting 2026/01/15:
 % Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match? 
@@ -753,7 +752,7 @@ divergence. Functional elements are highly conserved in the genome of the
 species; however, patterns of molecular evolution highlight the role of 
 positive selection as a key driver in the divergence of coding sequences between 
 closely related barnacle species. At a population level, Oregon populations of 
-\textit{B. glanula} appear to be hyperpolymorphic, showing levels of genetic 
+\textit{B. glandula} appear to be hyperpolymorphic, showing levels of genetic 
 diversity of over 5\% along the genome. Yet, we find preliminary evidence of 
 background selection over protein-coding and non-coding genes, reiterating the 
 functional constraint genes. Overall, our work highlights the role of the 
@@ -1183,55 +1182,45 @@ Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
 \label{tab:sup_popgen_stats}
 \end{table}
 
+
 % Stats about the phasCons conserved elements and enrichment of genomic elements.
-% TODO: Add the total ammounts and proportions for genome and HCE classes
-\begin{table}[htbp]
+\begin{sidewaystable}[htbp]
     \centering
-    \suptablecaption{Enrichment of annotated features among HCEs} 
+    \suptablecaption{Enchrichment of annotated features among \texttt{phastCons} highly 
+        conserved elements} 
     \label{tab:sup_phastcons_enrichment}
-    \begin{tabular}{lrrrr}
-        \toprule
-        Feature & \shortstack{Mean \\ Enrichment} & \shortstack{Median \\ 
-            Enrichment} & \shortstack{StDev \\ Enrichment} & \shortstack{N 
-            Chromosomes \\ With Feature} \\ 
-        \midrule
-        3' UTR & 0.99 & 1.02 & 0.26 &  16 \\ 
-        5' UTR & 0.81 & 0.78 & 0.37 &  16 \\ 
-        CDS & 1.94 & 1.98 & 0.85 &  16 \\ 
-        TE & 0.79 & 0.81 & 0.09 &  16 \\ 
-        intron & 1.42 & 1.23 & 0.67 &  16 \\ 
-        lncRNA & 0.95 & 0.91 & 0.35 &  16 \\ 
-        multiple & 1.34 & 1.35 & 0.15 &  16 \\ 
-        other & 0.90 & 0.88 & 0.11 &  16 \\ 
-        rRNA & 0.00 & 0.00 & 0.00 &   6 \\ 
-        tRNA & 4.99 & 4.10 & 3.36 &  16 \\ 
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-% TODO: Clean this up.
-
-\begin{table}[ht]
-\centering
-\caption{Enchrichment of annotated features among HCEs} 
-\label{tab:phastcons_enrichment}
-\begin{tabular}{lrrrrrrrr}
-  \toprule
-Feature & feature.total.len & feature.total.prop & pcFeature.total.len & pcFeature.total.prop & mean.log2enrichment & median.log2enrichment & std.log2enrichment & n\_chromosomes \\ 
-  \midrule
-3' UTR & 2358104.00 & 0.00 & 152598.00 & 0.00 & -0.09 & 0.03 & 0.51 &  16 \\ 
-  5' UTR & 530151.00 & 0.00 & 27679.00 & 0.00 & -0.29 & -0.33 & 0.45 &  16 \\ 
-  CDS & 16273411.00 & 0.02 & 2225138.00 & 0.04 & 0.75 & 0.98 & 0.93 &  16 \\ 
-  TE & 370573528.00 & 0.44 & 17505920.00 & 0.34 & -0.36 & -0.31 & 0.18 &  16 \\ 
-  intergenic & 196612776.00 & 0.23 & 10688761.00 & 0.21 & -0.17 & -0.18 & 0.17 &  16 \\ 
-  intron & 111562654.00 & 0.13 & 8575960.00 & 0.17 & 0.42 & 0.30 & 0.43 &  16 \\ 
-  lncRNA & 2211027.00 & 0.00 & 130744.00 & 0.00 & -0.17 & -0.13 & 0.57 &  16 \\ 
-  multiple & 141022121.00 & 0.17 & 11537936.00 & 0.23 & 0.42 & 0.44 & 0.17 &  16 \\ 
-  rRNA & 2106.00 & 0.00 & 0.00 & 0.00 &  &  &  &   6 \\ 
-  tRNA & 20220.00 & 0.00 & 5162.00 & 0.00 & 2.14 & 2.04 & 0.96 &  16 \\ 
+    \begin{tabular}{lrrrrrrrr}
+    \toprule
+        Feature & \shortstack{Total Feature \\ Length (bp)} & \shortstack{Total Feature \\ 
+            Proportion\textsuperscript{1}} & \shortstack{HCE Feature \\ Length (bp)} & 
+            \shortstack{HCE Feature \\ Proportion\textsuperscript{2}} & \shortstack{Mean 
+            $\log_2$ \\ Enrichment} & \shortstack{Median $\log_2$ \\ Enrichment} & 
+            \shortstack{St Dev $\log_2$ \\ Enrichment} & \shortstack{N Chromosomes \\ With 
+            Feature} \\ 
+    \midrule
+        3' UTR & 2,358,104 & 0.00280 & 152,598 & 0.00300 & -0.0861 & 0.0332 & 0.508 & 16 \\ 
+        5' UTR & 530,151 & $6.303\mathrm{e}{-4}$ & 27,679 & $5.443\mathrm{e}{-4}$ & -0.292 & 
+            -0.332 & 0.453 & 16 \\ 
+        CDS & 16,273,411 & 0.0193 & 2,225,138 & 0.0438 & 0.752 & 0.984 & 0.926 & 16 \\ 
+        TE & 370,573,528 & 0.441 & 17,505,920 & 0.344 & -0.359 & -0.305 & 0.180 & 16 \\ 
+        intergenic & 196,612,776 & 0.234 & 10,688,761 & 0.210 & -0.167 & -0.178 & 0.167 & 16 \\ 
+        intron & 111,562,654 & 0.133 & 8,575,960 & 0.169 & 0.419 & 0.297 & 0.432 & 16 \\ 
+        lncRNA & 2,211,027 & 0.00263 & 130,744 & 0.00257 & -0.174 & -0.133 & 0.567 & 16 \\ 
+        multiple & 141,022,121 & 0.168 & 11,537,936 & 0.227 & 0.418 & 0.438 & 0.167 & 16 \\ 
+        rRNA & 2,106 & $2.504\mathrm{e}{-6}$ & 0.000 & 0.000 & \texttt{NaN} & \texttt{NaN} & 
+            \texttt{NaN} & 6 \\ 
+        tRNA & 20,220 & $2.404\mathrm{e}{-5}$ & 5,162 & $1.015\mathrm{e}{-4}$ & 2.143 & 2.041 & 
+            0.959 & 16 \\ 
    \bottomrule
 \end{tabular}
-\end{table}
+
+\vspace{2mm}
+\footnotesize
+\textsuperscript{1}Proportion calculated based on the sequence length of 841,166,098 bp, 
+corresponding to the span of the 16 chromosome-level scaffolds.\\
+\textsuperscript{2}Proportion calculated based on the sum of the span of all HCE elements 
+in the genome, 50,849,898 bp.
+\end{sidewaystable}
 
 % Breakdown of the per-feature Pi
 \begin{sidewaystable}[htbp]
