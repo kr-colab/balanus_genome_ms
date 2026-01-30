@@ -465,20 +465,35 @@ coding sequences in the \textit{B. crenatus} outgroup.
 
 After filtering alignments both by length ($<100$ bp) and by the presence of 
 premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman 
-tests for 7,702 orthologs sequences between \textit{B. glandula} and \textit{B. 
-crenatus}. Eight-hundred and thirty-nine (839, 10.89\%) of these orthologs showed a 
+tests for 7,714 orthologs sequences between \textit{B. glandula} and \textit{B. 
+crenatus}. Four-hundred and seventeen (417, 5.41\%) of these orthologs showed a 
 significant deviation from the expected proportion of non-synonymous and synonymous 
 substitutions and polymorphisms, following \textit{p}-value correction 
 (Fig~\ref{fig:mkTest}). We additionally calculated the Neutrality Index (NI; 
-\cite{rand_excess_1996}) at each ortholog. We observe a mean NI value of 0.736 
-(median: 0.493, standard deviation: 1.518), suggesting that, on average, protein 
-coding sequences in \textit{B. glandula} showed an excess of non-synonymous 
-substitutions and are evolving under positive directional selection when compared to 
-the outgroup sequence. Additionally, we calculated the average genome-wide $\alpha$, 
-a measure of the proportion of non-synonymous substitutions fixed by positive 
-selection (\cite{smith_adaptive_2002,stoletzki_estimation_2011}), finding that 
-47.49\% of non-synonymous substitutions in this \textit{B. glandula} population were 
-fixed as a product of positive selection.
+\cite{rand_excess_1996}) and Direction of Selection (DoS; \cite{stoletzki_estimation_2011}) 
+at each ortholog. We observe a mean NI value of 0.745 (median: 0.554; standard 
+deviation: 1.079) and a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; 
+Fig~\ref{fig:sup_dos}). Both of these statistics show that, on average, protein 
+coding sequences in \textit{B. glandula} exhibit an excess of non-synonymous 
+substitutions, suggesting that they are evolving under positive directional selection 
+when compared to the outgroup sequence.
+\vspace{0.2cm}
+
+In addition to NI and DoS, we also calculated $\alpha$, a measure of the proportion 
+of non-synonymous substitutions fixed by positive selection (\cite{smith_adaptive_2002}). 
+We calculated two adjusted versions of $alpha$ to account for the presence of known biases. 
+First, we calculated the Tarone-Greenland $\alpha$ estimator ($\alpha_{TG}$), a weighted 
+estimator that correct for the effects of averaging over a large number of genes 
+(\cite{stoletzki_estimation_2011}). Across our 7,714 genes, we calculated an $\alpha_{TG}$ 
+of 0.530 ($95\%$ Confidence Interval: 0.523-0.538), which indicates that 53\% of 
+non-synonymous substitutions in this \textit{B. glandula} population were fixed as 
+a product of positive selection. Secondly, we calculated the $\alpha$ product of the 
+asymptotic McDonald-Kreitman test ($\alpha_{asym}$), which corrects for the presence of weakly 
+deleterious non-synonymous polymorphism present at low frequency in the population 
+(\cite{messer_frequent_2013}). We found a mean $\alpha_{asym}$ of 0.610 ($95\%$ Confidence 
+Interval: 0.600-0.620). Regardless of the metric used, both $\alpha_{TG}$ and $\alpha_{asym}$ 
+agree that the majority of non-synonymous substitutions in this barnacle population are 
+the outcome of directional positive selection.
 
 \begin{figure}[htbp]
     \centering
@@ -494,8 +509,8 @@ fixed as a product of positive selection.
         and non-synonymous substitutions and polymorphism. The dashed line in 
         light blue shows the raw \textit{p}-value cutoff of 0.05, while the 
         dot-dashed line in dark blue shows the Bonferroni-corrected 
-        \textit{p}-value cutoff of $6.49\times10^{-6}$. Points in red show the 
-        837 genes displaying a significant \textit{p}-value in the 
+        \textit{p}-value cutoff of $6.48\times10^{-6}$. Points in red show the 
+        417 genes displaying a significant \textit{p}-value in the 
         McDonald-Kreitman test and an excess of fixed non-synonymous 
         substitutions indicating positive selection. Points in green show the 
         two genes with significant McDonald-Kreitman results showing an excess 
@@ -1305,6 +1320,20 @@ in the genome, 50,849,898 bp.
         $<$ 1). The dashed line shows the mean d\textsubscript{N}/d\textsubscript{S} 
         (0.206), while the dotted line shows the median (0.158).
     \label{fig:sup_dnds}
+\end{figure}
+
+% Direction of selection.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/sups_mkt_dos.pdf}
+    \supfigurecaption{Distribution of per-gene direction of selection values.}
+        The distribution shows Direction of Selection (DoS) calculated across 7,056 
+        single-copy orthologs identified between \textit{Balanus glandula} and 
+        \textit{Balanus crenatus}. The solid back line at zero marks the boundary 
+        between genes evolving under a regime of positive selection (DoS $>1$) and 
+        genes exhibiting an excess of slightly deleterious non-synonymous polymorphism 
+        (DoS $<1$). The light blue dashed line shows the mean DoS (0.102), while the dark blue dotted line shows the median DoS (0.106).
+    \label{fig:sup_dos}
 \end{figure}
 
 % Genetic diversity of different genomic features. Similar to the figure
