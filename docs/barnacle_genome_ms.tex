@@ -538,15 +538,17 @@ these variant sites (5.23\%) were located within the span of coding sequences. T
 coding variants included 360 thousand missense (non-synonymous) mutations, 
 corresponding to an average (mean) of 18.93 non-synonymous variants per transcript 
 (median: 10, standard deviation: 28.50). Overall, these represent a substantial 
-proportion of coding variation segregating in this central Oregon population.
+proportion of coding variation segregating in this central Oregon population. Moreover, 
+this \textit{B. glandula} population displayed a mean genome-wide nucleotide 
+diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; 
+Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). This degree of 
+diversity is an order of magnitude higher than that observed in diverse 
+\textit{Drosophila} populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
 \vspace{0.2cm}
 
-This \textit{B. glandula} population displayed a mean genome-wide nucleotide 
-diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; 
-Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). Along each chromosome, we 
-did not observe any strong correlation between the density of specific genomic 
-features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and \textpi{}, 
-particularly not at the scale of 10 kbp (Figure~\ref{fig:genome_pi}; 
+Along each chromosome, we did not observe any strong correlation between the density 
+of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and 
+\textpi{}, particularly not at the scale of 10 kbp (Figure~\ref{fig:genome_pi}; 
 Figure~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present 
 at smaller genomic intervals (see below). The strongest correlation was, expectedly, 
 observed between the density of segregating sites along 10 kbp windows and \textpi{} 
@@ -706,9 +708,10 @@ Our work here shows that a Pacific acorn barnacle population from the central Or
 coast exhibits genetic diversity of over 5\% (mean genome-wide \textpi{} of 0.0506). 
 These levels of genetic diversity are higher than those observed for other model 
 systems known for their relatively large population sizes. For example, the 
-genome-wide nucleotide diversity we observe here in barnacles is tenfold higher 
-than that observed in large-scale surveys in \textit{Drosophila} 
-(\cite{nunez_footprints_2025,li_comparative_2025}). Even the diversity observed at 
+genome-wide nucleotide diversity we observe here in barnacles is an order of magnitude 
+higher than that observed for \textit{Drosophila} (Figure~\ref{fig:sup_dmel_pi}), both 
+at a local scale and diversity observed in large-scale surveys (\cite{nunez_footprints_2025,
+li_comparative_2025,pool_population_2012}). Even the diversity observed at 
 zero-fold degenerate sites, our least diverse in the genome as the likely product of 
 functional constraint, is still an order of magnitude higher than the diverse 
 observed in these diverse \textit{Drosophila} populations.
@@ -1113,12 +1116,13 @@ Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
 
 \subsection*{Supplemental Text}
 
-% TODO:
+TODO:
 
-% \begin{itemize}
-%     \item BalCre assembly and annotation.
-%     \item ``Annotation'' of the other barnacle genomes.
-% \end{itemize}
+\begin{itemize}
+    \item BalCre assembly and annotation.
+    \item ``Annotation'' of the other barnacle genomes.
+    \item Drosophila ENC and Pi
+\end{itemize}
 
 \subsection*{Supplemental Tables and Figures}
 
@@ -1335,8 +1339,24 @@ in the genome, 50,849,898 bp.
         \textit{Balanus crenatus}. The solid back line at zero marks the boundary 
         between genes evolving under a regime of positive selection (DoS $>1$) and 
         genes exhibiting an excess of slightly deleterious non-synonymous polymorphism 
-        (DoS $<1$). The light blue dashed line shows the mean DoS (0.102), while the dark blue dotted line shows the median DoS (0.106).
+        (DoS $<1$). The light blue dashed line shows the mean DoS (0.102), while 
+        the dark blue dotted line shows the median DoS (0.106).
     \label{fig:sup_dos}
+\end{figure}
+
+% Pi vs Drosophila.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/sups_dmel_pi.pdf}
+    \supfigurecaption{Comparing nucleotide diversity (\textpi{}) between barnacles
+    and fruit flies.} Average \textpi{} in 10 kbp windows between the Oregon Pacific 
+    acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and Sub-Saharan 
+    populations of the fruit fly (\textit{Drosophila melanogaster}; \texttt{DroMel}). 
+    This barnacle population shows an average nucleotide diversity (mean = 0.0506, 
+    median = 0.0532, standard deviation = 0.0188) an order of magnitude higher than 
+    that of this \textit{Drosophila} population (mean = 0.0076, median = 0.077, 
+    standard deviation = 0.0035).
+    \label{fig:sup_dmel_pi}
 \end{figure}
 
 % Genetic diversity of different genomic features. Similar to the figure
