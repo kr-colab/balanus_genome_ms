@@ -500,11 +500,13 @@ the outcome of directional positive selection.
     \centering
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{Signatures of positive selection in \textit{Balanus glandula} 
-        protein-coding genes as determined by the McDonald-Kreitman test.} 
-        X-axis denotes the $-\log_{10}$ of the Neutrality Index, with positive 
-        values representing sequences evolving from an excess of non-synonymous 
-        substitutions due to positive selection. Negative values represent an 
-        excess of non-synonymous polymorphisms. Y-axis denotes the $-\log_{10}$ 
+        protein-coding genes.} 
+        Selection on protein coding genes was calculated on 7,714 \textit{B. 
+        glandula} genes using the McDonald-Kreitman test. X-axis denotes the 
+        $-\log_{10}$ of the Neutrality Index, with positive values representing 
+        sequences evolving from an excess of non-synonymous substitutions due 
+        to positive selection. Negative values represent an excess of 
+        non-synonymous polymorphisms. Y-axis denotes the $-\log_{10}$ 
         \textit{p}-value of the McDonald-Kreitman test, generated from the 
         Fisher's Exact Test of the $2\times2$ contingency table of synonymous 
         and non-synonymous substitutions and polymorphism. The dashed line in 
@@ -522,6 +524,26 @@ the outcome of directional positive selection.
 % Mention a few mkTest genes?.
 
 \subsection*{Barnacle genes show a biased use of non-synonymous codons}
+
+We used the annotated transcript sequences of our Pacific acorn barnacle genome 
+to calculate the effective number of codons (ENC), a measure of the extent of 
+departure of equal usage across synonymous codons (\cite{wright_effective_1990,
+sun_improved_2013}). We successfully calculated ENC across the coding sequences of 
+16,904 \textit{B. glandula} genes, finding an average (mean) number of 43.1 
+effective codons (median: 42.7, standard deviation: 5.56, Figure~\ref{fig:codon_enc}). 
+This ENC distribution highlights a substantial biases in the usage of synonymous 
+codons
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
+    \caption{Codon usage biases in \textit{Balanus glandula}.}
+        Distribution in the effective number of codons (ENC) across 16,904 \textit{B. 
+        glandula} genes. Dashed light blue line shows the mean ENC (43.1), while the 
+        dot-dashed dark blue line shows the median ENC (42.7).
+    \label{fig:codon_enc}
+\end{figure}
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
@@ -1110,8 +1132,14 @@ Code repo: \url{https://github.com/kr-colab/balanus_genome_ms}.
 Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB. 
 Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
 
-\printbibliography{}
+% Clear a new page for the bibliography
+\pagebreak
 
+\printbibliography
+
+\pagebreak
+
+\fancyhead[L]{\textit{SUPPLEMENTS}}
 \section*{Supplements}
 
 \subsection*{Supplemental Text}
@@ -1286,6 +1314,7 @@ in the genome, 50,849,898 bp.
 \end{sidewaystable}
 
 % Supplemental Figures
+\pagebreak
 
 % k-mer distribution of the raw hi-fi reads
 \begin{figure}[htbp]
@@ -1344,18 +1373,32 @@ in the genome, 50,849,898 bp.
     \label{fig:sup_dos}
 \end{figure}
 
+% Codon usage biases vs Drosophila
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/sups_dmel_codons.pdf}
+    \supfigurecaption{Comparing codon usage biases between barnacles and fruit flies.}
+        The distribution of effective number of codons (ENC) between genes in the Pacific 
+        acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and the fruit fly 
+        (\textit{Drosophila melanogaster}; \texttt{DroMel}). Barnacles show a mean ENC 
+        of 43.1 (median: 42.7, standard deviation: 5.56), while the mean ENC in flies is 
+        50.1 (median: 50.6, standard deviation: 3.95).
+    \label{fig:sup_dmel_enc}
+\end{figure}
+
 % Pi vs Drosophila.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/sups_dmel_pi.pdf}
     \supfigurecaption{Comparing nucleotide diversity (\textpi{}) between barnacles
-    and fruit flies.} Average \textpi{} in 10 kbp windows between the Oregon Pacific 
-    acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and Sub-Saharan 
-    populations of the fruit fly (\textit{Drosophila melanogaster}; \texttt{DroMel}). 
-    This barnacle population shows an average nucleotide diversity (mean = 0.0506, 
-    median = 0.0532, standard deviation = 0.0188) an order of magnitude higher than 
-    that of this \textit{Drosophila} population (mean = 0.0076, median = 0.077, 
-    standard deviation = 0.0035).
+    and fruit flies.} 
+        Average \textpi{} in 10 kbp windows between the Oregon Pacific 
+        acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and Sub-Saharan 
+        populations of the fruit fly (\textit{Drosophila melanogaster}; \texttt{DroMel}). 
+        This barnacle population shows an average nucleotide diversity (mean = 0.0506, 
+        median = 0.0532, standard deviation = 0.0188) an order of magnitude higher than 
+        that of this \textit{Drosophila} population (mean = 0.0076, median = 0.077, 
+        standard deviation = 0.0035).
     \label{fig:sup_dmel_pi}
 \end{figure}
 
@@ -1407,7 +1450,7 @@ in the genome, 50,849,898 bp.
 % msmc2 Ne
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/sups_msmc2_ne.pdf}
+    \includegraphics[width=0.7\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{Coalescent estimation of the effective population 
         (N\textsubscript{e}) size estimation of \textit{Balanus glandula}.}
         Estimation of N\textsubscript{e} through time was using the 
