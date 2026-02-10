@@ -439,9 +439,10 @@ at the pairwise rate of non-synonymous to synonymous substitutions
 congener, the wrinkled barnacle \textit{Balanus crenatus}. We identified and aligned 
 9,082 single-copy orthologs between both species. The mean pairwise 
 d\textsubscript{N}/d\textsubscript{S} was 0.206 (median: 0.158, standard deviation: 
-0.191; Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, protein 
-coding sequencing in these barnacle genomes are under purifying selection, reflecting 
-the expected evolutionary constraints over sequences of functional importance.
+0.191; Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average and under 
+this specific metric, coding sequencing in these barnacle genomes are under purifying 
+selection when compared to outgroup sequences, reflecting the expected evolutionary 
+constraints over sequences of functional importance.
 \vspace{0.2cm}
 
 Of the 9 thousand genes assessed, 70 (0.77\%) displayed a 
@@ -480,27 +481,29 @@ substitutions and polymorphisms, following \textit{p}-value correction
 \cite{rand_excess_1996}) and Direction of Selection (DoS; \cite{stoletzki_estimation_2011}) 
 at each ortholog. We observe a mean NI value of 0.745 (median: 0.554; standard 
 deviation: 1.079) and a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; 
-Figure~\ref{fig:sup_dos}). Both of these statistics show that, on average, protein 
-coding sequences in \textit{B. glandula} exhibit an excess of non-synonymous 
-substitutions, suggesting that they are evolving under positive directional selection 
-when compared to the outgroup sequence.
+Figure~\ref{fig:sup_dos}). Both of these statistics show that, on average and in contrast 
+with our measurements of d\textsubscript{N}/d\textsubscript{S}, protein coding 
+sequences in \textit{B. glandula} exhibit an excess of non-synonymous substitutions, 
+suggesting that they are evolving under positive directional selection when compared 
+to the outgroup sequence.
 \vspace{0.2cm}
 
-In addition to NI and DoS, we also calculated $\alpha$, a measure of the proportion 
+In addition to NI and DoS, we also calculated \textalpha{}, a measure of the proportion 
 of non-synonymous substitutions fixed by positive selection (\cite{smith_adaptive_2002}). 
-We calculated two adjusted versions of $alpha$ to account for the presence of known biases. 
-First, we calculated the Tarone-Greenland $\alpha$ estimator ($\alpha_{TG}$), a weighted 
-estimator that correct for the effects of averaging over a large number of genes 
-(\cite{stoletzki_estimation_2011}). Across our 7,714 genes, we calculated an $\alpha_{TG}$ 
-of 0.530 ($95\%$ Confidence Interval: 0.523-0.538), which indicates that 53\% of 
-non-synonymous substitutions in this \textit{B. glandula} population were fixed as 
-a product of positive selection. Secondly, we calculated the $\alpha$ product of the 
-asymptotic McDonald-Kreitman test ($\alpha_{asym}$), which corrects for the presence of weakly 
-deleterious non-synonymous polymorphism present at low frequency in the population 
-(\cite{messer_frequent_2013}). We found a mean $\alpha_{asym}$ of 0.610 ($95\%$ Confidence 
-Interval: 0.600-0.620). Regardless of the metric used, both $\alpha_{TG}$ and $\alpha_{asym}$ 
-agree that the majority of non-synonymous substitutions in this barnacle population are 
-the outcome of directional positive selection.
+We calculated two adjusted versions of \textalpha{} to account for the presence of known biases. 
+First, we calculated the Tarone-Greenland \textalpha{} estimator (\textalpha{}\textsubscript{TG}), 
+a weighted estimator that correct for the effects of averaging over a large number of genes 
+(\cite{stoletzki_estimation_2011}). Across our 7,714 genes, we calculated an 
+\textalpha{}\textsubscript{TG} of 0.530 ($95\%$ Confidence Interval: 0.523--0.538), which 
+indicates that 53\% of non-synonymous substitutions in this \textit{B. glandula} population 
+were fixed as a product of positive selection. Secondly, we calculated the \textalpha{} 
+product of the asymptotic McDonald-Kreitman test (\textalpha{}\textsubscript{asym}), which 
+corrects for the presence of weakly deleterious non-synonymous polymorphism present at 
+low frequency in the population (\cite{messer_frequent_2013}). We found a mean 
+\textalpha{}\textsubscript{asym} of 0.610 ($95\%$ Confidence Interval: 0.600--0.620). 
+Regardless of the metric used, both \textalpha{}\textsubscript{TG} and 
+\textalpha{}\textsubscript{asym} agree that the majority of non-synonymous substitutions 
+in this barnacle population are the outcome of directional positive selection.
 
 % MK test volcano plot
 \begin{figure}[htbp]
