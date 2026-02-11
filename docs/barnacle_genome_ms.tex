@@ -117,99 +117,110 @@ empirical systems.
 % Likely needs some tightening up, but wanted to get the general flow in there.
 % Modify citations in the intro as needed. I will be adding a few in the comments.
 
-The size of a population is a key factor mediating the mode and tempo of evolution, 
-particularly as it relates to the strength of stochastic versus deterministic 
-evolutionary forces. We know from theory that selection is less efficacious in small 
-populations (\cite{kimura_mutation_1963,charlesworth_effective_2009,gravel_when_2016}), 
-resulting in a reduction in genetic diversity from the stochastic effects of genetic 
-drift and an increase in genetic load due to the accumulation of deleterious mutations 
-(\cite{dussex_purging_2023}). These dynamics of evolution in small populations have 
-been extensively supported by empirical observations, e.g., distance to sub-Saharan 
-Africa as a predictor of genetic load in humans (\cite{henn_distance_2016}), and 
-the increase in genetic load and inbreeding depression in small populations of 
-conservation concern (\cite{tian_severe_2022,mathur_genetic_2021,
-kardos_inbreeding_2023}). In contrast, evolution in large populations is thought to 
-be primarily mediated by deterministic processes due to an increase in the efficacy 
-of selection (\cite{charlesworth_effective_2009,gravel_when_2016,
-lanfear_population_2014}). Interestingly, this increase in selection can in turn 
-lead to a reduction in genetic diversity due to the hitchhiking of neutral alleles 
-in a stochastic-like fashion (\cite{smith_hitch-hiking_1974}). In large enough 
-populations, this hitchhiking effect is theorized as the main driver of the 
-stochastic loss of genetic diversity (\cite{smith_hitch-hiking_1974,
-gillespie_genetic_2000,gillespie_role_1999}). Yet, in contrast to small populations, 
-empirical studies of these evolutionary mechanisms have been, with a few key 
-exceptions (\cite{dey_molecular_2013,teterina_pervasive_2025}), mostly limited to 
-eukaryotic species with small-to-moderate historical population sizes 
-(\cite{cutter_molecular_2013}). This gap in knowledge highlights the need for 
-empirical studies in systems with historically large population sizes and elevated 
-levels of genetic polymorphism.
+The size of a population is a key factor mediating the mode and tempo of evolution,
+particularly as it relates to the strength of stochastic versus deterministic evolutionary
+forces (\cite{kimura_mutation_1963,gillespie_genetic_2000}). Theory predicts that
+selection is less efficacious in small populations
+(\cite{charlesworth_effective_2009,gravel_when_2016}), resulting
+in reduced genetic diversity from genetic drift and
+an increase in genetic load due to the accumulation of deleterious mutations
+(\cite{lynch_mutation_1995,lande_risk_1994,dussex_purging_2023}). These dynamics have
+been extensively supported by empirical observations, including distance to sub-Saharan
+Africa as a predictor of genetic load in humans (\cite{henn_distance_2016}) and
+the increase in genetic load and inbreeding depression in small populations of
+conservation concern (\cite{tian_severe_2022,mathur_genetic_2021,kardos_inbreeding_2023}).
+In contrast, evolution in large populations is thought to be primarily mediated by
+deterministic processes due to an increase in the efficacy of selection
+(\cite{charlesworth_effective_2009,gravel_when_2016,lanfear_population_2014}).
+However, this increased efficacy of selection can itself reduce genetic
+diversity through the hitchhiking effect
+(\cite{smith_hitch-hiking_1974}). In sufficiently large populations, hitchhiking
+is predicted to be a primary driver of stochastic diversity loss
+(\cite{gillespie_genetic_2000,gillespie_role_1999}).
+In contrast to the well-studied dynamics of small populations, empirical tests of these
+mechanisms have been, with a few key exceptions (\cite{dey_molecular_2013,
+teterina_pervasive_2025}), mostly limited to eukaryotic species with
+small-to-moderate historical population sizes (\cite{cutter_molecular_2013,
+leffler_revisiting_2012, buffalo2021quantifying}).
+This gap highlights the need for empirical studies in systems
+with historically large population sizes and elevated levels of genetic polymorphism.
 \vspace{0.2cm}
 
-The Pacific acorn barnacle (\textit{Balanus glandula}) presents an exceptional 
-model to study the dynamics and mechanisms of evolution in large populations. 
-This species is widespread in the intertidal across the Pacific coast of North 
-America, from Baja California to Alaska, where it can reach densities of up to 
-tens of thousands of individuals per square meter (\cite{menge_recruitment_2000}). 
-This species has been the subject of numerous prior studies, with research 
-describing the link between environmental factors and variation in development, 
+The Pacific acorn barnacle (\textit{Balanus glandula}) presents an exceptional
+model for studying the dynamics and mechanisms of evolution in large populations.
+This species is widespread across the Pacific intertidal of North
+America, from Baja California to Alaska, where it can reach densities of
+tens of thousands of individuals per square meter (\cite{menge_recruitment_2000}).
+High fecundity and a planktonic larval stage capable of
+long-distance dispersal, combined with these enormous census sizes,
+are consistent with very large effective population sizes,
+making \textit{B. glandula} an ideal system for testing theoretical
+predictions about selection and drift in large populations.
+Indeed, \textit{B. glandula} has been the focus of extensive ecological and genetic research.
+Prior work has linked environmental factors to variation in development,
 recruitment, dispersal, and reproduction (\cite{berger_spatial_2006,
 berger_reproduction_2009,barshis_coastal_2011,pfeiffer-hoyt_modeling_2005,
-schubart_recruitment_1995}). There has also been substantial work regarding 
-the spatial population structure of \textit{B. glandula} along the Pacific coast, 
-particularly with regard to a steep genetic cline on the coast of California 
-that separates populations North and South of this transition point 
+schubart_recruitment_1995}), and substantial effort has characterized
+the spatial population structure of \textit{B. glandula} along the Pacific coast,
+particularly a steep genetic cline on the coast of California
+that separates northern and southern populations
 (\cite{sotka_strong_2004,wares_diversification_2005,wares_maintenance_2019,
-wares_diversity_2021}). Moreover, \textit{B. glandula} has also been 
-introduced outside its native range, and genetic work has been done to assess 
-invasive populations in Japan (\cite{yorisue_lack_2022,geller_sources_2008}), 
-Argentina (\cite{geller_sources_2008}), and South Africa 
-(\cite{simon-blecher_balanus_2008}).
+wares_diversity_2021}).
+% \textit{B. glandula} has also been
+% introduced outside its native range, and genetic work has assessed
+% invasive populations in Japan (\cite{yorisue_lack_2022,geller_sources_2008}),
+% Argentina (\cite{geller_sources_2008}), and South Africa
+% (\cite{simon-blecher_balanus_2008}).
 \vspace{0.2cm}
 
-Previous work on barnacles has shown both substantial levels of genetic diversity 
-(\cite{alm_rosenblad_genomic_2021}), as well as complex patterns of selection and 
-local adaptation at small spatial scales (\cite{nunez_footprints_2020,nunez_tides_2021}). 
-In the northern acorn barnacle (\textit{Semibalanus balanoides}), there is 
-evidence of zonation of adaptive alleles in the mannose-6-phosphate isomerase 
-(\textit{Mpi}) gene between low and high intertidal barnacles less than five 
-meters apart (\cite{nunez_footprints_2020}). Moreover, while \textit{Mpi} as a 
-whole is under balancing selection across the intertidal, there is evidence for 
-a more complex selection landscape across the gene. Different exons appear to be 
-under varying selection effects across spatial and temporal scales, beyond the 
-low versus high intertidal. While this is a comprehensive look at genetic diversity 
-and selection in a barnacle species, the work primarily focused on a single 
-protein-coding gene. The landscape of genetic diversity and signatures of selection 
-across the \textit{S. balanoides} genome remains unknown.
+These patterns are not unique to \textit{B. glandula}. Work in other barnacle
+species has revealed substantial levels of genetic diversity
+(\cite{alm_rosenblad_genomic_2021}), as well as complex patterns of selection and
+local adaptation at remarkably small spatial scales (\cite{nunez_footprints_2020,nunez_tides_2021}).
+In the northern acorn barnacle (\textit{Semibalanus balanoides}), for example, adaptive alleles
+in the mannose-6-phosphate isomerase
+(\textit{Mpi}) gene are partitioned between low and high intertidal zones less than five
+meters apart, with environmental heterogeneity maintaining a balanced polymorphism
+(\cite{schmidt_environmental_2000,nunez_footprints_2020}). Further work has shown that
+different exons of \textit{Mpi} experience distinct selective pressures across spatial and
+temporal scales, suggesting a more complex selective landscape than the simple zonation
+model implies (\cite{nunez_tides_2021}).
+Despite the depth of this work, it has focused on a single
+protein-coding gene, and the genome-wide landscape of genetic diversity and selection
+in \textit{S. balanoides} remains unknown.
 \vspace{0.2cm}
 
-Similarly, while there has been extensive prior genetic work in \textit{B. glandula}, 
-the species also remains genomically understudied. Previous genetic research in the 
-species has been limited to a handful of nuclear and mitochondrial markers, with the 
-most extensive genetic work conducted using reduced representation sequencing in the 
-absence of a reference genome (\cite{wares_diversity_2021}). Two reference assemblies 
-for \textit{B. glandula} have been deposited to NCBI's GenBank database (NCBI 
-accessions GCA\_030265075.1 and GCA\_049308085.2); however, they both appear to be 
-highly fragmented and/or incomplete. Most publicly available barnacle genomes follow 
-the same fate, being highly-fragmented likely due to the difficulty of assembling 
-highly polymorphic genomes using short reads. While there are a handful of recent 
-high-quality, chromosome-level assemblies for barnacles (\cite{han_new_2024,
-bernot_chromosome-level_2022,carlson_reference_2025,blaxter_genome_2023}), they 
-belong to evolutionarily distant species, which limits their use for studies in 
+The situation in \textit{B. glandula} is similar: despite extensive prior genetic work,
+the species remains genomically understudied. Previous research has been limited to a
+handful of nuclear and mitochondrial markers, with the
+most extensive study employing reduced representation sequencing in the
+absence of a reference genome (\cite{wares_diversity_2021}). Two reference assemblies
+for \textit{B. glandula} exist in public databases; however, both are
+highly fragmented and likely incomplete. Most publicly available barnacle genomes
+suffer from the same limitation, presumably due to the difficulty of assembling
+highly polymorphic genomes from short reads
+(\cite{vinson_assembly_2005,kajitani_efficient_2014}). Although a handful of recent
+chromosome-level assemblies exist for barnacles (\cite{han_new_2024,
+bernot_chromosome-level_2022,carlson_reference_2025,blaxter_genome_2023}), they
+belong to evolutionarily distant species, limiting their utility for studies of
 \textit{B. glandula}.
 \vspace{0.2cm}
 
-In this work, we describe a high-quality, chromosome-level genome assembly for the 
-Pacific acorn barnacle. We use this assembly to perform whole-genome comparative 
-analysis, revealing conservation in genome architecture across 165 million years 
-of barnacle evolution. We additionally perform the first assessment of genome-wide 
-genetic variation in this system, revealing extreme levels ($>5\%$) of nucleotide 
-diversity across the genome, with over 20 million SNPs observed in just six 
-individuals. In accordance with theoretical expectations, we observe a reduction 
-in diversity in protein-coding sequences, reflecting strong background selection 
-and functional constraints in barnacle populations. Overall, our new assembly 
-provides a key resource for future research in this system, setting the stage 
-for \textit{B. glandula} as a model for the study of evolution in large, 
-hyperpolymorphic populations.
+Here, we describe a high-quality, chromosome-level genome assembly for the
+Pacific acorn barnacle. We use this assembly to perform whole-genome comparative
+analyses, revealing conservation in genome architecture across 165 million years
+of barnacle evolution. We further conduct the first genome-wide assessment of
+genetic variation in this system, uncovering extreme levels ($>5\%$) of nucleotide
+diversity, with over 20 million SNPs observed in just six individuals.
+Consistent with theoretical expectations, we observe reduced diversity in
+protein-coding sequences, reflecting strong background selection and functional
+constraints. McDonald-Kreitman tests further reveal that the majority of
+nonsynonymous substitutions between species were driven by positive selection,
+as expected when selection is highly efficacious in large
+populations. Our assembly provides a key
+resource for future research, laying the groundwork for \textit{B.
+glandula} as a model for the study of evolution in large, hyperpolymorphic
+populations.
 \vspace{0.2cm}
 
 \section*{Results}
