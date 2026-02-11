@@ -12,6 +12,7 @@ docs/.vscode/ltex.dictionary.en-US.txt
 *.fdb_latexmk
 *.out
 *.synctex.gz
+*.synctex(busy)
 
 # LaTeX temporary files
 *.bbl
@@ -22,6 +23,17 @@ docs/.vscode/ltex.dictionary.en-US.txt
 *.idx
 *.ind
 *.ilg
+*.nav
+*.snm
+*.vrb
+*.run.xml
+*.bcf
 
-# PDFLaTeX specific
-pdflatex*.fls
+# biber
+*.bbl-SAVE-ERROR
+
+# latexmk
+*.latexmk_db
+
+# lineno
+*.lno
