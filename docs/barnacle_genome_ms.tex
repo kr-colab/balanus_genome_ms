@@ -235,52 +235,47 @@ populations.
 % Not a big point, so we can move it somewhere else.
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle 
-using PacBio Hi-Fi long reads and Hi-C chromosome conformation capture. Preliminary 
-assessment of the PacBio Hi-Fi data using k-mers revealed an expected genome size 
+using PacBio HiFi long reads and Hi-C chromosome conformation capture. Preliminary
+assessment of the PacBio HiFi data using k-mers revealed an expected genome size 
 of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}). 
 Our initial contig-level assembly, generated using \texttt{hifiasm} 
 (\cite{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022}) with 
-default parameters, generated sequences with a total length of 1.64 Gbp, 
+default parameters, produced sequences with a total length of 1.64 Gbp, 
 composed of 4,212 fragments, and a contig N50 of 734 kbp. We also assessed 
 gene-completeness using \texttt{BUSCO}s (\cite{simao_busco_2015,manni_busco_2021,
-tegenfeldt_orthodb_2025}), as implemented in \texttt{compleasm} 
-(\cite{huang_compleasm_2023}), resulting in a completeness of 95.66\% 
-(\texttt{S}:45.31\%; \texttt{D}:50.35\%; \texttt{F}:0.79\%; \texttt{M}:3.55\%; 
-\texttt{N}:1,013) for the \texttt{arthropoda\_odb10} single-copy ortholog set 
-(Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with 
+tegenfeldt_orthodb_2025}), as implemented in \texttt{compleasm}
+(\cite{huang_compleasm_2023}), resulting in a completeness of 95.66\%
+with over 50\% duplicated orthologs
+for the \texttt{arthropoda\_odb10} single-copy ortholog set
+(Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with
 twice the expected genome size and over 50\% duplicated \texttt{BUSCO}s, 
 suggested the presence of a large fraction of haplotig sequences, reflecting 
 the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
-Following optimization, both in the integration of additional data types and 
-in the increased stringency of the purging of haplotig and contaminant 
-sequences (see Methods), we generated a contig-level assembly composed of 
-1,342 sequences, with a total length of 1.05 Gbp, a contig N50 of 1.35 Mbp, 
-and a \texttt{BUSCO} completeness of 93.88\% ([\texttt{S}:89.04\%; 
-\texttt{D}:4.84\%; \texttt{F}:1.18\%; \texttt{M}:4.94\%; \texttt{N}:1,013], 
-\texttt{arthropoda\_odb10}). The contig-level assembly was then scaffolded 
-with Hi-C data using the \texttt{YaHS} software (\cite{zhou_yahs_2023}; 
-Figure~\ref{fig:sup_hic}). Our scaffolding process generated an assembly 
-with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50 
-of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% ([\texttt{S}:89.24\%; 
-\texttt{D}:4.74\%; \texttt{F}:0.89\%; \texttt{M}:5.13\%; \texttt{N}:1,013], 
+After optimizing the assembly through additional data types and more stringent
+purging of haplotig and contaminant sequences (see Methods), we generated a
+contig-level assembly composed of 1,342 sequences, with a total length of
+1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of
+93.88\% (4.84\% duplicated; \texttt{arthropoda\_odb10}). The contig-level
+assembly was then scaffolded with Hi-C data using the \texttt{YaHS} software
+(\cite{zhou_yahs_2023}; Figure~\ref{fig:sup_hic}), generating an assembly
+with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
+of 50.96 Mbp, and a \texttt{BUSCO} completeness of 93.98\% (4.74\% duplicated;
 \texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
 \vspace{0.2cm}
 
-This scaffold-level assembly was further processed by performing manual curation 
-of the Hi-C contact map and self-correction using the software \texttt{Inspector} 
-(\cite{chen_accurate_2021}). This curated assembly was composed of 592 fragments, 
-a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base 
-quality value (QV) of 30.49. When assessing completeness, the curated assembly was 
-94.08\% (\texttt{S}:89.44\%; \texttt{D}:4.64\%; \texttt{F}:0.89\%; \texttt{M}:5.03\%; 
-\texttt{N}:1,013) and 92.77\% (\texttt{S}:87.77\%; \texttt{D}:5.40\%; 
-\texttt{F}:2.93\%; \texttt{M}:4.30\%; \texttt{N}:1,536) gene-complete for the 
-\texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, 
-respectively (Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence, 
+This scaffold-level assembly was further processed by performing manual curation
+of the Hi-C contact map and polishing using the software \texttt{Inspector}
+(\cite{chen_accurate_2021}). This curated assembly was composed of 592 fragments,
+a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base
+quality value (QV) of 30.49. When assessing completeness, the curated assembly was
+94.08\% and 92.77\% gene-complete for the \texttt{arthropoda\_odb10} and
+\texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively
+(Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence, 
 906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover, 
-the 16 largest sequences (larger than 8.5 Mbp) contain 841.2 Mbp (80.61\%) of 
-the total sequence, and likely represent 16 putative chromosomes. This karyotype 
+the 16 largest sequences (larger than 8.5 Mbp) contained 841.2 Mbp (80.61\%) of
+the total sequence, and likely represent 16 chromosomes. This karyotype 
 number, N=16, is in agreement with that observed for other species in the genus 
 \textit{Balanus} (\cite{austin_chromosome_1958}) and other acorn barnacles in the 
 family Balanidae (\cite{han_new_2024}).
@@ -970,12 +965,12 @@ manni_busco_2021,tegenfeldt_orthodb_2025}).
 \subsubsection*{Assembly decontamination}
 
 Following the generation of a base, contig-level genome assembly, we detected 
-endogenous contamination (i.e., sequences not belonging to \textit{B. glandula}) 
+exogenous contamination (i.e., sequences not belonging to \textit{B. glandula}) 
 in both reads and assembled contigs using the \texttt{blobtoolkit} software version 
 \texttt{4.3.0} (\cite{challis_blobtoolkit_2020}). To achieve this, we first created 
 a new \texttt{blobtools} database, using the \texttt{create} command, specifying the 
-contig-level assembly as our reference sequence (\texttt{--fasta}), the NCBI 
-taxonomical identifier for \textit{B. glandula} (\texttt{--taxid 110520}), and 
+contig-level assembly as our reference sequence (\texttt{--fasta}), the NCBI
+taxonomic identifier for \textit{B. glandula} (\texttt{--taxid 110520}), and 
 the NCBI reference taxonomy files (\texttt{--taxdump}, downloaded on 2023/12/13).
 \vspace{0.2cm}
 
@@ -989,20 +984,20 @@ alignments were then added to the \texttt{blobtools} database using the \texttt{
 command.
 \vspace{0.2cm}
 
-We did a taxonomical assignment of each sequence in the assembly by first aligning 
+We performed taxonomic assignment of each sequence in the assembly by first aligning 
 our contigs against NCBI's non-redundant database (downloaded on 2023/12/13). We 
 aligned each contig against the database using \texttt{blastn} version 
 \texttt{2.15.0+}, as implemented in \texttt{BLAST+} (\cite{camacho_blast_2009}), 
 specifying a minimum e-value cutoff (\texttt{-evalue}) of $1\times10^{-10}$, a 
-maximum of 25 target sequence exported in the output (\texttt{-max\_target\_seqs 25}), 
+maximum of 25 target sequences exported in the output (\texttt{-max\_target\_seqs 25}), 
 and exporting in tabular format (\texttt{-outfmt 6}). These BLAST alignments 
 were then added to the \texttt{blobtools} database using the \texttt{add} command, 
-specifying the rule for taxonomical assignment (\texttt{--taxrule bestsumorder}). 
+specifying the rule for taxonomic assignment (\texttt{--taxrule bestsumorder}). 
 Using this approach, the \texttt{blobtools} database provides a single taxonomic 
 assignment to each assembled contig.
 \vspace{0.2cm}
 
-Following taxonomical assignment of the assembled contigs, we used the 
+Following taxonomic assignment of the assembled contigs, we used the 
 \texttt{blobtools filter} command to obtain the IDs of sequencing reads that were 
 assigned to a given taxon. We specified paths of our reference contigs 
 (\texttt{--fasta}), alignments (\texttt{--cov}), and sequencing reads 
@@ -1084,11 +1079,11 @@ split} to process the data into a \texttt{BAM} file of valid alignments and a
 \vspace{0.2cm}
 
 The processed Hi-C alignments were used to scaffold the genome using the \texttt{YaHS} 
-software version \texttt{1.2a.1} (\cite{zhou_yahs_2023}). Since our assembly was in 
+software version \texttt{1.2a.1} (\cite{zhou_yahs_2023}). Since our assembly consisted of
 highly fragmented contigs, we reduced the minimum resolution size to 1 kbp (\texttt{-r 
 1000}). Following the \texttt{YaHS} documentation, we generated a Hi-C contact map 
 using the \texttt{juicer} suite of tools (\cite{durand_juicer_2016,dudchenko_juicebox_2018}). 
-First, we used \texttt{juicer} version \texttt{1.1} \texttt{pre} command to convert 
+First, we used the \texttt{juicer pre} command (version \texttt{1.1}) to convert 
 the \texttt{YaHS} output into the \texttt{juicer} format in assembly mode 
 (\texttt{-a}). We then ran \texttt{juicer tools} version \texttt{1.9.9} to generate 
 the \texttt{*.assembly} and \texttt{*.hic} files required for manual curation using 
