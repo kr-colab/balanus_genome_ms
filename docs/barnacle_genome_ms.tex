@@ -545,16 +545,16 @@ positive selection.
 
 % Mention a few mkTest genes?
 
-\subsection*{Barnacle genes show a biased use of non-synonymous codons}
+\subsection*{Barnacle genes show a biased use of synonymous codons}
 
 We used the annotated transcript sequences of our Pacific acorn barnacle genome 
-to calculate the effective number of codons (ENC), a measure of the extent of 
-departure of equal usage across synonymous codons (\cite{wright_effective_1990,
-sun_improved_2013}). We successfully calculated ENC across the coding sequences of 
-16,904 \textit{B. glandula} genes, finding an average (mean) number of 43.1 
+to calculate the effective number of codons (ENC), a measure of the extent of
+departure from equal usage across synonymous codons (\cite{wright_effective_1990,
+sun_improved_2013}). We calculated ENC across the coding sequences of
+16,904 \textit{B. glandula} genes, finding a mean of 43.1
 effective codons (median: 42.7, standard deviation: 5.56, Figure~\ref{fig:codon_enc}). 
-This ENC distribution highlights a substantial reduction in the usage of synonymous 
-codons, higher than that observed for \textit{Drosophila} (Figure~\ref{fig:sup_dmel_enc}),
+This ENC distribution indicates a codon usage bias stronger than that observed
+in \textit{Drosophila} (Figure~\ref{fig:sup_dmel_enc}),
 suggesting that some synonymous substitutions may not be neutral in this large
 barnacle population.
 
@@ -563,7 +563,7 @@ barnacle population.
     \centering
     \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
     \caption{Codon usage biases in \textit{Balanus glandula}.}
-        Distribution in the effective number of codons (ENC) across 16,904 \textit{B. 
+        Distribution of the effective number of codons (ENC) across 16,904 \textit{B. 
         glandula} genes. Dashed light blue line shows the mean ENC (43.1), while the 
         dot-dashed dark blue line shows the median ENC (42.7).
     \label{fig:codon_enc}
@@ -572,7 +572,7 @@ barnacle population.
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
 We sequenced the whole genomes of six \textit{B. glandula} individuals collected 
-from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites 
+from Cape Perpetua, on the central Oregon coast. After stringent filtering of sites 
 with low coverage, low quality, and/or missing genotypes, we retained a total of 
 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million 
 (19.16\%) of which were variant in the sequenced individuals. Among these variant 
@@ -580,12 +580,11 @@ sites, we recovered 20.5 million point mutations, including 996 thousand SNPs th
 were multiallelic in this set of just six individuals. In total, the amount of 
 polymorphism observed in our sampling translates to a mean density of 41.05 variant 
 sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of 
-these variant sites (5.23\%) were located within the span of coding sequences. These 
+these variant sites (5.23\%) were located within coding sequences. These 
 coding variants included 360 thousand missense (non-synonymous) mutations, 
-corresponding to an average (mean) of 18.93 non-synonymous variants per transcript 
+corresponding to a mean of 18.93 non-synonymous variants per transcript 
 (median: 10, standard deviation: 28.50). Overall, these represent a substantial 
-proportion of coding variation segregating in this central Oregon population. Moreover, 
-this \textit{B. glandula} population displayed a mean genome-wide nucleotide 
+proportion of coding variation segregating in this central Oregon population. This \textit{B. glandula} population displayed a mean genome-wide nucleotide 
 diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; 
 Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). This degree of 
 diversity is an order of magnitude higher than that observed in diverse 
@@ -596,8 +595,8 @@ Along each chromosome, we did not observe any strong correlation between the den
 of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and 
 \textpi{}, particularly not at the scale of 10 kbp (Figure~\ref{fig:genome_pi}; 
 Figure~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present 
-at smaller genomic intervals (see below). The strongest correlation was, expectedly, 
-observed between the density of segregating sites along 10 kbp windows and \textpi{} 
+at smaller genomic intervals (see below). The strongest correlation was, as expected,
+observed between the density of segregating sites within 10 kbp windows and \textpi{} 
 (Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}). The proportion of 
 segregating sites in itself was not correlated with the density of particular genomic 
 features, except for repeats; however, this is likely an artifact of the masking of 
@@ -612,8 +611,7 @@ genotypes located within repetitive intervals in the reference (see \nameref{sec
     the \textit{Balanus glandula} genome.}
         \textbf{A.} Density of coding sequences (CDS) along the genome, defined as the 
         proportion of bases annotated as CDS within 10 kbp windows. Line reflects the 
-        values kernel-smoothed along a 1 Mbp interval. Alternating colors show the values 
-        show the values for different chromosomes. Top and bottom horizontal axes show 
+        values kernel-smoothed along a 1 Mbp interval. Alternating colors show the values for different chromosomes. Top and bottom horizontal axes show 
         the chromosome number and genomic position, respectively. Dashed horizontal line 
         shows the genome-wide average proportion of CDS bases (0.0288).
         \textbf{B.} Density of repeat elements annotated within 10 kbp windows, smoothed 
@@ -621,14 +619,14 @@ genotypes located within repetitive intervals in the reference (see \nameref{sec
         proportion of repeat bases (0.597).
         \textbf{C.} Density of segregating sites, calculated as the proportion of SNPs 
         within 10 kbp windows, smoothed along 1 Mbp intervals. Dashed horizontal line 
-        shows the genome-wide average of proportion of segregating SNPs per 10 kbp 
+        shows the genome-wide average proportion of segregating SNPs per 10 kbp 
         (0.0307).
         \textbf{D.} \textpi{} within 10 kbp windows, smoothed along 1 Mbp intervals. 
         Horizontal dashed line shows the mean genome-wide \textpi{} (0.0506).
     \label{fig:genome_pi}
 \end{figure}
 
-Looking at diversity across the genome, we observe an overall reduction in \textpi{} 
+Looking at diversity across the genome, we observed an overall reduction in \textpi{} 
 at putatively functional sites. For example, the mean \textpi{} in sequences spanning 
 annotated CDSs is 0.0302 (median: 0.0270, standard deviation: 0.0221; 
 Figure~\ref{fig:feature_pi}; Figure~\ref{fig:sup_pi_hist}; Table~\ref{tab:sup_feature_pi}),
@@ -636,24 +634,23 @@ which represents a $\approx$ 1.6x reduction in diversity when compared to the
 genome-wide average. A reduction in diversity of similar magnitude is also observed 
 in the sequences of lncRNAs (1.4x) and 5' UTRs (1.3x). The largest reduction in 
 diversity when compared to the genome-wide background was observed in tRNAs, with 
-\textpi{} $\approx$ 4.3x lower than the genomic background and in agreement with their 
-high functional constrained as observed from their enrichment in highly-conserved 
-elements in the genome. In contrast to most other elements of the genome, introns 
+\textpi{} $\approx$ 4.3x lower than the genomic background and consistent with the strong functional constraint evidenced by their enrichment
+in highly conserved elements. In contrast to most other elements of the genome, introns 
 display a relative increase in diversity, with a mean \textpi{} of 0.0646 (median: 
 0.0650, standard deviation: 0.0299), approximately 1.3x higher than the genome-wide 
 average.
 \vspace{0.2cm}
 
 % I feel like I want to say more here, but I should wait for the discussion.
-Zooming in further on coding sequences, we further explored the patterns of \textpi{} 
+Zooming in further on coding sequences, we explored the patterns of \textpi{} 
 at zero-fold and four-fold degenerate sites, effectively comparing diversity at 
 constrained versus neutral (or putatively neutral) sites. In this central Oregon 
 population of \textit{B. glandula}, the mean \textpi{} at zero-fold degenerate sites, 
  in which any mutation produces a non-synonymous substitution, was 0.0107 (median: 
 0.00292, standard deviation: 0.0178). This is the lowest \textpi{} among the studied 
-categories in the genome, not a surprising results given the expected higher functional 
+categories in the genome, not a surprising result given the expected higher functional 
 constraint at these sites. In contrast, mean \textpi{} at four-fold degenerate sites, 
-in which any mutation results in a synonymous change, \textpi{} was 0.0790 (median: 
+in which any mutation results in a synonymous change, was 0.0790 (median: 
 0.0750, standard deviation: 0.0483), $\approx$ 1.6x higher than the genome-wide average 
 and the highest in the genome.
 
@@ -672,25 +669,27 @@ and the highest in the genome.
 
 \subsection*{\textit{B. glandula} exhibits large effective population sizes}
 
-We estimated the effective population size (N\textsubscript{e}) of this central 
-Oregon \textit{B. glandula} population using the whole-genome genotypes. First, we 
-calculated N\textsubscript{e} using the Watterson's estimator of genetic diversity 
+We estimated the effective population size (N\textsubscript{e}) for a central 
+Oregon \textit{B. glandula} population sample using the whole-genome genotypes. 
+As a simple estimate of the long-term N\textsubscript{e} of this population, we first 
+calculated N\textsubscript{e} using Watterson's estimator of genetic diversity 
 ($\theta_W$), observing a genome-wide mean $\theta_W$ of 0.0617 (median: 0.0635, 
-standard deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Using the relationship 
-between the effective population size and the Watterson's estimator, 
-$\theta_W=4N_{e}\mu$, we calculated the mean effective size of this population as 
-5,137,172 (median: 5,289,211, standard deviation: 1,862,683), according to a mutation 
-rate per-base, per-generation ($\mu$) of $3\times10^{-9}$ (as estimated by 
-\cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides}).
+standard deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). 
+Assuming a per-base, per-generation mutation
+rate ($\mu$) of $3\times10^{-9}$ (as estimated by 
+\cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides}) and using the relationship 
+this yields a mean effective size of 
+5,137,172 (median: 5,289,211, standard deviation: 1,862,683),
+which is consistent with the expectation of large N\textsubscript{e} in this species.
 \vspace{0.2cm}
 
-Additionally, we did a coalescent-based estimation of N\textsubscript{e} through 
-time using \texttt{MSMC2} (\cite{dutheil_msmc_2020}). This estimate also placed the 
-historical (between $10^{6}$ and $10^{7}$ generations ago) effective size of the 
-population in the magnitude of $10^{6}$ effective individuals 
-(Figure~\ref{fig:sup_mcmc_ne}); however, with our small sampling and estimating using 
-only pairs of haplotypes per-individual, we were unable to obtain accurate 
-N\textsubscript{e} estimates at more recent ($<10^{5}$ generations) estimates.
+Additionally, we estimated N\textsubscript{e} through time using a coalescent-based
+approach with \texttt{MSMC2} (\cite{dutheil_msmc_2020}). This estimate also placed the
+historical effective size of the
+population on the order of $10^{6}$ individuals (between $10^{6}$ and $10^{7}$ generations ago)
+(Figure~\ref{fig:sup_mcmc_ne}); however, given our small sample size and the use of
+only pairwise haplotype comparisons, we were unable to obtain accurate
+N\textsubscript{e} estimates at more recent ($<10^{5}$ generations) timescales using \texttt{MSMC2}.
 
 \section*{Discussion}
 
