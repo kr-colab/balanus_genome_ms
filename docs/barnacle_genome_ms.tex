@@ -253,8 +253,8 @@ suggested the presence of a large fraction of haplotig sequences, reflecting
 the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
-After optimizing the assembly through additional data types and more stringent
-purging of haplotig and contaminant sequences (see Methods), we generated a
+After optimizing the assembly through additional data types and more stringent %unclear what 'additional data types' means here
+purging of haplotig and contaminant sequences (see \nameref{sec:methods_assembly}), we generated a
 contig-level assembly composed of 1,342 sequences, with a total length of
 1.05 Gbp, a contig N50 of 1.35 Mbp, and a \texttt{BUSCO} completeness of
 93.88\% (4.84\% duplicated; \texttt{arthropoda\_odb10}). The contig-level
@@ -269,7 +269,8 @@ This scaffold-level assembly was further processed by performing manual curation
 of the Hi-C contact map and polishing using the software \texttt{Inspector}
 (\cite{chen_accurate_2021}). This curated assembly was composed of 592 fragments,
 a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base
-quality value (QV) of 30.49. When assessing completeness, the curated assembly was
+quality value (QV) of 30.49. 
+When assessing completeness, the curated assembly was
 94.08\% and 92.77\% gene-complete for the \texttt{arthropoda\_odb10} and
 \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively
 (Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence, 
@@ -284,30 +285,30 @@ family Balanidae (\cite{han_new_2024}).
 
 % Stats and QC on the annotation.
 
-Once the assembly and scaffolding was completed, we annotated and masked repeat 
+Once the assembly and scaffolding were completed, we annotated and masked repeat 
 sequences in the \textit{B. glandula} reference assembly using the \texttt{EarlGrey} 
 software (\cite{baril_earl_2024}). This analysis identified 698.6 Mbp (66.94\%) 
 of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary}); 
-however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remain 
+however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remained
 unclassified among the major repeat element types. This large proportion of 
 unclassified repeat elements is likely the product of the small number of 
 representative barnacle sequences among curated repeat reference libraries, 
-reflecting barnacle's status as a genomically understudied group. Among the 
-classified repeats, DNA and LINE elements were the two most abundant repeats 
+reflecting the status of barnacles as a genomically understudied group. Among the 
+classified repeats, DNA and LINE elements were the two most abundant repeat
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 \vspace{0.2cm}
 
 Following repeat masking of the reference assembly, we annotated protein-coding 
 genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining 
-and curating annotations generated across the two data types (see Methods). This 
+and curating annotations generated from the two data types (see \nameref{sec:methods_protein_coding}). This 
 process resulted in 20,234 protein-coding genes annotated in the genome. The 
 resulting annotation was 93.58\% (\texttt{S}:79.76\%; \texttt{D}:13.82\%; 
 \texttt{F}:1.78\%; \texttt{M}:4.64\%; \texttt{N}:1,013) and 84.77\% 
 (\texttt{S}:72.66\%; \texttt{D}:12.11\%; \texttt{F}:4.10\%; \texttt{M}:11.13\%; 
 \texttt{N}:1,536) gene-complete when compared against the \texttt{arthropoda\_odb10} 
 and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Additionally, 
-we compared our annotation against the proteome of four other barnacle species 
-(see Methods) using \texttt{OrthoFinder} (\cite{emms_orthofinder_2015,
+we compared our annotation against the proteomes of four other barnacle species
+(see \nameref{sec:methods_orthologs}) using \texttt{OrthoFinder} (\cite{emms_orthofinder_2015,
 emms_orthofinder_2019}), resulting in the assignment of 16,978 (83.91\%) 
 \textit{B. glandula} genes to orthologous groups across barnacles and the 
 identification of 2,576 single-copy orthologs across all five species.
@@ -316,11 +317,11 @@ identification of 2,576 single-copy orthologs across all five species.
 % Short paragraph, but unsure what to say here. Just wanted to mention that 
 % we annotated non-coding stuff too.
 
-In addition to protein-coding genes, we also annotated non-coding elements in the 
-\textit{B. glandula} reference assembly. We identified 7,532 long, non-coding RNAs 
+In addition to protein-coding genes, we annotated non-coding elements in the 
+\textit{B. glandula} reference assembly. We identified 7,532 long non-coding RNAs 
 (lncRNA), 1,203 transfer RNAs (tRNA), and 24 ribosomal RNA (rRNA) genes. In total, 
 across protein-coding and non-coding transcripts, we were able to annotate 28,993 
-genes in the genome.
+genes in the genome. %TODO -- add this methods section for non-coding annotation.
 
 \subsection*{Conserved architecture across barnacle genomes}
 
@@ -598,7 +599,7 @@ observed between the density of segregating sites along 10 kbp windows and \text
 (Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}). The proportion of 
 segregating sites in itself was not correlated with the density of particular genomic 
 features, except for repeats; however, this is likely an artifact of the masking of 
-genotypes located within repetitive intervals in the reference (see Methods).
+genotypes located within repetitive intervals in the reference (see \nameref{sec:methods_popgen}).
 \vspace{0.2cm}
 
 % Genome-wide pi & repeat and gene density
@@ -936,7 +937,7 @@ the sequencing process yielded 1.97 billion reads across the eight individuals,
 an average of 246.3 million reads per individual. In total, these individuals 
 were sequenced at an estimated depth of 45x.
 
-\subsection*{Genome assembly}
+\subsection*{Genome assembly}\label{sec:methods_assembly}
 
 \subsubsection*{Genome size and heterozygosity estimation}
 
@@ -1017,7 +1018,7 @@ filtering retained 5.74 million Thecostraca-specific PacBio HiFi reads, represen
 filtering was also performed on the ONT reads, retaining 371 thousand (95.8\%) 
 reads.
 
-\subsubsection*{Optimized contig-level genome assembly}
+\subsubsection*{Optimized contig-level genome assembly}\label{sec:methods_optimized_assembly}
 
 We generated a new contig-level genome assembly using the Thecostraca-specific 
 data and iterating over different assembly parameters and filtering schemes, 
@@ -1100,7 +1101,7 @@ automatic curation using the \texttt{Inspector} software version \texttt{1.0.1}
 mapping the PacBio HiFi reads against the assembly. The assembly was then corrected using 
 \texttt{inspector-correct.py}.
 
-\subsection*{Genome annotation}
+\subsection*{Genome annotation}\label{sec:methods_annotation}
 
 \subsubsection*{Repeat annotation}
 
@@ -1114,10 +1115,10 @@ an initial consensus masking library. We provided this initial consensus library
 we clustered the final TE library to reduce redundancy (\texttt{-c yes}) and generated a 
 soft-masked genome (\texttt{-d yes}).
 
-\subsubsection*{Annotation of protein-coding genes}
+\subsubsection*{Annotation of protein-coding genes}\label{sec:methods_protein_coding}
 
 After masking the repetitive sequences in the genome, we took an integrative approach to 
-annotate protein-coding genes, combining evidence from both short-read RNAseq data, PacBio 
+annotate protein-coding genes, combining evidence from short-read RNAseq data, PacBio
 IsoSeq long reads, and protein sequences. For protein-level evidence, we downloaded the 
 Arthropoda and Crustacea partitions of \texttt{OrthoDB} version \texttt{11} 
 (\cite{kriventseva_orthodb_2019,zdobnov_orthodb_2021}).
@@ -1141,9 +1142,9 @@ version \texttt{3.0.8} (\cite{gabriel_braker3_2024}). We ran \texttt{BRAKER} in
 We also used the Arthropod dataset from \texttt{BUSCO} (\cite{simao_busco_2015}) to 
 enforce this set of orthologs as hints for \texttt{Augustus} (\cite{stanke_using_2008}) 
 and reduce the number of missing single-copy orthologs in the final annotation 
-(\texttt{--busco\_lineage arthropoda\_odb10}). After running \texttt{BUSCO}, we assessed 
+(\texttt{--busco\_lineage arthropoda\_odb10}). After running \texttt{BRAKER}, we assessed
 the quality of the generated annotation using \texttt{compleasm} version \texttt{0.2.5} 
-(\cite{huang_compleasm_2023}) in \text{protein} mode, using the Arthropod ortholog set 
+(\cite{huang_compleasm_2023}) in \texttt{protein} mode, using the Arthropod ortholog set 
 as reference (\texttt{--lineage arthropoda\_odb10}).
 \vspace{0.2cm}
 
@@ -1168,9 +1169,9 @@ both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference data
 
 \subsubsection*{Curation of transcript isoforms}
 
-\subsubsection*{Annotation of non-coding RNAs}
+\subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
 
-\subsection*{Identifying orthologous gene families}
+\subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
 
 \subsection*{Conserved synteny analysis}
 
@@ -1184,7 +1185,7 @@ both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference data
 
 \subsection*{Codon usage biases}
 
-\subsection*{Popgen}
+\subsection*{Popgen}\label{sec:methods_popgen}
 
 \subsection*{Demographic inference}
 
