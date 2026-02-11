@@ -330,18 +330,18 @@ genes in the genome. %TODO -- add this methods section for non-coding annotation
 % not micro-synteny. This might be a better way of describing these relationships give 
 % that we do not know the ancestral karyotype for this types.
 
-We performed a conserved synteny analysis using the software \texttt{Genespace} 
-(\cite{lovell_genespace_2022}) to identify patterns of large-scale structure across 
-barnacle genomes. We compared our \textit{B. glandula} genome against the 
+To assess large-scale structural conservation across barnacle genomes, we performed
+a synteny analysis using the software \texttt{Genespace}
+(\cite{lovell_genespace_2022}). We compared our \textit{B. glandula} genome against the 
 chromosome-level genome assemblies of the striped barnacle \textit{Amphibalanus 
 amphitrite} (Balanidae; \cite{han_new_2024}) and the gooseneck barnacle 
 \textit{Pollicipes pollicipes} (Pollicipedidae; \cite{bernot_chromosome-level_2022}). 
 These genomes display conservation in their large-scale organization, including 
 one-to-one correspondence between 16 putatively orthologous chromosomes across the 
-three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding 
-of the \textit{B. glandula} assembly likely reflects the biological structure of 
-the genome and is not the product of technical artifacts, but also suggests the 
-conservation in the genome architecture of barnacle genomes across $\approx$165 Mya 
+three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding
+of the \textit{B. glandula} assembly likely reflects the biological structure of
+the genome and is not the product of technical artifacts, and further suggests
+conservation of genome architecture across barnacles spanning $\approx$165 Mya
 of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
 
 % Synteny
@@ -354,7 +354,7 @@ of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
         (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes 
         pollicipes} (bottom). Each set of colored lines shows orthologous genes 
         across the three assemblies, colored according to their chromosome of origin. 
-        Chromosomes are drawn according their order in \textit{A. amphitrite}. 
+        Chromosomes are drawn according to their order in \textit{A. amphitrite}. 
         Cladogram on the left shows the evolutionary relationship among the three 
         species.
     \label{fig:synteny}
@@ -367,21 +367,21 @@ of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
 % We delve more on this on the later popgen section, but this individual is not 
 % included there.
 
-We calculated estimates of diversity present in the barnacle genome by genotyping 
-our \textit{B. glandula} reference individual. After filtering low-quality genotypes 
+We estimated the genetic diversity present in the \textit{B. glandula} reference
+genome by genotyping the reference individual. %ADK -- this isn't clear to me. what does it mean to genotype the reference individual?
+After filtering low-quality genotypes 
 and masking regions with annotated repeats, we obtained genotypes for 314 million 
 sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 
 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 
 million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference 
-individual, including 8.73 million SNPs and 356 thousand indels. In total, this 
-variation represent a mean density of 14.66 heterozygous sites per kbp (median: 6; 
-standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant 
-sites within the span of protein-coding sequences, including 144 thousand 
+individual, including 8.73 million SNPs and 356 thousand indels. In total, this
+variation represents a mean density of 14.66 heterozygous sites per kbp (median: 6
+per kbp; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant 
+sites within protein-coding sequences, including 144 thousand 
 non-synonymous point mutations, as categorized by the \texttt{snpEff} software 
-(\cite{cingolani_program_2012}). In this reference individual, the average 
-transcript showed a mean number of 7.74 (median: 3, standard deviation: 14.97) 
-non-synonymous variants, indicating a substantial proportion of coding variation 
-in just a single barnacle individual.
+(\cite{cingolani_program_2012}). In this reference individual, transcripts had a mean of 7.74 (median: 3, standard deviation: 14.97)
+non-synonymous variants, indicating considerable coding variation segregating
+within a single individual.
 
 \subsection*{Functional elements are conserved in barnacle genomes}
 
@@ -389,43 +389,47 @@ in just a single barnacle individual.
 % it is. The enrichment results are generally expected (tRNAs and CDSs are conserved). 
 % Not sure what else to say there.
 
-We used the \texttt{phastCons} software (\cite{siepel_evolutionarily_2005}) on the 
+We used the \texttt{phastCons} package (\cite{siepel_evolutionarily_2005}) on the 
 \texttt{cactus} whole-genome alignment (\cite{armstrong_progressive_2020}) between 
 six barnacle species to identify highly conserved sites in the Pacific acorn barnacle 
 genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly, 
-\texttt{phastCons} identified 196,141 highly-conserved elements (HCEs), spanning 
-50.85 Mbp of sequence and 6.05\% of the sequence spanning the 16 assembled chromosomes.
+\texttt{phastCons} identified 196,141 highly conserved elements (HCEs), spanning
+50.85 Mbp (6.05\%) of the 16 assembled chromosomes.
 In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp, 
 standard deviation: 990.40 bp).
 \vspace{0.2cm}
 
 Following the identification of HCEs, we compared their sequence composition against 
-the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlaid 
-the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, 
-obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). 
-Among our target features, including an ``intergenic'' and ``multiple'' class for 
-the unannotated fraction of the genome and annotation overlaps (e.g., a site spanning 
-both a transposable element and an intron), respectively, all but one is present 
-among HCEs. We do not observe any rRNA sites among our conserved sites; however, this 
+the genome-wide background (Figure~\ref{fig:phastcons}). 
+We first intersected the genomic coordinates of the HCEs with the \textit{B. glandula}
+annotation, obtaining the proportion of annotated features among HCE sites
+(Figure~\ref{fig:phastcons}A). Among our target features — which include an
+``intergenic'' class for the unannotated fraction of the genome and a ``multiple''
+class for annotation overlaps (e.g., a site spanning both a transposable element
+and an intron) — all but one are present among HCEs. We did not observe any rRNA
+sites among our conserved sites; however, this 
 is likely the product of the whole-genome alignment, given rRNA's repetitive nature 
 and alignment difficulty (\cite{gillespie_characterizing_2004}), and not an accurate 
-measure of conservation (or lack therof). Aside from the absence of rRNAs, the 
-sequence composition of HCE largely follows that of the whole genome. Most annotated 
+measure of conservation (or lack thereof). Aside from the absence of rRNAs, the
+sequence composition of HCEs largely followed that of the whole genome. Most annotated 
 features do not appear substantially enriched among HCE sites (Figure~\ref{fig:phastcons}B, 
 Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding 
-sequences (CDSs) and tRNAs. CDSs display an average two-fold enrichment among HCEs 
+sequences (CDSs) and tRNAs. CDSs display an approximately two-fold enrichment among HCEs
 (mean $\log_2$ enrichment: 0.75, median: 0.98, standard deviation: 0.93), reflecting 
 the conservation of protein-coding genes among barnacle genomes. Similarly, tRNAs exhibit 
 four-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14, median: 2.04, standard 
-deviation: 0.96), the likely product of the strong functional constraint expected for 
-these biologically-important sequences.
+deviation: 0.96), likely reflecting the strong functional constraints on these sequences.
+
+%ADK -- generally speaking, I think this is a good way to present the phastCons results.
+% but to make this more interesting we want to put this in context. How does this compare to 
+% other species? take a look here https://doi.org/10.1093/molbev/mst082
 
 % Phastcons and enrichment
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
     \caption{Highly conserved elements in the \textit{Balanus glandula} assembly.} 
-        \textbf{A.} Proportion of annotated features between the whole genome 
+        \textbf{A.} Proportion of annotated features in the whole genome 
         (left column) and \texttt{phastCons}-conserved elements (right column). Values 
         are shown only for elements with proportions larger than 0.01. Sites that span 
         more than one non-intergenic annotation type are represented by the ``multiple'' 
@@ -441,79 +445,77 @@ these biologically-important sequences.
 \subsection*{Patterns of molecular evolution reflect strong positive selection in 
 protein-coding genes}
 
-To look at the rate of molecular evolution in protein coding sequences, we calculated 
-at the pairwise rate of non-synonymous to synonymous substitutions 
-(d\textsubscript{N}/d\textsubscript{S}) between \textit{B. glandula} and its 
-congener, the wrinkled barnacle \textit{Balanus crenatus}. We identified and aligned 
-9,082 single-copy orthologs between both species. The mean pairwise 
-d\textsubscript{N}/d\textsubscript{S} was 0.206 (median: 0.158, standard deviation: 
-0.191; Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average and under 
-this specific metric, coding sequencing in these barnacle genomes are under purifying 
-selection when compared to outgroup sequences, reflecting the expected evolutionary 
-constraints over sequences of functional importance.
+To examine the rate of molecular evolution in protein-coding sequences, we calculated
+the pairwise rate of non-synonymous to synonymous substitutions
+(d\textsubscript{N}/d\textsubscript{S}) between \textit{B. glandula} and its
+congener, the wrinkled barnacle \textit{Balanus crenatus}. We identified and aligned
+9,082 single-copy orthologs between the two species. The mean pairwise
+d\textsubscript{N}/d\textsubscript{S} was 0.206 (median: 0.158, standard deviation:
+0.191; Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
+sequences in these barnacle genomes are under purifying selection, reflecting the
+expected evolutionary constraints on sequences of functional importance.
 \vspace{0.2cm}
 
-Of the 9 thousand genes assessed, 70 (0.77\%) displayed a 
-d\textsubscript{N}/d\textsubscript{S} $>$ 1, and are likely candidates under positive 
+Of the nine thousand genes assessed, 70 (0.77\%) displayed a 
+d\textsubscript{N}/d\textsubscript{S} $>$ 1, and are likely candidates for positive %ADK -- should say how you did this here.  What models, etc
 selection. The predicted function of the majority ($>80\%$) of these genes is 
 unknown, as determined by the functional annotation generated by the \texttt{EnTap} 
 software (\cite{hart_span_2020}). This is expected, since homology is likely harder 
 to determine for fast-evolving sequences putatively under strong selection. 
 Regardless, we found several genes with known function in our candidates under 
-positive selection. Among then, we found a follistatin-A-like homolog, known to be 
-involved to myogenesis and muscle development in crustaceans 
-(\cite{yan_identification_2021}). We also observe a homolog of the 
-gamma-interferon-inducible lysosomal thiol reductase, known to be involved in innate 
-immune response in crustaceans (\cite{liu_involvement_2019}). Additionally, we find 
-homologs to tumor protein p53-inducible protein 11 (which is involved in cell cycle 
-regulation), chymotrypsin-like protease CTRL-1, and the protein quiver gene.
+positive selection. Among them, we found a follistatin-A-like homolog, known to be
+involved in myogenesis and muscle development in crustaceans
+(\cite{yan_identification_2021}). We also observed a homolog of the
+gamma-interferon-inducible lysosomal thiol reductase, known to be involved in innate
+immune response in crustaceans (\cite{liu_involvement_2019}). Additionally, we found
+homologs of tumor protein p53-inducible protein 11 (which is involved in cell cycle
+regulation), chymotrypsin-like protease CTRL-1, and the quiver gene.
 \vspace{0.2cm}
 
 We expanded on our d\textsubscript{N}/d\textsubscript{S} measures of positive 
 selection in protein-coding sequences in the \textit{B. glandula} genome by 
 incorporating population-level polymorphism using the McDonald-Kreitman test 
-(\cite{mcdonald_adaptive_1991}). To achieve this, we incorporated genetic variants 
-observed in a \textit{B. glandula} population by taking genetic variants present 
-across the whole-genome of seven individuals (including our reference individual and 
-six additional samples, see below), and comparing those against the orthologous 
+(\cite{mcdonald_adaptive_1991}). Specifically, we used variation data 
+from seven \textit{B. glandula} individuals (including the reference individual and
+six additional samples, see below), comparing those against the orthologous
 coding sequences in the \textit{B. crenatus} outgroup.
 \vspace{0.2cm}
 
-After filtering alignments both by length ($<100$ bp) and by the presence of 
-premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman 
-tests for 7,714 orthologs sequences between \textit{B. glandula} and \textit{B. 
-crenatus}. Four-hundred and seventeen (417, 5.41\%) of these orthologs showed a 
+After removing alignments shorter than 100 bp and those containing
+premature stop codons or frameshift mutations, we calculated the McDonald-Kreitman
+tests for 7,714 orthologous sequences between \textit{B. glandula} and \textit{B. 
+crenatus}. Four hundred and seventeen (417, 5.41\%) of these orthologs showed a
 significant deviation from the expected proportion of non-synonymous and synonymous 
-substitutions and polymorphisms, following \textit{p}-value correction 
+substitutions and polymorphisms, following \textit{p}-value correction for multiple testing.
 (Figure~\ref{fig:mkTest}). We additionally calculated the Neutrality Index (NI; 
 \cite{rand_excess_1996}) and Direction of Selection (DoS; \cite{stoletzki_estimation_2011}) 
-at each ortholog. We observe a mean NI value of 0.745 (median: 0.554; standard 
+at each ortholog. We observed a mean NI value of 0.745 (median: 0.554; standard 
 deviation: 1.079) and a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; 
 Figure~\ref{fig:sup_dos}). Both of these statistics show that, on average and in contrast 
-with our measurements of d\textsubscript{N}/d\textsubscript{S}, protein coding 
+with our measurements of d\textsubscript{N}/d\textsubscript{S}, protein-coding
 sequences in \textit{B. glandula} exhibit an excess of non-synonymous substitutions, 
 suggesting that they are evolving under positive directional selection when compared 
 to the outgroup sequence.
 \vspace{0.2cm}
 
-In addition to NI and DoS, we also calculated \textalpha{}, a measure of the proportion 
+In addition to NI and DoS, we calculated \textalpha{}, a measure of the proportion 
 of non-synonymous substitutions fixed by positive selection (\cite{smith_adaptive_2002}). 
 We calculated two adjusted versions of \textalpha{} to account for the presence of known 
 biases. First, we calculated the Tarone-Greenland \textalpha{} estimator 
-(\textalpha{}\textsubscript{TG}), a weighted estimator that correct for the effects of 
+(\textalpha{}\textsubscript{TG}), a weighted estimator that corrects for the effects of 
 averaging over a large number of genes (\cite{stoletzki_estimation_2011}). Across our 
 7,714 genes, we calculated an \textalpha{}\textsubscript{TG} of 0.530 ($95\%$ 
 Confidence Interval: 0.523--0.538), which indicates that 53\% of non-synonymous 
 substitutions in this \textit{B. glandula} population were fixed as a product of 
-positive selection. Secondly, we calculated the \textalpha{} product of the asymptotic 
+positive selection. Secondly, we calculated the \textalpha{} using the asymptotic 
 McDonald-Kreitman test (\textalpha{}\textsubscript{asym}), which corrects for the 
-presence of weakly deleterious non-synonymous polymorphism present at low frequency 
-in the population (\cite{messer_frequent_2013}). We found a mean 
-\textalpha{}\textsubscript{asym} of 0.610 ($95\%$ Confidence Interval: 0.600--0.620). 
+presence of weakly deleterious non-synonymous polymorphisms present at low frequency 
+in the population (\cite{messer_frequent_2013}) which might obscure the signal of positive selection.
+We found a mean \textalpha{}\textsubscript{asym} of 0.610 ($95\%$ Confidence Interval: 0.600--0.620). 
 Regardless of the metric used, both \textalpha{}\textsubscript{TG} and 
 \textalpha{}\textsubscript{asym} agree that the majority of non-synonymous 
 substitutions in this barnacle population are the outcome of directional 
-positive selection.
+positive selection. 
 
 % MK test volcano plot
 \begin{figure}[htbp]
@@ -521,15 +523,15 @@ positive selection.
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{Signatures of positive selection in \textit{Balanus glandula} 
     protein-coding genes.} 
-        Selection on protein coding genes was calculated on 7,714 \textit{B. 
+        Selection on protein-coding genes was assessed for 7,714 \textit{B.
         glandula} genes using the McDonald-Kreitman test. X-axis denotes the 
         $-\log_{10}$ of the Neutrality Index, with positive values representing 
-        sequences evolving from an excess of non-synonymous substitutions due 
-        to positive selection. Negative values represent an excess of 
+        sequences with an excess of non-synonymous substitutions indicative
+        of positive selection. Negative values represent an excess of 
         non-synonymous polymorphisms. Y-axis denotes the $-\log_{10}$ 
-        \textit{p}-value of the McDonald-Kreitman test, generated from the 
-        Fisher's Exact Test of the $2\times2$ contingency table of synonymous 
-        and non-synonymous substitutions and polymorphism. The dashed line in 
+        \textit{p}-value of the McDonald-Kreitman test, generated from
+        Fisher's exact test of the $2\times2$ contingency table of synonymous
+        and non-synonymous substitutions and polymorphisms. The dashed line in 
         light blue shows the raw \textit{p}-value cutoff of 0.05, while the 
         dot-dashed line in dark blue shows the Bonferroni-corrected 
         \textit{p}-value cutoff of $6.48\times10^{-6}$. Points in red show the 
