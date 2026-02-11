@@ -20,6 +20,8 @@
 \usepackage{amsmath}
 \usepackage{lipsum}
 \usepackage{rotating}
+\usepackage{xspace}
+\usepackage{fixltx2e}
 
 % For supplemental figure and table numbering
 \newcounter{supfigure}
@@ -61,12 +63,18 @@
 \usepackage[style=apa]{biblatex}
 \addbibresource{references/references.bib}
 
+% Some aliases for text
+\newcommand{\dnds}{d\textsubscript{N}/d\textsubscript{S}\xspace}
+\newcommand{\balgla}{\textit{Balanus glandula}\xspace}
+\newcommand{\bgla}{\textit{B. glandula}\xspace}
+\newcommand{\Ne}{N\textsubscript{e}\xspace}
+
 \title{The genome of the Pacific acorn barnacle provides insights into 
 the evolution of extremely large populations}
 \author[1]{Angel G. Rivera-Colón}
 \author[1]{Scott T. Small}
 \author[2,3]{Erin Jezuit}
-\author[1]{Andrew D. Kern}
+\author[1,4]{Andrew D. Kern}
 
 % I think we should add Erin as a co-author for all her help getting us 
 % samples for both glandula and crenatus.
@@ -76,31 +84,31 @@ the evolution of extremely large populations}
 \affil[1]{\small{University of Oregon, Institute of Ecology and Evolution, USA}}
 \affil[2]{\small{University of Oregon, Institute of Molecular Biology, USA}}
 \affil[3]{\small{University of Oregon, Oregon Institute of Marine Biology, USA}}
+\affil[4]{\small{University of Oregon, Department of Biology, USA}}
 
 \begin{document}
 
 \maketitle
 \begin{abstract}
 
-The size of a population is a key factor mediating the mode and tempo of evolution, 
-particularly as it relates to the strength of stochastic versus deterministic evolutionary 
-processes. While the mechanisms underlying the interactions between population size 
-and selection have been studied in population genetics for over a century, empirical 
-knowledge of these dynamics has been limited to species with small-to-moderate 
-historical population sizes. This gap in knowledge highlights the need for empirical 
-studies in systems with historically large population sizes and elevated diversity. 
-The Pacific acorn barnacle (\textit{Balanus glandula}) presents an exceptional model 
-to study evolution in extremely large populations, exhibiting census sizes often 
-exceeding the tens of thousands of individuals per meter squared. We present one 
-of the first large-scale genomic analyses in this system, generating a new 
-chromosome-level genome assembly for this species. This assembly reveals high levels 
-of genetic polymorphism even in a single individual. At a population level, 
-\textit{B. glandula} exhibits extreme levels of polymorphism, with nucleotide 
-diversity surpassing 5\% genome-wide in just a small collection of individuals. 
-Across the genome, nucleotide diversity predictably decreases at functional elements, 
-including both coding and non-coding sequences, likely reflecting strong purifying 
-selection along the genome. These remarkable levels of diversity set \textit{B. 
-glandula} as a unique model for the study of evolution at extreme demographic scales and 
+The size of a population is a key factor mediating the mode and tempo of evolution,
+particularly as it relates to the strength of stochastic versus deterministic evolutionary
+processes. While the mechanisms underlying the interactions between population size
+and selection have been studied in population genetics for over a century, empirical
+knowledge of these dynamics has been limited to species with small-to-moderate
+historical population sizes. This gap in knowledge highlights the need for empirical
+studies in systems with historically large population sizes and elevated diversity.
+The Pacific acorn barnacle (\balgla) presents an exceptional model to study evolution
+in extremely large populations, exhibiting census sizes often exceeding the tens of
+thousands of individuals per meter squared. We present one of the first large-scale
+genomic analyses in this system, generating a new chromosome-level genome assembly
+for this species. This assembly reveals high levels of genetic polymorphism even in a
+single individual. At a population level, \bgla{} exhibits extreme levels of polymorphism,
+with nucleotide diversity surpassing 5\% genome-wide in just a small collection of
+individuals. Across the genome, nucleotide diversity predictably decreases at functional
+elements, including both coding and non-coding sequences, likely reflecting strong
+purifying selection along the genome. These remarkable levels of diversity set \bgla{}
+as a unique model for the study of evolution at extreme demographic scales and
 highlights the importance of testing evolutionary theory across a wide variety of 
 empirical systems.
 
@@ -120,60 +128,55 @@ empirical systems.
 The size of a population is a key factor mediating the mode and tempo of evolution,
 particularly as it relates to the strength of stochastic versus deterministic evolutionary
 forces (\cite{kimura_mutation_1963,gillespie_genetic_2000}). Theory predicts that
-selection is less efficacious in small populations
-(\cite{charlesworth_effective_2009,gravel_when_2016}), resulting
-in reduced genetic diversity from genetic drift and
-an increase in genetic load due to the accumulation of deleterious mutations
+selection is less efficacious in small populations (\cite{charlesworth_effective_2009,
+gravel_when_2016}), resulting in reduced genetic diversity from genetic drift and an 
+increase in genetic load due to the accumulation of deleterious mutations
 (\cite{lynch_mutation_1995,lande_risk_1994,dussex_purging_2023}). These dynamics have
 been extensively supported by empirical observations, including distance to sub-Saharan
 Africa as a predictor of genetic load in humans (\cite{henn_distance_2016}) and
 the increase in genetic load and inbreeding depression in small populations of
-conservation concern (\cite{tian_severe_2022,mathur_genetic_2021,kardos_inbreeding_2023}).
-In contrast, evolution in large populations is thought to be primarily mediated by
-deterministic processes due to an increase in the efficacy of selection
-(\cite{charlesworth_effective_2009,gravel_when_2016,lanfear_population_2014}).
-However, this increased efficacy of selection can itself reduce genetic
-diversity through the hitchhiking effect
-(\cite{smith_hitch-hiking_1974}). In sufficiently large populations, hitchhiking
-is predicted to be a primary driver of stochastic diversity loss
-(\cite{gillespie_genetic_2000,gillespie_role_1999}).
-In contrast to the well-studied dynamics of small populations, empirical tests of these
-mechanisms have been, with a few key exceptions (\cite{dey_molecular_2013,
+conservation concern (\cite{tian_severe_2022,mathur_genetic_2021,
+kardos_inbreeding_2023}). In contrast, evolution in large populations is thought to
+be primarily mediated by deterministic processes due to an increase in the efficacy
+of selection (\cite{charlesworth_effective_2009,gravel_when_2016,
+lanfear_population_2014}). However, this increased efficacy of selection can itself
+reduce genetic diversity through the hitchhiking effect (\cite{smith_hitch-hiking_1974}).
+In sufficiently large populations, hitchhiking is predicted to be a primary driver 
+of stochastic diversity loss (\cite{gillespie_genetic_2000,gillespie_role_1999}).
+In contrast to the well-studied dynamics of small populations, empirical tests of
+these mechanisms have been, with a few key exceptions (\cite{dey_molecular_2013,
 teterina_pervasive_2025}), mostly limited to eukaryotic species with
 small-to-moderate historical population sizes (\cite{cutter_molecular_2013,
-leffler_revisiting_2012, buffalo2021quantifying}).
-This gap highlights the need for empirical studies in systems
-with historically large population sizes and elevated levels of genetic polymorphism.
+leffler_revisiting_2012, buffalo2021quantifying}). This gap highlights the need for
+empirical studies in systems with historically large population sizes and elevated
+levels of genetic polymorphism.
 \vspace{0.2cm}
 
-The Pacific acorn barnacle (\textit{Balanus glandula}) presents an exceptional
-model for studying the dynamics and mechanisms of evolution in large populations.
-This species is widespread across the Pacific intertidal of North
-America, from Baja California to Alaska, where it can reach densities of
-tens of thousands of individuals per square meter (\cite{menge_recruitment_2000}).
-High fecundity and a planktonic larval stage capable of
-long-distance dispersal, combined with these enormous census sizes,
-are consistent with very large effective population sizes,
-making \textit{B. glandula} an ideal system for testing theoretical
-predictions about selection and drift in large populations.
-This species has been the focus of extensive ecological and genetic research.
-Prior work has linked environmental factors to variation in development,
-recruitment, dispersal, and reproduction (\cite{berger_spatial_2006,
-berger_reproduction_2009,barshis_coastal_2011,pfeiffer-hoyt_modeling_2005,
-schubart_recruitment_1995}), and substantial effort has characterized
-the spatial population structure of \textit{B. glandula} along the Pacific coast,
-particularly a steep genetic cline on the coast of California
-that separates northern and southern populations
+The Pacific acorn barnacle (\balgla) presents an exceptional model for studying the
+dynamics and mechanisms of evolution in large populations. This species is widespread
+across the Pacific intertidal of North America, from Baja California to Alaska,
+where it can reach densities of tens of thousands of individuals per square meter
+(\cite{menge_recruitment_2000}). High fecundity and a planktonic larval stage capable
+of long-distance dispersal, combined with these enormous census sizes, are consistent
+with very large effective population sizes, making \bgla{} an ideal system for
+testing theoretical predictions about selection and drift in large populations. This
+species has been the focus of extensive ecological and genetic research. Prior work
+has linked environmental factors to variation in development, recruitment, dispersal,
+and reproduction (\cite{berger_spatial_2006,berger_reproduction_2009,
+barshis_coastal_2011,pfeiffer-hoyt_modeling_2005,schubart_recruitment_1995}), and
+substantial effort has characterized the spatial population structure of \bgla{}
+along the Pacific coast, particularly a steep genetic cline on the coast of
+California that separates northern and southern populations
 (\cite{sotka_strong_2004,wares_diversification_2005,wares_maintenance_2019,
 wares_diversity_2021}).
-% \textit{B. glandula} has also been
+% \bgla{} has also been
 % introduced outside its native range, and genetic work has assessed
 % invasive populations in Japan (\cite{yorisue_lack_2022,geller_sources_2008}),
 % Argentina (\cite{geller_sources_2008}), and South Africa
 % (\cite{simon-blecher_balanus_2008}).
 \vspace{0.2cm}
 
-These patterns are not unique to \textit{B. glandula}. Work in other barnacle
+These patterns are not unique to \bgla{}. Work in other barnacle
 species has revealed substantial levels of genetic diversity
 (\cite{alm_rosenblad_genomic_2021}), as well as complex patterns of selection and
 local adaptation at remarkably small spatial scales (\cite{nunez_footprints_2020,
@@ -189,12 +192,12 @@ has focused on a single protein-coding gene, and the genome-wide landscape of ge
 diversity and selection in \textit{S. balanoides} remains unknown.
 \vspace{0.2cm}
 
-The situation in \textit{B. glandula} is similar: despite extensive prior genetic work,
+The situation in \bgla{} is similar: despite extensive prior genetic work,
 the species remains genomically understudied. Previous research has been limited to a
 handful of nuclear and mitochondrial markers, with the
 most extensive study employing reduced representation sequencing in the
 absence of a reference genome (\cite{wares_diversity_2021}). Two reference assemblies
-for \textit{B. glandula} exist in public databases; however, both are
+for \bgla{} exist in public databases; however, both are
 highly fragmented and likely incomplete. Most publicly available barnacle genomes
 suffer from the same limitation, presumably due to the difficulty of assembling
 highly polymorphic genomes from short reads
@@ -202,7 +205,7 @@ highly polymorphic genomes from short reads
 chromosome-level assemblies exist for barnacles (\cite{han_new_2024,
 bernot_chromosome-level_2022,carlson_reference_2025,blaxter_genome_2023}), they
 belong to evolutionarily distant species, limiting their utility for studies of
-\textit{B. glandula}.
+\bgla{}.
 \vspace{0.2cm}
 
 Here, we describe a high-quality, chromosome-level genome assembly for the
@@ -217,7 +220,7 @@ constraints. McDonald-Kreitman tests further reveal that the majority of
 non-synonymous substitutions between species were driven by positive selection,
 as expected when selection is highly efficacious in large
 populations. Our assembly provides a key resource for future research, laying
-the groundwork for \textit{B. glandula} as a model for the study of evolution
+the groundwork for \bgla{} as a model for the study of evolution
 in large, hyperpolymorphic populations.
 \vspace{0.2cm}
 
@@ -288,7 +291,7 @@ family Balanidae (\cite{han_new_2024}).
 % Stats and QC on the annotation.
 
 Once the assembly and scaffolding was completed, we annotated and masked repeat 
-sequences in the \textit{B. glandula} reference assembly using the \texttt{EarlGrey} 
+sequences in the \bgla{} reference assembly using the \texttt{EarlGrey} 
 software (\cite{baril_earl_2024}). This analysis identified 698.6 Mbp (66.94\%) 
 of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary}); 
 however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remain 
@@ -312,7 +315,7 @@ and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Additionall
 we compared our annotation against the proteome of four other barnacle species 
 (see Methods) using \texttt{OrthoFinder} (\cite{emms_orthofinder_2015,
 emms_orthofinder_2019}), resulting in the assignment of 16,978 (83.91\%) 
-\textit{B. glandula} genes to orthologous groups across barnacles and the 
+\bgla{} genes to orthologous groups across barnacles and the 
 identification of 2,576 single-copy orthologs across all five species.
 \vspace{0.2cm}
 
@@ -320,7 +323,7 @@ identification of 2,576 single-copy orthologs across all five species.
 % we annotated non-coding stuff too.
 
 In addition to protein-coding genes, we also annotated non-coding elements in the 
-\textit{B. glandula} reference assembly. We identified 7,532 long, non-coding RNAs 
+\bgla{} reference assembly. We identified 7,532 long, non-coding RNAs 
 (lncRNA), 1,203 transfer RNAs (tRNA), and 24 ribosomal RNA (rRNA) genes. In total, 
 across protein-coding and non-coding transcripts, we were able to annotate 28,993 
 genes in the genome.
@@ -334,14 +337,14 @@ genes in the genome.
 
 We performed a conserved synteny analysis using the software \texttt{Genespace} 
 (\cite{lovell_genespace_2022}) to identify patterns of large-scale structure across 
-barnacle genomes. We compared our \textit{B. glandula} genome against the 
+barnacle genomes. We compared our \bgla{} genome against the 
 chromosome-level genome assemblies of the striped barnacle \textit{Amphibalanus 
-amphitrite} (Balanidae; \cite{han_new_2024}) and the gooseneck barnacle 
-\textit{Pollicipes pollicipes} (Pollicipedidae; \cite{bernot_chromosome-level_2022}). 
+amphitrite} (Balanidae;~\cite{han_new_2024}) and the gooseneck barnacle 
+\textit{Pollicipes pollicipes} (Pollicipedidae;~\cite{bernot_chromosome-level_2022}). 
 These genomes display conservation in their large-scale organization, including 
 one-to-one correspondence between 16 putatively orthologous chromosomes across the 
 three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding 
-of the \textit{B. glandula} assembly likely reflects the biological structure of 
+of the \bgla{} assembly likely reflects the biological structure of 
 the genome and is not the product of technical artifacts, but also suggests the 
 conservation in the genome architecture of barnacle genomes across $\approx$165 Mya 
 of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
@@ -352,7 +355,7 @@ of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
     \caption{Conserved synteny across barnacle genomes.}
         Genome-wide riparian synteny plots showing one-to-one correspondence across 
-        16 orthologous chromosomes between the genomes of \textit{Balanus glandula} 
+        16 orthologous chromosomes between the genomes of \balgla{} 
         (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes 
         pollicipes} (bottom). Each set of colored lines shows orthologous genes 
         across the three assemblies, colored according to their chromosome of origin. 
@@ -362,7 +365,7 @@ of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
     \label{fig:synteny}
 \end{figure}
 
-\subsection*{High genetic diversity in the \textit{B. glandula} reference assembly}
+\subsection*{High genetic diversity in the \bgla{} reference assembly}
 
 % Talking about the diversity on just our reference sample. There is tons of 
 % variation on just one individual, so I thought it was important just to say that.
@@ -370,7 +373,7 @@ of evolution (\cite{han_new_2024,bernot_chromosome-level_2022}).
 % included there.
 
 We calculated estimates of diversity present in the barnacle genome by genotyping 
-our \textit{B. glandula} reference individual. After filtering low-quality genotypes 
+our \bgla{} reference individual. After filtering low-quality genotypes 
 and masking regions with annotated repeats, we obtained genotypes for 314 million 
 sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58 
 scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314 
@@ -394,16 +397,16 @@ in just a single barnacle individual.
 We used the \texttt{phastCons} software (\cite{siepel_evolutionarily_2005}) on the 
 \texttt{cactus} whole-genome alignment (\cite{armstrong_progressive_2020}) between 
 six barnacle species to identify highly conserved sites in the Pacific acorn barnacle 
-genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly, 
+genome. Across the 16 putative chromosomes in the \bgla{} assembly, 
 \texttt{phastCons} identified 196,141 highly-conserved elements (HCEs), spanning 
 50.85 Mbp of sequence and 6.05\% of the sequence spanning the 16 assembled chromosomes.
-In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp, 
+In \bgla{}, the HCEs had a mean length of 259.25 bp (median: 42 bp, 
 standard deviation: 990.40 bp).
 \vspace{0.2cm}
 
 Following the identification of HCEs, we compared their sequence composition against 
 the genome-wide background (Figure~\ref{fig:phastcons}). For this, we first overlaid 
-the genomic coordinates of the HCEs against the \textit{B. glandula} annotation, 
+the genomic coordinates of the HCEs against the \bgla{} annotation, 
 obtaining the proportion of annotated features among HCE sites (Figure~\ref{fig:phastcons}A). 
 Among our target features, including an ``intergenic'' and ``multiple'' class for 
 the unannotated fraction of the genome and annotation overlaps (e.g., a site spanning 
@@ -426,7 +429,7 @@ these biologically-important sequences.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
-    \caption{Highly conserved elements in the \textit{Balanus glandula} assembly.} 
+    \caption{Highly conserved elements in the \balgla{} assembly.} 
         \textbf{A.} Proportion of annotated features between the whole genome 
         (left column) and \texttt{phastCons}-conserved elements (right column). Values 
         are shown only for elements with proportions larger than 0.01. Sites that span 
@@ -445,22 +448,20 @@ protein-coding genes}
 
 To look at the rate of molecular evolution in protein coding sequences, we calculated 
 at the pairwise rate of non-synonymous to synonymous substitutions 
-(d\textsubscript{N}/d\textsubscript{S}) between \textit{B. glandula} and its 
-congener, the wrinkled barnacle \textit{Balanus crenatus}. We identified and aligned 
-9,082 single-copy orthologs between both species. The mean pairwise 
-d\textsubscript{N}/d\textsubscript{S} was 0.206 (median: 0.158, standard deviation: 
+(\dnds) between \bgla{} and its congener, the wrinkled barnacle
+\textit{Balanus crenatus}. We identified and aligned 9,082 single-copy orthologs
+between both species. The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation:
 0.191; Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average and under 
 this specific metric, coding sequencing in these barnacle genomes are under purifying 
 selection when compared to outgroup sequences, reflecting the expected evolutionary 
 constraints over sequences of functional importance.
 \vspace{0.2cm}
 
-Of the 9 thousand genes assessed, 70 (0.77\%) displayed a 
-d\textsubscript{N}/d\textsubscript{S} $>$ 1, and are likely candidates under positive 
-selection. The predicted function of the majority ($>80\%$) of these genes is 
-unknown, as determined by the functional annotation generated by the \texttt{EnTap} 
-software (\cite{hart_span_2020}). This is expected, since homology is likely harder 
-to determine for fast-evolving sequences putatively under strong selection. 
+Of the 9 thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are likely
+candidates under positive selection. The predicted function of the majority ($>80\%$)
+of these genes is unknown, as determined by the functional annotation generated by the
+\texttt{EnTap} software (\cite{hart_span_2020}). This is expected, since homology is
+likely harder to determine for fast-evolving sequences putatively under strong selection.
 Regardless, we found several genes with known function in our candidates under 
 positive selection. Among then, we found a follistatin-A-like homolog, known to be 
 involved to myogenesis and muscle development in crustaceans 
@@ -471,19 +472,18 @@ homologs to tumor protein p53-inducible protein 11 (which is involved in cell cy
 regulation), chymotrypsin-like protease CTRL-1, and the protein quiver gene.
 \vspace{0.2cm}
 
-We expanded on our d\textsubscript{N}/d\textsubscript{S} measures of positive 
-selection in protein-coding sequences in the \textit{B. glandula} genome by 
-incorporating population-level polymorphism using the McDonald-Kreitman test 
-(\cite{mcdonald_adaptive_1991}). To achieve this, we incorporated genetic variants 
-observed in a \textit{B. glandula} population by taking genetic variants present 
-across the whole-genome of seven individuals (including our reference individual and 
-six additional samples, see below), and comparing those against the orthologous 
-coding sequences in the \textit{B. crenatus} outgroup.
+We expanded on our \dnds{} measures of positive selection in protein-coding sequences
+in the \bgla{} genome by incorporating population-level polymorphism using
+the McDonald-Kreitman test (\cite{mcdonald_adaptive_1991}). To achieve this, we
+incorporated genetic variants observed in a \bgla{} population by taking
+genetic variants present across the whole-genome of seven individuals (including our
+reference individual and six additional samples, see below), and comparing those against
+the orthologous coding sequences in the \textit{B. crenatus} outgroup.
 \vspace{0.2cm}
 
 After filtering alignments both by length ($<100$ bp) and by the presence of 
 premature stop codons and frameshift mutations, we calculated the McDonald-Kreitman 
-tests for 7,714 orthologs sequences between \textit{B. glandula} and \textit{B. 
+tests for 7,714 orthologs sequences between \bgla{} and \textit{B. 
 crenatus}. Four-hundred and seventeen (417, 5.41\%) of these orthologs showed a 
 significant deviation from the expected proportion of non-synonymous and synonymous 
 substitutions and polymorphisms, following \textit{p}-value correction 
@@ -492,10 +492,9 @@ substitutions and polymorphisms, following \textit{p}-value correction
 at each ortholog. We observe a mean NI value of 0.745 (median: 0.554; standard 
 deviation: 1.079) and a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; 
 Figure~\ref{fig:sup_dos}). Both of these statistics show that, on average and in contrast 
-with our measurements of d\textsubscript{N}/d\textsubscript{S}, protein coding 
-sequences in \textit{B. glandula} exhibit an excess of non-synonymous substitutions, 
-suggesting that they are evolving under positive directional selection when compared 
-to the outgroup sequence.
+with our measurements of \dnds{}, protein coding sequences in \bgla{} exhibit an excess
+of non-synonymous substitutions, suggesting that they are evolving under positive
+directional selection when compared to the outgroup sequence.
 \vspace{0.2cm}
 
 In addition to NI and DoS, we also calculated \textalpha{}, a measure of the proportion 
@@ -506,7 +505,7 @@ biases. First, we calculated the Tarone-Greenland \textalpha{} estimator
 averaging over a large number of genes (\cite{stoletzki_estimation_2011}). Across our 
 7,714 genes, we calculated an \textalpha{}\textsubscript{TG} of 0.530 ($95\%$ 
 Confidence Interval: 0.523--0.538), which indicates that 53\% of non-synonymous 
-substitutions in this \textit{B. glandula} population were fixed as a product of 
+substitutions in this \bgla{} population were fixed as a product of 
 positive selection. Secondly, we calculated the \textalpha{} product of the asymptotic 
 McDonald-Kreitman test (\textalpha{}\textsubscript{asym}), which corrects for the 
 presence of weakly deleterious non-synonymous polymorphism present at low frequency 
@@ -521,7 +520,7 @@ positive selection.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
-    \caption{Signatures of positive selection in \textit{Balanus glandula} 
+    \caption{Signatures of positive selection in \balgla{} 
     protein-coding genes.} 
         Selection on protein coding genes was calculated on 7,714 \textit{B. 
         glandula} genes using the McDonald-Kreitman test. X-axis denotes the 
@@ -551,7 +550,7 @@ We used the annotated transcript sequences of our Pacific acorn barnacle genome
 to calculate the effective number of codons (ENC), a measure of the extent of 
 departure of equal usage across synonymous codons (\cite{wright_effective_1990,
 sun_improved_2013}). We successfully calculated ENC across the coding sequences of 
-16,904 \textit{B. glandula} genes, finding an average (mean) number of 43.1 
+16,904 \bgla{} genes, finding an average (mean) number of 43.1 
 effective codons (median: 42.7, standard deviation: 5.56, Figure~\ref{fig:codon_enc}). 
 This ENC distribution highlights a substantial reduction in the usage of synonymous 
 codons, higher than that observed for \textit{Drosophila} (Figure~\ref{fig:sup_dmel_enc}),
@@ -562,7 +561,7 @@ barnacle population.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
-    \caption{Codon usage biases in \textit{Balanus glandula}.}
+    \caption{Codon usage biases in \balgla.}
         Distribution in the effective number of codons (ENC) across 16,904 \textit{B. 
         glandula} genes. Dashed light blue line shows the mean ENC (43.1), while the 
         dot-dashed dark blue line shows the median ENC (42.7).
@@ -571,7 +570,7 @@ barnacle population.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
-We sequenced the whole genomes of six \textit{B. glandula} individuals collected 
+We sequenced the whole genomes of six \bgla{} individuals collected 
 from Cape Perpetua, in the central Oregon coast. After a stringent filtering of sites 
 with low coverage, low quality, and/or missing genotypes, we retained a total of 
 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million 
@@ -585,7 +584,7 @@ coding variants included 360 thousand missense (non-synonymous) mutations,
 corresponding to an average (mean) of 18.93 non-synonymous variants per transcript 
 (median: 10, standard deviation: 28.50). Overall, these represent a substantial 
 proportion of coding variation segregating in this central Oregon population. Moreover, 
-this \textit{B. glandula} population displayed a mean genome-wide nucleotide 
+this \bgla{} population displayed a mean genome-wide nucleotide 
 diversity (\textpi{}) of 0.0506 (median: 0.0531, standard deviation: 0.0188; 
 Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). This degree of 
 diversity is an order of magnitude higher than that observed in diverse 
@@ -609,7 +608,7 @@ genotypes located within repetitive intervals in the reference (see Methods).
     \centering
     \includegraphics[width=1.0\textwidth]{figures/genome_pi.pdf}
     \caption{Nucleotide diversity (\textpi{}) and coding and repeat density along 
-    the \textit{Balanus glandula} genome.}
+    the \balgla{} genome.}
         \textbf{A.} Density of coding sequences (CDS) along the genome, defined as the 
         proportion of bases annotated as CDS within 10 kbp windows. Line reflects the 
         values kernel-smoothed along a 1 Mbp interval. Alternating colors show the values 
@@ -648,7 +647,7 @@ average.
 Zooming in further on coding sequences, we further explored the patterns of \textpi{} 
 at zero-fold and four-fold degenerate sites, effectively comparing diversity at 
 constrained versus neutral (or putatively neutral) sites. In this central Oregon 
-population of \textit{B. glandula}, the mean \textpi{} at zero-fold degenerate sites, 
+population of \bgla{}, the mean \textpi{} at zero-fold degenerate sites, 
  in which any mutation produces a non-synonymous substitution, was 0.0107 (median: 
 0.00292, standard deviation: 0.0178). This is the lowest \textpi{} among the studied 
 categories in the genome, not a surprising results given the expected higher functional 
@@ -662,19 +661,19 @@ and the highest in the genome.
     \centering
     \includegraphics[width=0.6\textwidth]{figures/feature_pi.pdf}
     \caption{Nucleotide diversity (\textpi{}) across genomic features in Oregon 
-    \textit{Balanus glandula}.}
+    \balgla{}.}
         The density histogram shows the distribution of windowed \textpi{} values 
-        across different genomic features annotated in the \textit{B. glandula} 
+        across different genomic features annotated in the \bgla{} 
         assembly. The vertical lines show the 50th quantile (median) of the 
         distribution, while the crosses show the mean value.
     \label{fig:feature_pi}
 \end{figure}
 
-\subsection*{\textit{B. glandula} exhibits large effective population sizes}
+\subsection*{\balgla{} exhibits large effective population sizes}
 
-We estimated the effective population size (N\textsubscript{e}) of this central 
-Oregon \textit{B. glandula} population using the whole-genome genotypes. First, we 
-calculated N\textsubscript{e} using the Watterson's estimator of genetic diversity 
+We estimated the effective population size (\Ne{}) of this central 
+Oregon \bgla{} population using the whole-genome genotypes. First, we 
+calculated \Ne{} using the Watterson's estimator of genetic diversity 
 ($\theta_W$), observing a genome-wide mean $\theta_W$ of 0.0617 (median: 0.0635, 
 standard deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Using the relationship 
 between the effective population size and the Watterson's estimator, 
@@ -684,13 +683,13 @@ rate per-base, per-generation ($\mu$) of $3\times10^{-9}$ (as estimated by
 \cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides}).
 \vspace{0.2cm}
 
-Additionally, we did a coalescent-based estimation of N\textsubscript{e} through 
+Additionally, we did a coalescent-based estimation of \Ne{} through 
 time using \texttt{MSMC2} (\cite{dutheil_msmc_2020}). This estimate also placed the 
 historical (between $10^{6}$ and $10^{7}$ generations ago) effective size of the 
 population in the magnitude of $10^{6}$ effective individuals 
 (Figure~\ref{fig:sup_mcmc_ne}); however, with our small sampling and estimating using 
 only pairs of haplotypes per-individual, we were unable to obtain accurate 
-N\textsubscript{e} estimates at more recent ($<10^{5}$ generations) estimates.
+\Ne{} estimates at more recent ($<10^{5}$ generations) estimates.
 
 \section*{Discussion}
 
@@ -772,7 +771,7 @@ of natural selection.
 \vspace{0.2cm}
 
 In contrast, the distribution of transposable and repeat elements in the 
-\textit{B. glandula} assembly was unexpected, as we find a highly repetitive genome 
+\bgla{} assembly was unexpected, as we find a highly repetitive genome 
 composed of over 60\% repeat sequences (Table~\ref{fig:genome_pi}; 
 Table~\ref{tab:sup_earlgrey_summary}). Previous work has shown that purifying 
 selection plays a key role in the accumulation and fixation of transposable elements 
@@ -862,13 +861,13 @@ study this disparity and the biological processes that maintain it.
 \section*{Conclusion}
 
 In this work, we describe the first high-quality, chromosome-level genome assembly 
-for the Pacific acorn barnacle, \textit{Balanus glandula}. Using this new assembly, 
+for the Pacific acorn barnacle, \balgla{}. Using this new assembly, 
 we first identify conserved synteny among barnacle genomes despite 165 Mya of 
 divergence. Functional elements are highly conserved in the genome of the 
 species; however, patterns of molecular evolution highlight the role of 
 positive selection as a key driver in the divergence of coding sequences between 
 closely related barnacle species. At a population level, Oregon populations of 
-\textit{B. glandula} appear to be hyperpolymorphic, showing levels of genetic 
+\bgla{} appear to be hyperpolymorphic, showing levels of genetic 
 diversity of over 5\% along the genome. Yet, we find preliminary evidence of 
 background selection over protein-coding and non-coding genes, reiterating the 
 functional constraint genes. Overall, our work highlights the role of the 
@@ -881,17 +880,17 @@ and the mechanisms of evolution at biological extremes.
 
 \subsubsection*{High-molecular weight DNA and PacBio sequencing}
 
-For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{B. 
-glandula} individuals from the docks in the Oregon Institute of Marine Biology, 
-in Charleston, Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected 
-at low tide in February 2023. High-molecular weight (HMW) DNA was extracted from 
-the dissected testes using the PacBio Nanobind tissue kit (PacBio) and quality 
-checked using fluorometric quantification of concentration (Qubit; Invitrogen) 
-and fragment length distribution (Fragment Analyzer; Advanced Analytical). The 
-extracted DNA of a single individual was sequenced using on three SMRTcells of a 
-PacBio Sequel II machine at the University of Oregon's Genomics and Cell 
-Characterization Core Facility (GC3F). These three sequencing runs yielded a total 
-of 5.93 million reads with a read N50 of 12.4 kbp.
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \balgla
+individuals from the docks in the Oregon Institute of Marine Biology, in Charleston,
+Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected at low tide in
+February 2023. High-molecular weight (HMW) DNA was extracted from the dissected
+testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using
+fluorometric quantification of concentration (Qubit; Invitrogen) and fragment
+length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA
+of a single individual was sequenced using on three SMRTcells of a PacBio Sequel
+II machine at the University of Oregon's Genomics and Cell Characterization Core
+Facility (GC3F). These three sequencing runs yielded a total of 5.93 million
+reads with a read N50 of 12.4 kbp.
 % Some of this happened before me, so we might need some more details on the 
 % library and sequencing, e.g., library prep? specific machine?
 
@@ -907,7 +906,7 @@ Illumina NovaSeq6000 S4 lane at the University of Oregon's GC3F, yielding
 \subsubsection*{ONT ultra-long read sequencing}
 
 % TODO: library info?
-The HMW DNA from a \textit{B. glandula} individual collected from Cape Perpetua, 
+The HMW DNA from a \bgla{} individual collected from Cape Perpetua, 
 Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit. 
 This HMW DNA was then processed using an Ultra-Long DNA Sequencing Kit and sequenced 
 using an Oxford Nanopore (ONT) GridION at the University of Oregon's GC3F. This 
@@ -916,7 +915,7 @@ library yielded 387 thousand ONT reads with a read N50 of 42.7 kbp.
 \subsubsection*{RNA sequencing}
 
 % TODO: extraction protocol? library info for these?
-RNA was extracted from a \textit{B. glandula} individual collected from Cape 
+RNA was extracted from a \bgla{} individual collected from Cape 
 Perpetua, Oregon, USA in August 2023. For RNAseq, RNA was extracted from the 
 testes and cirri, and sequenced, pooled along other samples, on two Illumina 
 NovaSeq6000 S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F, 
@@ -930,7 +929,7 @@ the two libraries combined resulted in 3.3 million reads, with a read N50 of
 
 \subsubsection*{Whole-genome shotgun sequencing}
 
-Genomic DNA was extracted from eight \textit{B. glandula} individuals collected 
+Genomic DNA was extracted from eight \bgla{} individuals collected 
 from Cape Perpetua, Oregon, USA in August 2023 using the QIAGEN Genomic-Tips 
 20/G kit. The extracted DNA was processed using the Illumina TrueSeq library 
 kit and sequenced, pooled along with other samples, on two Illumina NovaSeq6000 
@@ -943,7 +942,7 @@ were sequenced at an estimated depth of 45x.
 
 \subsubsection*{Genome size and heterozygosity estimation}
 
-We estimated the genome size and heterozygosity of the \textit{B. glandula} 
+We estimated the genome size and heterozygosity of the \bgla{} 
 genome using k-mers. First, we used the \texttt{count} command of the 
 \texttt{jellyfish} software version \texttt{2.2.10} (\cite{marcais_fast_2011}) 
 to count the unique k-mers present in the PacBio HiFi reads. We counted k-mers 
@@ -956,7 +955,7 @@ based on the empirical counts.
 
 \subsubsection*{Base contig-level genome assembly}
 
-A base, contig-level genome assembly for \textit{B. glandula} was generated from 
+A base, contig-level genome assembly for \bgla{} was generated from 
 the PacBio HiFi reads using \texttt{hifiasm} version \texttt{0.19.6-r595} 
 (\cite{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022}) with default 
 parameters. This base assembly was assesed for contiguity using \texttt{quast} 
@@ -968,12 +967,12 @@ manni_busco_2021,tegenfeldt_orthodb_2025}).
 \subsubsection*{Assembly decontamination}
 
 Following the generation of a base, contig-level genome assembly, we detected 
-endogenous contamination (i.e., sequences not belonging to \textit{B. glandula}) 
+endogenous contamination (i.e., sequences not belonging to \bgla{}) 
 in both reads and assembled contigs using the \texttt{blobtoolkit} software version 
 \texttt{4.3.0} (\cite{challis_blobtoolkit_2020}). To achieve this, we first created 
 a new \texttt{blobtools} database, using the \texttt{create} command, specifying the 
 contig-level assembly as our reference sequence (\texttt{--fasta}), the NCBI 
-taxonomical identifier for \textit{B. glandula} (\texttt{--taxid 110520}), and 
+taxonomical identifier for \bgla{} (\texttt{--taxid 110520}), and 
 the NCBI reference taxonomy files (\texttt{--taxdump}, downloaded on 2023/12/13).
 \vspace{0.2cm}
 
@@ -1107,7 +1106,7 @@ mapping the PacBio HiFi reads against the assembly. The assembly was then correc
 
 \subsubsection*{Repeat annotation}
 
-We identified and classified repetitive elements in the \textit{B. glandula} genome 
+We identified and classified repetitive elements in the \bgla{} genome 
 using the \texttt{EarlGrey} software version \texttt{4.1.0} (\cite{baril_earl_2024}). 
 Before running \texttt{EarlGrey}, we first downloaded the \texttt{Dfam 3.8} database 
 (\cite{storer_dfam_2021}), extracting the annotated arthropod repeat sequences to generate 
@@ -1131,7 +1130,7 @@ Illumina reads using \texttt{fastp} version \texttt{0.23.4} (\cite{chen_fastp_20
 chen_ultrafast_2023}), setting the minimum length of reads post-filtering to 25 bp 
 (\texttt{--length\_required 25}) and enabling the detection of adapter sequences in the 
 paired reads (\texttt{--detect\_adapter\_for\_pe}). We then aligned the processed RNAseq 
-reads to the \textit{B. glandula} assembly using \texttt{HISAT2} version \texttt{2.2.1} 
+reads to the \bgla{} assembly using \texttt{HISAT2} version \texttt{2.2.1} 
 (\cite{kim_graph-based_2019}), exporting alignments tailored for \textit{de novo} 
 transcriptome assemblers (\texttt{--dta}). The alignments were further processed and 
 sorted using \texttt{samtools}.
@@ -1228,7 +1227,7 @@ TODO:
 % Stats for the different stages of the assembly
 \begin{table}[htbp]
     \centering
-    \suptablecaption{Assembly statistics for the \textit{Balanus glandula} genome 
+    \suptablecaption{Assembly statistics for the \balgla{} genome 
         at different stages of the assembly process. \texttt{BUSCO} results refer 
         to the \texttt{arthropoda\_odb10} dataset.}
     \begin{tabular}{lrrrr}
@@ -1255,7 +1254,7 @@ TODO:
 \begin{table}[htbp]
     \centering
     \suptablecaption{\texttt{EarlGrey} high-level annotation of the 
-        \textit{B. glandula} assembly}
+        \bgla{} assembly}
     \begin{tabular}{lrrrr}
         \toprule
         Classification & N Sites bp & Count & Proportion & N Distinct 
@@ -1278,7 +1277,7 @@ TODO:
 % Stats about polymorphism in the reference individual and the popgen samples.
 \begin{table}[htbp]
     \centering
-    \suptablecaption{Genetic variation in central Oregon \textit{B. glandula}.}
+    \suptablecaption{Genetic variation in central Oregon \bgla{}.}
     \begin{tabular}{lrr}
         \toprule
         Metric & Reference Individual & Cape Perpetua N=6\\
@@ -1397,7 +1396,7 @@ elements in the genome, 50,849,898 bp.
     \includegraphics[width=0.8\textwidth]{figures/sups_kmers.png}
     \supfigurecaption{\texttt{GenomeScope} profile of the raw PacBio Hi-Fi 
         data.} Distribution of 21-mers shows an estimated genome size of 
-        845.01 Mbp and a heterozygosity of 3.3\% in the \textit{B. glandula} 
+        845.01 Mbp and a heterozygosity of 3.3\% in the \bgla{} 
         reference assembly.
     \label{fig:sup_kmers}
 \end{figure}
@@ -1406,7 +1405,7 @@ elements in the genome, 50,849,898 bp.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_hic.pdf}
-    \supfigurecaption{Hi-C contact map of the \textit{B. glandula} assembly.} 
+    \supfigurecaption{Hi-C contact map of the \bgla{} assembly.} 
         The contact map shows the assembly following manual curation in 
         \texttt{Juicebox}. The numbers (1-16) denote the 16 chromosome-level 
         scaffolds. The dashed lines show the boundary between these 16 
@@ -1424,7 +1423,7 @@ elements in the genome, 50,849,898 bp.
     \supfigurecaption{Distribution of the pairwise rate of non-synonymous 
         to synonymous substitutions (d\textsubscript{N}/d\textsubscript{S}).}
         The distribution is calculated across 9,082 single-copy orthologs 
-        identified between \textit{Balanus glandula} and \textit{Balanus 
+        identified between \balgla{} and \textit{Balanus 
         crenatus}. The solid gray line marks the boundary between genes under 
         positive selection (d\textsubscript{N}/d\textsubscript{S} $>$ 1) 
         and genes under purifying selection (d\textsubscript{N}/d\textsubscript{S} 
@@ -1439,7 +1438,7 @@ elements in the genome, 50,849,898 bp.
     \includegraphics[width=0.5\textwidth]{figures/sups_mkt_dos.pdf}
     \supfigurecaption{Distribution of per-gene direction of selection values.}
         The distribution shows Direction of Selection (DoS) calculated across 7,056 
-        single-copy orthologs identified between \textit{Balanus glandula} and 
+        single-copy orthologs identified between \balgla{} and 
         \textit{Balanus crenatus}. The solid back line at zero marks the boundary 
         between genes evolving under a regime of positive selection (DoS $>1$) and 
         genes exhibiting an excess of slightly deleterious non-synonymous polymorphism 
@@ -1454,7 +1453,7 @@ elements in the genome, 50,849,898 bp.
     \includegraphics[width=0.5\textwidth]{figures/sups_dmel_codons.pdf}
     \supfigurecaption{Comparing codon usage biases between barnacles and fruit flies.}
         The distribution of effective number of codons (ENC) between genes in the Pacific 
-        acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and the fruit fly 
+        acorn barnacle (\balgla{}; \texttt{BalGla}) and the fruit fly 
         (\textit{Drosophila melanogaster}; \texttt{DroMel}). Barnacles show a mean ENC 
         of 43.1 (median: 42.7, standard deviation: 5.56), while the mean ENC in flies is 
         50.1 (median: 50.6, standard deviation: 3.95).
@@ -1468,7 +1467,7 @@ elements in the genome, 50,849,898 bp.
     \supfigurecaption{Comparing nucleotide diversity (\textpi{}) between barnacles
     and fruit flies.} 
         Average \textpi{} in 10 kbp windows between the Oregon Pacific 
-        acorn barnacle (\textit{Balanus glandula}; \texttt{BalGla}) and Sub-Saharan 
+        acorn barnacle (\balgla{}; \texttt{BalGla}) and Sub-Saharan 
         populations of the fruit fly (\textit{Drosophila melanogaster}; \texttt{DroMel}). 
         This barnacle population shows an average nucleotide diversity (mean = 0.0506, 
         median = 0.0532, standard deviation = 0.0188) an order of magnitude higher than 
@@ -1484,9 +1483,9 @@ elements in the genome, 50,849,898 bp.
     \centering
     \includegraphics[width=0.8\textwidth]{figures/sups_feature_pi_hist.pdf}
     \supfigurecaption{Histogram of nucleotide diversity (\textpi{}) across 
-        different genomic features in Oregon \textit{Balanus glandula}.} The 
+        different genomic features in Oregon \balgla{}.} The 
         histogram shows the distribution of windowed \textpi{} values across 
-        different genomic features annotated in the \textit{B. glandula} assembly. 
+        different genomic features annotated in the \bgla{} assembly. 
         The dotted lines show the median \textpi{}, while the crosses show the 
         mean \textpi{}. Legend: gwide = genome-wide, degen0 = 0-fold degenerate 
         sites, degen4 = 4-fold degenerate sites.\label{fig:sup_pi_hist}
@@ -1497,7 +1496,7 @@ elements in the genome, 50,849,898 bp.
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
     \supfigurecaption{Pairplot of genomic features and genetic variation 
-        in Oregon \textit{Balanus glandula}.} Diagonal shows the density 
+        in Oregon \balgla{}.} Diagonal shows the density 
         histogram of the proportion of the genomics elements (e.g., CDS, 
         lncRNA, tRNA, repeats, and introns), proportion of variant sites, 
         proportion of callable sites post-filtering, and nucleotide diversity 
@@ -1513,8 +1512,8 @@ elements in the genome, 50,849,898 bp.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/sups_theta_ne.pdf}
-    \supfigurecaption{Effective population (N\textsubscript{e}) size 
-        estimation of \textit{Balanus glandula} based on the Watterson's 
+    \supfigurecaption{Effective population (\Ne) size 
+        estimation of \balgla{} based on the Watterson's 
         estimator ($\theta_W$).} Effective size of the population was 
         calculated according to the relationship $\theta_W=4N_{e}\mu$, 
         using a mutation rate per-base, per-generation ($\mu$) of 
@@ -1527,16 +1526,16 @@ elements in the genome, 50,849,898 bp.
     \centering
     \includegraphics[width=0.7\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{Coalescent estimation of the effective population 
-        (N\textsubscript{e}) size estimation of \textit{Balanus glandula}.}
-        Estimation of N\textsubscript{e} through time was using the 
-        \texttt{mscm2} software, using a mutation rate per-base, 
+    (\Ne) size estimation of \balgla{}.}
+        Estimation of \Ne{} through time was using the 
+        \texttt{MSMC2} software, using a mutation rate per-base, 
         per-generation ($\mu$) of $3\times10^{-9}$, and fixing the 
         generation time ($g$) to 1. Each line represents the 
-        N\textsubscript{e} for each sample, with \texttt{Bgland\_00} 
+        \Ne{} for each sample, with \texttt{Bgland\_00} 
         denoting the individual used to generate the reference assembly. 
         Using just these seven diploid samples, and estimating only between 
         pairs of unphased diploid genotypes within samples, we do not 
-        obtain enough resolution to resolve N\textsubscript{e} at recent 
+        obtain enough resolution to resolve \Ne{} at recent 
         ($<10^{5}$) time intervals.
     \label{fig:sup_mcmc_ne}
 \end{figure}
