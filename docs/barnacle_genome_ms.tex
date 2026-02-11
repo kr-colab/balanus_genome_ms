@@ -961,7 +961,7 @@ based on the empirical counts.
 A base, contig-level genome assembly for \textit{B. glandula} was generated from 
 the PacBio HiFi reads using \texttt{hifiasm} version \texttt{0.19.6-r595} 
 (\cite{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022}) with default 
-parameters. This base assembly was assesed for contiguity using \texttt{quast} 
+parameters. This base assembly was assessed for contiguity using \texttt{quast} 
 version \texttt{5.2.0} (\cite{gurevich_quast_2013}), and for gene-completeness with 
 \texttt{compleasm} version \texttt{0.12-r237} (\cite{huang_compleasm_2023}) using 
 the \texttt{arthropoda\_odb10} reference \texttt{BUSCO} dataset (\cite{simao_busco_2015,
@@ -995,7 +995,7 @@ aligned each contig against the database using \texttt{blastn} version
 \texttt{2.15.0+}, as implemented in \texttt{BLAST+} (\cite{camacho_blast_2009}), 
 specifying a minimum e-value cutoff (\texttt{-evalue}) of $1\times10^{-10}$, a 
 maximum of 25 target sequence exported in the output (\texttt{-max\_target\_seqs 25}), 
-and exporting in tabular format (\texttt{-outfmt 6}). These BLAST allginments 
+and exporting in tabular format (\texttt{-outfmt 6}). These BLAST alignments 
 were then added to the \texttt{blobtools} database using the \texttt{add} command, 
 specifying the rule for taxonomical assignment (\texttt{--taxrule bestsumorder}). 
 Using this approach, the \texttt{blobtools} database provides a single taxonomic 
@@ -1009,7 +1009,7 @@ assigned to a given taxon. We specified paths of our reference contigs
 (\texttt{--fastq}). For filtering, we specified the parameters to select the 
 reads aligned to contigs assigned to the class Thecostraca (\texttt{--Keys=
 Thecostraca}) using a given taxonomic assignment rule (\texttt{--param 
-bestsumorder\_class}). We then specified the (\texttt{--invert}) option to specify 
+bestsumorder\_class}). We then used the (\texttt{--invert}) option to specify
 that we wished to export the IDs of reads matching this assignment (i.e., keeping 
 only reads specific to the barnacle class Thecostraca).
 \vspace{0.2cm}
@@ -1017,7 +1017,7 @@ only reads specific to the barnacle class Thecostraca).
 Lastly, we used the IDs of the Thecostraca-assigned reads to filter our raw 
 PacBio HiFi FASTQ file using the \texttt{subseq} command from the \texttt{seqtk} 
 software version \texttt{1.4-r130} (\url{https://github.com/lh3/seqtk}). This 
-filtering in 5.74 million Thecostraca-specific PacBio HiFi reads, representing 
+filtering retained 5.74 million Thecostraca-specific PacBio HiFi reads, representing
 96.8\% of the total sequencing library. This taxonomic assignment and read 
 filtering was also performed on the ONT reads, retaining 371 thousand (95.8\%) 
 reads.
@@ -1031,7 +1031,7 @@ metrics (\cite{rayamajhi_evaluating_2022}), as determined by \texttt{quast} and
 \texttt{compleasm}, respectively. This optimized assembly was generated using 
 \texttt{hifiasm} version \texttt{0.19.8-r603}, including our Thecostraca-specific 
 PacBio HiFi reads as well as the ultra-long ONT (\texttt{--ul}) and Hi-C reads 
-(\texttt{--h1}, \texttt{--h2}). This assembly was done using using an estimated 
+(\texttt{--h1}, \texttt{--h2}). This assembly was done using an estimated 
 haploid genome size of 800 Mbp (\texttt{--hg-size 800m}), dropping k-mers observed 
 over ten times the average coverage (\texttt{-D 10.0}), and allowing scaffolding 
 (\texttt{--dual-scaf}). For identifying and correctly phasing haplotype sequences, 
@@ -1046,7 +1046,7 @@ Following the initial assembly of contigs, we purged haplotig sequences using th
 \texttt{purge\_dups} software version \texttt{1.2.5} (\cite{guan_identifying_2020}). 
 Following the \texttt{purge\_dups} documentation, we first mapped the PacBio HiFi 
 reads to this contig-level assembly using \texttt{minimap2 -x map-hifi}. We then 
-calculated the read-depth histogram using the \texttt{pbcstat} command, following 
+calculated the read-depth histogram using the \texttt{pbcstat} command, followed
 by determining the base-level coverage cutoffs using the command \texttt{calcuts}. 
 Subsequently, we split the assembly at gaps, if present, using the \texttt{split\_fa} 
 command, followed by a self-alignment using \texttt{minimap2 -x asm5}. The 
@@ -1063,7 +1063,7 @@ sequences (Table~\ref{tab:sup_asm_stats}).
 We scaffolded the purged contig-level assembly into chromosome-level scaffolds using 
 Hi-C data. First, we aligned the Hi-C short-read data to our assembly using 
 \texttt{bwa mem} version \texttt{0.7.17-r1188} (\cite{li_aligning_2013}), setting the 
-minimum alignment score to output to zero (\texttt{-T 0}), skipping make rescue 
+minimum alignment score to output to zero (\texttt{-T 0}), skipping mate rescue 
 (\texttt{-S}), mate pairing (\texttt{-P}), and setting the smallest query coordinate 
 as primary for split alignments (\texttt{-5}). Alignments were converted to BAM format 
 using \texttt{samtools} version \texttt{1.18}.
