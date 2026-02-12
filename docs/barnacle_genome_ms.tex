@@ -169,11 +169,6 @@ along the Pacific coast, particularly a steep genetic cline on the coast of
 California that separates northern and southern populations
 (\cite{sotka_strong_2004,wares_diversification_2005,wares_maintenance_2019,
 wares_diversity_2021}).
-% \bgla{} has also been
-% introduced outside its native range, and genetic work has assessed
-% invasive populations in Japan (\cite{yorisue_lack_2022,geller_sources_2008}),
-% Argentina (\cite{geller_sources_2008}), and South Africa
-% (\cite{simon-blecher_balanus_2008}).
 \vspace{0.2cm}
 
 These patterns are not unique to \bgla{}. Work in other barnacle
@@ -229,11 +224,6 @@ in large, hyperpolymorphic populations.
 \subsection*{Genome assembly}
 
 % General stats on assembly. Confirming the quality and status of the genome.
-% Note from lab meeting 2026/01/15:
-% This is a lot of reporting of the genome early in the results and I agree. 
-% We can definitely removed this out somewhere else. My idea was to describe 
-% that the assembly was not easy and the difficulty is based on the biology. 
-% Not a big point, so we can move it somewhere else.
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle 
 using PacBio HiFi long reads and Hi-C chromosome conformation capture. Preliminary
@@ -300,37 +290,33 @@ classified repeats, DNA and LINE elements were the two most abundant repeat
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 \vspace{0.2cm}
 
-Following repeat masking of the reference assembly, we annotated protein-coding 
-genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining 
-and curating annotations generated from the two data types (see \nameref{sec:methods_protein_coding}). This 
-process resulted in 20,234 protein-coding genes annotated in the genome. The 
-resulting annotation was 93.58\% (\texttt{S}:79.76\%; \texttt{D}:13.82\%; 
-\texttt{F}:1.78\%; \texttt{M}:4.64\%; \texttt{N}:1,013) and 84.77\% 
-(\texttt{S}:72.66\%; \texttt{D}:12.11\%; \texttt{F}:4.10\%; \texttt{M}:11.13\%; 
-\texttt{N}:1,536) gene-complete when compared against the \texttt{arthropoda\_odb10} 
-and \texttt{crustacea\_odb12} \texttt{BUSCO} datasets, respectively. Additionally, 
-we compared our annotation against the proteomes of four other barnacle species
-(see \nameref{sec:methods_orthologs}) using \texttt{OrthoFinder} (\cite{emms_orthofinder_2015,
-emms_orthofinder_2019}), resulting in the assignment of 16,978 (83.91\%) 
-\bgla{} genes to orthologous groups across barnacles and the 
+Following repeat masking of the reference assembly, we annotated protein-coding
+genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining
+and curating annotations generated from the two data types (see
+\nameref{sec:methods_protein_coding}). This process resulted in 20,234
+protein-coding genes annotated in the genome. The resulting annotation has a \texttt{BUSCO}
+completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10} and
+\texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
+Additionally, we compared our annotation against the proteomes of four other
+barnacle species (see \nameref{sec:methods_orthologs}) using \texttt{OrthoFinder}
+(\cite{emms_orthofinder_2015,emms_orthofinder_2019}), resulting in the assignment
+of 16,978 (83.91\%) \bgla{} genes to orthologous groups across barnacles and the 
 identification of 2,576 single-copy orthologs across all five species.
 \vspace{0.2cm}
 
 % Short paragraph, but unsure what to say here. Just wanted to mention that 
 % we annotated non-coding stuff too.
+%TODO -- add this methods section for non-coding annotation.
 
 In addition to protein-coding genes, we also annotated non-coding elements in the 
 \bgla{} reference assembly. We identified 7,532 long, non-coding RNAs 
 (lncRNA), 1,203 transfer RNAs (tRNA), and 24 ribosomal RNA (rRNA) genes. In total, 
 across protein-coding and non-coding transcripts, we were able to annotate 28,993 
-genes in the genome. %TODO -- add this methods section for non-coding annotation.
+genes in the genome.
 
 \subsection*{Conserved architecture across barnacle genomes}
 
 % Just touching on synteny. Things are fairly clean, so not much to say for now.
-% Note 2026/01/15: Instead of orthologous chromosomes, we have macro-synteny but 
-% not micro-synteny. This might be a better way of describing these relationships give 
-% that we do not know the ancestral karyotype for this types.
 
 To assess large-scale structural conservation across barnacle genomes, we performed 
 a synteny analysis using the software \texttt{Genespace}
@@ -424,6 +410,7 @@ the conservation of protein-coding genes among barnacle genomes. Similarly, tRNA
 four-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14, median: 2.04, standard 
 deviation: 0.96), likely reflecting the strong functional constraints on these sequences.
 
+% TODO:
 %ADK -- generally speaking, I think this is a good way to present the phastCons results.
 % but to make this more interesting we want to put this in context. How does this compare to 
 % other species? take a look here https://doi.org/10.1093/molbev/mst082
@@ -549,7 +536,8 @@ positive selection.
     \label{fig:mkTest}
 \end{figure}
 
-% Mention a few mkTest genes?
+% TODO: Mention a few mkTest genes?
+% TODO: Mention the candidate genes in Semibalanus, mpi, gpi, adh, etc.
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -1235,8 +1223,7 @@ TODO:
 \begin{table}[htbp]
     \centering
     \suptablecaption{Assembly statistics for the \balgla{} genome 
-        at different stages of the assembly process. \texttt{BUSCO} results refer 
-        to the \texttt{arthropoda\_odb10} dataset.}
+        at different stages of the assembly process.}
     \begin{tabular}{lrrrr}
         \toprule
         Assembly Stage & Default contigs & Optimized contigs & Hi-C scaffolds & 
@@ -1254,7 +1241,30 @@ TODO:
         \texttt{BUSCO} size (N) & 1,013 & 1,013 & 1,013 & 1,013 \\
         \bottomrule
     \end{tabular}
-\label{tab:sup_asm_stats}
+    \label{tab:sup_asm_stats}
+\vspace{2mm}
+\footnotesize
+\texttt{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.\\
+\end{table}
+
+% Gene-completeness in the annotation
+\begin{table}[htbp]
+    \centering
+    \suptablecaption{Completeness metrics for the \balgla{} protein-coding
+    gene annotation.}
+    \begin{tabular}{lrr}
+        \toprule
+        Metric & \texttt{arthropoda\_odb10} & \texttt{crustacea\_odb12} \\
+        \midrule
+        \texttt{BUSCO} Complete (\%) & 93.58 & 84.77 \\
+        \texttt{BUSCO} Single (\%) & 79.76 & 72.66 \\
+        \texttt{BUSCO} Duplicates (\%) & 13.82 & 12.11 \\
+        \texttt{BUSCO} Fragmented (\%) & 1.78 & 4.10 \\
+        \texttt{BUSCO} Missing (\%) & 4.64 & 11.13 \\
+        \texttt{BUSCO} size (N) & 1,013 & 1,536 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_annot_stats}
 \end{table}
 
 % Repeat annotation
