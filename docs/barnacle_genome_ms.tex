@@ -706,23 +706,25 @@ comparisons, we were unable to obtain accurate \Ne{} estimates at more recent
 
 \subsection*{Genome assembly in highly polymorphic species}
 
-% The idea here is to say that we have all these improvement in assembly and data 
-% analysis for genomes. These are all good, but not really applicable for these very 
-% diverse system. Just highlighting the gap in knowledge and the need for improvements 
+% The idea here is to say that we have all these improvement in assembly and data
+% analysis for genomes. These are all good, but not really applicable for these very
+% diverse system. Just highlighting the gap in knowledge and the need for improvements
 % in the field. Good hook for cyclothone and other projects.
 
-Improvements in the affordability, accessibility, and accuracy in sequencing 
-technologies has increased the generation of high quality reference genomes across 
-the tree of life. Over the last decade, we have seen the research outcomes of large 
-genome assembly consortiums, e.g., the Vertebrate Genome Project 
-(\cite{rhie_towards_2021}) and the Earth BioGenome Project 
-(\cite{blaxter_earth_2025}), tackling the production of high quality genomes across 
-diverse taxa. We have also seen the generation of complete genomes, sequencing 
-chromosomes at a telomore-to-telomere scale (\cite{nurk_complete_2022,
-yoo_complete_2025}), as well as the sequencing and assembly of some of the largest 
-and most repetitive genomes known in nature (\cite{campos-dominguez_genome_2025}). 
-Alongside these advances, there has also been access to cutting-edge best practice 
-protocols for the application of these analyses to new taxa in a reproducible fashion 
+Improvements in the affordability, accessibility, and accuracy in sequencing
+technologies have increased the generation of high quality reference genomes across
+the tree of life. Over the last decade, we have seen the research outcomes of large
+genome assembly consortiums, e.g., the Vertebrate Genome Project
+(\cite{rhie_towards_2021}) and the Earth BioGenome Project
+(\cite{blaxter_earth_2025}), tackling the production of high quality genomes across
+diverse taxa. We have also seen the generation of complete genomes, sequencing
+chromosomes at a telomere-to-telomere scale (\cite{nurk_complete_2022,
+yoo_complete_2025}), as well as the sequencing and assembly of some of the largest
+and most repetitive genomes known in nature (\cite{campos-dominguez_genome_2025}).
+Alongside these advances, there has also been access to cutting-edge best practice
+% ADK: This sentence is a bit convoluted. Consider: "best practice protocols have also
+% become available for applying these methods to new taxa in a reproducible fashion"
+protocols for the application of these analyses to new taxa in a reproducible fashion
 (\cite{lawniczak_best-practice_2025,li_genome_2024}).
 \vspace{0.2cm}
 
@@ -730,7 +732,7 @@ Despite these advances, there appears to be a gap in knowledge in the analysis o
 highly polymorphic organisms, such as barnacles. High heterozygosity presents 
 problems during the assembly process, e.g., hindering the differentiation between 
 paralogs and haplotypes, which often results in the inflation of the genome size and 
-a high proportion of duplicates sequences (\cite{guiglielmoni_phasing_2024,
+a high proportion of duplicated sequences (\cite{guiglielmoni_phasing_2024,
 asalone_regional_2020,roach_purge_2018,mochizuki_practical_2023}). The most common 
 approach is to manage these haplotypes \textit{a posteriori}, purging them after 
 initial assembly (\cite{guan_identifying_2020,roach_purge_2018}); however, while this 
@@ -739,7 +741,7 @@ it is not without its drawbacks. First, purging haplotypes could lead to a reduc
 in the gene completeness in the main assembly, as primary haplotypes might be 
 incorrectly labelled as haplotigs, leading to their removal. Secondly, the ability 
 to identify and remove haplotypes is dependent on the properties of the assembly. 
-Sequences that are too fragmented and/or two divergent from one another are likely 
+Sequences that are too fragmented and/or too divergent from one another are likely 
 harder to purge due to difficulties in mapping. Moreover, when performing phased 
 diploid assemblies, the excessive presence of haplotypes will interfere with 
 phasing, leading to a main haploid assembly that is a mosaic between the two 
@@ -752,8 +754,10 @@ exploration of how elevated heterozygosity affects \textit{de novo} assembly
 parameters. While some improvements have been made in recent years, e.g., in 
 \texttt{hifiasm} with the direct purging of haplotigs during assembly and the 
 integration of Hi-C data to phase haplotypes without the need of parental genomes 
-(\cite{cheng_haplotype-resolved_2022}), further work is likely needed before we can 
+(\cite{cheng_haplotype-resolved_2022}), further work is likely needed before we can
 obtain haplotype-resolved genome assemblies for hyperpolymorphic organisms.
+% ADK: This closing paragraph is brief. The only concrete tool improvement mentioned
+% is hifiasm's Hi-C integration. Are there other approaches worth noting here?
 
 \subsection*{Genome evolution in large populations}
 
@@ -762,26 +766,30 @@ obtain haplotype-resolved genome assemblies for hyperpolymorphic organisms.
 % We see the heterozygosity, signatures of molecular evolution, codon bisaes, etc.
 % However, TEs do look weird.
 
-Evolutionary processes at large demographic scales are expected to leave distinct 
-signatures in the genome, several of which are observed in our Pacific acorn 
-barnacle assembly. For example, we observe high heterozygosity on our reference 
-individual (Figure~\ref{fig:sup_kmers}; Table~\ref{tab:sup_popgen_stats}), in 
-accordance with the expectation of high polymorphism in large populations. We see 
-enrichment in the sequence conservation of putatively functional sites 
-(Figure~\ref{fig:phastcons}), the likely result of strong purifying selection over 
-evolutionarily constrained sequences. In concert, we also find evidence for the high 
-efficacy of positive selection in large populations in the form of the fixation 
-of a large fraction of non-synonymous substitutions (Figure~\ref{fig:mkTest}). 
-We even observe substantial codon usage biases, finding preliminary evidence for 
-differential selection among different synonymous codons (Figure~\ref{fig:codon_enc}). 
-Overall, these finding agree with our theoretical expectation of evolution in large 
-populations, showing both a high degree of polymorphism and the increased efficacy 
+% ADK: This paragraph reads as a results recap ("We observe X... We see Y... We
+% also find Z... We even observe W."). For a Discussion, consider adding more
+% interpretation -- not just *that* you see these signatures, but what they tell us
+% collectively about the selective regime in these populations.
+Evolutionary processes at large demographic scales are expected to leave distinct
+signatures in the genome, several of which are observed in our Pacific acorn
+barnacle assembly. For example, we observe high heterozygosity on our reference
+individual (Figure~\ref{fig:sup_kmers}; Table~\ref{tab:sup_popgen_stats}), in
+accordance with the expectation of high polymorphism in large populations. We see
+enrichment in the sequence conservation of putatively functional sites
+(Figure~\ref{fig:phastcons}), the likely result of strong purifying selection over
+evolutionarily constrained sequences. In concert, we also find evidence for the high
+efficacy of positive selection in large populations in the form of the fixation
+of a large fraction of non-synonymous substitutions (Figure~\ref{fig:mkTest}).
+We also observe substantial codon usage biases, finding preliminary evidence for
+differential selection among different synonymous codons (Figure~\ref{fig:codon_enc}).
+Overall, these findings agree with our theoretical expectation of evolution in large
+populations, showing both a high degree of polymorphism and the increased efficacy
 of natural selection.
 \vspace{0.2cm}
 
 In contrast, the distribution of transposable and repeat elements in the 
 \bgla{} assembly was unexpected, as we find a highly repetitive genome 
-composed of over 60\% repeat sequences (Table~\ref{fig:genome_pi}; 
+composed of over 60\% repeat sequences (Figure~\ref{fig:genome_pi}; 
 Table~\ref{tab:sup_earlgrey_summary}). Previous work has shown that purifying 
 selection plays a key role in the accumulation and fixation of transposable elements 
 (\cite{merel_relaxed_2025,langmuller_genomic_2023,bourque_ten_2018}), following the 
@@ -790,6 +798,8 @@ the increased efficacy of selection expected in these large barnacle populations
 our expectation was to find a genome with a relatively small proportion of transposable
 elements. However, the high repeat content observed in the genome does not necessarily 
 reflect the low efficacy of selection in these populations. Some of these repeats 
+% ADK: "beneficial genetic polymorphisms" --- would be to add a citation or two. Even
+% as speculation, consider a brief justification or example.
 might be beneficial genetic polymorphisms. Others could be low-frequency, slightly 
 deleterious variants not yet purged from the population. Disentangling the
 population-wide repeat landscape and its fitness effects is likely impossible with 
@@ -800,10 +810,18 @@ and other large populations.
 
 \subsection*{The magnitude of genetic diversity in barnacle populations}
 
-% Point here is reiterating the level of diversity we observe and how it compares 
-% to other systems. I mention Drosophila, but do we need something else? There's 
-% humans too (because of large cohorts, e.g., Bergstrom2020), but that nowhere near 
+% Point here is reiterating the level of diversity we observe and how it compares
+% to other systems. I mention Drosophila, but do we need something else? There's
+% humans too (because of large cohorts, e.g., Bergstrom2020), but that nowhere near
 % the same ballpark in terms of diversity. Anything else to add here? Feels short.
+
+% ADK: Agreed this section feels short for what is arguably the central result of
+% the paper. Two suggestions: (1) Broaden the comparison beyond Drosophila -- marine
+% invertebrates (oysters, sea urchins, tunicates) would provide natural context. Are
+% barnacles exceptional even among marine invertebrates? (2) Add a sentence or two on
+% potential drivers of this diversity -- larval dispersal, census size, mutation rate?
+% Also consider merging this subsection into "Barnacles as models..." since they
+% overlap considerably.
 
 Our work here shows that a Pacific acorn barnacle population from the central Oregon 
 coast exhibits genetic diversity of over 5\% (mean genome-wide \textpi{} of 0.0506). 
@@ -813,9 +831,9 @@ genome-wide nucleotide diversity we observe here in barnacles is an order of mag
 higher than that observed for \textit{Drosophila} (Figure~\ref{fig:sup_dmel_pi}), both 
 at a local scale and diversity observed in large-scale surveys 
 (\cite{nunez_footprints_2025,li_comparative_2025,pool_population_2012}). Even the 
-diversity observed at zero-fold degenerate sites, our least diverse in the genome 
+diversity observed at zero-fold degenerate sites, the least diverse sites in the genome 
 as the likely product of functional constraint, is still an order of magnitude 
-higher than the diverse observed in these diverse \textit{Drosophila} populations.
+higher than the diversity observed in these \textit{Drosophila} populations.
 
 \subsection*{Barnacles as models for evolution at biological extremes}
 
@@ -824,18 +842,18 @@ higher than the diverse observed in these diverse \textit{Drosophila} population
 % We are past that here.
 
 The magnitude of diversity observed in barnacles solidly places them among 
-hyperpolymorphic populations, those who exhibit diversity above 5\% 
-(\cite{cutter_molecular_2013}). This adds barnacles to growing list of emerging 
-hyperpolymorphic models systems, which are key to studying the limits of biological 
-variation and molecular evolution in natural populations. Moreover, our finding of 
-diversity also has important implications for the study of species boundaries. For 
-example, recent work by \cite{hart_genomic_2025} denotes how levels of above 1\% 
-neutral diversity in Eukaryotes likely serve as biological limits for the definition 
-of species. Barnacles and other hyperpolymorphic populations puts these putative 
-cutoffs into question. We observe levels of genome-wide diversity of over 5\% in 
-just a very small portion of the biological range of the Pacific acorn barnacle. 
-Nucleotide diversity is even higher ($\approx8\%$) at four-fold degenerate, and 
-putatively neutral sites (Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}).
+hyperpolymorphic populations, that exhibit diversity above 5\% 
+(\cite{cutter_molecular_2013}). This adds barnacles to a growing list of emerging 
+hyperpolymorphic model systems, which are key to studying the limits of biological 
+variation and molecular evolution in natural populations. Moreover, our observations
+of extreme genetic diversity also have important implications for the study of species
+boundaries. For example, recent work by \cite{hart_genomic_2025} suggests that levels
+of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the
+definition of species. Barnacles and other hyperpolymorphic populations put these
+putative cutoffs into question. We observe levels of genome-wide diversity of over 5\%
+in just a very small portion of the biological range of the Pacific acorn barnacle.
+Nucleotide diversity is even higher ($\approx8\%$) at four-fold degenerate (putatively
+neutral) sites (Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}).
 Given the species' broader geographical and ecological distribution, genetic 
 diversity is likely to increase when looking across the whole range. This 
 observation reiterates the importance of future studies of genetic diversity 
@@ -844,9 +862,10 @@ the mechanisms that maintain population and species boundaries in the presence
 of extreme genetic diversity.
 \vspace{0.2cm}
 
-Moreover, barnacles appear to be an emerging model for the study of the dynamics 
-between effective and census population sizes. From our results on diversity, we 
-observe that this barnacle population has an effective size approximately $10^{6}$. 
+Beyond species boundaries, the extreme diversity observed in barnacles also speaks to
+a long-standing question in population genetics: the relationship between effective
+and census population sizes. From our results on diversity, we
+observe that this barnacle population has an effective size of approximately $10^{6}$. 
 However, these populations also show densities of $10^{4}$ individuals per square meter 
 (\cite{menge_recruitment_2000}). Based on this estimate, the census size of the Pacific 
 acorn barnacle population in central Oregon should be, conservatively, in the billions of 
@@ -859,17 +878,30 @@ Our work on the Pacific acorn barnacle provides a unique opportunity to empirica
 study this disparity and the biological processes that maintain it.
 
 % Notes from lab meeting 2026/01/15:
-% Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match? 
-% We see small dN/dS and large MKT, so at first glance this is counterintuive. 
+% Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match?
+% We see small dN/dS and large MKT, so at first glance this is counterintuive.
 % But is it?
 
-% Also, we can also discuss the issues with our current metrics, e.g., recurrent 
+% Also, we can also discuss the issues with our current metrics, e.g., recurrent
 % mutation and effects in theta, psmc, etc.
 % How much we should discuss here?
 
+% ADK: Strongly recommend adding a subsection here on molecular evolution addressing
+% the dN/dS vs. MKT tension flagged above. This is one of the more intellectually
+% interesting results and the Discussion currently only gives it a passing mention in
+% "Genome evolution in large populations." Similarly, at ~5% diversity, infinite-sites
+% assumptions may break down -- the implications for theta, PSMC, and standard popgen
+% tools are worth discussing. These two topics (dN/dS-MKT tension + recurrent mutation)
+% could form a compelling subsection on the methodological challenges of studying
+% hyperpolymorphic genomes.
+
 \section*{Conclusion}
 
-In this work, we describe the first high-quality, chromosome-level genome assembly 
+% ADK: The conclusion reads as a list of results rather than a synthesis. Consider
+% mentioning the TE paradox and/or the Ne/Nc disparity, which got significant Discussion
+% space. Also, "reiterating the functional constraints on genes" is still vague --
+% constraints on genes in what sense?
+In this work, we describe the first high-quality, chromosome-level genome assembly
 for the Pacific acorn barnacle, \balgla{}. Using this new assembly, 
 we first identify conserved synteny among barnacle genomes despite 165 Mya of 
 divergence. Functional elements are highly conserved in the genome of the 
@@ -879,7 +911,7 @@ closely related barnacle species. At a population level, Oregon populations of
 \bgla{} appear to be hyperpolymorphic, showing levels of genetic 
 diversity of over 5\% along the genome. Yet, we find preliminary evidence of 
 background selection over protein-coding and non-coding genes, reiterating the 
-functional constraint genes. Overall, our work highlights the role of the 
+functional constraints on genes. Overall, our work highlights the role of the 
 Pacific acorn barnacle as an emerging model for the study of genetic variation 
 and the mechanisms of evolution at biological extremes.
 
