@@ -1,9 +1,14 @@
-.Rhistory
+# OS files
 .DS_Store
-.gitignore
-docs/.vscode/ltex.hiddenFalsePositives.en-US.txt
-docs/barnacle_genome_ms.synctex.gz
-docs/.vscode/ltex.dictionary.en-US.txt
+.Rhistory
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+*~
+*.swp
+*.bak
+
 
 # LaTeX build artifacts
 *.log
@@ -13,6 +18,8 @@ docs/.vscode/ltex.dictionary.en-US.txt
 *.out
 *.synctex.gz
 *.synctex(busy)
+*.dvi
+*.xdv
 
 # LaTeX temporary files
 *.bbl
@@ -37,3 +44,6 @@ docs/.vscode/ltex.dictionary.en-US.txt
 
 # lineno
 *.lno
+
+# PDF output
+docs/*.pdf
