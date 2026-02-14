@@ -542,6 +542,7 @@ positive selection.
 \subsection*{Molecular evolution in classic allozyme genes}
 
 Check for selection in the classic genes from \cite{flowerdew_electrophoretic_1983}.
+See Table~\ref{tab:sup_allozymes}.
 
 \begin{itemize}
     \item mannose-6-phosphate isomerase (\textit{Mpi})
@@ -552,6 +553,8 @@ Check for selection in the classic genes from \cite{flowerdew_electrophoretic_19
     \item phosphoglucomutase (\textit{Pgm})
 \end{itemize}
 
+% All under purifying from dN/dS. Gpi seems to have good results from MKtest.
+% Check the two genes "missing" from MKtest.
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -721,11 +724,8 @@ diverse taxa. We have also seen the generation of complete genomes, sequencing
 chromosomes at a telomere-to-telomere scale (\cite{nurk_complete_2022,
 yoo_complete_2025}), as well as the sequencing and assembly of some of the largest
 and most repetitive genomes known in nature (\cite{campos-dominguez_genome_2025}).
-Alongside these advances, there has also been access to cutting-edge best practice
-% ADK: This sentence is a bit convoluted. Consider: "best practice protocols have also
-% become available for applying these methods to new taxa in a reproducible fashion"
-protocols for the application of these analyses to new taxa in a reproducible fashion
-(\cite{lawniczak_best-practice_2025,li_genome_2024}).
+Best practice proptocols have also become available to applying these methods to new
+taxa in a reproducible fashion (\cite{lawniczak_best-practice_2025,li_genome_2024}).
 \vspace{0.2cm}
 
 Despite these advances, there appears to be a gap in knowledge in the analysis of 
@@ -1365,7 +1365,6 @@ TODO:
 \label{tab:sup_popgen_stats}
 \end{table}
 
-
 % Stats about the phasCons conserved elements and enrichment of genomic elements.
 \begin{sidewaystable}[htbp]
     \centering
@@ -1407,6 +1406,38 @@ TODO:
 bp, corresponding to the span of the 16 chromosome-level scaffolds.\\
 \textsuperscript{2}Proportion calculated based on the sum of the span of all HCE 
 elements in the genome, 50,849,898 bp.
+\end{sidewaystable}
+
+% Reference for the allozyme genes in our assembly.
+% TODO: look for the missing genes, Gpi and Me.1. Double check why they are missing
+% from the mkado analysis. Most likely, alignment filtering.
+\begin{sidewaystable}[htbp]
+    \centering
+    \suptablecaption{Allozyme genes identified in the \balgla{} genome assembly.}
+    \begin{tabular}{llp{3.5cm}lrrrrr}
+        \toprule
+        Transcript ID & Gene Symbol & Gene Name & \shortstack{NCBI Reference \\ Accession} 
+            & \dnds{} & \shortstack{MK-Test \\ adjusted \\ \textit{p}-value} & 
+            \shortstack{MK-Test \\ \textalpha{}} & 
+            \shortstack{MK-Test \\ NI} & \shortstack{MK-Test \\ DoS} \\
+        \midrule
+        mrna-5994 & \textit{Mpi} & mannose-6-phosphate isomerase & QIA50417.1 & 
+            0.149 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+        mrna-15301 & \textit{Gpi} & glucose phosphate isomerase & QIA50414.1 & 
+            0.121 & 0.036 & 0.649 & 0.351 & 0.127 \\
+        mrna-5520 & \textit{Adh} & alcohol dehydrogenase & QIA50413.1 & 
+            0.063 & 0.343 & 0.516 & 0.484 & 0.149 \\
+        mrna-5969 & \textit{Pgm} & phosphoglucomutase & QIA50416.1 & 
+            0.091 & 0.911 & 0.384 & 0.616 & 0.068 \\
+        mrna-17464 & \textit{Sod} & superoxide dismutase & QIA50415.1 & 
+            0.165 & 1.000 & \texttt{NaN} & \texttt{NaN} & -0.318 \\
+        mrna-1965 & \textit{Me.1} & NADP-dependent malic enzyme & KAF0299259.1 & 
+            0.087 & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} \\
+        mrna-3861 & \textit{Me.2} & NADP-dependent malic enzyme & KAF0308712.1 & 
+            0.096 & 0.883 & -0.105 & 1.105 & -0.025 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_allozymes}
 \end{sidewaystable}
 
 % Breakdown of the per-feature Pi
