@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[utf8]{inputenc}
 \usepackage[letterpaper,margin=1.0in]{geometry}
@@ -147,7 +147,7 @@ In contrast to the well-studied dynamics of small populations, empirical tests o
 these mechanisms have been, with a few key exceptions (\cite{dey_molecular_2013,
 teterina_pervasive_2025}), mostly limited to eukaryotic species with
 small-to-moderate historical population sizes (\cite{cutter_molecular_2013,
-leffler_revisiting_2012, buffalo2021quantifying}). This gap highlights the need for
+leffler_revisiting_2012,buffalo_quantifying_2021}). This gap highlights the need for
 empirical studies in systems with historically large population sizes and elevated
 levels of genetic polymorphism.
 \vspace{0.2cm}
@@ -369,9 +369,9 @@ variation represents a mean density of 14.66 heterozygous sites per kbp (median:
 per kbp; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant 
 sites within protein-coding sequences, including 144 thousand 
 non-synonymous point mutations, as categorized by the \texttt{snpEff} software 
-(\cite{cingolani_program_2012}). In this reference individual, transcripts had a mean of 7.74 (median: 3, standard deviation: 14.97)
-non-synonymous variants, indicating considerable coding variation segregating
-within a single individual.
+(\cite{cingolani_program_2012}). In this reference individual, transcripts had a mean 
+of 7.74 (median: 3, standard deviation: 14.97) non-synonymous variants, indicating 
+considerable coding variation segregating within a single individual.
 
 \subsection*{Functional elements are conserved in barnacle genomes}
 
@@ -639,19 +639,19 @@ genotypes located within repetitive intervals in the reference (see \nameref{sec
     \label{fig:genome_pi}
 \end{figure}
 
-Looking at diversity across the genome, we observed an overall reduction in \textpi{} 
-at putatively functional sites. For example, the mean \textpi{} in sequences spanning 
-annotated CDSs is 0.0302 (median: 0.0270, standard deviation: 0.0221; 
+Looking at diversity across the genome, we observed an overall reduction in \textpi{}
+at putatively functional sites. For example, the mean \textpi{} in sequences spanning
+annotated CDSs is 0.0302 (median: 0.0270, standard deviation: 0.0221;
 Figure~\ref{fig:feature_pi}; Figure~\ref{fig:sup_pi_hist}; Table~\ref{tab:sup_feature_pi}),
-which represents a $\approx$ 1.6x reduction in diversity when compared to the 
-genome-wide average. A reduction in diversity of similar magnitude is also observed 
-in the sequences of lncRNAs (1.4x) and 5' UTRs (1.3x). The largest reduction in 
-diversity when compared to the genome-wide background was observed in tRNAs, with 
-\textpi{} $\approx$ 4.3x lower than the genomic background and consistent with the strong functional constraint evidenced by their enrichment
-in highly conserved elements. In contrast to most other elements of the genome, introns 
-display a relative increase in diversity, with a mean \textpi{} of 0.0646 (median: 
-0.0650, standard deviation: 0.0299), approximately 1.3x higher than the genome-wide 
-average.
+which represents a $\approx$ 1.6x reduction in diversity when compared to the
+genome-wide average. A reduction in diversity of similar magnitude is also observed
+in the sequences of lncRNAs (1.4x) and 5' UTRs (1.3x). The largest reduction in
+diversity when compared to the genome-wide background was observed in tRNAs, with
+\textpi{} $\approx$ 4.3x lower than the genomic background and consistent with the strong
+functional constraint evidenced by their enrichment in highly conserved elements. In
+contrast to most other elements of the genome, introns display a relative increase in
+diversity, with a mean \textpi{} of 0.0646 (median: 0.0650, standard deviation: 0.0299),
+approximately 1.3x higher than the genome-wide average.
 \vspace{0.2cm}
 
 % I feel like I want to say more here, but I should wait for the discussion.
@@ -671,8 +671,8 @@ and the highest in the genome.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/feature_pi.pdf}
-    \caption{Nucleotide diversity (\textpi{}) across genomic features in Oregon 
-    \balgla.}
+    \caption{Nucleotide diversity (\textpi{}) across genomic features in
+    Oregon \balgla.}
         The density histogram shows the distribution of windowed \textpi{} values 
         across different genomic features annotated in the \bgla{} 
         assembly. The vertical lines show the 50th quantile (median) of the 
@@ -724,7 +724,7 @@ diverse taxa. We have also seen the generation of complete genomes, sequencing
 chromosomes at a telomere-to-telomere scale (\cite{nurk_complete_2022,
 yoo_complete_2025}), as well as the sequencing and assembly of some of the largest
 and most repetitive genomes known in nature (\cite{campos-dominguez_genome_2025}).
-Best practice proptocols have also become available to applying these methods to new
+Best practice protocols have also become available to applying these methods to new
 taxa in a reproducible fashion (\cite{lawniczak_best-practice_2025,li_genome_2024}).
 \vspace{0.2cm}
 
@@ -847,7 +847,7 @@ hyperpolymorphic populations, that exhibit diversity above 5\%
 hyperpolymorphic model systems, which are key to studying the limits of biological 
 variation and molecular evolution in natural populations. Moreover, our observations
 of extreme genetic diversity also have important implications for the study of species
-boundaries. For example, recent work by \cite{hart_genomic_2025} suggests that levels
+boundaries. For example, recent work by~\cite{hart_genomic_2025} suggests that levels
 of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the
 definition of species. Barnacles and other hyperpolymorphic populations put these
 putative cutoffs into question. We observe levels of genome-wide diversity of over 5\%
@@ -1096,7 +1096,7 @@ using the \texttt{get\_seqs} command, only removing sequences at the ends of con
 process removed 876 fragments from the assembly, accounting for 240 Mbp of haplotig 
 sequences (Table~\ref{tab:sup_asm_stats}).
 
-\subsubsection*{Hi-C Scaffolding}
+\subsubsection*{Hi-C scaffolding}
 
 We scaffolded the purged contig-level assembly into chromosome-level scaffolds using 
 Hi-C data. First, we aligned the Hi-C short-read data to our assembly using 
