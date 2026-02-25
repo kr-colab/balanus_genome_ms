@@ -2,10 +2,6 @@
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
 
-## Working Overleaf doc
-
-<https://www.overleaf.com/project/682b8a7df249ffae37220a61>
-
 ## *Balanus glandula* genome assembly and annotation
 
 * The Pacfic acorn barnacle (*Balanus glandula*).
@@ -845,35 +841,52 @@ echo "${cmd[@]}"
 
 #### Annotating non-coding transcripts
 
+The directory `scripts/genome_annotation/non_coding` contains different script for the
+annotation and processing of non-coding RNAs (e.g., rRNAs, tRNAs, lncRNAs).
+
 ##### Ribosonal RNAs
 
-We annotated rRNAs using `barrnap` version `0.9`. 
+* `run_barrnap.sh`:
 
-```sh
-#!/bin/bash
-THR=12
+Annotate rRNAs using `barrnap` version `0.9`.
 
-work=/sietch_colab/data_share/balanus/genome_annot/non_coding
-genome=$work/in_genome/BalGla.fa
-outdir=$work/barrnap_out
-outgff=$outdir/BalGla.rRNA.gff
-outfa=$outdir/BalGla.rRNA.fa
-outlog=$outdir/barrnap.log
+* `process_rrna_gff.sh`
 
-mkdir -p $outdir
-cd $outdir
+Process the resulting rRNA annotation and standardize GFF IDs using `agat` version `1.4.3` and a custom `awk` script.
 
-cmd=(
-    barrnap
-    --threads $THR
-    --kingdom euk
-    --outseq $outfa
-    $genome
-)
-echo "${cmd[@]}"
-"${cmd[@]}" 1> $outgff 2> $outlog
-```
+##### Transfer RNAs
 
+* `run_tRNAscanSE.sh`
+
+Annotate tRNAs using `tRNAscan-SE` version `2.0.12`.
+
+* `process_trna_gff.sh`
+
+Process the resulting tRNA annotation and standardize GFF IDs using `agat` version `1.4.3` and
+a custom `awk` script.
+
+##### Long, non-coding RNAs
+
+* `run_minimap.sh`
+
+Align the Pacbio IsoSeq data to the assembly using `minimap2` version `2.26-r1175`.
+
+* `run_stringtie.sh`
+
+Generate call _de novo_ transcripts from the IsoSeq alignments using `StringTie` version
+`2.2.1`.
+
+* `run_feelnc.sh`
+
+Annotate lncRNAs using `FEELnc` version `0.01`. First, use `FEELnc_filter.pl` to filter
+the `StringTie` GTF to get candidate lncRNAs. Then, use `FEELnc_codpot` to compute the
+coding potential score of candidate lncRNAs. Lastly, use `FEELnc_classifier` to classify
+annotated lncRNAs based on their location relative to nearby genes.
+
+* `process_lncrna_gff.sh`
+
+Process the output lncRNA annotation using `AGAT` version `1.4.3` to standardize into
+the GFF format and manage IDs.
 
 ## *Balanus crenatus* genome assembly and annotation
 

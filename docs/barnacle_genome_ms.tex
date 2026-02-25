@@ -1211,7 +1211,40 @@ both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference data
 
 \subsubsection*{Curation of transcript isoforms}
 
+TODO:
+
 \subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
+
+We annotated three classes of non-coding transcripts in the \bgla{} assembly: ribosomal
+RNAs (rRNA), transfer RNAs (tRNA), and long, non-coding RNAs (RNAs). First, we annotated
+rRNAs using \texttt{barrnap} version \texttt{0.9} (\cite{seemann_barrnap_2018}), specifying
+the search against eukaryotic sequences (\texttt{--kingdom euk}). Transfer RNAs were
+annotated using the \texttt{tRNAscan-SE} software version \texttt{2.0.12}
+(\cite{chan_trnascan-se_2021}). We specified the annotation of eukaryotic tRNA motiffs
+(\texttt{-E}) and reporting the source of all sequence hits in the outputs
+(\texttt{--hitsrc}). We removed pseudogenized tRNA copies from downstream analyses.
+\vspace{0.2cm}
+
+For annotating lncRNAs, we first re-aligned our PacBio IsoSeq transcripts to the
+assembly using \texttt{minimap2} (using the \texttt{-ax splice:hq} option). Then, we
+called \textit{de novo} transcripts from the aligned long-reads using \texttt{StringTie}
+version \texttt{2.2.1} (\cite{shumate_improved_2022,kovaka_transcriptome_2019}). We ran
+\texttt{StringTie} in long-read mode (\texttt{-L}), providing our curated protein-coding
+annotation as a guide for transcript assembly (\texttt{-G}). After calling \textit{de novo}
+transcripts, we annotated lncRNAs using the \texttt{FEELnc} pipeline version \texttt{0.01}
+(\cite{wucher_feelnc_2017}). In this pipeline, we used \texttt{FEELnc filter} to filter
+the \texttt{StringTie} annotation to look for candidate non-coding transcripts not
+present in the reference protein-coding gene annotation. We then used \texttt{FEELnc
+codpot} to calculate the coding potential of the candidate transcripts, modeling the
+coding potential against a non-coding fraction of the genome (\texttt{--mode=intergenic}).
+Lastly, we classified candidate non-coding transcripts according to their location
+relative to nearby genes using \texttt{FEELnc classifier}.
+\vspace{0.2cm}
+
+After their annotation, all three non-coding RNA classes were separately processed
+using the \texttt{AGAT} software version \texttt{1.4.3} (\cite{dainat_another_2022})
+in order to sort features by chromosomal coordinates, add missing features, add 
+biotypes, standardize IDs, and merge records into a single GFF file.
 
 \subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
 
