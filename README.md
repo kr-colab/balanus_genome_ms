@@ -65,65 +65,28 @@ Path to raw reads:
 /sietch_colab/data_share/balanus/isoseq/6885/ccs.Q20
 ```
 
-#### TELLseq
-
-<!-- TODO: Remove this-->
-
-One of several individuals collected on August 2024 by the Kern-Ralph co-lab at Bob Creek, OR ([map](https://maps.app.goo.gl/Kzq9TssYcpcbbqvP6)). More TELLseq was performed on other individuals for collecting popgen data.
-
-DNA was extracted using PacBio Nanobind and prepared in a TELLseq library. Sequenced 2x150bp on an Illumina NovaSeq 6000 at the University of Oregon's GC3F.
-
-<!--- Confirm this --->
-
-Path to raw reads:
-
-```
-/sietch_colab/data_share/balanus/tellseq_analysis/illumina_raw_reads/merged_reads_7698_7699
-```
-
-Note: Sample used for the scaffolding was `Bgland_1`
-
 ### Genome assembly
+
+The directory `scripts/genome_assembly/` contains different directories each containing 
+scripts describing different steps of the assembly and annotation.
 
 #### K-mer estimation
 
-First, generate a distribution of k-mers using `jellyfish` version `2.2.10`. Default k-mer size (21). Only modifying the size of the output database (`--size`).
+The directory `scripts/genome_assembly/kmer_stats` contains the scripts for the k-mer 
+analysis of genome size and heterozygosity.
 
-```sh
-# Run the k-mer counts
-jellyfish count \
-    --canonical \
-    --mer-len 21 \
-    --size 1000000000 \
-    --threads $THR \
-    --output $jf \
-    $reads
-```
+* `run_jellyfish.sh`:
+ 
+Use `jellyfish` version `2.1.10` to count k-mers (`jellyfish count`)
+and generate a k-mer histogram (`jellyfish histo`).
 
-After k-mers are counted (and stored in the `*.jf` file), generate a k-mer histogram.
+* `run_genomescope.sh`
 
-```sh
-# Generate a k-mer histogram
-jellyfish histo \
-    --threads $THR \
-    --output $histo \
-    $jf
-```
-
-Generate a `GenomeScope2` (version `2.0`) plot using the k-mer histogram. Set the same k-mer length (21) and fix the ploidy (2).
-
-```sh
-genomescope2 \
-    --input $histo \
-    --ploidy 2 \
-    --kmer_length 21 \
-    --output $outdir \
-    --name_prefix $name \
-```
+Use `GenomeScope2` version `2.0` to do the k-mer model and plot.
 
 #### Initial contig-level assembly
 
-The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using defeault parameters.
+The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using default parameters.
 
 ```sh
 cmd=(
@@ -879,6 +842,38 @@ cmd=(
 echo "${cmd[@]}"
 "${cmd[@]}"
 ```
+
+#### Annotating non-coding transcripts
+
+##### Ribosonal RNAs
+
+We annotated rRNAs using `barrnap` version `0.9`. 
+
+```sh
+#!/bin/bash
+THR=12
+
+work=/sietch_colab/data_share/balanus/genome_annot/non_coding
+genome=$work/in_genome/BalGla.fa
+outdir=$work/barrnap_out
+outgff=$outdir/BalGla.rRNA.gff
+outfa=$outdir/BalGla.rRNA.fa
+outlog=$outdir/barrnap.log
+
+mkdir -p $outdir
+cd $outdir
+
+cmd=(
+    barrnap
+    --threads $THR
+    --kingdom euk
+    --outseq $outfa
+    $genome
+)
+echo "${cmd[@]}"
+"${cmd[@]}" 1> $outgff 2> $outlog
+```
+
 
 ## *Balanus crenatus* genome assembly and annotation
 
