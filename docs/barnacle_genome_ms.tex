@@ -197,7 +197,7 @@ highly fragmented and likely incomplete. Most publicly available barnacle genome
 suffer from the same limitation, presumably due to the difficulty of assembling
 highly polymorphic genomes from short reads
 (\cite{vinson_assembly_2005,kajitani_efficient_2014}). Although a handful of recent
-chromosome-level assemblies exist for barnacles (\cite{han_new_2024,
+chromosome-level assemblies exist for barnacles (\cite{han_new_2024,bishop_genome_2025,
 bernot_chromosome-level_2022,carlson_reference_2025,blaxter_genome_2023}), they
 belong to evolutionarily distant species, limiting their utility for studies of
 \bgla{}.
@@ -299,9 +299,10 @@ completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10} and
 \texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
 Additionally, we compared our annotation against the proteomes of four other
 barnacle species (see \nameref{sec:methods_orthologs}) using \texttt{OrthoFinder}
-(\cite{emms_orthofinder_2015,emms_orthofinder_2019}), resulting in the assignment
-of 16,978 (83.91\%) \bgla{} genes to orthologous groups across barnacles and the 
-identification of 2,576 single-copy orthologs across all five species.
+(\cite{emms_orthofinder_2015,emms_orthofinder_2019,emms_orthofinder_2025}),
+resulting in the assignment of 16,978 (83.91\%) \bgla{} genes to orthologous
+groups across barnacles and the identification of 2,576 single-copy orthologs
+across all five species.
 \vspace{0.2cm}
 
 % Short paragraph, but unsure what to say here. Just wanted to mention that 
@@ -1248,6 +1249,25 @@ biotypes, standardize IDs, and merge records into a single GFF file.
 
 \subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
 
+We identified orthologous gene families across annotated barnacle genomes. In addition
+to the \bgla{} annotated protein-coding genes, we used annotations for a newly generated
+assembly and annotation for the wrinkled barnacle (\textit{Balanus crenatus}; see
+\nameref{sec:sup_methods_balcre}), as well as published annotations and/or transcriptomic
+data for the striped barnacle (\textit{Amphibalanus amphitrite};~\cite{han_new_2024}),
+the Bay barnacle (\textit{Amphibalanus improvisus};~\cite{bishop_genome_2025}), and the
+gooseneck barnacle (\textit{Pollicipes pollicipes};~\cite{bernot_chromosome-level_2022}).
+See \nameref{sec:sup_methods_barnacle_rna} for details.
+\vspace{0.2cm}
+
+We identified orthologs across the protein-coding genes of these five genomes using 
+\texttt{OrthoFinder} version \texttt{3.1.0} (\cite{emms_orthofinder_2015,
+emms_orthofinder_2019,emms_orthofinder_2025}). We used the default search parameters
+in \texttt{OrthoFinder}, searching homologous sequences using \texttt{diamond} version
+\texttt{2.1.9.163}, generating multiple-sequence alignments using \texttt{famsa}
+version \texttt{2.4.1}, and building gene trees using \texttt{fasttree} version
+\texttt{2.1.11}. Across all genomes, we assigned $88.5\%$ of genes into 15,184
+orthogroups, including 2,576 containing single-copy orthologs for all species.
+
 \subsection*{Conserved synteny analysis}
 
 \subsection*{phastCons}
@@ -1271,7 +1291,7 @@ Code repo: \url{https://github.com/kr-colab/balanus_genome_ms}.
 
 \section*{Acknowledgments}
 
-Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB. 
+Tina Arredondo and GC3F folks. George von Dossow and Richard Emlet at OIMB.
 Kern-Ralph co-lab folks for sampling collection, manuscript review, and more.
 Funding.
 
@@ -1287,6 +1307,12 @@ Funding.
 \section*{Supplements}
 
 \subsection*{Supplemental Text}
+
+\subsubsection*{Assembly and annotation of \textit{Balanus
+crenatus}}\label{sec:sup_methods_balcre}
+
+\subsubsection*{Processing annotations of published barnacle
+assemblies}\label{sec:sup_methods_barnacle_rna}
 
 TODO:
 

@@ -878,7 +878,7 @@ Generate call _de novo_ transcripts from the IsoSeq alignments using `StringTie`
 
 * `run_feelnc.sh`
 
-Annotate lncRNAs using `FEELnc` version `0.01`. First, use `FEELnc_filter.pl` to filter
+Annotate lncRNAs using `FEELnc` version `0.01`. First, use `FEELnc_filter` to filter
 the `StringTie` GTF to get candidate lncRNAs. Then, use `FEELnc_codpot` to compute the
 coding potential score of candidate lncRNAs. Lastly, use `FEELnc_classifier` to classify
 annotated lncRNAs based on their location relative to nearby genes.
@@ -887,6 +887,24 @@ annotated lncRNAs based on their location relative to nearby genes.
 
 Process the output lncRNA annotation using `AGAT` version `1.4.3` to standardize into
 the GFF format and manage IDs.
+
+### Comparative genomics
+
+The `scripts/comparative_genomics/` directory contains various subdirectories describing
+various comparative genomic analyses, including identifying orthologs, synteny, whole-
+genome aligments, etc.
+
+#### Identifying orthologroups
+
+`scripts/comparative_genomics/orthofinder`:
+
+* `run_orthofinder.sh`
+
+Identify orthologous genes across barnacle genomes using `OrthoFinder` version `3.1.0`.
+
+#### Conserved synteny analysis
+
+
 
 ## *Balanus crenatus* genome assembly and annotation
 
