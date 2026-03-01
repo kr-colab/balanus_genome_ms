@@ -917,23 +917,51 @@ kimura_neutral_1983}) and are still the subjects of study (\cite{buffalo_quantif
 Our work on the Pacific acorn barnacle provides a unique opportunity to empirically 
 study this disparity and the biological processes that maintain it.
 
-% Notes from lab meeting 2026/01/15:
-% Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match?
-% We see small dN/dS and large MKT, so at first glance this is counterintuive.
-% But is it?
+\subsection*{Molecular evolution in large populations: reconciling \dnds and the
+McDonald-Kreitman test}
 
-% Also, we can also discuss the issues with our current metrics, e.g., recurrent
-% mutation and effects in theta, psmc, etc.
-% How much we should discuss here?
+One of the more striking patterns in our results is the apparent discordance between
+our two measures of selection on protein-coding genes. The pairwise \dnds{} between
+\bgla{} and \textit{B. crenatus} is 0.206 on average, indicating that the majority
+of coding sites are under purifying selection. Yet the McDonald-Kreitman test reveals
+that $\approx$61\% of non-synonymous substitutions that have fixed between these
+species were driven by positive selection (\textalpha{}\textsubscript{asym} = 0.610).
+At first glance, these results appear contradictory: how can coding sequences be
+under strong purifying selection while simultaneously showing pervasive adaptive
+evolution?
+\vspace{0.2cm}
 
-% ADK: Strongly recommend adding a subsection here on molecular evolution addressing
-% the dN/dS vs. MKT tension flagged above. This is one of the more intellectually
-% interesting results and the Discussion currently only gives it a passing mention in
-% "Genome evolution in large populations." Similarly, at ~5% diversity, infinite-sites
-% assumptions may break down -- the implications for theta, PSMC, and standard popgen
-% tools are worth discussing. These two topics (dN/dS-MKT tension + recurrent mutation)
-% could form a compelling subsection on the methodological challenges of studying
-% hyperpolymorphic genomes.
+The resolution lies in the fact that \dnds{} and the McDonald-Kreitman test measure
+fundamentally different quantities. The \dnds{} ratio averages across all
+nonsynonymous sites in a gene, the vast majority of which are under functional
+constraint, resulting in a ratio well below one. In contrast, the McDonald-Kreitman
+test partitions changes into polymorphism and divergence, using synonymous changes
+as a neutral baseline to ask whether there is an \textit{excess} of nonsynonymous
+fixations relative to the neutral expectation. This test is therefore sensitive to
+the subset of nonsynonymous mutations that escape purifying selection and reach
+fixation, even when most nonsynonymous sites in a gene are constrained.
+\cite{li_reverse_2008} showed that these two approaches can identify largely
+non-overlapping sets of genes as targets of selection, and that the McDonald-Kreitman
+test can be more powerful than \dnds{} in species with abundant polymorphism data.
+In \textit{Drosophila}, for example, the McDonald-Kreitman test identified nearly
+three times as many genes under positive selection as did \dnds{},
+a pattern attributed to the greater statistical power conferred by the large
+number of segregating sites available in species with high \Ne{}
+(\cite{li_reverse_2008}).
+\vspace{0.2cm}
+
+The pattern we observe in barnacles is thus consistent with theoretical expectations
+for large populations: strong purifying selection efficiently removes the majority
+of deleterious nonsynonymous mutations, keeping \dnds{} low, while at the same time
+the increased efficacy of positive selection drives a disproportionate fraction of
+the remaining nonsynonymous substitutions to fixation, producing a high
+\textalpha{}. This coupling of strong purifying and positive selection is a hallmark
+of evolution in large populations and has been observed in \textit{Drosophila}, where
+\textalpha{}\textsubscript{asym} is approximately 0.57 (\cite{haller_asymptoticmk_2017}).
+Our estimate of \textalpha{}\textsubscript{asym} = 0.610 in \bgla{} is comparable to
+or slightly higher than that in \textit{Drosophila}, consistent with the expectation
+that the even larger effective population size in barnacles further increases the
+efficacy of both modes of selection.
 
 \section*{Conclusion}
 
