@@ -410,10 +410,45 @@ the conservation of protein-coding genes among barnacle genomes. Similarly, tRNA
 four-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14, median: 2.04, standard 
 deviation: 0.96), likely reflecting the strong functional constraints on these sequences.
 
-% TODO:
-%ADK -- generally speaking, I think this is a good way to present the phastCons results.
-% but to make this more interesting we want to put this in context. How does this compare to 
-% other species? take a look here https://doi.org/10.1093/molbev/mst082
+The rank order of enrichment among conserved elements in \bgla{} mirrors patterns
+observed across other groups of organisms. \cite{siepel_evolutionarily_2005} characterized
+the distribution of \texttt{phastCons}-conserved elements across vertebrate, insect, worm,
+and yeast genomes, finding that coding sequences are consistently enriched among conserved
+elements, with enrichment values ranging from 15.5-fold in vertebrates to lower values in
+the more compact insect and worm genomes. A subsequent analysis of 20 angiosperm plant
+genomes using the same framework (\cite{hupalo_conservation_2013}) found that translational
+RNAs were the most enriched annotation among conserved regions ($\approx$3.6-fold),
+followed by coding sequences ($\approx$1.3-fold), while transposable elements were
+drastically underrepresented. The enrichment pattern in barnacles follows the same ordering
+observed in both plants and animals: tRNAs are the most enriched feature
+($\approx$4.2-fold), followed by CDSs ($\approx$2.3-fold), while transposable elements
+are depleted among HCEs.
+\vspace{0.2cm}
+
+As fellow arthropods, insects provide the most phylogenetically relevant comparison for
+barnacles. In \textit{Drosophila}, \cite{siepel_evolutionarily_2005} found that conserved
+elements cover 44.5\% of the genome, with 34\% of conserved bases falling in protein-coding
+exons and less dramatic differences in enrichment across annotation classes compared
+with vertebrates. In \bgla{}, HCEs cover a substantially smaller fraction of the genome
+(6.05\%), and only 4.4\% of HCE bases overlap CDSs
+(Table~\ref{tab:sup_phastcons_enrichment}). Both of these values are lower than those
+observed in insects; however, this difference is largely driven by the repeat-rich nature
+of the barnacle genome (67\% repetitive elements, compared with $\approx$15\% in
+\textit{D. melanogaster}), which contributes a large fraction of HCE bases in transposable
+element and overlapping annotation categories. Despite these differences in raw
+composition, CDSs are enriched among conserved elements in both insects and barnacles,
+consistent with the expectation that protein-coding sequences are among the most
+functionally constrained regions in arthropod genomes. More broadly,
+\cite{siepel_evolutionarily_2005} showed that the proportion of conserved bases falling in
+protein-coding exons scales with genome compactness, from 86\% in yeast to 59\% in worms,
+34\% in insects, and 28\% in vertebrates, with plants at 42\%
+(\cite{hupalo_conservation_2013}). The low CDS proportion in barnacle HCEs extends this
+trend to an arthropod with a much larger, more repeat-rich genome than the model insects
+examined in previous studies. Additionally, introns are mildly enriched among barnacle HCEs
+($\approx$1.3-fold), in contrast with their depletion in plant ($\approx$0.4-fold;
+\cite{hupalo_conservation_2013}), insect, and vertebrate conserved elements
+(\cite{siepel_evolutionarily_2005}), potentially reflecting the larger intronic fraction
+of the barnacle genome or genuine intronic conservation in this lineage.
 
 % Phastcons and enrichment
 \begin{figure}[htbp]
