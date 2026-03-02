@@ -904,7 +904,12 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 
 #### Conserved synteny analysis
 
+`scripts/comparative_genomics/synteny`:
 
+* `run_genespace.R`
+
+Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
+version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
 
 ## *Balanus crenatus* genome assembly and annotation
 

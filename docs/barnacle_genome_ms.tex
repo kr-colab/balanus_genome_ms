@@ -1267,6 +1267,19 @@ present in all five species.
 
 \subsection*{Conserved synteny analysis}
 
+We calculated conserved syntenty between barnacle genomes using the
+\textsc{genespace} version \texttt{1.3.1} software \cite{lovell_genespace_2022}.
+We used our \textsc{OrthoFinder} analysis as input for \textsc{genespace}, subsetting
+to only include orthologs for \bgla, \textit{A. amphitrite}, and \textit{P.
+pollicipes} using the \texttt{genomeID} parameter in the \texttt{init\_genespace}
+function. We set the minimum number of genes pairs required to define a syntenyc
+block to two (\texttt{blkSize=2}) to identify synteny across smaller/more
+fragmented genomic regions across these highly-diverged species. Lastly, we
+generated a riparian plot for the three genomes using the \texttt{plot\_riparian}
+function, only plotting sequences larger than 5 Mb (\texttt{minChrLen2plot}),
+and setting \textit{A. amphitrite} as the reference for ordering the chromosomes
+(\texttt{ref}).
+
 \subsection*{phastCons}
 
 \subsection*{Analysis of molecular evolution}
