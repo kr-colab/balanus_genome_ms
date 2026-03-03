@@ -1,0 +1,666 @@
+#!/usr/bin/env python3
+import sys
+import os
+import argparse
+import statistics
+from datetime import datetime
+
+PROG = sys.argv[0].split('/')[-1]
+MIN_LEN = 10_000
+MIN_INTERVAL=1
+DESC = """Determine the proportion of each of the annotated genetic \
+elements in a BED across the sites present in an phastCons conserved \
+sites BED file. Provide other general stats for the phastCons BED."""
+
+def parse_args():
+    '''Set and verify command line options.'''
+    p = argparse.ArgumentParser(prog=PROG, description=DESC)
+    p.add_argument('-f', '--fai', required=True,
+                   help='(str) Path to genome index in FAI format.')
+    p.add_argument('-a', '--annotation', required=True,
+                   help='(str) Path to the annotation in BED format.')
+    p.add_argument('-p', '--phastcons', required=True,
+                   help='(str) Path to the phastCons conserved sited BED.')
+    p.add_argument('-o', '--out-dir', required=False, default='.',
+                   help='(str) Path to output directory [default=.].')
+    p.add_argument('-m', '--min-seq-len', required=False,
+                   default=MIN_LEN, type=float,
+                   help=f'(int|float) Min length of input sequences \
+                    [default={MIN_LEN:,}].')
+    p.add_argument('-i', '--min-interval-len', required=False,
+                   default=MIN_INTERVAL, type=int,
+                   help=f'(int) Min length of intervals in input BED files \
+                    [default={MIN_INTERVAL:,}].')
+    # Check inputs
+    args = p.parse_args()
+    assert os.path.exists(args.fai)
+    assert os.path.exists(args.annotation)
+    assert os.path.exists(args.phastcons)
+    args.out_dir = args.out_dir.rstrip('/')
+    args.min_seq_len = int(args.min_seq_len)
+    return args
+
+def date() -> str:
+    '''Print the current date in YYYY-MM-DD format.'''
+    return datetime.now().strftime("%Y-%m-%d")
+
+def time() -> str:
+    '''Print the current time in HH:MM:SS format.'''
+    return datetime.now().strftime("%H:%M:%S")
+
+def load_fai(fai_f:int, min_len:int=MIN_LEN)->dict:
+    '''
+    Load the chromosome sizes from a genome FAI index.
+    Args:
+        fai_f: (str) Path to input FAI.
+        min_len: (int/float) Minimum length to load a sequence [default=10,000].
+    Returns:
+        chromosomes: (dict) chromosome ids/length pairs.
+    '''
+    print(f'''
+Loading chromosomes from FAI (retaining sequences larger than \
+{min_len:,} bp).''', flush=True)
+    chromosomes = {}
+    records = 0
+    total_seq = 0
+    kept_seq = 0
+    with open(fai_f, encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip('\n')
+            if len(line)==0 or line.startswith('#'):
+                continue
+            records += 1
+            fields = line.split('\t')
+            chrom_id = fields[0]
+            chrom_len = int(fields[1])
+            total_seq += chrom_len
+            if chrom_len < min_len:
+                continue
+            chromosomes[chrom_id] = chrom_len
+            kept_seq += chrom_len
+    # report to log
+    n_chrs = len(chromosomes)
+    print(f'''    Read {records:,} records ({total_seq:,} bp) from the input FAI.
+    Retained {n_chrs:,} ({(n_chrs/records):0.2%}) records as chromosomes objects.'
+    These {n_chrs:,} chromosome objects represent {kept_seq:,} bp \
+({(kept_seq/total_seq):0.2%}) of the total sequence.''', flush=True)
+    return chromosomes
+
+def load_phastcons_bed(phastcons_bed_f:str, chromosomes:dict,
+                       min_interval:int=MIN_INTERVAL)->dict:
+    '''
+    Load the conserved genomic intervals from a phastCons BED.
+    Args:
+        phastcons_bed_f: (str) Path to input phastCons conserved BED.
+        chromosomes: (dict) chromosome ids/length pairs.
+        min_interval: (int) Minimum length required to retain an interval
+                     [default=1].
+    Returns:
+        phastcons: (dict) Dictionary of per-chromosome conserved intervals.
+            { chrom_1_id : [ (start_1, end_1), (start_2, end_2), 
+                             ..., (start_n, end_n) ], ... }
+    '''
+    phastcons = {}
+    print('\nLoading conserved genomic intervals from phastCons BED...')
+    seen = 0
+    kept = 0
+    with open(phastcons_bed_f, encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip('\n')
+            if len(line)==0 or line.startswith('#'):
+                continue
+            seen += 1
+            fields = line.split('\t')
+            chrom = fields[0]
+            start = int(fields[1]) # BED start are 0-based inclusive
+            end = int(fields[2])   # BED end are 0-based exclusive
+            # Check the formatting of the BED
+            assert end>start
+            # Skip small elements
+            if (end-start) < min_interval:
+                continue
+            # Only process elements in the target chromosome
+            if chrom not in chromosomes:
+                continue
+            # Check the coordinates
+            if start<0:
+                sys.exit(f'Error: start coordinate must be > 0, Line: {line}')
+            if end>chromosomes[chrom]:
+                sys.exit(f'Error: end coordinate must be smaller than chromosome \
+                         length ({chromosomes[chrom]}), Line: {line}')
+            # Add to the intervals to the output dictionary
+            phastcons.setdefault(chrom, [])
+            phastcons[chrom].append((start, end))
+            kept += 1
+    # report to log
+    print(f'''    Read {seen:,} records from the input BED.
+    Filtering phastCons intervals smaller than {min_interval:,} bp.
+    Kept {kept:,} ({(kept/seen):0.2%}) records as genomic intervals.''',
+        flush=True)
+    return phastcons
+
+def calculate_phastcons_stats(phastcons:dict, chromosomes:dict, outdir:str='.')->None:
+    '''
+    Calculate the per-chromosome stats of the phastCons conserved sites.
+    Args:
+        phastcons: (dict) Dictionary of per-chromosome conserved intervals.
+        chromosomes: (dict) chromosome ids/length pairs.
+        outdir: (str) Path to output directory [default='.']
+    Returns:
+        None
+    '''
+    out_f = f'{outdir}/phastCons_stats.tsv'
+    print(f'''
+Calculating stats for phastCons elements. Saving to file:
+    {out_f}''', flush=True)
+    with open(out_f, 'w', encoding='utf-8') as fh:
+        header = ['chromID', 'chromLen', 'phastConsNum', 'phastConsLen',
+                  'phastConsProp', 'meanLen', 'medianLen','sdLen', 'minLen', 'maxLen']
+        header = '\t'.join(header)
+        fh.write(f'{header}\n')
+        # Create an entry for the genome-wide statistics
+        gw_stats = []
+        gw_len = 0
+        # Loop over the chromosomes and calculate per-chrom stats
+        for chromosome, chr_len in chromosomes.items():
+            chr_phastcons = phastcons.get(chromosome, [])
+            size_dist = [ phastcon[1]-phastcon[0] for phastcon in chr_phastcons ]
+            # Add to the genome-wide stats
+            gw_stats += size_dist
+            gw_len += chr_len
+            # Calculate stats from the size distribution
+            phasc_n  = len(size_dist)
+            total_l  = sum(size_dist)
+            perc_l   = total_l/chr_len
+            # Initialize these to 0 to prevent stat errors
+            mean_l   = 0
+            median_l = 0
+            sd_l     = 0
+            min_l    = 0
+            max_l    = 0
+            # Now, if values are present calculate stats
+            if phasc_n>0:
+                mean_l   = statistics.mean(size_dist)
+                median_l = statistics.median(size_dist)
+                min_l    = min(size_dist)
+                max_l    = max(size_dist)
+            if phasc_n>1:
+                sd_l     = statistics.stdev(size_dist)
+            # Save to output file
+            row = [chromosome,              # chromID
+                   f'{chr_len}',            # chromLen
+                   f'{phasc_n}',            # numPhastCons
+                   f'{total_l}',            # totalLen
+                   f'{perc_l:0.6f}',        # totalProp
+                   f'{mean_l:0.3f}',        # meanLen
+                   f'{median_l:0.3g}',      # medianLen
+                   f'{sd_l:0.3f}',          # sdLen
+                   f'{min_l}',              # minLen
+                   f'{max_l}' ]             # maxLen
+            row = '\t'.join(row)
+            fh.write(f'{row}\n')
+        # Print the genome-wide statistics
+        phasc_n  = len(gw_stats)
+        total_l  = sum(gw_stats)
+        perc_l   = total_l/gw_len
+        # Initialize these to 0 to prevent stat errors
+        mean_l   = 0
+        median_l = 0
+        sd_l     = 0
+        min_l    = 0
+        max_l    = 0
+        # Now, if values are present calculate stats
+        if phasc_n>0:
+            mean_l   = statistics.mean(gw_stats)
+            median_l = statistics.median(gw_stats)
+            min_l    = min(gw_stats)
+            max_l    = max(gw_stats)
+        if phasc_n>1:
+            sd_l     = statistics.stdev(gw_stats)
+        # Save to output file
+        row = ['AllGW',                # chromID
+              f'{gw_len}',             # chromLen
+              f'{phasc_n}',            # numPhastCons
+              f'{total_l}',            # totalLen
+              f'{perc_l:0.6f}',        # totalProp
+              f'{mean_l:0.3f}',        # meanLen
+              f'{median_l:0.3g}',      # medianLen
+              f'{sd_l:0.3f}',          # sdLen
+              f'{min_l}',              # minLen
+              f'{max_l}' ]             # maxLen
+        row = '\t'.join(row)
+        fh.write(f'{row}\n')
+
+class Annotation:
+    '''Store the annotation intervals from a BED.'''
+    def __init__(self, chrom:str, feature:str, start:int, end:int):
+        self.chr = chrom
+        self.fet = feature
+        self.sta = start
+        self.end = end
+    def __str__(self):
+        return f'{self.chr}\t{self.fet}\t{self.sta}\t{self.end}'
+
+def load_annotation_bed(annotation_bed_f:str,
+                        chromosomes:dict,
+                        min_interval:int=MIN_INTERVAL)->dict:
+    '''
+    Parse a GFF file and load the annotated features.
+    Args:
+        annotation_bed_f: (str) Path to input annotation BED.
+        chromosomes: (dict) chromosome ids/length pairs.
+        min_interval: (int) minumum length of annotation intervals [default=1]
+    Returns:
+        annotations: (dict) per-chromosome Annotation objects
+            { chr_id : [ Annotation_1, Annotation_2, ..., Annotation_n ], ... }
+    '''
+    print('\nLoading the annotatated features from the input BED...', flush=True)
+    annotations = {}
+    feat_tally = {}
+    seen = 0
+    kept = 0
+    # Parse the file
+    with open(annotation_bed_f, encoding='utf-8') as fh:
+        for line in fh:
+            line = line.strip('\n')
+            if len(line)==0 or line.startswith('#'):
+                continue
+            seen += 1
+            fields = line.split('\t')
+            # The input BED needs to have 4 fields
+            assert len(fields) == 4, 'Input BED must have four columns: \
+                Chr<tab>Start<tab>End<tab>Feature/Annotation'
+            chrom = fields[0]
+            # Only process elements in the target chromosome
+            if chrom not in chromosomes:
+                continue
+            # Set the coordinates
+            start  = int(fields[1]) # BED start are 0-based inclusive
+            end    = int(fields[2]) # BED end are 0-based exclusive
+            # Check the coordinates
+            if start<0:
+                sys.exit(f'Error: start coordinate must be > 0, Line: {line}')
+            if end>chromosomes[chrom]:
+                sys.exit(f'Error: end coordinate must be smaller than chromosome\
+                         length ({chromosomes[chrom]}), Line: {line}')
+            # Check for the length requirements
+            if (end-start) < min_interval:
+                continue
+            # Keep a track of the different features/annotations
+            feature = fields[3]
+            feat_tally.setdefault(feature, 0)
+            feat_tally[feature] += 1
+            # Create the Annotation object from the parsed elements
+            annotation = Annotation(chrom, feature, start, end)
+            # Add the annotation feature to the output dict
+            annotations.setdefault(chrom, [])
+            annotations[chrom].append(annotation)
+            kept += 1
+    # report to log
+    print(f'''    Read {seen:,} records from the input annotation BED.
+    Filtering annotations smaller than {min_interval:,} bp.
+    Kept {kept:,} ({(kept/seen):0.2%}) records as annotations from the \
+following features:''')
+    for feat in sorted(feat_tally):
+        n = feat_tally[feat]
+        print(f'        {feat} : {n:,}',
+              flush=True)
+    return annotations
+
+def tally_phastcons_annotations(phastcons:dict, annotations:dict,
+                                chromosomes:dict, outdir:str='.')->None:
+    '''
+    Calculate the overlap between the phastcons and annotation elements
+    and tally across different annotation elements.
+    Args:
+        phastcons: (dict) per-chromosome conserved intervals.
+        annotations: (dict) per-chromosome Annotation objects
+        chromosomes: (dict) chromosome ids/length pairs.
+        outdir: (str) Path to output directory [default='.']
+    Returns:
+        None
+    '''
+    out_f = f'{outdir}/phastCons_annotations.tsv'
+    print(F'''
+Calculating the overlap between the phastcons and annotation elements. \
+Saving to file:
+    {out_f}''', flush=True)
+    with open(out_f, 'w', encoding='utf-8') as fh:
+        header = ['chromID', 'phastConsLen', 'featType',
+                  'featLen', 'featProp']
+        header = '\t'.join(header)
+        fh.write(f'{header}\n')
+        # Add genome-wide stats
+        gw_phastcon_len = 0
+        gw_results = {}
+        # Loop and process the chromosomes
+        for chromosome in chromosomes:
+            # First, generate a object to hold the results for that chrom
+            chr_results = {}
+            # Get the annotations for that chromosome
+            target_features = { annotation.fet for
+                               annotation in annotations[chromosome] }
+            feature_sites = set_feature_sites(chromosome, annotations,
+                                              list(target_features))
+            # Process the phastCons for the target chromosome
+            chr_phastcons = phastcons.get(chromosome, None)
+            if chr_phastcons is None:
+                continue
+            chr_phastcon_len = 0
+            # Then, iterare over the phastCon intervals
+            for interval in chr_phastcons:
+                phastcon_set = set(range(interval[0], interval[1]))
+                chr_phastcon_len += len(phastcon_set)
+                gw_phastcon_len += len(phastcon_set)
+                # Compare that phastCon set against the different feature
+                # sites. The intersection between the two set is the
+                # overlap between the genomic interval of the two
+                # elements. As you do, keep a tally in the results object.
+                for feature, feat_s in feature_sites.items():
+                    overlap = len(phastcon_set.intersection(feat_s))
+                    # Add to the chrom-specific results
+                    chr_results.setdefault(feature, 0)
+                    chr_results[feature] += overlap
+                    # Add to the genome-wide results
+                    gw_results.setdefault(feature, 0)
+                    gw_results[feature] += overlap
+            # Prepare the output for the chromosomes
+            for feature in sorted(chr_results):
+                span = chr_results[feature]
+                prop = 0.0
+                if chr_phastcon_len>0:
+                    prop = span/chr_phastcon_len
+                row = [chromosome,               # chromID
+                       f'{chr_phastcon_len}',    # phastConsLen
+                       feature,                  # featType
+                       f'{span}',                # featLen
+                       f'{prop:0.8f}' ]          # featProp
+                row = '\t'.join(row)
+                fh.write(f'{row}\n')
+        # Prepare the output for the whole gehome
+        for feature in sorted(gw_results):
+            span = gw_results[feature]
+            prop = 0.0
+            if gw_phastcon_len>0:
+                prop = span/gw_phastcon_len
+            row = ['AllGW',                  # chromID
+                  f'{gw_phastcon_len}',      # phastConsLen
+                  feature,                   # featType
+                  f'{span}',                 # featLen
+                  f'{prop:0.8f}' ]           # featProp
+            row = '\t'.join(row)
+            fh.write(f'{row}\n')
+
+def set_feature_sites(chromosome:int, annotations:dict,
+                         target_features:list)->dict:
+    '''
+    Process the annotations for a target chromsome, generating a set
+    of site per annotation feature.
+    Args:
+        chromosome: (int) Target chromosome to process
+        annotations: (dict) per-chromosome Annotation objects
+        target_features: (list) Features to be analyzed.
+    Returns:
+        feature_sites: (dict) feature feature sites (positions)
+            { feature_1 : { site1, site2, ..., siteN }, ... }
+    '''
+    # Initialize outputs
+    feature_sites = {}
+    for feature in target_features:
+        feature_sites.setdefault(feature, set())
+    # Get the annotations for the target chromosome
+    chr_annotations = annotations.get(chromosome, [])
+    if chr_annotations is None:
+        return feature_sites
+    # Loop over the annotations
+    for annotation in chr_annotations:
+        assert isinstance(annotation, Annotation)
+        feature = annotation.fet
+        start = annotation.sta
+        end = annotation.end
+        # Loop over each site in the annotation and add to
+        # the corresponding set
+        for site in range(start, end):
+            feature_sites[feature].add(site)
+    return feature_sites
+
+def find_overlapping_annotations(annotations:dict,
+                                 chromosomes:dict,
+                                 outdir:str='.')->dict:
+    '''
+    Identify and tag overlapping annotation windows.
+    Args:
+        annotations: (dict) per-chromosome Annotation objects
+        chromosomes: (dict) chromosome ids/length pairs.
+        outdir (str): Path to output directory
+    Returns:
+        annotations_no_olap: (dict) per-chromosome annotation
+            containing the new "multiple" feature for
+            overlapping annotations.
+    '''
+    out_bed = f'{outdir}/annotations_no_overlap.bed'
+    print(f'''
+Processing annotations to identify and collapse overlapping sites. Saving to file:
+    {out_bed}''', flush=True)
+    annotations_no_olap = {}
+
+    # TODO: This merges adjacent (but non-overlapping) windows
+    # with the same annotation. This doesn't matter for the final
+    # result; however it would be good if this did not happen to
+    # avoid skewing the length statistics later on. These should be
+    # taken from the BED or GFF anyway, but making sure.
+
+    with open(out_bed, 'w', encoding='utf-8') as fh:
+
+        # Loop over chromosome and process
+        for chromosome in chromosomes:
+            chr_len = chromosomes[chromosome]
+            chr_annotations = annotations[chromosome]
+
+            # Initialize the spans of the whole chromosome.
+            # By default these will be annotated to "other"
+            # and filled as annotations are read
+            per_site_feats = { s : 'other' for s in range(chr_len) }
+
+            # Loop over the annotations in the chromosome
+            for annotation in chr_annotations:
+                assert isinstance(annotation, Annotation)
+                feature = annotation.fet
+                start = annotation.sta
+                end = annotation.end
+                # Loop over the range of the annotation
+                for s in range(start, end):
+                    # "other" is the initialized state.
+                    # If a feature has been added to this site already
+                    if per_site_feats[s] != 'other':
+                        # And if its not the same as the current feature,
+                        # this means this site has multiple annotations,
+                        # e.g., an intron+transposable element
+                        if per_site_feats[s] != feature:
+                            per_site_feats[s] = 'multiple'
+                        # Otherwise, keep the current feature
+                        else:
+                            per_site_feats[s] = feature
+                    # No feature has been added to the site, so just update
+                    else:
+                        per_site_feats[s] = feature
+
+            # With info on all sites, collapse them down to new Annotation
+            # objects by finding consecutive sites annotated with the same feature.
+            curr_start = 0
+            curr_feature = None
+
+            for site in sorted(per_site_feats.keys()):
+                site_feature = per_site_feats[site]
+
+                # If this is the first position or we have a new feature
+                if curr_feature is None or site_feature != curr_feature:
+                    # If we had a previous interval, save it
+                    if curr_feature is not None:
+                        new_annotation = Annotation(chromosome, curr_feature, 
+                                                        curr_start, site)
+                        annotations_no_olap.setdefault(chromosome, [])
+                        annotations_no_olap[chromosome].append(new_annotation)
+                        fh.write(f'{new_annotation.chr}\t{new_annotation.sta}\t{new_annotation.end}\t{new_annotation.fet}\n')
+                    # Start a new interval
+                    curr_start = site
+                    curr_feature = site_feature
+            # Don't forget the last interval
+            if curr_feature is not None:
+                new_annotation = Annotation(chromosome, curr_feature, 
+                                                curr_start, chr_len)
+                annotations_no_olap.setdefault(chromosome, [])
+                annotations_no_olap[chromosome].append(new_annotation)
+                fh.write(f'{new_annotation.chr}\t{new_annotation.sta}\t{new_annotation.end}\t{new_annotation.fet}\n')
+    return annotations_no_olap
+
+def calculate_annotation_stats(annotations:dict, chromosomes:dict,
+                               outdir:str='.')->None:
+    '''
+    Calculate the per-chromosome stats of the annotations BED.
+    Args:
+        annotations: (dict) per-chromosome Annotation objects
+        chromosomes: (dict) chromosome ids/length pairs.
+        outdir: (str) Path to output directory [default='.']
+    Returns:
+        None
+    '''
+    out_f = f'{outdir}/annotation_stats.tsv'
+    print(f'''
+Calculating stats for the annotation. Saving to file:
+    {out_f}''', flush=True)
+    with open(out_f, 'w', encoding='utf-8') as fh:
+        header = ['chromID', 'chromLen', 'featType', 'featNum',
+                  'featLen', 'featProp', 'meanLen', 'medianLen',
+                  'sdLen', 'minLen', 'maxLen']
+        header = '\t'.join(header)
+        fh.write(f'{header}\n')
+        # Create an entry for the genome-wide statistics
+        gw_stats = {}
+        gw_len = 0
+        # Loop over the chromosomes and calculate per-chrom stats
+        for chromosome, chr_len in chromosomes.items():
+            chr_annotations = annotations.get(chromosome, [])
+            gw_len += chr_len
+            # This will be the output for that chromosome
+            feature_tally = {}
+            # Loop over the annotations in the chromosome
+            for annotation in chr_annotations:
+                assert isinstance(annotation, Annotation)
+                feat  = annotation.fet
+                start = annotation.sta
+                end   = annotation.end
+                span  = end-start
+                # Add to the tally dict
+                feature_tally.setdefault(feat, [])
+                feature_tally[feat].append(span)
+                # Add to the genome-wide stats dict
+                gw_stats.setdefault(feat, [])
+                gw_stats[feat].append(span)
+            # Prepare the output for each tallied feature
+            for feature in sorted(feature_tally):
+                size_dist = feature_tally[feature]
+                feat_n  = len(size_dist)
+                total_l = sum(size_dist)
+                prop_l  = total_l/chr_len
+                # Initialize these to 0 to prevent stat errors
+                mean_l   = 0
+                median_l = 0
+                sd_l     = 0
+                min_l    = 0
+                max_l    = 0
+                # Now, if values are present calculate stats
+                if feat_n>0:
+                    mean_l   = statistics.mean(size_dist)
+                    median_l = statistics.median(size_dist)
+                    min_l    = min(size_dist)
+                    max_l    = max(size_dist)
+                if feat_n>1:
+                    sd_l     = statistics.stdev(size_dist)
+                # Save to output file
+                row = [
+                    chromosome,              # chromID
+                    f'{chr_len}',            # chromLen
+                    feature,                 # featType
+                    f'{feat_n}',             # featNum
+                    f'{total_l}',            # featLen
+                    f'{prop_l:0.8f}',        # featProp
+                    f'{mean_l:0.3f}',        # meanLen
+                    f'{median_l:0.3g}',      # medianLen
+                    f'{sd_l:0.3f}',          # sdLen
+                    f'{min_l}',              # minLen
+                    f'{max_l}' ]             # maxLen
+                row = '\t'.join(row)
+                fh.write(f'{row}\n')
+        # Prepare the output for the genome-wide stats
+        for feature in sorted(gw_stats):
+            size_dist = gw_stats[feature]
+            feat_n  = len(size_dist)
+            total_l = sum(size_dist)
+            prop_l  = total_l/gw_len
+            # Initialize these to 0 to prevent stat errors
+            mean_l   = 0
+            median_l = 0
+            sd_l     = 0
+            min_l    = 0
+            max_l    = 0
+            # Now, if values are present calculate stats
+            if feat_n>0:
+                mean_l   = statistics.mean(size_dist)
+                median_l = statistics.median(size_dist)
+                min_l    = min(size_dist)
+                max_l    = max(size_dist)
+            if feat_n>1:
+                sd_l     = statistics.stdev(size_dist)
+            # Save to output file
+            row = [
+                'AllGW',                 # chromID
+                f'{gw_len}',             # chromLen
+                feature,                 # featType
+                f'{feat_n}',             # featNum
+                f'{total_l}',            # featLen
+                f'{prop_l:0.8f}',        # featProp
+                f'{mean_l:0.3f}',        # meanLen
+                f'{median_l:0.3g}',      # medianLen
+                f'{sd_l:0.3f}',          # sdLen
+                f'{min_l}',              # minLen
+                f'{max_l}' ]             # maxLen
+            row = '\t'.join(row)
+            fh.write(f'{row}\n')
+
+def main():
+    '''Main function: rode the code!'''
+    print(f'{PROG} started on {date()} {time()}.')
+    args = parse_args()
+    # First, load the genome lengths from the FAI
+    chromosomes = load_fai(args.fai, args.min_seq_len)
+    # Load and tally the phastCons bed
+    phastcons = load_phastcons_bed(args.phastcons,
+                                   chromosomes,
+                                   args.min_interval_len)
+    calculate_phastcons_stats(phastcons,
+                              chromosomes,
+                              args.out_dir)
+
+    # Load the annotation BED
+    annotations = load_annotation_bed(args.annotation,
+                                      chromosomes,
+                                      args.min_interval_len)
+    # Process to find any overlapping windows.
+    annotations = find_overlapping_annotations(annotations,
+                                               chromosomes,
+                                               args.out_dir)
+    # Get some stats on this new file.
+    calculate_annotation_stats(annotations,
+                               chromosomes,
+                               args.out_dir)
+
+    # Calculate overlaps between phastCons and GFF
+    tally_phastcons_annotations(phastcons, annotations,
+                                chromosomes, args.out_dir)
+
+    print(f'\n{PROG} finished on {date()} {time()}.')
+
+# Run Code
+if __name__ == '__main__':
+    main()

@@ -911,6 +911,56 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
 version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
 
+### Whole-genome alignment and conserved regions
+
+`scripts/comparative_genomics/phastcons`
+
+* `run_cactus.sh`
+
+Run a whole genome alignment with `cactus` version `2.9.7`.
+
+* `run_phylofit.sh`
+
+Using the `cactus` whole-genome alignment, calculate a neutral phylogenetic model using `phyloFit` from `PHAST` version. `1.5`.
+
+* `run_chr_phastcons.sh`
+
+Calculate conservation scores on a `cactus` whole-genome alignment using `phastCons` from `PHAST` version `1.5`. Takes the `phyloFit` neutral model as input.
+
+* `tally_phastcon_elements.py`:
+
+Custom Python script that intersects the coordinates of the `phastCons` highly
+conserved elements against a set of known annotated features in the genome. It
+compares the proportion of the known features in the conserved elements against
+their proportion in the whole genome.
+
+Usage:
+
+```sh
+$ python3 tally_phastcon_elements.py -h
+tally_phastcon_elements.py started on 2026-03-02 21:33:07.
+usage: tally_phastcon_elements.py [-h] -f FAI -a ANNOTATION -p PHASTCONS [-o OUT_DIR]
+                                  [-m MIN_SEQ_LEN] [-i MIN_INTERVAL_LEN]
+
+Determine the proportion of each of the annotated genetic elements in a BED across the sites
+present in an phastCons conserved sites BED file. Provide other general stats for the phastCons
+BED.
+
+options:
+  -h, --help            show this help message and exit
+  -f, --fai FAI         (str) Path to genome index in FAI format.
+  -a, --annotation ANNOTATION
+                        (str) Path to the annotation in BED format.
+  -p, --phastcons PHASTCONS
+                        (str) Path to the phastCons conserved sited BED.
+  -o, --out-dir OUT_DIR
+                        (str) Path to output directory [default=.].
+  -m, --min-seq-len MIN_SEQ_LEN
+                        (int|float) Min length of input sequences [default=10,000].
+  -i, --min-interval-len MIN_INTERVAL_LEN
+                        (int) Min length of intervals in input BED files [default=1].
+```
+
 ## *Balanus crenatus* genome assembly and annotation
 
 * The wrinkled barnacle (*Balanus crenatus*).
