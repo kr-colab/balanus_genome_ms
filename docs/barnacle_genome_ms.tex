@@ -436,20 +436,17 @@ deviation: 0.96), likely reflecting the strong functional constraints on these s
 \subsection*{Patterns of molecular evolution reflect strong positive selection in
 protein-coding genes}
 
+% @Andy: I added the reference to Nei & Gojobori 1986 here. Anything else?
 To examine the rate of molecular evolution in protein-coding sequences, we calculated
 the pairwise rate of non-synonymous to synonymous substitutions (\dnds) between
-\bgla{} and its congener, the wrinkled barnacle \textit{Balanus crenatus}. We
-identified and aligned 9,082 single-copy orthologs between the two species. The mean
-pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
+\bgla{} and its congener, the wrinkled barnacle \textit{Balanus crenatus},
+using the approach described by \cite{nei1986_dnds}.
+We identified and aligned 9,082 single-copy orthologs between the two species.
+The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
 Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
 sequences in these barnacle genomes are under purifying selection, reflecting the
 expected evolutionary constraints on sequences of functional importance.
 \vspace{0.2cm}
-
-% ADK -- should say how you did this here.  What models, etc
-% ARC: This was done pairwise between the two species, just calculating the
-% ratio. No model, since we couldn't get HyPhy to work. We could run
-% something in CrabML if needed.
 
 Of the nine thousand genes assessed, 70 (0.77\%) displayed a
 \dnds{} $>$ 1, and are likely candidates for positive
