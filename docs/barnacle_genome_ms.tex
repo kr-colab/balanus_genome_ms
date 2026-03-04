@@ -474,16 +474,19 @@ polymorphism data from six \bgla{} individuals from the central Oregon coast
 
 After removing alignments shorter than 100 bp and those containing premature stop
 codons or frameshift mutations, we calculated the McDonald-Kreitman tests for
-7,374 orthologous sequences between \bgla{} and \textit{B.
-crenatus}. Four hundred and fourty-four (444, 6.02\%) of these orthologs showed a
-significant deviation from the expected proportion of non-synonymous and synonymous
-substitutions and polymorphisms, following \textit{p}-value correction for multiple testing.
-(Figure~\ref{fig:mkTest}). We additionally calculated the Neutrality Index (NI;~
-deviation: 1.040) and a mean DoS of 0.103 (median: 0.109; standard deviation: 0.131;
-Figure~\ref{fig:sup_dos}). Both of these statistics show that, on average and in contrast
-with our measurements of \dnds, protein-coding sequences in \bgla{} exhibit an excess
-of non-synonymous substitutions, suggesting that they are evolving under positive
-directional selection when compared to the outgroup sequence.
+7,374 orthologous sequences between \bgla{} and \textit{B. crenatus}.
+Four hundred and fourty-four (444, 6.02\%) of these orthologs showed a significant
+deviation from the expected proportion of non-synonymous and synonymous substitutions
+and polymorphisms, following \textit{p}-value correction for multiple testing
+(Figure~\ref{fig:mkTest}).
+We additionally calculated the Neutrality Index (NI;~\cite{rand_excess_1996}) and
+Direction of Selection (DoS;~\cite{stoletzki_estimation_2011}) at each ortholog.
+We observed a mean NI value of 0.745 (median: 0.554; standard deviation: 1.079) and
+a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; Figure~\ref{fig:sup_dos}).
+Both of these statistics show that on average, and in contrast with our measurements
+of \dnds, protein-coding sequences in \bgla{} exhibit an excess of non-synonymous
+substitutions, suggesting that they are evolving under positive directional selection
+when compared to the outgroup sequence.
 \vspace{0.2cm}
 
 In addition to NI and DoS, we calculated \textalpha{}, a measure of the proportion
@@ -1322,8 +1325,9 @@ The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
 Lastly, we filtered all alignments shorter than 100 bp.
 \vspace{0.2cm}
 
-After generating and processing alignments for all single-copy orthologs, we
-calculated \dnds rates using a custom Python script (\texttt{pairwise\_dnds.py}).
+After generating and processing alignments for the resulting 9,082 single-copy
+orthologs, we calculated \dnds{} rates using a custom Python script
+(\texttt{pairwise\_dnds.py}).
 The script uses the \texttt{dnds} Python package version \texttt{2.1}
 (\url{https://github.com/adelq/dnds}) to calculate \dnds{} using the codon-by-codon
 counting method described by~\cite{nei1986_dnds}.
@@ -1339,29 +1343,51 @@ multiple substitutions using the Jukes-Cantor correction (\cite{JC69}).
 \subsection*{McDonald-Kreitman test}
 
 We calculated the deviation from synonymous to non-synonymous polymorphism and
-divergence using the McDonald-Kreitman test (\cite{mcdonald_adaptive_1991}).
-We used the pairwise alignments and ortholog assignment between \bgla{} and \textit{B.
-crenatus} described above as a basis for the analysis.
+divergence using the McDonald-Kreitman (MK) test (\cite{mcdonald_adaptive_1991}),
+using the single-copy orthologs between \bgla{} and \textit{B. crenatus} described
+above.
 For determining the levels of polymorphism, we took population genetic data from
 \bgla{} from Central Oregon (see \nameref{sec:methods_popgen}).
 We used a custom Python script (\texttt{extract\_hap\_cds.py}) to map these
 variants (both SNPs and indels) to the \bgla{} coding sequences, effectively
-creating two allelic variant for each sample for each protein coding gene.
-This polymorphism data was re-organized for each single-copy orthogroup,
-taking the \textit{B. crenatus} as an outgroup species.
-After processing, we obtain a multi-species FASTA file, containing both
-polymorphic sequences for \bgla{} and a \textit{B. crenatus} outgroup
-sequence, for each ortholog.
-
-\vspace{0.2cm}
-Similar to the \dnds{} analysis, we codon multiple-sequence alignments of all 
-coding sequences using \textsc{prank} \texttt{-codon}.
-Alignments containing frameshift mutations were removed from the analysis.
+creating two allelic variants for each sample for each protein coding gene.
+This polymorphism data was re-organized for each ortholog, generating a
+per-ortholog multi-species FASTA file, containing both polymorphic sequences for
+\bgla{} and the corresponding \textit{B. crenatus} outgroup sequence.
+Similar to the \dnds{} analysis, we generated codon-aware multiple-sequence
+alignments of all coding sequences using \textsc{prank} \texttt{-codon}.
+Orthologs whose alignments contained frameshift mutations were removed from the
+analysis.
 The resulting alignments were processed with \textsc{ClipKIT}, trimming the
 alignment by codons (\texttt{--codon}), and trimming sites above a gap threshold
 of 25\% (\texttt{--mode gappy}; \texttt{--gaps 0.25}).
+Alignments smaller than 100 bp were also discarded, retaining sequences for 7,374 
+orthologs.
+\vspace{0.2cm}
 
-% mKado
+% TODO: update MKado citation once available
+The MK test and associated statstics were calculated using the
+\textsc{MKado} version \texttt{0.2.0} software
+(\url{https://github.com/kr-colab/mkado}).
+\textsc{MKado} parses the multiple-sequence alignments and computes the 
+non-synonymous and synonymous changes in divergence and polymorphism
+(D\textsubscript{n}, D\textsubscript{s}, P\textsubscript{n}, P\textsubscript{s},
+respectively), between ingroup and outgroup sequences.
+We ran \textsc{MKado} three times, each time calculating a different variant of
+the MK test.
+First, we calculated the standard MK test (\cite{mcdonald_adaptive_1991}) for all
+7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating
+per-gene \textalpha{} (\cite{smith_adaptive_2002}), Neutrality Index (NI;
+\cite{rand_excess_1996}) and Direction of Selection (DoS;
+\cite{stoletzki_estimation_2011}).
+Next, we calculated the asymptotic MK test (\texttt{--asymptotic};
+\cite{messer_frequent_2013}) to correct for the biases introduced by low frequency
+polymorphism, and estimating \textalpha{}\textsubscript{asym} aggregated across
+all genes.
+Lastly, we calculated the Tarone-Greenland weighted estimator
+(\textalpha\textsubscript{TG};~\cite{stoletzki_estimation_2011}) using
+\textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiaased estimator of
+genome-wide \textalpha{} when comparing across multiple genes.
 
 \subsection*{Codon usage biases}
 

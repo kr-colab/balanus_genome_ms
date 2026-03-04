@@ -1049,7 +1049,6 @@ generate per-sample, per-haplotype consensus sequences for protein coding genes.
 It generates *n* consensus files per sample in the VCF, where *n* is the ploidy.
 It depends on `bcftools` and `samtools`.
 
-
 ```sh
 $ python3 extract_hap_cds.py -h
 
@@ -1069,6 +1068,19 @@ options:
                         of code [default=1].
   --snps-only           Filter the input variants to only keep SNPs.
   ```
+
+* `run_mkado.sh`
+
+Calculate three different versions of the McDonald-Kreitman test using the
+`MKado` version `0.2.0` software:
+
+1. Standard MK test (McDonald & Kreitman 1991)
+2. Asymptotic MK test (Messer & Petrov 2013)
+3. Tarone-Greenland estimator (Stoletzki and Eyre-Walker, 2011)
+
+#### Codon usage biases
+
+`scripts/comparative_genomics/codon_usage`
 
 ## *Balanus crenatus* genome assembly and annotation
 
