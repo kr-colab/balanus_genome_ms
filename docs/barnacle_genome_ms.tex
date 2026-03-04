@@ -1246,8 +1246,10 @@ published annotations and/or transcriptomic data for the striped barnacle
 (\textit{Amphibalanus amphitrite};~\cite{han_new_2024,kim_draft_2019}), the
 Bay barnacle (\textit{Amphibalanus improvisus};~\cite{bishop_genome_2025}),
 and the gooseneck barnacle (\textit{Pollicipes pollicipes};
-\cite{bernot_chromosome-level_2022}). See
-\nameref{sec:sup_methods_barnacle_rna} for details.
+\cite{bernot_chromosome-level_2022}).
+See \nameref{sec:sup_methods_barnacle_rna} for additional details.
+For all species, we used the longest isoform as representative for each gene for
+all downstream analyses.
 \vspace{0.2cm}
 
 We identified orthologs across the protein-coding genes of these five genomes using
@@ -1302,9 +1304,62 @@ the \texttt{phastCons}. The script provides general statistics about the HCEs
 (e.g., number of HCE and size distribution) and annotates conserved sites
 based on their overlap to annotated features in the genome.
 
-\subsection*{Analysis of molecular evolution}
+\subsection*{Estimating rates of non-synonymous to synonymous substitution}
 
-\subsubsection*{McDonald-Kreitman test}
+We calculated pairwise \dnds{} between the coding sequences of \bgla{} and its
+congener \textit{B. crenatus}. We first took the orthologous protein coding genes
+identified between the two species by \textsc{OrthoFinder}.
+Then, we used a custom Python script (\texttt{extract\_orthogroups\_cds.py}) to
+extract the per-species coding sequences for each single-copy ortholog between the
+two species.
+We generated a multiple-sequence alignment (MSA) for each ortholog using
+\textsc{prank} version \texttt{v.170427} (\cite{loytynoja2005_prank}) in codon
+mode (\texttt{-codon}), using the \textsc{OrthoFinder} phylogeny as the guide
+tree for alignment (\texttt{-tree}; \texttt{-prunetree}), and performing three
+iterations of re-alignments (\texttt{-iterate=3}).
+The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
+\cite{steenwyk2020_clipkit}, trimming the alignment by codons (\texttt{--codon}).
+Lastly, we filtered all alignments shorter than 100 bp.
+\vspace{0.2cm}
+
+After generating and processing alignments for all single-copy orthologs, we
+calculated \dnds rates using a custom Python script (\texttt{pairwise\_dnds.py}).
+The script uses the \texttt{dnds} Python package version \texttt{2.1}
+(\url{https://github.com/adelq/dnds}) to calculate \dnds{} using the codon-by-codon
+counting method described by~\cite{nei1986_dnds}.
+For each alignment, we calculated the total number of non-synonymous and
+synonymous sites (N\textsubscript{c} and S\textsubscript{c}, respectively),
+accounting for the degenerate codons.
+We then calculated the number of non-synonymous (N\textsubscript{d}) and
+synonymous (S\textsubscript{d}) observed between the two sequences.
+The rate between the number non-synonymous (d\textsubscript{N}) and synonymous
+(d\textsubscript{S}) substitutions and sites is then calculated, and corrected for
+multiple substitutions using the Jukes-Cantor correction (\cite{JC69}).
+
+\subsection*{McDonald-Kreitman test}
+
+We calculated the deviation from synonymous to non-synonymous polymorphism and
+divergence using the McDonald-Kreitman test (\cite{mcdonald_adaptive_1991}).
+We used the pairwise alignments and ortholog assignment between \bgla{} and \textit{B.
+crenatus} described above as a basis for the analysis.
+For determining the levels of polymorphism, we took population genetic data from
+\bgla{} from Central Oregon (see \nameref{sec:methods_popgen}).
+We used a custom Python script (\texttt{extract\_hap\_cds.py}) to map these
+variants (both SNPs and indels) to the \bgla{} coding sequences, effectively
+creating two allelic variant for each sample for each protein coding gene.
+This polymorphism data was re-organized for each single-copy orthogroup,
+taking the \textit{B. crenatus} as an outgroup species.
+After processing, we obtain a multi-species FASTA file, containing both
+polymorphic sequences for \bgla{} and a \textit{B. crenatus} outgroup
+sequence, for each ortholog.
+
+\vspace{0.2cm}
+Similar to the \dnds{} analysis, we codon multiple-sequence alignments of all 
+coding sequences using \textsc{prank} \texttt{-codon}.
+Alignments containing frameshift mutations were removed from the analysis.
+The resulting alignments were processed with \textsc{ClipKIT}, trimming the
+alignment by codons (\texttt{--codon}), and trimming sites above a gap threshold
+of 25\% (\texttt{--mode gappy}; \texttt{--gaps 0.25}).
 
 % mKado
 
@@ -1313,6 +1368,8 @@ based on their overlap to annotated features in the genome.
 \subsection*{Popgen}\label{sec:methods_popgen}
 
 \subsection*{Demographic inference}
+
+\subsection*{Allozymes}
 
 \subsection*{Data Availability}
 

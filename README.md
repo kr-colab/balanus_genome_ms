@@ -911,10 +911,9 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
 version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
 
-### Whole-genome alignment and conserved regions
+#### Whole-genome alignment and conserved regions
 
 `scripts/comparative_genomics/phastcons`
-
 * `run_cactus.sh`
 
 Run a whole genome alignment with `cactus` version `2.9.7`.
@@ -938,7 +937,7 @@ Usage:
 
 ```sh
 $ python3 tally_phastcon_elements.py -h
-tally_phastcon_elements.py started on 2026-03-02 21:33:07.
+
 usage: tally_phastcon_elements.py [-h] -f FAI -a ANNOTATION -p PHASTCONS [-o OUT_DIR]
                                   [-m MIN_SEQ_LEN] [-i MIN_INTERVAL_LEN]
 
@@ -960,6 +959,116 @@ options:
   -i, --min-interval-len MIN_INTERVAL_LEN
                         (int) Min length of intervals in input BED files [default=1].
 ```
+
+#### dN/dS analysis
+
+`scripts/comparative_genomics/dnds`
+
+* `extract_orthogroups_cds.py`
+
+Custom Python script to take the orthologs from `OrthoFinder` and extract the
+corresponding coding sequences for each species. It generates a per-orthogroup
+FASTA containing the sequences for each species.
+
+```sh
+$ python3 extract_orthogroups_cds.py -h
+
+usage: extract_orthogroups_cds.py [-h] -s SCO_LIST -r ORTHOGROUPS_TSV
+                                  -c CDS_IN_DIR [-o OUT_DIR] [-t] [-f]
+
+options:
+  -h, --help            show this help message and exit
+  -s, --sco-list SCO_LIST
+                        (str) Path to orthofinder
+                        Orthogroups/Orthogroups_SingleCopyOrthologues.txt file.
+  -r, --orthogroups-tsv ORTHOGROUPS_TSV
+                        (str) Path to the orthofinder
+                        Orthogroups/Orthogroups.tsv
+  -c, --cds-in-dir CDS_IN_DIR
+                        (str) Path to the directory containing the input per-
+                        taxon CDS sequences.
+  -o, --out-dir OUT_DIR
+                        (str) Path to output directory [default=./].
+  -t, --trim-stops      Trim the 3' stop codons from the extracted sequences
+                        [default=False]
+  -f, --check-frame     Filter out sequences if the codons are out of frame,
+                        not multiple of 3 [default=False]
+```
+
+* `run_prank_msa.sh`
+
+Generate a codon-aware multiple sequence alignment using `prank` version `v.170427`.
+
+* `run_clipkit.sh`
+
+Filter and trim multiple sequence alignments using `ClipKIT` version `2.7.0`.
+
+* `pairwise_dnds.py`
+
+Custom Python script used to process pairwise alignments of coding sequences and
+calculate dN/dS. It depends on the [`dnds`](https://github.com/adelq/dnds) and
+[`BioPython`](https://biopython.org) packages.
+
+```sh
+$ python3 pairwise_dnds.py -h
+
+usage: pairwise_dnds.py [-h] -s SCO_LIST -a ALIGNMENTS -i INGROUP
+                        [-o OUT_DIR] [-m MIN_ALN_LEN] [-p ALN_SUFFIX]
+
+options:
+  -h, --help            show this help message and exit
+  -s SCO_LIST, --sco-list SCO_LIST
+                        (str) Path to the single-copy orthgroup table
+                        (produced by `extract_orthogroups_cds.py`).
+  -a ALIGNMENTS, --alignments ALIGNMENTS
+                        (str) Path to the directory with the trimmed
+                        multiple sequence alignments.
+  -i INGROUP, --ingroup INGROUP
+                        (str) ID of the ingroup (focal) species in the
+                        alignment. Used to report gene/transcript IDs
+                        in the output.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Path to output directory [default=./].
+  -m MIN_ALN_LEN, --min-aln-len MIN_ALN_LEN
+                        (int) Minimum length required to keep an alignment
+                        [default=25]
+  -p ALN_SUFFIX, --aln-suffix ALN_SUFFIX
+                        (str) Suffix for the alignment FASTA files
+                        [default=fa].
+```
+
+#### McDonald-Kreitman test
+
+`scripts/comparative_genomics/mk_test`
+
+* `extract_hap_cds.py`
+
+Custom Python scripts that takes the genetic variants in a VCF file and propagates
+these variants along genomic regions specified in a GFF file. It can be used to
+generate per-sample, per-haplotype consensus sequences for protein coding genes.
+It generates *n* consensus files per sample in the VCF, where *n* is the ploidy.
+It depends on `bcftools` and `samtools`.
+
+
+```sh
+$ python3 extract_hap_cds.py -h
+
+usage: extract_hap_cds.py [-h] -g GENOME -f GFF -v VCF [-o OUT_DIR]
+                          [-t THREADS] [--snps-only]
+
+options:
+  -h, --help            show this help message and exit
+  -g GENOME, --genome GENOME
+                        (str) Path to genome in FASTA format.
+  -f GFF, --gff GFF     (str) Path to the annotation in GFF format.
+  -v VCF, --vcf VCF     (str) Path to variants in VCF/BCF format.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Path to output directory [default=.].
+  -t THREADS, --threads THREADS
+                        (int) Number of threads to run in parallel sections
+                        of code [default=1].
+  --snps-only           Filter the input variants to only keep SNPs.
+  ```
 
 ## *Balanus crenatus* genome assembly and annotation
 
