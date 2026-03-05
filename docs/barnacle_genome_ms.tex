@@ -1365,10 +1365,8 @@ Alignments smaller than 100 bp were also discarded, retaining sequences for 7,37
 orthologs.
 \vspace{0.2cm}
 
-% TODO: update MKado citation once available
-The MK test and associated statstics were calculated using the
-\textsc{MKado} version \texttt{0.2.0} software
-(\url{https://github.com/kr-colab/mkado}).
+The MK test and associated statstics were calculated using the \textsc{MKado}
+version \texttt{0.2.0} software (\cite{mkado_2026}).
 \textsc{MKado} parses the multiple-sequence alignments and computes the 
 non-synonymous and synonymous changes in divergence and polymorphism
 (D\textsubscript{n}, D\textsubscript{s}, P\textsubscript{n}, P\textsubscript{s},
@@ -1390,6 +1388,20 @@ Lastly, we calculated the Tarone-Greenland weighted estimator
 genome-wide \textalpha{} when comparing across multiple genes.
 
 \subsection*{Codon usage biases}
+
+We calculated codon usage biases on the \bgla{} coding sequences using the R package
+\textsc{cubar} version \texttt{1.2.0} (\cite{liu_cubar_2026}).
+We first filtered coding sequences using the \texttt{check\_cds} function,
+ensuring the presence of canonical start and stop codons, retaining 16,904
+sequences.
+Then we calculated the distribution of observed codons using the
+\texttt{cound\_codons} function.
+Lastly, we used the \texttt{get\_enc} function to calculate codon usage biases
+in the empirical codon distribution using the effective number of codons (ENC)
+metric, which captures the deviation from equal codon usage across synonymous
+codons (\cite{wright_effective_1990}).
+More specifically, we calculated an improved implementation of ENC, accouting for
+usage differences across different codon subfamilies (\cite{sun_improved_2013}).
 
 \subsection*{Popgen}\label{sec:methods_popgen}
 

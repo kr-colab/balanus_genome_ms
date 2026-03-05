@@ -1082,6 +1082,12 @@ Calculate three different versions of the McDonald-Kreitman test using the
 
 `scripts/comparative_genomics/codon_usage`
 
+* `run_cubar.sh`
+
+Take a set of coding sequences in FASTA format and calculate codon usage using the `cubar` version `1.2.0` R package. The script does a few statistics, but the main
+one we care about here is the effective number of codons (ENC).
+
+
 ## *Balanus crenatus* genome assembly and annotation
 
 * The wrinkled barnacle (*Balanus crenatus*).
