@@ -1497,6 +1497,7 @@ Additionally, we removed sites with per-sample coverage lower than 10x, genotype
 lower than 30, and allelic imbalance larger than 30\%.
 After merging individual per-chromosome variants into a single genome-wide VCF, we also
 removed any sites containing missing genotypes (\texttt{bcftools view -g \^{}miss}).
+The effects of the kept variants was determined using \textsc{snpEff}.
 
 \subsubsection*{Population genetic statistics}
 
@@ -1512,6 +1513,10 @@ input VCF file (\texttt{--sites\_file}).
 
 We performed additional diversity calculations with \textsc{pixy} on different regions
 of interest in the genome. Instead of running on standard 10 kbp windows,
+
+% TODO:
+% mention calculating over genes and exons, introns, etc.
+% mention calculationg over 0- and 4- fold sites which were calculated using degenotate.
 
 
 \subsection*{Inference of effective population size}
