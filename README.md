@@ -1112,7 +1112,7 @@ Normalize indels and adjacent variant sites using `BCFtools norm`.
 
 * `softFilt_bcf.sh`
 
-Filter the variants using `BCFtools filter` and `view`.
+Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
 
 * `run_snpEff.sh`
 
@@ -1126,12 +1126,36 @@ genetics data for central Oregon barnacles. This includes the alignment and geno
 of individuals as well as various downstream analyses.
 
 * `bwa_align_reads.sh`
+  
+Align the processed Illumina short reads for the eight samples using `bwa mem` version
+`0.7.18-r1243`. Process the resulting alignments with `samtools` version `1.21`.
+Calculate depth of coverage using `mosdepth` version `0.3.10`.
+
 * `run_bcftools_chr.sh`
+
+Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the six Oregon barnacle
+sam individuals. Run the genotyping per-chromosome.
+
 * `filt_bcf_4pixy.sh`
+
+Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
+
 * `run_pixy.sh`
+
+Take the processed genotypes and calculate population genetic statistics (e.g.,
+pi and Watterson's theta) using `pixy` version `2.0.0.beta12`. By default,
+calculate these statistics over the whole genome within 10 kbp windows.
+
 * `run_pixy_features.sh`
-* `run_pixy.sh`
+
+Take the processed genotypes and calculate diversity over specific genomic features
+(e.g., coding exons, introns, intergenic) using `pixy` version `2.0.0.beta12`. The
+coordinates of the features of interest are specified in BED format.
+
 * `run_degenotate.sh`
+
+Run `degenotate` version `1.3` to calculate the degeracy of the coding sites in the
+*B. glandula* reference annotation.
 
 ## *Balanus crenatus* genome assembly and annotation
 
