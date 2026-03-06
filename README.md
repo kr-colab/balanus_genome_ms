@@ -1084,9 +1084,46 @@ Calculate three different versions of the McDonald-Kreitman test using the
 
 * `run_cubar.sh`
 
-Take a set of coding sequences in FASTA format and calculate codon usage using the `cubar` version `1.2.0` R package. The script does a few statistics, but the main
-one we care about here is the effective number of codons (ENC).
+Take a set of coding sequences in FASTA format and calculate codon
+usage using the `cubar` version `1.2.0` R package. The script does a
+few statistics, but the main one we care about here is the effective
+number of codons (ENC).
 
+### Reference sample popgen
+
+The directory `popgen/reference_sample` contains a series of scripts for
+calculating diversity statistics on the *B. glandula* refererence individual,
+including aligning reads, genotyping, and filtering.
+
+* `mmp_align_hifi.sh`
+
+Align the processed PacBio HiFi reads using `minimap2` version `2.28-r1209`.
+Process the resulting alignments with `samtools` version `1.21`. Calculate
+depth of coverage using `mosdepth` version `0.3.10`.
+
+* `run_bcftools_hifi.sh`
+
+Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the barnacle reference
+individual. Run the genotyping per-chromosome.
+
+* `run_bcftools_norm.sh`
+
+Normalize indels and adjacent variant sites using `BCFtools norm`.
+
+* `softFilt_bcf.sh`
+
+Filter the variants using `BCFtools filter` and `view`.
+
+* `run_snpEff.sh`
+
+Take the set of called variants and annotate their effects using `snpEff` version `5.2`.
+First, the script builds a `snpEff` database. Then, it annotates the VCF.
+
+### Oregon barnacle popgen
+
+The directory `/scripts/popgen` contains various script for analyzing the population
+genetics data for central Oregon barnacles. This includes the alignment and genotyping
+of individuals as well as various downstream analyses.
 
 ## *Balanus crenatus* genome assembly and annotation
 
