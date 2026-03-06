@@ -1091,7 +1091,7 @@ number of codons (ENC).
 
 ### Reference sample popgen
 
-The directory `popgen/reference_sample` contains a series of scripts for
+The directory `scripts/popgen/reference_sample` contains a series of scripts for
 calculating diversity statistics on the *B. glandula* refererence individual,
 including aligning reads, genotyping, and filtering.
 
@@ -1121,9 +1121,17 @@ First, the script builds a `snpEff` database. Then, it annotates the VCF.
 
 ### Oregon barnacle popgen
 
-The directory `/scripts/popgen` contains various script for analyzing the population
+The directory `scripts/popgen/oregon` contains various script for analyzing the population
 genetics data for central Oregon barnacles. This includes the alignment and genotyping
 of individuals as well as various downstream analyses.
+
+* `bwa_align_reads.sh`
+* `run_bcftools_chr.sh`
+* `filt_bcf_4pixy.sh`
+* `run_pixy.sh`
+* `run_pixy_features.sh`
+* `run_pixy.sh`
+* `run_degenotate.sh`
 
 ## *Balanus crenatus* genome assembly and annotation
 

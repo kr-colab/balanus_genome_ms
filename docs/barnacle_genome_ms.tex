@@ -605,7 +605,8 @@ observed between the density of segregating sites within 10 kbp windows and $\pi
 (Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}). The proportion of
 segregating sites in itself was not correlated with the density of particular genomic
 features, except for repeats; however, this is likely an artifact of the masking of
-genotypes located within repetitive intervals in the reference (see \nameref{sec:methods_popgen}).
+genotypes located within repetitive intervals in the reference
+(see \nameref{sec:methods_popgen}).
 \vspace{0.2cm}
 
 % Genome-wide pi & repeat and gene density
@@ -678,8 +679,8 @@ and the highest in the genome.
 We estimated the effective population size (\Ne) for a central
 Oregon \textit{B. glandula} population sample using the whole-genome genotypes.
 As a simple estimate of the long-term \Ne{} of this population, we first
-calculated \Ne{} using Watterson's estimator of genetic diversity ($\theta_W$),
-observing a genome-wide mean $\theta_W$ of 0.0617 (median: 0.0635, standard
+calculated \Ne{} using Watterson's estimator of genetic diversity ($\theta_\text{W}$),
+observing a mean genome-wide $\theta_\text{W}$ of 0.0617 (median: 0.0635, standard
 deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Assuming a per-base,
 per-generation mutation rate ($\mu$) of $3\times10^{-9}$ (as estimated by
 \cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides})
@@ -970,7 +971,7 @@ kit and sequenced, pooled along with other samples, on two Illumina NovaSeq6000
 S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F. Across both lanes,
 the sequencing process yielded 1.97 billion reads across the eight individuals,
 an average of 246.3 million reads per individual. In total, these individuals
-were sequenced at an estimated depth of 45x.
+were sequenced at an estimated depth of $\approx$ 60x.
 
 \subsection*{Genome assembly}\label{sec:methods_assembly}
 
@@ -1407,7 +1408,7 @@ codons (\cite{wright_effective_1990}).
 More specifically, we calculated an improved implementation of ENC, accouting for
 usage differences across different codon subfamilies (\cite{sun_improved_2013}).
 
-\subsection*{Genetic variation in the \balgla{} reference}
+\subsection*{Genetic variation in the \balgla{} reference}\label{sec:methods_ref_geno}
 
 We genotyped our barnacle reference individual to assess the levels of genetic variation
 present in our genome assembly.
@@ -1462,6 +1463,55 @@ CSV file containing a breakdown of all annotated variants (\texttt{-csvStats}).
 
 \subsection*{Population genetics of central Oregon barnacles}\label{sec:methods_popgen}
 
+\subsubsection*{Aligning reads}
+
+We used whole-genome shotgun sequencing in order to assses the genetic diversity of a \bgla{}
+population in central Oregon.
+We aligned the Illumina paired-end reads to the reference genome using \textsc{bwa}
+\texttt{mem} version \texttt{0.7.18-r1243}.
+Resulting alignments were processed and sorted using \textsc{samtools} version \texttt{1.21}.
+We used \textsc{Picard} \texttt{MarkDuplicates} version \texttt{3.3.0}
+(\url{https://broadinstitute.github.io/picard/}) to identify PCR duplicate reads, and
+\textsc{gtak} \texttt{LeftAlignIndels} version \texttt{4.6.1.0}
+\cite{mckenna_gatk_2010,depristo_framework_2011} to process indels.
+Then, we used \textsc{samtools} \texttt{view} to filter and export the alignments,
+removing those with low mapping quality (\texttt{-q 30}), unmapped reads (\texttt{-F 4}),
+non-primary (\texttt{-F 256}) and secondary (\texttt{-F 2048}) alignments, and those
+flagged as PCR duplicates (\texttt{-F 1024}).
+Lastly, we calculated depth of coverage using \textsc{mosdepth}.
+Two individuals had low genome-wide average coverage ($<$5x) and were removed from
+downstream analysis.
+The mean genome-wide coverage for the remaining individuals was 48.83x.
+
+\subsubsection*{Genotyping}
+
+These six individuals were genotyped using the same \textsc{bcftools}
+\texttt{mpileup}/\texttt{call} approach used for our reference sample
+(see \nameref{sec:methods_ref_geno}), except allowing for a maximum depth of 1000x when
+genotyping (\texttt{--max-depth 1000}).
+After normalizing indels using \textsc{bcftools} \texttt{norm}, we filtered the called
+variants using \textsc{bcftools} \texttt{filter} and \texttt{view}.
+We removed sites with low quality, adjacent to indels, and within the span of annotated
+repeats.
+Additionally, we removed sites with per-sample coverage lower than 10x, genotype quality
+lower than 30, and allelic imbalance larger than 30\%.
+After merging individual per-chromosome variants into a single genome-wide VCF, we also
+removed any sites containing missing genotypes (\texttt{bcftools view -g \^{}miss}).
+
+\subsubsection*{Population genetic statistics}
+
+We used the \textsc{pixy} software version \texttt{2.0.0.beta12}
+(\cite{korunes_pixy_2021,bailey_pixy2_2025}) to obtain genome-wide measures of genetic
+diversity. We calculated both nucleotide diversity ($\pi$) and Watterson's Theta
+($\theta_\text{W}$; \texttt{--stats pi watterson\_theta}) on 10 kbp windows
+(\texttt{--window\_size 10000}).
+We allowed multiallelic sites to be used in the calculations
+(\texttt{--include\_multiallelic\_snps}), limiting the calculation to sites present in our
+input VCF file (\texttt{--sites\_file}).
+\vspace{0.2cm}
+
+We performed additional diversity calculations with \textsc{pixy} on different regions
+of interest in the genome. Instead of running on standard 10 kbp windows,
 
 
 \subsection*{Inference of effective population size}
@@ -1936,9 +1986,9 @@ DoS = Direction of Selection
     \centering
     \includegraphics[width=0.5\textwidth]{figures/sups_theta_ne.pdf}
     \supfigurecaption{\textbf{Effective population (\Ne) size estimation
-        of \balgla{} based on the Watterson's estimator ($\theta_W$).}
+        of \balgla{} based on the Watterson's estimator ($\theta_\text{W}$).}
         Effective size of the population was calculated according to the
-        relationship $\theta_W=4N_{e}\mu$, using a mutation rate per-base,
+        relationship $\theta_\text{W}=4N_{e}\mu$, using a mutation rate per-base,
         per-generation ($\mu$) of $3\times10^{-9}$.}
     \label{fig:sup_theta_ne}
 \end{figure}
