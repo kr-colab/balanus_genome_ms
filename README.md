@@ -1157,6 +1157,18 @@ coordinates of the features of interest are specified in BED format.
 Run `degenotate` version `1.3` to calculate the degeracy of the coding sites in the
 *B. glandula* reference annotation.
 
+### Demographic inference
+
+`scripts/popgen/ne_inference`
+
+* `run_deminfhelper.sh`
+
+Run `msmc2` version `2.1.4` as implemented in `DemInfHelper`.
+
+* `Bgland_00.yml`
+
+Example of the configuration file required by `DemInfHelper`.
+
 ## *Balanus crenatus* genome assembly and annotation
 
 * The wrinkled barnacle (*Balanus crenatus*).

@@ -1,0 +1,46 @@
+### CONFIGURATION FILE for DemInfHelper
+
+## Output top level directory
+out_dir: ./Bgland_00/
+
+## Input data
+vcf: ./in_variants/Bgland_all.allSites.filtSNPs.vcf.gz
+ref_genome: ./in_reference/BalGla.fa
+
+## L: effective sequence length genotyped
+L: 901159333
+
+## Population(s)
+name_pop: ref
+npop: 1
+
+# POP 1
+# Note: If you don't specify samples, it will use all samples in the VCF
+ref: Bgland_00
+
+# PARAM
+gen_time: 1
+mut_rate: 3e-9
+
+# Only keep contigs >=10mb for the analyses
+length_cutoff: 1000000
+
+## SFS
+out_dir_sfs: Bgland_00/sfs
+folded: True
+
+# MSMC2
+msmc2_kwargs: -i 25 -p 1*2+25*1+1*2+1*3
+out_dir_msmc2: Bgland_00/output_msmc2/
+
+## GQ distribution
+out_dir_gq_distrib: Bgland_00/output_stats/
+
+## FINAL INFERENCES
+final_out_dir: Bgland_00/inferences/
+
+## Stats
+out_dir_stats: Bgland_00/output_stats/
+
+## Contig filter
+contig_filter: .*

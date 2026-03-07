@@ -1523,7 +1523,29 @@ and averaging within the span of each exon (using \texttt{--bed\_file}).
 
 \subsection*{Inference of effective population size}
 
+We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
+population's effective size.
+First, we estimated the long-term average \Ne{} in this population based on the
+estmates of $\theta_\text{W}$ from \textsc{pixy}, and using the relationship
+$\text{N}_\text{e} = \theta_\text{W}/4\mu$.
+We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
+by \cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+Using this relationship, we calculated \Ne{} along 10 kbp windows, obtaining a distribution
+of effective size along the genome.
+\vspace{0.2cm}
+
+We additionally estimated the effective size of the population using the \textsc{msmc2}
+software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
+\textsc{DemInfHelper} program \citep{forest_popsize_2024}.
+We ran \textsc{msmc2} with 25 iternations (\texttt{-i 25}), using the default
+time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
+in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
+Since our genotypes were not phased, we ran \textsc{msmc2} for each individual separately
+(including both our reference sample and our six central Oregon individuals).
+
 \subsection*{Assessment of classic allozyme loci}
+
+TODO:
 
 \subsection*{Data availability}
 
