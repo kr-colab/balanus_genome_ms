@@ -839,6 +839,14 @@ echo "${cmd[@]}"
 "${cmd[@]}"
 ```
 
+#### Functional annotation
+
+The directory `scripts/genome_annotation/functional` contains the configuration files for running
+`EnTap` version `2.3.0`:
+
+* `entap_config.ini`
+* `entap_run.params`
+
 #### Annotating non-coding transcripts
 
 The directory `scripts/genome_annotation/non_coding` contains different script for the

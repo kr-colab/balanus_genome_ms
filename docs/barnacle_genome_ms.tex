@@ -1197,13 +1197,23 @@ individual \textsc{BRAKER} run as inputs to the \texttt{tsebra.py} script. We as
 the gene-completeness of the merged annotation using \textsc{compleasm} \texttt{protein},
 using both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference datasets.
 
-\subsubsection*{Curation of transcript isoforms}
+% TODO: Checking some details from Taco
+% \subsubsection*{Curation of transcript isoforms}
 
-TODO:
+% TODO:
 
 \subsubsection*{Functional annotation}
 
-TODO:
+Functional annotation of the processed protein coding genes was performed using the
+\textsc{EnTAP} software version \texttt{2.3.0} \citep{hart_span_2020}.
+We compared the bgla{} protein sequences against the following curated databases:
+\texttt{eggNOG} (downloaded 2025/07/08),
+\texttt{NCBI nr} (downloaded 2025/10/08),
+\texttt{RefSeq Protein} (downloaded 2025/08/08),
+\texttt{Swiss-Prot} (downloaded 2025/08)/08,cd 
+and \texttt{InterProScan} (downloaded 2025/07/25).
+We considered sequences as contaminant if they had high similarlity to bacteria, fungi, viridiplantae, archaea, nematoda, cestoda, and trematoda.
+Contaminant sequences were removed from the annotation GFF file.
 
 \subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
 
@@ -1549,7 +1559,7 @@ TODO:
 
 \subsection*{Data availability}
 
-Assembly and annotation on PRJNA1378260. Popgen Illumina data on PRJNAXXXXXXX.
+Assembly and annotation on PRJNA1378260. Popgen Illumina data on PRJNA1434535.
 Code repo: \url{https://github.com/kr-colab/balanus_genome_ms}.
 
 \section*{Acknowledgments}
