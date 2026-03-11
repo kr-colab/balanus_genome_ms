@@ -300,7 +300,6 @@ single-copy orthologs across all five species.
 
 % Short paragraph, but unsure what to say here. Just wanted to mention that
 % we annotated non-coding stuff too.
-%TODO -- add this methods section for non-coding annotation.
 
 In addition to protein-coding genes, we also annotated non-coding elements in the
 \bgla{} reference assembly. We identified 7,532 long, non-coding RNAs
@@ -371,7 +370,6 @@ considerable coding variation segregating within a single individual.
 
 % For phastCons, mostly saying how we found the hughly conserved stuff and what
 % it is. The enrichment results are generally expected (tRNAs and CDSs are conserved).
-% Not sure what else to say there.
 
 We used the \textsc{phastCons} package \citep{siepel_evolutionarily_2005} on the
 \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} between
@@ -391,23 +389,64 @@ annotation, obtaining the proportion of annotated features among HCE sites
 ``intergenic'' class for the unannotated fraction of the genome and a ``multiple''
 class for annotation overlaps (e.g., a site spanning both a transposable element
 and an intron) — all but one are present among HCEs. We did not observe any rRNA
-sites among our conserved sites; however, this
-is likely the product of the whole-genome alignment, given rRNA's repetitive nature
-and alignment difficulty \citep{gillespie_characterizing_2004}, and not an accurate
-measure of conservation (or lack thereof). Aside from the absence of rRNAs, the
-sequence composition of HCEs largely followed that of the whole genome. Most annotated
-features do not appear substantially enriched among HCE sites (Figure~\ref{fig:phastcons}B,
-Table~\ref{tab:sup_phastcons_enrichment}). The two clear exceptions are coding
-sequences (CDSs) and tRNAs. CDSs display an approximately two-fold enrichment among HCEs
-(mean $\log_2$ enrichment: 0.75, median: 0.98, standard deviation: 0.93), reflecting
-the conservation of protein-coding genes among barnacle genomes. Similarly, tRNAs exhibit
-four-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14, median: 2.04, standard
-deviation: 0.96), likely reflecting the strong functional constraints on these sequences.
+sites among our conserved sites; however, this is likely the product of the
+whole-genome alignment, given rRNA's repetitive nature and alignment difficulty
+\citep{gillespie_characterizing_2004}, and not an accurate measure of conservation (or
+lack thereof).
+Aside from the absence of rRNAs, the sequence composition of HCEs largely followed that of
+the whole genome.
+Most annotated features do not appear substantially enriched among HCE sites
+(Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}).
+The two clear exceptions are coding sequences (CDSs) and tRNAs.
+Protein-coding sequences display an approximately 2-fold enrichment among HCEs (mean
+$\log_2$ enrichment: 0.75, median: 0.98, standard deviation: 0.93), reflecting the
+conservation of protein-coding genes among barnacle genomes.
+Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14,
+median: 2.04, standard deviation: 0.96), likely reflecting the strong functional constraints
+on these sequences.
 
-% TODO:
-%ADK -- generally speaking, I think this is a good way to present the phastCons results.
-% but to make this more interesting we want to put this in context. How does this compare to
-% other species? take a look here https://doi.org/10.1093/molbev/mst082
+The rank order of enrichment among conserved elements in \bgla{} mirrors patterns
+observed across other groups of organisms. \cite{siepel_evolutionarily_2005} characterized
+the distribution of \textsc{phastCons}-conserved elements across vertebrate, insect, worm,
+and yeast genomes, finding that coding sequences are consistently enriched among conserved
+elements, with enrichment values ranging from 15.5-fold in vertebrates to lower values in
+the more compact insect and worm genomes. A subsequent analysis of 20 angiosperm plant
+genomes using the same framework \citep{hupalo_conservation_2013} found that translational
+RNAs were the most enriched annotation among conserved regions ($\approx$3.6-fold),
+followed by coding sequences ($\approx$1.3-fold), while transposable elements were
+drastically underrepresented. The enrichment pattern in barnacles follows the same ordering
+observed in both plants and animals: tRNAs are the most enriched feature
+($\approx$4-fold), followed by CDSs ($\approx$2-fold), while transposable elements
+are depleted among HCEs.
+\vspace{0.2cm}
+
+As fellow arthropods, insects provide the most phylogenetically relevant comparison for
+barnacles.
+In \textit{Drosophila}, conserved elements cover 44.5\% of the genome, with 34\% of conserved
+bases falling in protein-coding exons \citep{siepel_evolutionarily_2005}.
+Less dramatic differences in enrichment across annotation classes are also observed when
+compared with vertebrate genomes.
+In \bgla{}, HCEs cover a substantially smaller fraction of the genome (6.05\%), and only
+4.4\% of HCE bases overlap CDSs (Table~\ref{tab:sup_phastcons_enrichment}).
+Both of these values are lower than those observed in insects; however, this difference is
+likely driven by the repeat-rich nature of the barnacle genome (67\% repetitive elements,
+compared with $\approx$15\% in \textit{D. melanogaster}), which contributes a large fraction
+of HCE bases in transposable element and overlapping annotation categories.
+Despite these differences in raw composition, CDSs are enriched among conserved elements
+in both insects and barnacles, consistent with the expectation that protein-coding
+sequences are among the most functionally constrained regions in arthropod genomes.
+More broadly, \cite{siepel_evolutionarily_2005} showed that the proportion of conserved
+bases that overlap protein-coding exons scales with genome compactness, from 86\% in
+yeast to 59\% in worms, 34\% in insects, and 28\% in vertebrates, with plants at 42\%
+\citep{hupalo_conservation_2013}.
+The low CDS proportion in barnacle HCEs extends this trend to an arthropod with a much
+larger, more repeat-rich genome than the model insects examined in previous studies.
+Additionally, introns are mildly enriched among barnacle HCEs
+($\approx$1.3-fold), in contrast with their depletion in plant ($\approx$0.4-fold;
+\cite{hupalo_conservation_2013}), insect, and vertebrate conserved elements
+\citep{siepel_evolutionarily_2005}.
+However, it remains unknown if this enrichment reflects the larger intronic fraction
+of the barnacle genome or genuine intronic conservation in this lineage.
 
 % Phastcons and enrichment
 \begin{figure}[htbp]
@@ -765,7 +804,12 @@ individual (Figure~\ref{fig:sup_kmers}; Table~\ref{tab:sup_popgen_stats}), in
 accordance with the expectation of high polymorphism in large populations. We see
 enrichment in the sequence conservation of putatively functional sites
 (Figure~\ref{fig:phastcons}), the likely result of strong purifying selection over
-evolutionarily constrained sequences. In concert, we also find evidence for the high
+evolutionarily constrained sequences. Notably, the rank ordering of this enrichment
+, with tRNAs and CDSs as the most enriched features among conserved elements,
+parallels findings in insects (\cite{siepel_evolutionarily_2005}) and plants
+(\cite{hupalo_conservation_2013}), suggesting that the targets of purifying selection
+are broadly conserved across arthropods despite the much larger and more repeat-rich
+genome of \bgla{}. In concert, we also find evidence for the high
 efficacy of positive selection in large populations in the form of the fixation
 of a large fraction of non-synonymous substitutions (Figure~\ref{fig:mkTest}).
 We also observe substantial codon usage biases, finding preliminary evidence for
@@ -865,23 +909,61 @@ kimura_neutral_1983} and are still the subjects of study \citep{buffalo_quantify
 Our work on the Pacific acorn barnacle provides a unique opportunity to empirically
 study this disparity and the biological processes that maintain it.
 
-% Notes from lab meeting 2026/01/15:
-% Discussion on molecular evolution. Why are we not seeing dN/dS and MKT match?
-% We see small dN/dS and large MKT, so at first glance this is counterintuive.
-% But is it?
+\subsection*{Molecular evolution in large populations: reconciling \dnds and the
+McDonald-Kreitman test}
+% ADK -- i don't know if this subsection should go here or earlier in the discussion.
 
-% Also, we can also discuss the issues with our current metrics, e.g., recurrent
-% mutation and effects in theta, psmc, etc.
-% How much we should discuss here?
+One of the more striking patterns in our results is the apparent discordance between
+our two measures of selection on protein-coding genes. The pairwise \dnds{} between
+\bgla{} and \textit{B. crenatus} is 0.206 on average, indicating that the majority
+of coding sites are under purifying selection. Yet the McDonald-Kreitman test reveals
+that $\approx$61\% of non-synonymous substitutions that have fixed between these
+species were driven by positive selection (\textalpha{}\textsubscript{asym} = 0.610).
+At first glance, these results appear contradictory: how can coding sequences be
+under strong purifying selection while simultaneously showing pervasive adaptive
+evolution?
 
-% ADK: Strongly recommend adding a subsection here on molecular evolution addressing
-% the dN/dS vs. MKT tension flagged above. This is one of the more intellectually
-% interesting results and the Discussion currently only gives it a passing mention in
-% "Genome evolution in large populations." Similarly, at ~5% diversity, infinite-sites
-% assumptions may break down -- the implications for theta, PSMC, and standard popgen
-% tools are worth discussing. These two topics (dN/dS-MKT tension + recurrent mutation)
-% could form a compelling subsection on the methodological challenges of studying
-% hyperpolymorphic genomes.
+The resolution lies in the fact that \dnds{} and the McDonald-Kreitman test measure
+fundamentally different quantities. The \dnds{} ratio averages across all
+nonsynonymous sites in a gene, the vast majority of which are under functional
+constraint, resulting in a ratio well below one. In contrast, the McDonald-Kreitman
+test partitions changes into polymorphism and divergence, using synonymous changes
+as a neutral baseline to ask whether there is an \textit{excess} of nonsynonymous
+fixations relative to the neutral expectation. This test is therefore sensitive to
+the subset of nonsynonymous mutations that escape purifying selection and reach
+fixation, even when most nonsynonymous sites in a gene are constrained.
+Moreover, pairwise \dnds{} is calculated from a single sequence per species and
+therefore incorporates segregating polymorphisms into its divergence estimate. In
+species with many weakly deleterious nonsynonymous variants segregating at
+appreciable frequencies, this can inflate the nonsynonymous divergence and distort
+estimates of selection (\cite{li_reverse_2008}). By explicitly separating
+polymorphism from fixation, the McDonald-Kreitman test avoids this conflation.
+
+
+\cite{li_reverse_2008} compared the performance of \dnds{} and the McDonald-Kreitman
+test across human, \textit{Drosophila}, and yeast genomes and found that the two
+approaches identify distinct but correlated sets of genes as targets of selection.
+Notably, the McDonald-Kreitman test was more powerful than \dnds{} only in
+\textit{Drosophila}, the species with the most abundant polymorphism data, where it
+identified nearly three times as many genes under positive selection. In the
+lower-diversity human and yeast datasets, the pattern was reversed. This suggests
+that the statistical power of the McDonald-Kreitman test is greatest in
+high-polymorphism species, making it particularly well suited for systems like
+barnacles where segregating variation is abundant.
+
+
+The pattern we observe in barnacles is thus consistent with theoretical expectations
+for large populations: strong purifying selection efficiently removes the majority
+of deleterious nonsynonymous mutations, keeping \dnds{} low, while at the same time
+the increased efficacy of positive selection drives a disproportionate fraction of
+the remaining nonsynonymous substitutions to fixation, producing a high
+\textalpha{}. This coupling of strong purifying and positive selection is a hallmark
+of evolution in large populations and has been observed in \textit{Drosophila}, where
+\textalpha{}\textsubscript{asym} is approximately 0.57 (\cite{messer_frequent_2013}).
+Our estimate of \textalpha{}\textsubscript{asym} = 0.610 in \bgla{} is comparable to
+or slightly higher than that in \textit{Drosophila}, consistent with the expectation
+that the even larger effective population size in barnacles further increases the
+efficacy of both modes of selection.
 
 \section*{Conclusion}
 
