@@ -2,10 +2,6 @@
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
 
-## Working Overleaf doc
-
-<https://www.overleaf.com/project/682b8a7df249ffae37220a61>
-
 ## *Balanus glandula* genome assembly and annotation
 
 * The Pacfic acorn barnacle (*Balanus glandula*).
@@ -65,65 +61,28 @@ Path to raw reads:
 /sietch_colab/data_share/balanus/isoseq/6885/ccs.Q20
 ```
 
-#### TELLseq
-
-<!-- TODO: Remove this-->
-
-One of several individuals collected on August 2024 by the Kern-Ralph co-lab at Bob Creek, OR ([map](https://maps.app.goo.gl/Kzq9TssYcpcbbqvP6)). More TELLseq was performed on other individuals for collecting popgen data.
-
-DNA was extracted using PacBio Nanobind and prepared in a TELLseq library. Sequenced 2x150bp on an Illumina NovaSeq 6000 at the University of Oregon's GC3F.
-
-<!--- Confirm this --->
-
-Path to raw reads:
-
-```
-/sietch_colab/data_share/balanus/tellseq_analysis/illumina_raw_reads/merged_reads_7698_7699
-```
-
-Note: Sample used for the scaffolding was `Bgland_1`
-
 ### Genome assembly
+
+The directory `scripts/genome_assembly/` contains different directories each containing 
+scripts describing different steps of the assembly and annotation.
 
 #### K-mer estimation
 
-First, generate a distribution of k-mers using `jellyfish` version `2.2.10`. Default k-mer size (21). Only modifying the size of the output database (`--size`).
+The directory `scripts/genome_assembly/kmer_stats` contains the scripts for the k-mer 
+analysis of genome size and heterozygosity.
 
-```sh
-# Run the k-mer counts
-jellyfish count \
-    --canonical \
-    --mer-len 21 \
-    --size 1000000000 \
-    --threads $THR \
-    --output $jf \
-    $reads
-```
+* `run_jellyfish.sh`:
+ 
+Use `jellyfish` version `2.1.10` to count k-mers (`jellyfish count`)
+and generate a k-mer histogram (`jellyfish histo`).
 
-After k-mers are counted (and stored in the `*.jf` file), generate a k-mer histogram.
+* `run_genomescope.sh`
 
-```sh
-# Generate a k-mer histogram
-jellyfish histo \
-    --threads $THR \
-    --output $histo \
-    $jf
-```
-
-Generate a `GenomeScope2` (version `2.0`) plot using the k-mer histogram. Set the same k-mer length (21) and fix the ploidy (2).
-
-```sh
-genomescope2 \
-    --input $histo \
-    --ploidy 2 \
-    --kmer_length 21 \
-    --output $outdir \
-    --name_prefix $name \
-```
+Use `GenomeScope2` version `2.0` to do the k-mer model and plot.
 
 #### Initial contig-level assembly
 
-The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using defeault parameters.
+The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using default parameters.
 
 ```sh
 cmd=(
@@ -879,6 +838,429 @@ cmd=(
 echo "${cmd[@]}"
 "${cmd[@]}"
 ```
+
+#### Transcript and isoform curation
+
+##### Isoform QC
+
+The directory `scripts/genome_annotation/sqanti` contains scripts to run the `SQANTI3` version
+`5.2.2` pipeline. It takes a set of assembled transcripts and performs QC on the isoforms.
+
+* `run_sqanti_qc.sh`
+
+Perform QC on the isoforms by comparing against the RNAseq short reads and the reference
+annotation.
+
+* `run_sqanti_filter.sh`
+
+Filter the transcripts based on their QC. We are using the default rules except for retaining
+mono-exonic transcripts.
+
+* `run_sqanti_rescue.sh`
+
+Attempt to rescue transcripts and isoforms filtered by the `SQANTI3` QC process.
+
+##### Find protein-coding transcripts
+
+The directory `scripts/genome_annotation/transdecoder` contains scripts for identifying
+protein-coding transcripts among the curated `SQANTI` isoforms.
+
+* `transdecoder_preprocessing.sh`
+
+Preprocess the annotation by extracting the protein and coding sequences for annotated
+transcripts and isoforms. It then extract the representative longest open reading frames
+using `TransDecoder.LongOrfs` for future processing.
+
+* `transdecoder_homology.sh`
+
+Takes the extracted coding sequences and finds homology using `hmmsearch` version `3.4` and
+`blastp` version `2.15.0+`.
+
+* `transdecoder_predict.sh`
+
+It does the final coding prediction of the putative transcripts by incorporating the homology
+results. The resulting coding transcripts are mapped back to the genome and merged with the different isoforms. Non-coding transcripts and/or isoforms lacking homology hits are removed.
+
+##### Merging the isoform and reference annotations
+
+The directory `scripts/genome_annotation/taco` has scripts for merging the isoform and
+reference annotations using `tacoRNA` version `0.7.3`.
+
+* `run_tacoRNA.sh`
+
+Use `taco_run` to identify overlaps between the two annotations, the isoform annotation from
+`SQANTI3`+`TransDecoder` and the "reference" annotation from `BRAKER`.
+
+* `run_taco_refcomp.sh`
+
+Compared the merged annotation against the reference genome to ensure the proper merging of
+transcripts and isoforms.
+
+##### Processing the output annotation
+
+The directory `scripts/genome_annotation/agat` contains scripts for processing the final
+annotation (GFF, CDS FASTA, and protein FASTA) using `AGAT` version `1.4.3`.
+
+* `gfff_clean.sh`
+
+Processes the annotation using several `AGAT` utilities:
+
+1. Initial processing and filtering with `agat_convert_sp_gxf2gxf.pl`. Makes all the IDs and 
+   parent/offspring features consistent.
+2. Select the longest isoform (`agat_sp_keep_longest_isoform.pl`).
+3. Fix duplicated genes (`agat_sp_fix_features_locations_duplicated.pl`).
+4. Fix the phase of the CDSs (`agat_sp_fix_cds_phases.pl`).
+5. Remove overlaps (`agat_sp_fix_overlaping_genes.pl`).
+6. Add Introns (`agat_sp_add_introns.pl`).
+7. Add start and stop codons (`agat_sp_add_start_and_stop.pl`).
+8. Remove unwanted attributes (`agat_sp_manage_attributes.pl`).
+9.  Re-sort the file for re-naming (`agat_convert_sp_gxf2gxf.pl`).
+10. Clean the IDs (`agat_sp_manage_IDs.pl`).
+11. Extract the gene/mRNA attribute IDs (`agat_sp_extract_attributes.pl`).
+12. Convert the IDs into an attribute table (Uses BASH commands).
+13. Add the attributes into a new, final GFF (`agat_sq_add_attributes_from_tsv.pl`).
+14. Extract the peptide sequences (`agat_sp_extract_sequences.pl`).
+15. Extract the CDS sequences (`agat_sp_extract_sequences.pl`).
+16. Calculate the basic AGAT stats (`agat_sq_stat_basic.pl`).
+17. Calculate some more detailed stats (`agat_sp_statistics.pl`).
+
+#### Functional annotation
+
+The directory `scripts/genome_annotation/functional` contains the configuration files for running
+`EnTap` version `2.3.0`:
+
+* `entap_config.ini`
+* `entap_run.params`
+
+#### Annotating non-coding transcripts
+
+The directory `scripts/genome_annotation/non_coding` contains different script for the
+annotation and processing of non-coding RNAs (e.g., rRNAs, tRNAs, lncRNAs).
+
+##### Ribosonal RNAs
+
+* `run_barrnap.sh`:
+
+Annotate rRNAs using `barrnap` version `0.9`.
+
+* `process_rrna_gff.sh`
+
+Process the resulting rRNA annotation and standardize GFF IDs using `agat` version `1.4.3` and a custom `awk` script.
+
+##### Transfer RNAs
+
+* `run_tRNAscanSE.sh`
+
+Annotate tRNAs using `tRNAscan-SE` version `2.0.12`.
+
+* `process_trna_gff.sh`
+
+Process the resulting tRNA annotation and standardize GFF IDs using `agat` version `1.4.3` and
+a custom `awk` script.
+
+##### Long, non-coding RNAs
+
+* `run_minimap.sh`
+
+Align the Pacbio IsoSeq data to the assembly using `minimap2` version `2.26-r1175`.
+
+* `run_stringtie.sh`
+
+Generate call _de novo_ transcripts from the IsoSeq alignments using `StringTie` version
+`2.2.1`.
+
+* `run_feelnc.sh`
+
+Annotate lncRNAs using `FEELnc` version `0.01`. First, use `FEELnc_filter` to filter
+the `StringTie` GTF to get candidate lncRNAs. Then, use `FEELnc_codpot` to compute the
+coding potential score of candidate lncRNAs. Lastly, use `FEELnc_classifier` to classify
+annotated lncRNAs based on their location relative to nearby genes.
+
+* `process_lncrna_gff.sh`
+
+Process the output lncRNA annotation using `AGAT` version `1.4.3` to standardize into
+the GFF format and manage IDs.
+
+### Comparative genomics
+
+The `scripts/comparative_genomics/` directory contains various subdirectories describing
+various comparative genomic analyses, including identifying orthologs, synteny, whole-
+genome aligments, etc.
+
+#### Identifying orthologroups
+
+`scripts/comparative_genomics/orthofinder`:
+
+* `run_orthofinder.sh`
+
+Identify orthologous genes across barnacle genomes using `OrthoFinder` version `3.1.0`.
+
+#### Conserved synteny analysis
+
+`scripts/comparative_genomics/synteny`:
+
+* `run_genespace.R`
+
+Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
+version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
+
+#### Whole-genome alignment and conserved regions
+
+`scripts/comparative_genomics/phastcons`
+* `run_cactus.sh`
+
+Run a whole genome alignment with `cactus` version `2.9.7`.
+
+* `run_phylofit.sh`
+
+Using the `cactus` whole-genome alignment, calculate a neutral phylogenetic model using `phyloFit` from `PHAST` version. `1.5`.
+
+* `run_chr_phastcons.sh`
+
+Calculate conservation scores on a `cactus` whole-genome alignment using `phastCons` from `PHAST` version `1.5`. Takes the `phyloFit` neutral model as input.
+
+* `tally_phastcon_elements.py`:
+
+Custom Python script that intersects the coordinates of the `phastCons` highly
+conserved elements against a set of known annotated features in the genome. It
+compares the proportion of the known features in the conserved elements against
+their proportion in the whole genome.
+
+Usage:
+
+```sh
+$ python3 tally_phastcon_elements.py -h
+
+usage: tally_phastcon_elements.py [-h] -f FAI -a ANNOTATION -p PHASTCONS [-o OUT_DIR]
+                                  [-m MIN_SEQ_LEN] [-i MIN_INTERVAL_LEN]
+
+Determine the proportion of each of the annotated genetic elements in a BED across the sites
+present in an phastCons conserved sites BED file. Provide other general stats for the phastCons
+BED.
+
+options:
+  -h, --help            show this help message and exit
+  -f, --fai FAI         (str) Path to genome index in FAI format.
+  -a, --annotation ANNOTATION
+                        (str) Path to the annotation in BED format.
+  -p, --phastcons PHASTCONS
+                        (str) Path to the phastCons conserved sited BED.
+  -o, --out-dir OUT_DIR
+                        (str) Path to output directory [default=.].
+  -m, --min-seq-len MIN_SEQ_LEN
+                        (int|float) Min length of input sequences [default=10,000].
+  -i, --min-interval-len MIN_INTERVAL_LEN
+                        (int) Min length of intervals in input BED files [default=1].
+```
+
+#### dN/dS analysis
+
+`scripts/comparative_genomics/dnds`
+
+* `extract_orthogroups_cds.py`
+
+Custom Python script to take the orthologs from `OrthoFinder` and extract the
+corresponding coding sequences for each species. It generates a per-orthogroup
+FASTA containing the sequences for each species.
+
+```sh
+$ python3 extract_orthogroups_cds.py -h
+
+usage: extract_orthogroups_cds.py [-h] -s SCO_LIST -r ORTHOGROUPS_TSV
+                                  -c CDS_IN_DIR [-o OUT_DIR] [-t] [-f]
+
+options:
+  -h, --help            show this help message and exit
+  -s, --sco-list SCO_LIST
+                        (str) Path to orthofinder
+                        Orthogroups/Orthogroups_SingleCopyOrthologues.txt file.
+  -r, --orthogroups-tsv ORTHOGROUPS_TSV
+                        (str) Path to the orthofinder
+                        Orthogroups/Orthogroups.tsv
+  -c, --cds-in-dir CDS_IN_DIR
+                        (str) Path to the directory containing the input per-
+                        taxon CDS sequences.
+  -o, --out-dir OUT_DIR
+                        (str) Path to output directory [default=./].
+  -t, --trim-stops      Trim the 3' stop codons from the extracted sequences
+                        [default=False]
+  -f, --check-frame     Filter out sequences if the codons are out of frame,
+                        not multiple of 3 [default=False]
+```
+
+* `run_prank_msa.sh`
+
+Generate a codon-aware multiple sequence alignment using `prank` version `v.170427`.
+
+* `run_clipkit.sh`
+
+Filter and trim multiple sequence alignments using `ClipKIT` version `2.7.0`.
+
+* `pairwise_dnds.py`
+
+Custom Python script used to process pairwise alignments of coding sequences and
+calculate dN/dS. It depends on the [`dnds`](https://github.com/adelq/dnds) and
+[`BioPython`](https://biopython.org) packages.
+
+```sh
+$ python3 pairwise_dnds.py -h
+
+usage: pairwise_dnds.py [-h] -s SCO_LIST -a ALIGNMENTS -i INGROUP
+                        [-o OUT_DIR] [-m MIN_ALN_LEN] [-p ALN_SUFFIX]
+
+options:
+  -h, --help            show this help message and exit
+  -s SCO_LIST, --sco-list SCO_LIST
+                        (str) Path to the single-copy orthgroup table
+                        (produced by `extract_orthogroups_cds.py`).
+  -a ALIGNMENTS, --alignments ALIGNMENTS
+                        (str) Path to the directory with the trimmed
+                        multiple sequence alignments.
+  -i INGROUP, --ingroup INGROUP
+                        (str) ID of the ingroup (focal) species in the
+                        alignment. Used to report gene/transcript IDs
+                        in the output.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Path to output directory [default=./].
+  -m MIN_ALN_LEN, --min-aln-len MIN_ALN_LEN
+                        (int) Minimum length required to keep an alignment
+                        [default=25]
+  -p ALN_SUFFIX, --aln-suffix ALN_SUFFIX
+                        (str) Suffix for the alignment FASTA files
+                        [default=fa].
+```
+
+#### McDonald-Kreitman test
+
+`scripts/comparative_genomics/mk_test`
+
+* `extract_hap_cds.py`
+
+Custom Python scripts that takes the genetic variants in a VCF file and propagates
+these variants along genomic regions specified in a GFF file. It can be used to
+generate per-sample, per-haplotype consensus sequences for protein coding genes.
+It generates *n* consensus files per sample in the VCF, where *n* is the ploidy.
+It depends on `bcftools` and `samtools`.
+
+```sh
+$ python3 extract_hap_cds.py -h
+
+usage: extract_hap_cds.py [-h] -g GENOME -f GFF -v VCF [-o OUT_DIR]
+                          [-t THREADS] [--snps-only]
+
+options:
+  -h, --help            show this help message and exit
+  -g GENOME, --genome GENOME
+                        (str) Path to genome in FASTA format.
+  -f GFF, --gff GFF     (str) Path to the annotation in GFF format.
+  -v VCF, --vcf VCF     (str) Path to variants in VCF/BCF format.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Path to output directory [default=.].
+  -t THREADS, --threads THREADS
+                        (int) Number of threads to run in parallel sections
+                        of code [default=1].
+  --snps-only           Filter the input variants to only keep SNPs.
+  ```
+
+* `run_mkado.sh`
+
+Calculate three different versions of the McDonald-Kreitman test using the
+`MKado` version `0.2.0` software:
+
+1. Standard MK test (McDonald & Kreitman 1991)
+2. Asymptotic MK test (Messer & Petrov 2013)
+3. Tarone-Greenland estimator (Stoletzki and Eyre-Walker, 2011)
+
+#### Codon usage biases
+
+`scripts/comparative_genomics/codon_usage`
+
+* `run_cubar.sh`
+
+Take a set of coding sequences in FASTA format and calculate codon
+usage using the `cubar` version `1.2.0` R package. The script does a
+few statistics, but the main one we care about here is the effective
+number of codons (ENC).
+
+### Reference sample popgen
+
+The directory `scripts/popgen/reference_sample` contains a series of scripts for
+calculating diversity statistics on the *B. glandula* refererence individual,
+including aligning reads, genotyping, and filtering.
+
+* `mmp_align_hifi.sh`
+
+Align the processed PacBio HiFi reads using `minimap2` version `2.28-r1209`.
+Process the resulting alignments with `samtools` version `1.21`. Calculate
+depth of coverage using `mosdepth` version `0.3.10`.
+
+* `run_bcftools_hifi.sh`
+
+Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the barnacle reference
+individual. Run the genotyping per-chromosome.
+
+* `run_bcftools_norm.sh`
+
+Normalize indels and adjacent variant sites using `BCFtools norm`.
+
+* `softFilt_bcf.sh`
+
+Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
+
+* `run_snpEff.sh`
+
+Take the set of called variants and annotate their effects using `snpEff` version `5.2`.
+First, the script builds a `snpEff` database. Then, it annotates the VCF.
+
+### Oregon barnacle popgen
+
+The directory `scripts/popgen/oregon` contains various script for analyzing the population
+genetics data for central Oregon barnacles. This includes the alignment and genotyping
+of individuals as well as various downstream analyses.
+
+* `bwa_align_reads.sh`
+  
+Align the processed Illumina short reads for the eight samples using `bwa mem` version
+`0.7.18-r1243`. Process the resulting alignments with `samtools` version `1.21`.
+Calculate depth of coverage using `mosdepth` version `0.3.10`.
+
+* `run_bcftools_chr.sh`
+
+Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the six Oregon barnacle
+sam individuals. Run the genotyping per-chromosome.
+
+* `filt_bcf_4pixy.sh`
+
+Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
+
+* `run_pixy.sh`
+
+Take the processed genotypes and calculate population genetic statistics (e.g.,
+pi and Watterson's theta) using `pixy` version `2.0.0.beta12`. By default,
+calculate these statistics over the whole genome within 10 kbp windows.
+
+* `run_pixy_features.sh`
+
+Take the processed genotypes and calculate diversity over specific genomic features
+(e.g., coding exons, introns, intergenic) using `pixy` version `2.0.0.beta12`. The
+coordinates of the features of interest are specified in BED format.
+
+* `run_degenotate.sh`
+
+Run `degenotate` version `1.3` to calculate the degeracy of the coding sites in the
+*B. glandula* reference annotation.
+
+### Demographic inference
+
+`scripts/popgen/ne_inference`
+
+* `run_deminfhelper.sh`
+
+Run `msmc2` version `2.1.4` as implemented in `DemInfHelper`.
+
+* `Bgland_00.yml`
+
+Example of the configuration file required by `DemInfHelper`.
 
 ## *Balanus crenatus* genome assembly and annotation
 
