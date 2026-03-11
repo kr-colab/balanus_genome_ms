@@ -839,6 +839,91 @@ echo "${cmd[@]}"
 "${cmd[@]}"
 ```
 
+#### Transcript and isoform curation
+
+##### Isoform QC
+
+The directory `scripts/genome_annotation/sqanti` contains scripts to run the `SQANTI3` version
+`5.2.2` pipeline. It takes a set of assembled transcripts and performs QC on the isoforms.
+
+* `run_sqanti_qc.sh`
+
+Perform QC on the isoforms by comparing against the RNAseq short reads and the reference
+annotation.
+
+* `run_sqanti_filter.sh`
+
+Filter the transcripts based on their QC. We are using the default rules except for retaining
+mono-exonic transcripts.
+
+* `run_sqanti_rescue.sh`
+
+Attempt to rescue transcripts and isoforms filtered by the `SQANTI3` QC process.
+
+##### Find protein-coding transcripts
+
+The directory `scripts/genome_annotation/transdecoder` contains scripts for identifying
+protein-coding transcripts among the curated `SQANTI` isoforms.
+
+* `transdecoder_preprocessing.sh`
+
+Preprocess the annotation by extracting the protein and coding sequences for annotated
+transcripts and isoforms. It then extract the representative longest open reading frames
+using `TransDecoder.LongOrfs` for future processing.
+
+* `transdecoder_homology.sh`
+
+Takes the extracted coding sequences and finds homology using `hmmsearch` version `3.4` and
+`blastp` version `2.15.0+`.
+
+* `transdecoder_predict.sh`
+
+It does the final coding prediction of the putative transcripts by incorporating the homology
+results. The resulting coding transcripts are mapped back to the genome and merged with the different isoforms. Non-coding transcripts and/or isoforms lacking homology hits are removed.
+
+##### Merging the isoform and reference annotations
+
+The directory `scripts/genome_annotation/taco` has scripts for merging the isoform and
+reference annotations using `tacoRNA` version `0.7.3`.
+
+* `run_tacoRNA.sh`
+
+Use `taco_run` to identify overlaps between the two annotations, the isoform annotation from
+`SQANTI3`+`TransDecoder` and the "reference" annotation from `BRAKER`.
+
+* `run_taco_refcomp.sh`
+
+Compared the merged annotation against the reference genome to ensure the proper merging of
+transcripts and isoforms.
+
+##### Processing the output annotation
+
+The directory `scripts/genome_annotation/agat` contains scripts for processing the final
+annotation (GFF, CDS FASTA, and protein FASTA) using `AGAT` version `1.4.3`.
+
+* `gfff_clean.sh`
+
+Processes the annotation using several `AGAT` utilities:
+
+1. Initial processing and filtering with `agat_convert_sp_gxf2gxf.pl`. Makes all the IDs and 
+   parent/offspring features consistent.
+2. Select the longest isoform (`agat_sp_keep_longest_isoform.pl`).
+3. Fix duplicated genes (`agat_sp_fix_features_locations_duplicated.pl`).
+4. Fix the phase of the CDSs (`agat_sp_fix_cds_phases.pl`).
+5. Remove overlaps (`agat_sp_fix_overlaping_genes.pl`).
+6. Add Introns (`agat_sp_add_introns.pl`).
+7. Add start and stop codons (`agat_sp_add_start_and_stop.pl`).
+8. Remove unwanted attributes (`agat_sp_manage_attributes.pl`).
+9.  Re-sort the file for re-naming (`agat_convert_sp_gxf2gxf.pl`).
+10. Clean the IDs (`agat_sp_manage_IDs.pl`).
+11. Extract the gene/mRNA attribute IDs (`agat_sp_extract_attributes.pl`).
+12. Convert the IDs into an attribute table (Uses BASH commands).
+13. Add the attributes into a new, final GFF (`agat_sq_add_attributes_from_tsv.pl`).
+14. Extract the peptide sequences (`agat_sp_extract_sequences.pl`).
+15. Extract the CDS sequences (`agat_sp_extract_sequences.pl`).
+16. Calculate the basic AGAT stats (`agat_sq_stat_basic.pl`).
+17. Calculate some more detailed stats (`agat_sp_statistics.pl`).
+
 #### Functional annotation
 
 The directory `scripts/genome_annotation/functional` contains the configuration files for running

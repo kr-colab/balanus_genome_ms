@@ -991,7 +991,7 @@ parameters. This base assembly was assessed for contiguity using \textsc{quast}
 version \texttt{5.2.0} \citep{gurevich_quast_2013}, and for gene-completeness with
 \textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023} using
 the \texttt{arthropoda\_odb10} reference \textsc{BUSCO} dataset \citep{simao_busco_2015,
-manni_busco_2021,tegenfeldt_orthodb_2025}.
+manni_busco_2021,tegenfeldt_orthodb_2025} (Table~\ref{tab:sup_asm_stats}).
 
 \subsubsection*{Assembly decontamination}
 
@@ -1129,7 +1129,7 @@ After manual curation of the scaffolded genome, we performed one round of polish
 automatic curation using the \textsc{Inspector} software version \texttt{1.0.1}
 \citep{chen_accurate_2021}. First, we evaluated the assembly using \texttt{inspector.py},
 mapping the PacBio HiFi reads against the assembly. The assembly was then corrected using
-\texttt{inspector-correct.py}.
+\texttt{inspector-correct.py} (Table~\ref{tab:sup_asm_stats}).
 
 \subsection*{Genome annotation}\label{sec:methods_annotation}
 
@@ -1197,21 +1197,62 @@ individual \textsc{BRAKER} run as inputs to the \texttt{tsebra.py} script. We as
 the gene-completeness of the merged annotation using \textsc{compleasm} \texttt{protein},
 using both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference datasets.
 
-% TODO: Checking some details from Taco
-% \subsubsection*{Curation of transcript isoforms}
+\subsubsection*{Transcript and isoform curation}
 
-% TODO:
+We performed an additional curation of the annotated protein coding sequences using
+our PacBio Iso-Seq data.
+First, transcripts and isoforms were annotated from the Iso-Seq long reads using
+the \textsc{nf-core/isoseq} pipeline version \texttt{2.0.0}
+\citep{guizard_nf-coreisoseq_2023}.
+Quality control of the annotated isoforms was then performed using \textsc{sqanti3}
+pipeline version \texttt{5.2.2} \citep{pardo_sqanti3_2024}.
+Following the \textsc{sqanti3} documentation, we first performed quality control
+of the isoforms using \texttt{sqanti3\_gc}, using the \textsc{braker} GTF as our
+reference annotation, and providing short-read RNAseq reads to infer junction
+coverage and determine expression levels.
+Isoforms were then filtered using \texttt{sqanti3\_filter} using the default rules,
+except that we retained mono-exonic transcripts.
+Lastly, we rescued filtered transcripts and isoforms using \texttt{sqanti3\_rescue},
+rescuing all isoform types (\texttt{--mode "full"}) and using default parameters.
+\vspace{0.2cm}
+
+The rescued isoforms from \textsc{sqanti3} were processed using \textsc{TransDecoder}
+version \texttt{5.7.1} \citep{hass_transdecoder} to identify protein-coding sequences
+among the annotated sequences.
+Following the \textsc{TransDecoder} documentation, we first extracted the longest coding
+sequences from the rescued \textsc{sqanti3} GFF using \texttt{TransDecoder.LongOrfs}.
+We then identified homology among the putative transcripts using \textsc{hmmsearch}
+version \texttt{3.4} \citep{eddy_hmmer_2011} against the \texttt{Pfam} database
+(downloaded on 2025/07/25), and using \textsc{blastp} version \texttt{2.15.0+} against
+the \texttt{UniProtSprot} database (downloaded on 2025/08/08).
+Then, we performed the final coding sequence prediction integrating the homology
+results using \texttt{TransDecoder.Predict}.
+Predicted transcripts were mapped back to the genome and to the isoform annotation
+using the \textsc{TransDecoder} auxiliary scripts, filtering whole transcripts and
+isoforms lacking homology and coding predictions.
+\vspace{0.2cm}
+
+Lastly, we merged this curated isoform annotation with our \textsc{braker} annotation
+using the \textsc{tacoRNA} software version \texttt{0.7.3} \citep{niknafs_taco_2017}.
+First, we used \texttt{taco\_run} to merge the two annotations, disabling the filter
+by extression levels (\texttt{--filter-min-expr "0.0"}).
+The merged annotation was then compared to the reference genome and annotation using
+\texttt{taco\_refcomp} to ensure overlap of the merged transcripts.
+The final annotation was processed using the \textsc{agat} software version \texttt{1.4.3}
+\citep{dainat_another_2022} to sort by genomic coordinates, add missing annotation features,
+and standardize annotation IDs.
+We performed quality control of the merged annotation by assessing gene-completeness
+using \textsc{compleasm} \texttt{protein} against both the \texttt{arthropoda\_odb10}
+and \texttt{crustacea\_odb12} reference datasets (Table~\ref{tab:sup_annot_stats}).
 
 \subsubsection*{Functional annotation}
 
 Functional annotation of the processed protein coding genes was performed using the
 \textsc{EnTAP} software version \texttt{2.3.0} \citep{hart_span_2020}.
 We compared the bgla{} protein sequences against the following curated databases:
-\texttt{eggNOG} (downloaded 2025/07/08),
-\texttt{NCBI nr} (downloaded 2025/10/08),
-\texttt{RefSeq Protein} (downloaded 2025/08/08),
-\texttt{Swiss-Prot} (downloaded 2025/08)/08,cd 
-and \texttt{InterProScan} (downloaded 2025/07/25).
+\texttt{eggNOG} (downloaded on 2025/07/08), \texttt{NCBI nr} (downloaded on 2025/10/08),
+\texttt{RefSeq Protein} (downloaded on 2025/08/08), \texttt{Swiss-Prot}
+(downloaded on 2025/08/08), and \texttt{InterProScan} (downloaded on 2025/07/25).
 We considered sequences as contaminant if they had high similarlity to bacteria, fungi, viridiplantae, archaea, nematoda, cestoda, and trematoda.
 Contaminant sequences were removed from the annotation GFF file.
 
@@ -1244,9 +1285,8 @@ according to their location relative to nearby genes using \texttt{FEELnc\_class
 \vspace{0.2cm}
 
 After their annotation, all three non-coding RNA classes were separately processed
-using the \textsc{agat} software version \texttt{1.4.3} \citep{dainat_another_2022}
-in order to sort features by chromosomal coordinates, add missing features, add
-biotypes, standardize IDs, and merge records into a single GFF file.
+using the \textsc{agat} in order to sort features by chromosomal coordinates, add
+missing features, add biotypes, standardize IDs, and merge records into a single GFF file.
 
 \subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
 
