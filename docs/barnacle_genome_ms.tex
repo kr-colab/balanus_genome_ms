@@ -852,16 +852,20 @@ effects of positive selection, a proportion that is higher to that observed in d
 \vspace{0.2cm}
 
 In large enough populations, selection should be efficacious enough that is effects
-are seen across synonymous and non-coding sites.
-This could result in a bias in the usage of synonymous codons, as different codons
-are favored over others due to GC biases, tRNA abundance, and other factors
+are seen across synonymous sites, where substitutions are normally considered as neutral.
+This could result in a bias in the usage of synonymous codons, as different codons are
+favored over others due to GC biases, tRNA abundance, and other factors
 \citep{galtier_codon_2018}.
 These effects are observed in the \bgla{} assembly in the form of reduction in the
 effective number of codons seen across protein-coding genes (Figure~\ref{fig:codon_enc}).
 On average, \bgla{} uses $\approx$ 43 out of 61 available codons, a larger reduction
 to the one observed in \textit{D. melanogaster} (Figure~\ref{fig:sup_dmel_enc}).
-This strong biases in codon usage further reflects increase in efficacy of natural
-selection due to the large effective of Pacific acorn barnacle populations.
+This strong bias in codon usage further reflects an increase in the efficacy of natural
+selection due to the large size of Pacific acorn barnacle populations.
+Moreover, these biases put into question the neutrality of at least some synonymous
+substitutions in this system, which could have important ramifications for the study of
+molecular evolution; however, the extent of these effects remain presently unknown and
+should be the subject of future study.
 \vspace{0.2cm}
 
 In contrast, the distribution of transposable and repeat elements in the
@@ -877,20 +881,19 @@ our expectation was to find a genome with a relatively small proportion of trans
 elements.
 However, the high repeat content observed in the genome does not necessarily
 reflect the low efficacy of selection in these populations.
-Some could be low-frequency, slightly deleterious variants not yet purged from
-the population.
-Others repeats might be beneficial genetic polymorphisms.
-Transposable elements can have known impacts on adaptive evolution
-\citep{schrader_impact_2019}.
-These repeat elements can act as key regulators of gene expression, e.g.,
+Some could be low-frequency, slightly deleterious variants in the process of being purged
+from the population.
+Others repeats might be beneficial genetic polymorphisms, as transposable elements are
+sometimes known to play a role in adaptive evolution \citep{schrader_impact_2019}.
+These repeat elements can act as regulators of gene expression, e.g.,
 \cite{trizzino_transposable_2017,rech_population-scale_2022}, and as such might be
 respondible for the necessary plasticity required for survival in rapidly changing
 intertidal environments.
 % ADK: "beneficial genetic polymorphisms" --- would be to add a citation or two. Even
 % as speculation, consider a brief justification or example.
-% Andy: Check these new examples.
-Regardless of their role, disentangling the population-wide repeat landscape and its fitness
-effects is likely impossible with a single haploid reference assembly.
+% @Andy: Check these new examples.
+Regardless of their role, disentangling the population-wide repeat landscape and its
+fitness effects is likely impossible with a single haploid reference assembly.
 Thus, this observation drives the need for larger comparative genomic studies across
 barnacle populations before we can fully understand the dynamics of genomic repeats
 and transposable elements in this and other large populations.
@@ -977,6 +980,7 @@ species were driven by positive selection (\textalpha{}\textsubscript{asym} = 0.
 At first glance, these results appear contradictory: how can coding sequences be
 under strong purifying selection while simultaneously showing pervasive adaptive
 evolution?
+\vspace{0.2cm}
 
 The resolution lies in the fact that \dnds{} and the McDonald-Kreitman test measure
 fundamentally different quantities. The \dnds{} ratio averages across all
@@ -993,7 +997,7 @@ species with many weakly deleterious nonsynonymous variants segregating at
 appreciable frequencies, this can inflate the nonsynonymous divergence and distort
 estimates of selection (\cite{li_reverse_2008}). By explicitly separating
 polymorphism from fixation, the McDonald-Kreitman test avoids this conflation.
-
+\vspace{0.2cm}
 
 \cite{li_reverse_2008} compared the performance of \dnds{} and the McDonald-Kreitman
 test across human, \textit{Drosophila}, and yeast genomes and found that the two
@@ -1005,17 +1009,17 @@ lower-diversity human and yeast datasets, the pattern was reversed. This suggest
 that the statistical power of the McDonald-Kreitman test is greatest in
 high-polymorphism species, making it particularly well suited for systems like
 barnacles where segregating variation is abundant.
-
+\vspace{0.2cm}
 
 The pattern we observe in barnacles is thus consistent with theoretical expectations
 for large populations: strong purifying selection efficiently removes the majority
 of deleterious nonsynonymous mutations, keeping \dnds{} low, while at the same time
 the increased efficacy of positive selection drives a disproportionate fraction of
 the remaining nonsynonymous substitutions to fixation, producing a high
-\textalpha{}. This coupling of strong purifying and positive selection is a hallmark
+$\alpha$. This coupling of strong purifying and positive selection is a hallmark
 of evolution in large populations and has been observed in \textit{Drosophila}, where
-\textalpha{}\textsubscript{asym} is approximately 0.57 (\cite{messer_frequent_2013}).
-Our estimate of \textalpha{}\textsubscript{asym} = 0.610 in \bgla{} is comparable to
+$\alpha_\text{asym}$ is approximately 0.57 (\cite{messer_frequent_2013}).
+Our estimate of $\alpha_\text{asym}$ of 0.610 in \bgla{} is comparable to
 or slightly higher than that in \textit{Drosophila}, consistent with the expectation
 that the even larger effective population size in barnacles further increases the
 efficacy of both modes of selection.
@@ -1042,7 +1046,7 @@ and the mechanisms of evolution at biological extremes.
 
 \section*{Materials and Methods}
 
-% Scott: could you verify the sequencing info?
+% @Scott: could you verify the sequencing info?
 
 \subsection*{DNA and RNA sequencing}
 
@@ -1563,17 +1567,17 @@ We ran \textsc{MKado} three times, each time calculating a different variant of
 the MK test.
 First, we calculated the standard MK test \citep{mcdonald_adaptive_1991} for all
 7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating
-per-gene \textalpha{} \cite{smith_adaptive_2002}, Neutrality Index (NI;
+per-gene $\alpha$ \cite{smith_adaptive_2002}, Neutrality Index (NI;
 \cite{rand_excess_1996}) and Direction of Selection (DoS;
 \cite{stoletzki_estimation_2011}).
 Next, we calculated the asymptotic MK test (\texttt{--asymptotic};
 \cite{messer_frequent_2013}) to correct for the biases introduced by low frequency
-polymorphism, and estimating \textalpha{}\textsubscript{asym} aggregated across
+polymorphism, and estimating $\alpha_\text{asym}$ aggregated across
 all genes.
 Lastly, we calculated the Tarone-Greenland weighted estimator
-(\textalpha{}\textsubscript{TG};~\cite{stoletzki_estimation_2011}) using
+($\alpha_\text{TG}$;~\cite{stoletzki_estimation_2011}) using
 \textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiaased estimator of
-genome-wide \textalpha{} when comparing across multiple genes.
+genome-wide $\alpha$ when comparing across multiple genes.
 
 \subsection*{Codon usage biases}
 
@@ -1597,9 +1601,10 @@ We genotyped our barnacle reference individual to assess the levels of genetic v
 present in our genome assembly.
 To achieve this, we first re-aligned our processed PacBio HiFi reads to the assembly using
 \textsc{minimap2} version \texttt{2.28-r1209} with the \texttt{-x map-hifi} preset.
+A total of 99.97\% of reads were successfully mapped to the reference.
 The aligned reads were then sorted and filtered using \textsc{samtools} version \texttt{1.21}
 to remove non-primary and supplentary alignments.
-Lastly, used the \textsc{mosdepth} software version \texttt{0.3.10}
+Lastly, we used the \textsc{mosdepth} software version \texttt{0.3.10}
 \citep{pedersen_mosdepth_2018} to calculate the depth of coverage along 10 kbp windows
 (\texttt{--no-per-base}; \texttt{--by 10000}) and calculating the proportion of bases
 covered at specified coverage thresholds (\texttt{--thresholds "1,3,5,10,20"}).
@@ -1665,8 +1670,8 @@ flagged as PCR duplicates (\texttt{-F 1024}).
 Lastly, we calculated depth of coverage using \textsc{mosdepth}.
 Two individuals had low genome-wide average coverage ($<$5x) and were removed from
 downstream analysis.
-The mean genome-wide coverage for the remaining individuals was 48.83x.
-% TODO: mention the proportion of reads aligned
+For the six remaining individuals, an average of 94.13\% of reads aligned to the 
+reference genome, resulting in a mean genome-wide coverage of 48.83x.
 
 \subsubsection*{Genotyping}
 
@@ -1707,9 +1712,9 @@ We also calculated $\pi$ at zero-fold and four-fold degenerate sites.
 For this, we first determined the degeneracy at each coding site in the genome using the
 \texttt{degenotate} version \texttt{1.3} tool from the \textsc{snpArcher} pipeline
 \citep{mirchandani_snparcher_2023}.
-After determining degeneracy we separatelty calculated $\pi$ for zero-and four-fold sites
-using \textsc{pixy}, specifying the specific sites of interest using \texttt{--sites\_file}
-and averaging within the span of each exon (using \texttt{--bed\_file}).
+After determining degeneracy we separatelty calculated $\pi$ for 0-fold and 4-fold
+degenerate sites using \textsc{pixy}, specifying the specific sites of interest using
+\texttt{--sites\_file} and averaging within the span of each exon (using \texttt{--bed\_file}).
 
 \subsection*{Inference of effective population size}
 
