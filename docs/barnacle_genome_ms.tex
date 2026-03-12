@@ -1566,17 +1566,17 @@ respectively), between ingroup and outgroup sequences.
 We ran \textsc{MKado} three times, each time calculating a different variant of
 the MK test.
 First, we calculated the standard MK test \citep{mcdonald_adaptive_1991} for all
-7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating
-per-gene $\alpha$ \cite{smith_adaptive_2002}, Neutrality Index (NI;
-\cite{rand_excess_1996}) and Direction of Selection (DoS;
-\cite{stoletzki_estimation_2011}).
+7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating the
+per-gene proportion of non-synonymous sites fixed by selection ($\alpha$;
+\cite{smith_adaptive_2002}), Neutrality Index (NI; \cite{rand_excess_1996})
+and Direction of Selection (DoS; \cite{stoletzki_estimation_2011}).
 Next, we calculated the asymptotic MK test (\texttt{--asymptotic};
 \cite{messer_frequent_2013}) to correct for the biases introduced by low frequency
 polymorphism, and estimating $\alpha_\text{asym}$ aggregated across
 all genes.
 Lastly, we calculated the Tarone-Greenland weighted estimator
 ($\alpha_\text{TG}$;~\cite{stoletzki_estimation_2011}) using
-\textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiaased estimator of
+\textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiased estimator of
 genome-wide $\alpha$ when comparing across multiple genes.
 
 \subsection*{Codon usage biases}
@@ -1587,7 +1587,7 @@ We first filtered coding sequences using the \texttt{check\_cds} function,
 ensuring the presence of canonical start and stop codons, retaining 16,904
 sequences.
 Then we calculated the distribution of observed codons using the
-\texttt{cound\_codons} function.
+\texttt{count\_codons} function.
 Lastly, we used the \texttt{get\_enc} function to calculate codon usage biases
 in the empirical codon distribution using the effective number of codons (ENC)
 metric, which captures the deviation from equal codon usage across synonymous
@@ -1764,7 +1764,7 @@ Funding.
 \fancyhead[L]{\textit{SUPPLEMENTS}}
 \section*{Supplements}
 
-\subsection*{Supplemental Text}
+\subsection*{Supplemental Methods}
 
 \subsubsection*{Assembly and annotation of \textit{Balanus
 crenatus}}\label{sec:sup_methods_balcre}
@@ -1772,13 +1772,29 @@ crenatus}}\label{sec:sup_methods_balcre}
 \subsubsection*{Processing annotations of published barnacle
 assemblies}\label{sec:sup_methods_barnacle_rna}
 
-TODO:
+\subsubsection*{Codon usage biases in \textit{Drosophila melanogaster}}
 
-\begin{itemize}
-    \item BalCre assembly and annotation.
-    \item ``Annotation'' of the other barnacle genomes.
-    \item Drosophila ENC and Pi
-\end{itemize}
+As a comparison against barnacles, we calculated codon usage biases in the fruit
+fly \textit{D. melanogaster}.
+To do this, we first downloaded the reference annotation from NCBI RefSeq
+(Release 6 plus ISO1 MT, NCBI accession: \texttt{GCF\_000001215.4}).
+We processed the annotation using \textsc{agat} version \texttt{1.4.3}
+\citep{dainat_another_2022} to select the longest isoform per gene
+and clean the IDs of the extracted coding sequences.
+We calculated codon usage biases using the \textsc{cubar} R package version
+\texttt{1.2.0} \citep{liu_cubar_2026}.
+We filtered coding sequences using the \texttt{check\_cds} function, ensuring the
+presence of canonical start and stop codons, retaining sequences for 13,521 genes.
+Then we calculated the distribution of observed codons using the
+\texttt{count\_codons} function.
+Lastly, we calculated the effective number of codons (ENC) observed in the
+empirical codon distribution using the \texttt{get\_enc} function.
+This statistic determines the bias in codon usage in the form of the deviation from
+equal codon usage across synonymous codons \citep{wright_effective_1990}, using the 
+adjustments by \cite{sun_improved_2013} to account for for usage differences across
+different codon subfamilies.
+
+\subsubsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
 \subsection*{Supplemental Tables and Figures}
 
