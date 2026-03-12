@@ -69,7 +69,7 @@
 \newcommand{\bgla}{\textit{B. glandula}\xspace}
 \newcommand{\Ne}{N\textsubscript{e}\xspace}
 
-\title{The genome of the Pacific acorn barnacle provides insights into
+\title{The genome of the {Pacific} acorn barnacle provides insights into
     the evolution of extremely large populations}
 \author[1]{Angel G. Rivera-Col\'{o}n}
 \author[1]{Scott T. Small}
@@ -239,13 +239,12 @@ the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
 After optimizing the assembly with the addition of Hi-C and ONT ultra-long reads
-in the main assembly and more stringent purging of haplotig and contaminant
-sequences (see \nameref{sec:methods_assembly}), we generated a
-contig-level assembly composed of 1,342 sequences, with a total length of
-1.05 Gbp, a contig N50 of 1.35 Mbp, and a \textsc{BUSCO} completeness of
-93.88\% (4.84\% duplicated; \texttt{arthropoda\_odb10}). The contig-level
-assembly was then scaffolded with Hi-C data using the \textsc{YaHS} software
-(\cite{zhou_yahs_2023}; Figure~\ref{fig:sup_hic}), generating an assembly
+and more stringent purging of haplotig and contaminant sequences (see
+\nameref{sec:methods_assembly}), we generated contigs with a substantially smaller
+fraction of haplotigs, reducing the assembly size to 1.05 Gbp and the \textsc{BUSCO}
+duplicates to 4.84\%.
+This contig-level assembly was then scaffolded with Hi-C data using the \textsc{YaHS}
+software (\cite{zhou_yahs_2023}; Figure~\ref{fig:sup_hic}), generating an assembly
 with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
 of 50.96 Mbp, and a \textsc{BUSCO} completeness of 93.98\% (4.74\% duplicated;
 \texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
@@ -271,8 +270,8 @@ family Balanidae \citep{han_new_2024}.
 % Stats and QC on the annotation.
 
 Once the assembly and scaffolding were completed, we annotated and masked repeat
-sequences in the \bgla{} reference assembly using the \textsc{EarlGrey}
-software \citep{baril_earl_2024}. This analysis identified 698.6 Mbp (66.94\%)
+sequences in the \bgla{} reference assembly using \textsc{EarlGrey}
+\citep{baril_earl_2024}. This analysis identified 698.6 Mbp (66.94\%)
 of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary});
 however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remained
 unclassified among the major repeat element types. This large proportion of
@@ -330,10 +329,10 @@ of evolution \citep{han_new_2024,bernot_chromosome-level_2022}.
     \centering
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
-        Genome-wide riparian synteny plots showing one-to-one correspondence across
-        16 orthologous chromosomes between the genomes of \balgla{}
+        Genome-wide riparian plots showing one-to-one correspondence across
+        16 putatively orthologous chromosomes between the genomes of \balgla{}
         (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes
-        pollicipes} (bottom). Each set of colored lines shows orthologous genes
+        pollicipes} (bottom). Each set of colored lines shows syntenic orthologous genes
         across the three assemblies, colored according to their chromosome of origin.
         Chromosomes are drawn according to their order in \textit{A. amphitrite}.
         Cladogram on the left shows the evolutionary relationship among the three
@@ -351,16 +350,16 @@ of evolution \citep{han_new_2024,bernot_chromosome-level_2022}.
 % ADK -- this isn't clear to me. what does it mean to genotype the reference individual?
 % ARC: calling variant sites in just that one sample, i.e., calling heterozygous sites.
 
-We estimated the genetic diversity present in the \bgla{} genome by calling
-heterozygous variants in our reference individual. After filtering low-quality genotypes
+We estimated the genetic diversity present in the \bgla{} genome by identifying
+heterozygous variants in our reference individual. After filtering low-quality sites
 and masking regions with annotated repeats, we obtained genotypes for 314 million
 sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58
-scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these 314
-million genotyped sites, 9.08 million (2.89\%) were heterozygous in the reference
-individual, including 8.73 million SNPs and 356 thousand indels. In total, this
-variation represents a mean density of 14.66 heterozygous sites per kbp (median: 6
-per kbp; standard deviation: 19.86). Moreover, we observed a total of 399 thousand variant
-sites within protein-coding sequences, including 144 thousand
+scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these sites, 
+9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73
+million SNPs and 356 thousand indels.
+In total, this variation represents a mean density of 14.66 heterozygous sites per kbp
+(median: 6 per kbp; standard deviation: 19.86). Moreover, we observed nearly 400
+thousand variant sites within protein-coding sequences, including 144 thousand
 non-synonymous point mutations, as categorized by the \textsc{snpEff} software
 \citep{cingolani_program_2012}. In this reference individual, transcripts had a mean
 of 7.74 (median: 3, standard deviation: 14.97) non-synonymous variants, indicating
@@ -388,11 +387,10 @@ annotation, obtaining the proportion of annotated features among HCE sites
 (Figure~\ref{fig:phastcons}A). Among our target features — which include an
 ``intergenic'' class for the unannotated fraction of the genome and a ``multiple''
 class for annotation overlaps (e.g., a site spanning both a transposable element
-and an intron) — all but one are present among HCEs. We did not observe any rRNA
-sites among our conserved sites; however, this is likely the product of the
-whole-genome alignment, given rRNA's repetitive nature and alignment difficulty
-\citep{gillespie_characterizing_2004}, and not an accurate measure of conservation (or
-lack thereof).
+and an intron) — all but one are present among HCEs. We did not observe any conserved
+rRNA sites; however, this is likely the product of the whole-genome alignment, given
+rRNA's repetitive nature and alignment difficulty \citep{gillespie_characterizing_2004},
+and not an accurate measure of conservation (or lack thereof).
 Aside from the absence of rRNAs, the sequence composition of HCEs largely followed that of
 the whole genome.
 Most annotated features do not appear substantially enriched among HCE sites
@@ -404,6 +402,7 @@ conservation of protein-coding genes among barnacle genomes.
 Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14,
 median: 2.04, standard deviation: 0.96), likely reflecting the strong functional constraints
 on these sequences.
+\vspace{0.2cm}
 
 The rank order of enrichment among conserved elements in \bgla{} mirrors patterns
 observed across other groups of organisms. \cite{siepel_evolutionarily_2005} characterized
@@ -422,16 +421,17 @@ are depleted among HCEs.
 
 As fellow arthropods, insects provide the most phylogenetically relevant comparison for
 barnacles.
-In \textit{Drosophila}, conserved elements cover 44.5\% of the genome, with 34\% of conserved
-bases falling in protein-coding exons \citep{siepel_evolutionarily_2005}.
+In \textit{Drosophila}, conserved elements cover 44.5\% of the genome, with 34\% of
+conserved bases falling in protein-coding exons \citep{siepel_evolutionarily_2005}.
 Less dramatic differences in enrichment across annotation classes are also observed when
 compared with vertebrate genomes.
 In \bgla{}, HCEs cover a substantially smaller fraction of the genome (6.05\%), and only
 4.4\% of HCE bases overlap CDSs (Table~\ref{tab:sup_phastcons_enrichment}).
 Both of these values are lower than those observed in insects; however, this difference is
 likely driven by the repeat-rich nature of the barnacle genome (67\% repetitive elements,
-compared with $\approx$15\% in \textit{D. melanogaster}), which contributes a large fraction
-of HCE bases in transposable element and overlapping annotation categories.
+compared with $\approx$15\% in \textit{D. melanogaster}), which both makes aligning these
+genomes more difficult while also contributing to a larger fraction of HCE bases in
+transposable element and overlapping annotation categories.
 Despite these differences in raw composition, CDSs are enriched among conserved elements
 in both insects and barnacles, consistent with the expectation that protein-coding
 sequences are among the most functionally constrained regions in arthropod genomes.
@@ -466,14 +466,14 @@ of the barnacle genome or genuine intronic conservation in this lineage.
     \label{fig:phastcons}
 \end{figure}
 
-\subsection*{Patterns of molecular evolution reflect strong positive selection in
+\subsection*{Patterns of molecular evolution reflect positive selection in
 protein-coding genes}
 
 % @Andy: I added the reference to Nei & Gojobori 1986 here. Anything else?
 To examine the rate of molecular evolution in protein-coding sequences, we calculated
 the pairwise rate of non-synonymous to synonymous substitutions (\dnds) between
 \bgla{} and its congener, the wrinkled barnacle \textit{Balanus crenatus},
-using the approach described by \cite{nei1986_dnds}.
+using the codon counting approach described by \cite{nei1986_dnds}.
 We identified and aligned 9,082 single-copy orthologs between the two species.
 The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
 Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
@@ -484,7 +484,7 @@ expected evolutionary constraints on sequences of functional importance.
 Of the nine thousand genes assessed, 70 (0.77\%) displayed a
 \dnds{} $>$ 1, and are likely candidates for positive
 selection. The predicted function of the majority ($>80\%$) of these genes is
-unknown, as determined by the functional annotation generated by the \textsc{EnTap}
+unknown, as determined by the functional annotation generated by the \textsc{EnTAP}
 software \citep{hart_span_2020}. This is expected, since homology is likely harder
 to determine for fast-evolving sequences putatively under strong selection.
 Regardless, we found several genes with known function in our candidates under
@@ -517,30 +517,31 @@ Direction of Selection (DoS;~\cite{stoletzki_estimation_2011}) at each ortholog.
 We observed a mean NI value of 0.745 (median: 0.554; standard deviation: 1.079) and
 a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; Figure~\ref{fig:sup_dos}).
 Both of these statistics show that on average, and in contrast with our measurements
-of \dnds, protein-coding sequences in \bgla{} exhibit an excess of non-synonymous
-substitutions, suggesting that they are evolving under positive directional selection
-when compared to the outgroup sequence.
+of \dnds{} (see \nameref{sec:discussion_dnds_mkt}), protein-coding sequences in \bgla{}
+exhibit an excess of non-synonymous substitutions, suggesting that they are evolving
+under positive directional selection when compared to the outgroup sequence.
 \vspace{0.2cm}
 
-In addition to NI and DoS, we calculated \textalpha{}, a measure of the proportion
+In addition to NI and DoS, we calculated $\alpha$, a measure of the proportion
 of non-synonymous substitutions fixed by positive selection \citep{smith_adaptive_2002}.
-We calculated two adjusted versions of \textalpha{} to account for the presence of known
-biases. First, we calculated the Tarone-Greenland \textalpha{} estimator
-(\textalpha{}\textsubscript{TG}), a weighted estimator that corrects for the effects of
-averaging over a large number of genes \citep{stoletzki_estimation_2011}. Across our
-7,374 genes, we calculated an \textalpha{}\textsubscript{TG} of 0.540 ($95\%$ CI:
+We calculated two adjusted versions of $\alpha$ to account for the presence of known
+biases.
+First, we calculated the Tarone-Greenland $\alpha$ estimator ($\alpha_\text{TG}$), a
+weighted estimator that corrects for the effects of averaging over a large number of
+genes \citep{stoletzki_estimation_2011}.
+Across our 7,374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
 0.534--0.550), which indicates that $\approx$ 54\% of non-synonymous substitutions in
 this \bgla{} population were fixed as a product of positive selection.
-Secondly, we calculated the \textalpha{} using the asymptotic McDonald-Kreitman test
-(\textalpha{}\textsubscript{asym}), which corrects for the presence of weakly deleterious
+Secondly, we calculated $\alpha$ using the asymptotic McDonald-Kreitman test
+($\alpha_\text{asym}$), which corrects for the presence of weakly deleterious
 non-synonymous polymorphisms present at low frequency in the population
-\citep{messer_frequent_2013} which might obscure the signal of positive selection. We
-found a mean \textalpha{}\textsubscript{asym} of 0.616 ($95\%$ CI: 0.610--0.622), a
-larger proportion to that observed in \textit{Drosophila} (\textalpha{}\textsubscript{asym}
+\citep{messer_frequent_2013} which might obscure the signal of positive selection.
+We found a mean $\alpha_\text{asym}$ of 0.616 ($95\%$ CI: 0.610--0.622), a
+larger proportion to that observed in \textit{Drosophila} ($\alpha_\text{asym}$
 of 0.57; \cite{haller_asymptoticmk_2017}).
-Regardless of the metric used, both \textalpha{}\textsubscript{TG} and
-\textalpha{}\textsubscript{asym} agree that the majority of non-synonymous substitutions
-in this barnacle population are the outcome of directional positive selection.
+Regardless of the metric used, both $\alpha_\text{TG}$ and $\alpha_\text{asym}$ agree
+that the majority of non-synonymous substitutions in this barnacle population are the
+outcome of directional positive selection.
 
 % MK test volcano plot
 \begin{figure}[htbp]
@@ -548,17 +549,18 @@ in this barnacle population are the outcome of directional positive selection.
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{\textbf{Signatures of positive selection in \balgla{}
         protein-coding genes.}
-        Selection on protein-coding genes was assessed for 7,374 \textit{B.
-        glandula} genes using the McDonald-Kreitman test. X-axis denotes the
-        $-\log_{10}$ of the Neutrality Index, with values on the right (NI $<1$)
-        representing sequences with an excess of non-synonymous substitutions
-        indicative of positive selection. Y-axis denotes the $-\log_{10}$
-        \textit{p}-value of the McDonald-Kreitman test. The dashed and dot-dashed
-        lines shows the raw ($p<0.05$) and corrected ($p<6.20\times10^{-6}$)
-        significance thresholds, respectively. Points in red show the
-        444 significant after \textit{p}-value correction showing an excess of
-        fixed non-synonymous substitutions indicating positive selection. Points
-        in green shows the one significant gene with an excess of non-synonymous
+        Selection on 7,374 protein-coding genes was assessed for using the
+        McDonald-Kreitman test.
+        X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
+        right (NI $<1$) indicating sequences with an excess of non-synonymous
+        substitutions indicative of positive selection.
+        Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
+        The dashed and dot-dashed lines shows the raw ($p<0.05$) and corrected
+        ($p<6.20\times10^{-6}$) significance thresholds, respectively.
+        Points in red show the 444 genes significant after \textit{p}-value correction
+        showing an excess of fixed non-synonymous substitutions indicating positive
+        selection.
+        Points in green shows the one significant gene with an excess of non-synonymous
         polymorphism.}
     \label{fig:mkTest}
 \end{figure}
@@ -608,25 +610,26 @@ may not be neutral in this large barnacle population.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
-We sequenced the whole genomes of six \bgla{} individuals collected
-from Cape Perpetua, on the central Oregon coast. After stringent filtering of sites
-with low coverage, low quality, and/or missing genotypes, we retained a total of
-111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million
-(19.16\%) of which were variant in the sequenced individuals. Among these variant
-sites, we recovered 20.5 million point mutations, including 996 thousand SNPs that
-were multiallelic in this set of just six individuals. In total, the amount of
-polymorphism observed in our sampling translates to a mean density of 41.05 variant
-sites per kbp (median: 29, standard deviation: 40.82). Moreover, 1.12 million of
-these variant sites (5.23\%) were located within coding sequences. These
-coding variants included 360 thousand missense (non-synonymous) mutations,
+We sequenced the whole genomes of six \bgla{} individuals from the central Oregon coast.
+After stringent filtering of sites with low coverage, low quality, and/or missing
+genotypes, we retained a total of 111.6 million genotyped sites
+(Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the
+sequenced individuals.
+Among these variant sites, we recovered 20.5 million point mutations, including nearly 
+1 million SNPs that were multiallelic in this set of just six individuals.
+In total, the amount of polymorphism observed in our sampling translates to a mean
+density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82).
+Moreover, 1.12 million of these variant sites (5.23\%) were located in coding sequences.
+These coding variants included 360 thousand missense (non-synonymous) mutations,
 corresponding to a mean of 18.93 non-synonymous variants per transcript
-(median: 10, standard deviation: 28.50). Overall, these represent a substantial
-proportion of coding variation segregating in this central Oregon population.
+(median: 10, standard deviation: 28.50).
+Overall, these represent a substantial proportion of coding variation segregating in
+this central Oregon population.
 This \bgla{} population displayed a mean genome-wide nucleotide
 diversity ($\pi$) of 0.0506 (median: 0.0531, standard deviation: 0.0188;
-Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}). This degree of
-diversity is an order of magnitude higher than that observed in diverse
-\textit{Drosophila} populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
+Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}), a degree of diversity that
+is an order of magnitude higher than that observed in diverse \textit{Drosophila}
+populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
 \vspace{0.2cm}
 
 Along each chromosome, we did not observe any strong correlation between the density
@@ -650,7 +653,7 @@ genotypes located within repetitive intervals in the reference
         along the \balgla{} genome.}
         \textbf{A.} Density of coding sequences (CDS) along the genome, defined as the
         proportion of bases annotated as CDS within 10 kbp windows. Line reflects the
-        values kernel-smoothed along a 1 Mbp interval. Dashed horizontal line shows
+        kernel-smoothed values along a 1 Mbp window. Dashed horizontal line shows
         the genome-wide average proportion of CDS bases (0.0288). Top and bottom
         horizontal axes show the chromosome number and genomic position, respectively.
         \textbf{B.} Density of repeat elements annotated within 10 kbp windows, smoothed
@@ -682,16 +685,17 @@ approximately 1.3x higher than the genome-wide average.
 
 % I feel like I want to say more here, but I should wait for the discussion.
 Zooming in further on coding sequences, we explored the patterns of $\pi$
-at zero-fold and four-fold degenerate sites, effectively comparing diversity at
-constrained versus neutral (or putatively neutral) sites. In this central Oregon
-population of \bgla{}, the mean $\pi$ at zero-fold degenerate sites,
- in which any mutation produces a non-synonymous substitution, was 0.0107 (median:
-0.00292, standard deviation: 0.0178). This is the lowest $\pi$ among the studied
-categories in the genome, not a surprising result given the expected higher functional
-constraint at these sites. In contrast, mean $\pi$ at four-fold degenerate sites,
-in which any mutation results in a synonymous change, was 0.0790 (median:
-0.0750, standard deviation: 0.0483), $\approx$ 1.6x higher than the genome-wide average
-and the highest in the genome.
+at zero-fold degenrate ($\pi_{0}$), in which any mutation produces a non-synonymous
+substitution, and four-fold degenerate sites ($\pi_{4}$), in which any mutation results
+in a synonymous change.
+This comparison allows us to compare diversity at constrained versus neutral (or
+putatively neutral) sites.
+In this central Oregon population of \bgla{}, the mean $\pi_{0}$, was 0.0107 (median:
+0.00292, standard deviation: 0.0178).
+This is the lowest diversity among the studied categories in the genome, not a
+surprising result given the higher functional constraint expected at these sites.
+In contrast, mean $\pi_{4}$ was 0.0790 (median: 0.0750, standard deviation: 0.0483),
+$\approx$ 1.6x higher than the genome-wide average and the highest in the genome.
 
 % Distribution of pi for different features in the genome
 \begin{figure}[htbp]
@@ -717,22 +721,20 @@ observing a mean genome-wide $\theta_\text{W}$ of 0.0617 (median: 0.0635, standa
 deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Assuming a per-base,
 per-generation mutation rate ($\mu$) of $3\times10^{-9}$ (as estimated by
 \cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides})
-and using the relationship this yields a mean effective size of 5,137,172
-(median: 5,289,211, standard deviation: 1,862,683), which is consistent with
-the expectation of large \Ne{} in this species.
+and using the relationship between \Ne{} and $\theta_\text{W}$, this yields a
+mean effective size of 5,137,172 (median: 5,289,211, standard deviation: 1,862,683),
+which is consistent with the expectation of large \Ne{} in this species.
 \vspace{0.2cm}
 
 Additionally, we estimated \Ne{} through time using a coalescent-based
 approach with \textsc{msmc2} \citep{dutheil_msmc_2020}. This estimate also placed
 the historical effective size of the population on the order of $10^{6}$ individuals
 (between $10^{6}$ and $10^{7}$ generations ago) (Figure~\ref{fig:sup_mcmc_ne});
-however, given our small sample size and the use of only pairwise haplotype
+however, given our small sample size and the use of only within sample pairwise
 comparisons, we were unable to obtain accurate \Ne{} estimates at more recent
 ($<10^{5}$ generations) timescales using \textsc{msmc2}.
 
 \section*{Discussion}
-
-% All of this needs to be re-worked some more. These are mainly my general ideas.
 
 \subsection*{Genome assembly in highly polymorphic species}
 
@@ -775,16 +777,29 @@ phasing, leading to a main haploid assembly that is a mosaic between the two
 haplotypes and/or the poor quality of the secondary assembly.
 \vspace{0.2cm}
 
-These difficulties drive the need for the development of methods and analysis best
-practices focused on the assembly of highly heterozygous genomes, and for a further
-exploration of how elevated heterozygosity affects \textit{de novo} assembly
-parameters. While some improvements have been made in recent years, e.g., in
-\textsc{hifiasm} with the direct purging of haplotigs during assembly and the
-integration of Hi-C data to phase haplotypes without the need of parental genomes
-\citep{cheng_haplotype-resolved_2022}, further work is likely needed before we can
-obtain haplotype-resolved genome assemblies for hyperpolymorphic organisms.
+These difficulties drive the need for the development of methods and analysis
+best-practices focused on the assembly of highly heterozygous genomes, and for a
+further exploration of how elevated heterozygosity affects \textit{de novo} assembly
+parameters.
+In particular, the assembly of phased diploid genomes has seen several improvements
+in recent years, e.g.,
+the direct purging of haplotigs and the integration of Hi-C data to phase haplotypes
+without the need of parental genotypes in \textsc{hifiasm}
+\citep{cheng_haplotype-resolved_2022},
+and the intregation of Hi-C and ultra-long read data for phased telomere-to-telomere
+haplotypes in \textsc{Verkko2} \citep{antipov_verkko2_2025}.
+Yet, it is presently unknown if these new methods are all equally suitable for highly
+heterozygous genomes and further work is likely needed before we can obtain
+haplotype-resolved genome assemblies for hyperpolymorphic organisms.
+Despite these limitations, our work here, assembling a chromosome-level assembly for
+a heterozygous barnacle species --- even if not fully phased --- is a step in the
+right direction of generating high-quality genomic resources for these
+highly diverse and difficult genomes.
 % ADK: This closing paragraph is brief. The only concrete tool improvement mentioned
 % is hifiasm's Hi-C integration. Are there other approaches worth noting here?
+% @Andy: Added another method and a concluding sentence stating that, despite the gaps,
+% our genome is a step in the right direction. Not the most meaningful statement, but I
+% wanted to end with something else.
 
 \subsection*{Genome evolution in large populations}
 
@@ -799,46 +814,86 @@ obtain haplotype-resolved genome assemblies for hyperpolymorphic organisms.
 % collectively about the selective regime in these populations.
 Evolutionary processes at large demographic scales are expected to leave distinct
 signatures in the genome, several of which are observed in our Pacific acorn
-barnacle assembly. For example, we observe high heterozygosity on our reference
-individual (Figure~\ref{fig:sup_kmers}; Table~\ref{tab:sup_popgen_stats}), in
-accordance with the expectation of high polymorphism in large populations. We see
-enrichment in the sequence conservation of putatively functional sites
-(Figure~\ref{fig:phastcons}), the likely result of strong purifying selection over
-evolutionarily constrained sequences. Notably, the rank ordering of this enrichment
-, with tRNAs and CDSs as the most enriched features among conserved elements,
-parallels findings in insects (\cite{siepel_evolutionarily_2005}) and plants
-(\cite{hupalo_conservation_2013}), suggesting that the targets of purifying selection
-are broadly conserved across arthropods despite the much larger and more repeat-rich
-genome of \bgla{}. In concert, we also find evidence for the high
-efficacy of positive selection in large populations in the form of the fixation
-of a large fraction of non-synonymous substitutions (Figure~\ref{fig:mkTest}).
-We also observe substantial codon usage biases, finding preliminary evidence for
-differential selection among different synonymous codons (Figure~\ref{fig:codon_enc}).
-Overall, these findings agree with our theoretical expectation of evolution in large
-populations, showing both a high degree of polymorphism and the increased efficacy
-of natural selection.
+barnacle assembly.
+For example, large populations are expected to harbor increased levels of segregating
+polymorphism, the product of both the reduction in the stochastic loss due to
+genetic drift and the increase in the population-scale mutation rate.
+In accordance, we observe a barnacle genome with extreme levels of genetic diversity,
+both at the individual and population level (Figure~\ref{fig:sup_kmers};
+Table~\ref{tab:sup_popgen_stats}), a substantial proportion of which is located in
+coding sequences.
+\vspace{0.2cm}
+
+Similarly, large populations experience an increase in the efficacy of purifying
+selection, which is expected to reduce the levels of diversity and increase 
+conservation across functional sequences.
+We see this patterns reflected in the \bgla{} genome.
+Putatively functional sites, particularly coding exons and tRNAs show both increased
+levels of sequence conservation (Figure~\ref{fig:phastcons}) and a reduction in
+population-level genetic diversity (Figure~\ref{fig:feature_pi};
+Table~\ref{tab:sup_feature_pi}) when compared to less constrained features of the genome.
+Notably, the rank ordering of the enrichment of conserved elements, with tRNAs and CDSs
+as the most enriched, parallels findings in insects \citep{siepel_evolutionarily_2005},
+suggesting that the targets of purifying selection are broadly conserved across
+arthropods despite the much larger and more repeat-rich genome of \bgla{}.
+Increased efficacy of purifying selection is also reflected by our the results of Our
+McDonald-Kreitman test (Figure~\ref{fig:mkTest}).
+We observe a relative decrease in the proportion of non-synonymous polymorphism observed
+in a central Oregon \bgla{} population, suggesting an increase in the number of
+weakly deleterious polymorphism purged by selection \citep{li_reverse_2008}.
+Positive selection is also expected to increase in efficacy in large populations,
+resulting in a the fixation of a large fraction of non-synonymous mutations.
+We observe also this pattern in the \bgla{} genome as reflected by the McDonald-Kreitman
+test (Figure~\ref{fig:mkTest}).
+In this central Oregon population, the majority (54 to 61\%, depending on the metric
+of $\alpha$ used) of non-synonymous mutations reaching fixation due to due to the
+effects of positive selection, a proportion that is higher to that observed in diverse
+\textit{Drosophila} populations \citep{haller_asymptoticmk_2017}.
+\vspace{0.2cm}
+
+In large enough populations, selection should be efficacious enough that is effects
+are seen across synonymous and non-coding sites.
+This could result in a bias in the usage of synonymous codons, as different codons
+are favored over others due to GC biases, tRNA abundance, and other factors
+\citep{galtier_codon_2018}.
+These effects are observed in the \bgla{} assembly in the form of reduction in the
+effective number of codons seen across protein-coding genes (Figure~\ref{fig:codon_enc}).
+On average, \bgla{} uses $\approx$ 43 out of 61 available codons, a larger reduction
+to the one observed in \textit{D. melanogaster} (Figure~\ref{fig:sup_dmel_enc}).
+This strong biases in codon usage further reflects increase in efficacy of natural
+selection due to the large effective of Pacific acorn barnacle populations.
 \vspace{0.2cm}
 
 In contrast, the distribution of transposable and repeat elements in the
 \bgla{} assembly was unexpected, as we find a highly repetitive genome
 composed of over 60\% repeat sequences (Figure~\ref{fig:genome_pi};
-Table~\ref{tab:sup_earlgrey_summary}). Previous work has shown that purifying
-selection plays a key role in the accumulation and fixation of transposable elements
-\citep{merel_relaxed_2025,langmuller_genomic_2023,bourque_ten_2018}, following the
-expectation that repetitive sequences are, on average, slightly deleterious. Given
-the increased efficacy of selection expected in these large barnacle populations,
+Table~\ref{tab:sup_earlgrey_summary}).
+Previous work has shown that purifying selection plays a key role in the accumulation
+and fixation of transposable elements \citep{merel_relaxed_2025,langmuller_genomic_2023,
+bourque_ten_2018}, following the expectation that repetitive sequences are, on average,
+slightly deleterious.
+Given the increased efficacy of selection we observed in the rest of the genome,
 our expectation was to find a genome with a relatively small proportion of transposable
-elements. However, the high repeat content observed in the genome does not necessarily
-reflect the low efficacy of selection in these populations. Some of these repeats
+elements.
+However, the high repeat content observed in the genome does not necessarily
+reflect the low efficacy of selection in these populations.
+Some could be low-frequency, slightly deleterious variants not yet purged from
+the population.
+Others repeats might be beneficial genetic polymorphisms.
+Transposable elements can have known impacts on adaptive evolution
+\citep{schrader_impact_2019}.
+These repeat elements can act as key regulators of gene expression, e.g.,
+\cite{trizzino_transposable_2017,rech_population-scale_2022}, and as such might be
+respondible for the necessary plasticity required for survival in rapidly changing
+intertidal environments.
 % ADK: "beneficial genetic polymorphisms" --- would be to add a citation or two. Even
 % as speculation, consider a brief justification or example.
-might be beneficial genetic polymorphisms. Others could be low-frequency, slightly
-deleterious variants not yet purged from the population. Disentangling the
-population-wide repeat landscape and its fitness effects is likely impossible with
-a single haploid reference assembly. Thus, this observation drives the need for
-larger comparative genomic studies across barnacle populations before we can
-fully understand the dynamics of genomic repeats and transposable elements in this
-and other large populations.
+% Andy: Check these new examples.
+Regardless of their role, disentangling the population-wide repeat landscape and its fitness
+effects is likely impossible with a single haploid reference assembly.
+Thus, this observation drives the need for larger comparative genomic studies across
+barnacle populations before we can fully understand the dynamics of genomic repeats
+and transposable elements in this and other large populations.
 
 \subsection*{The magnitude of genetic diversity in barnacle populations}
 
@@ -909,8 +964,8 @@ kimura_neutral_1983} and are still the subjects of study \citep{buffalo_quantify
 Our work on the Pacific acorn barnacle provides a unique opportunity to empirically
 study this disparity and the biological processes that maintain it.
 
-\subsection*{Molecular evolution in large populations: reconciling \dnds and the
-McDonald-Kreitman test}
+\subsection*{Molecular evolution in large populations: reconciling \dnds{} and the
+McDonald-Kreitman test}\label{sec:discussion_dnds_mkt}
 % ADK -- i don't know if this subsection should go here or earlier in the discussion.
 
 One of the more striking patterns in our results is the apparent discordance between
@@ -986,6 +1041,8 @@ Pacific acorn barnacle as an emerging model for the study of genetic variation
 and the mechanisms of evolution at biological extremes.
 
 \section*{Materials and Methods}
+
+% Scott: could you verify the sequencing info?
 
 \subsection*{DNA and RNA sequencing}
 
@@ -1609,6 +1666,7 @@ Lastly, we calculated depth of coverage using \textsc{mosdepth}.
 Two individuals had low genome-wide average coverage ($<$5x) and were removed from
 downstream analysis.
 The mean genome-wide coverage for the remaining individuals was 48.83x.
+% TODO: mention the proportion of reads aligned
 
 \subsubsection*{Genotyping}
 
