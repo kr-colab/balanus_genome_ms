@@ -582,7 +582,6 @@ See Table~\ref{tab:sup_allozymes}.
 \end{itemize}
 
 % All under purifying from dN/dS. Gpi seems to have good results from MKtest.
-% Check the two genes "missing" from MKtest.
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -683,10 +682,9 @@ diversity, with a mean $\pi$ of 0.0646 (median: 0.0650, standard deviation: 0.02
 approximately 1.3x higher than the genome-wide average.
 \vspace{0.2cm}
 
-% I feel like I want to say more here, but I should wait for the discussion.
 Zooming in further on coding sequences, we explored the patterns of $\pi$
-at zero-fold degenrate ($\pi_{0}$), in which any mutation produces a non-synonymous
-substitution, and four-fold degenerate sites ($\pi_{4}$), in which any mutation results
+at 0-fold degenrate ($\pi_{0}$), in which any mutation produces a non-synonymous
+substitution, and 4-fold degenerate sites ($\pi_{4}$), in which any mutation results
 in a synonymous change.
 This comparison allows us to compare diversity at constrained versus neutral (or
 putatively neutral) sites.
@@ -750,7 +748,7 @@ genome assembly consortiums, e.g., the Vertebrate Genome Project
 \citep{rhie_towards_2021} and the Earth BioGenome Project
 \citep{blaxter_earth_2025}, tackling the production of high quality genomes across
 diverse taxa. We have also seen the generation of complete genomes, sequencing
-chromosomes at a telomere-to-telomere scale \citep{nurk_complete_2022,
+whole chromosomes at a telomere-to-telomere scale \citep{nurk_complete_2022,
 yoo_complete_2025}, as well as the sequencing and assembly of some of the largest
 and most repetitive genomes known in nature \citep{campos-dominguez_genome_2025}.
 Best practice protocols have also become available to applying these methods to new
@@ -786,7 +784,7 @@ in recent years, e.g.,
 the direct purging of haplotigs and the integration of Hi-C data to phase haplotypes
 without the need of parental genotypes in \textsc{hifiasm}
 \citep{cheng_haplotype-resolved_2022},
-and the intregation of Hi-C and ultra-long read data for phased telomere-to-telomere
+and the integration of Hi-C and ultra-long read data for phased telomere-to-telomere
 haplotypes in \textsc{Verkko2} \citep{antipov_verkko2_2025}.
 Yet, it is presently unknown if these new methods are all equally suitable for highly
 heterozygous genomes and further work is likely needed before we can obtain
@@ -812,6 +810,7 @@ highly diverse and difficult genomes.
 % also find Z... We even observe W."). For a Discussion, consider adding more
 % interpretation -- not just *that* you see these signatures, but what they tell us
 % collectively about the selective regime in these populations.
+% @Andy: Check the new edits
 Evolutionary processes at large demographic scales are expected to leave distinct
 signatures in the genome, several of which are observed in our Pacific acorn
 barnacle assembly.
@@ -836,7 +835,7 @@ Notably, the rank ordering of the enrichment of conserved elements, with tRNAs a
 as the most enriched, parallels findings in insects \citep{siepel_evolutionarily_2005},
 suggesting that the targets of purifying selection are broadly conserved across
 arthropods despite the much larger and more repeat-rich genome of \bgla{}.
-Increased efficacy of purifying selection is also reflected by our the results of Our
+Increased efficacy of purifying selection is also reflected by our the results of our
 McDonald-Kreitman test (Figure~\ref{fig:mkTest}).
 We observe a relative decrease in the proportion of non-synonymous polymorphism observed
 in a central Oregon \bgla{} population, suggesting an increase in the number of
@@ -846,7 +845,7 @@ resulting in a the fixation of a large fraction of non-synonymous mutations.
 We observe also this pattern in the \bgla{} genome as reflected by the McDonald-Kreitman
 test (Figure~\ref{fig:mkTest}).
 In this central Oregon population, the majority (54 to 61\%, depending on the metric
-of $\alpha$ used) of non-synonymous mutations reaching fixation due to due to the
+of $\alpha$ used) of non-synonymous mutations reaching fixation due to the
 effects of positive selection, a proportion that is higher to that observed in diverse
 \textit{Drosophila} populations \citep{haller_asymptoticmk_2017}.
 \vspace{0.2cm}
@@ -877,8 +876,7 @@ and fixation of transposable elements \citep{merel_relaxed_2025,langmuller_genom
 bourque_ten_2018}, following the expectation that repetitive sequences are, on average,
 slightly deleterious.
 Given the increased efficacy of selection we observed in the rest of the genome,
-our expectation was to find a genome with a relatively small proportion of transposable
-elements.
+our expectation was to find a genome with a relatively small proportion of repeats.
 However, the high repeat content observed in the genome does not necessarily
 reflect the low efficacy of selection in these populations.
 Some could be low-frequency, slightly deleterious variants in the process of being purged
@@ -887,7 +885,7 @@ Others repeats might be beneficial genetic polymorphisms, as transposable elemen
 sometimes known to play a role in adaptive evolution \citep{schrader_impact_2019}.
 These repeat elements can act as regulators of gene expression, e.g.,
 \cite{trizzino_transposable_2017,rech_population-scale_2022}, and as such might be
-respondible for the necessary plasticity required for survival in rapidly changing
+responsible for the necessary plasticity required for survival in rapidly changing
 intertidal environments.
 % ADK: "beneficial genetic polymorphisms" --- would be to add a citation or two. Even
 % as speculation, consider a brief justification or example.
@@ -898,98 +896,19 @@ Thus, this observation drives the need for larger comparative genomic studies ac
 barnacle populations before we can fully understand the dynamics of genomic repeats
 and transposable elements in this and other large populations.
 
-\subsection*{Barnacles as models for evolution at biological extremes}
-
-% Point here is reiterating the level of diversity we observe and how it compares
-% to other systems. I mention Drosophila, but do we need something else? There's
-% humans too (because of large cohorts, e.g., Bergstrom2020), but that nowhere near
-% the same ballpark in terms of diversity. Anything else to add here? Feels short.
-
-% ADK: Agreed this section feels short for what is arguably the central result of
-% the paper. Two suggestions: (1) Broaden the comparison beyond Drosophila -- marine
-% invertebrates (oysters, sea urchins, tunicates) would provide natural context. Are
-% barnacles exceptional even among marine invertebrates? (2) Add a sentence or two on
-% potential drivers of this diversity -- larval dispersal, census size, mutation rate?
-% Also consider merging this subsection into "Barnacles as models..." since they
-% overlap considerably.
-
-% @Andy: Moved this to the barnacles as models sections and reworked the end of the
-% paragraph to include additional examples.
-
-Our work here shows that a Pacific acorn barnacle population from the central Oregon
-coast exhibits genetic diversity of over 5\% (mean genome-wide $\pi$ of 0.0506).
-These levels of genetic diversity are higher than those observed for other model
-systems known for their relatively large population sizes.
-For example, the genome-wide $\pi$ we observe in this population is an order of magnitude
-higher than that observed for \textit{Drosophila} (Figure~\ref{fig:sup_dmel_pi}), both
-at a local scale and diversity observed in large-scale surveys
-\citep{nunez_footprints_2025,li_comparative_2025,pool_population_2012,langley_genomic_2012}.
-Even the $\pi$ observed at 0-fold degenerate sites, the least diverse sites in the genome
-as the likely product of functional constraint, is still an order of magnitude
-higher than the diversity observed genome-wide in these \textit{Drosophila} populations.
-While elevated, this level of diversity is not unique to barnacles.
-Similar magnitude of genome-wide $\pi$ ($\approx10^{-2}$) has been observed
-in other taxa, including corals \citep{meziere_corals_2025}, parasitic nematodes
-\citep{stevens_nematodes_2023}, bivalves \citep{liu_bivalves_2025}, and mosquitos
-\citep{kent_aedes_2025,small_funestus_2023}.
-Moreover, barnacle's life history traits are likely direct drivers for the elevated
-polymorphism observed, as factors such as large census sizes, small propagule size,
-long larval dispersal, and broad geographic distribution have been positively
-correlated with high genetic diversity in marine invertebrates
-\citep{leffler_revisiting_2012,romiguier_comparative_2014}.
-\vspace{0.2cm}
-
-% Now, bringing the hyperpolymorphic stuff. We are above the "cutfoff" of
-% hyperpolymorphic. But also, the Hart2025 "limit" of 1% for species boundaries.
-% We are past that here.
-
-The magnitude of diversity observed in \bgla{} solidly places them among
-hyperpolymorphic populations, those exhibiting diversity above 5\%
-\citep{cutter_molecular_2013}. This adds barnacles to a growing list of emerging
-hyperpolymorphic model systems, which are key to studying the limits of biological
-variation and molecular evolution in natural populations. Moreover, our observations
-of extreme genetic diversity also have important implications for the study of species
-boundaries. For example, recent work by~\cite{hart_genomic_2025} suggests that levels
-of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the
-definition of species. Barnacles and other hyperpolymorphic populations put these
-putative cutoffs into question. We observe levels of genome-wide diversity of over 5\%
-in just a very small portion of the biological range of the Pacific acorn barnacle.
-Nucleotide diversity is even higher ($\approx8\%$) at 4-fold degenerate (putatively
-neutral) sites (Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}).
-Given the species' broader geographical and ecological distribution, genetic
-diversity is likely to increase when looking across the whole range. This
-observation reiterates the importance of future studies of genetic diversity
-of this species over a broader geographic range, providing some insights on
-the mechanisms that maintain population and species boundaries in the presence
-of extreme genetic diversity.
-\vspace{0.2cm}
-
-Beyond species boundaries, the extreme diversity observed in barnacles also speaks to
-a long-standing question in population genetics: the relationship between effective
-and census population sizes. From our results on diversity, we
-observe that this barnacle population has an effective size of approximately $10^{6}$.
-However, these populations also show densities of $10^{4}$ individuals per square meter
-\citep{menge_recruitment_2000}. Based on this estimate, the census size of the Pacific
-acorn barnacle population in central Oregon should be, conservatively, in the billions of
-individuals. While the general disparity between the effective and census size estimates
-has been highlighted for decades, i.e., Lewontin's Paradox \citep{lewontin_genetic_1974},
-the mechanisms underlying the differences have been long debated
-\citep{gillespie_role_1999,gillespie_genetic_2000,smith_hitch-hiking_1974,
-kimura_neutral_1983} and are still the subjects of study \citep{buffalo_quantifying_2021}.
-Our work on the Pacific acorn barnacle provides a unique opportunity to empirically
-study this disparity and the biological processes that maintain it.
-
 \subsection*{Molecular evolution in large populations: reconciling \dnds{} and the
 McDonald-Kreitman test}\label{sec:discussion_dnds_mkt}
 % ADK -- i don't know if this subsection should go here or earlier in the discussion.
-% @Andy: Maybe we can switch this and the previous section?
+% @Andy: Yes, decided to flip this and the "barnacles as models" section. I think that
+% section provides a nicer end to the overall discussion.
 
 One of the more striking patterns in our results is the apparent discordance between
-our two measures of selection on protein-coding genes. The pairwise \dnds{} between
-\bgla{} and \textit{B. crenatus} is 0.206 on average, indicating that the majority
-of coding sites are under purifying selection. Yet the McDonald-Kreitman test reveals
-that $\approx61\%$ of non-synonymous substitutions that have fixed between these
-species were driven by positive selection ($\alpha_\text{asym}$ = 0.610).
+our two measures of selection on protein-coding genes.
+The average pairwise \dnds{} between \bgla{} and \textit{B. crenatus} is 0.206,
+indicating that the majority of coding sites are under purifying selection.
+Yet the McDonald-Kreitman test reveals seemingly opposite results, with $\approx61\%$
+of non-synonymous substitutions that have fixed between these species were driven by
+positive selection ($\alpha_\text{asym}$ = 0.610).
 At first glance, these results appear contradictory: how can coding sequences be
 under strong purifying selection while simultaneously showing pervasive adaptive
 evolution?
@@ -1018,8 +937,8 @@ approaches identify distinct but correlated sets of genes as targets of selectio
 Notably, the McDonald-Kreitman test was more powerful than \dnds{} only in
 \textit{Drosophila}, the species with the most abundant polymorphism data, where it
 identified nearly three times as many genes under positive selection. In the
-lower-diversity human and yeast datasets, the pattern was reversed. This suggests
-that the statistical power of the McDonald-Kreitman test is greatest in
+lower-diversity human and yeast datasets, the pattern was reversed. This finding
+suggests that the statistical power of the McDonald-Kreitman test is greatest in
 high-polymorphism species, making it particularly well suited for systems like
 barnacles where segregating variation is abundant.
 \vspace{0.2cm}
@@ -1037,25 +956,114 @@ or slightly higher than that in \textit{Drosophila}, consistent with the expecta
 that the even larger effective population size in barnacles further increases the
 efficacy of both modes of selection.
 
+\subsection*{Barnacles as models for evolution at biological extremes}
+
+% Point here is reiterating the level of diversity we observe and how it compares
+% to other systems. I mention Drosophila, but do we need something else? There's
+% humans too (because of large cohorts, e.g., Bergstrom2020), but that nowhere near
+% the same ballpark in terms of diversity. Anything else to add here? Feels short.
+
+% ADK: Agreed this section feels short for what is arguably the central result of
+% the paper. Two suggestions: (1) Broaden the comparison beyond Drosophila -- marine
+% invertebrates (oysters, sea urchins, tunicates) would provide natural context. Are
+% barnacles exceptional even among marine invertebrates? (2) Add a sentence or two on
+% potential drivers of this diversity -- larval dispersal, census size, mutation rate?
+% Also consider merging this subsection into "Barnacles as models..." since they
+% overlap considerably.
+
+% @Andy: Moved this to the barnacles as models sections and reworked the end of the
+% paragraph to include additional examples.
+
+Our work shows that a Pacific acorn barnacle population from central Oregon exhibits
+genetic diversity of over 5\% (mean genome-wide $\pi$ of 0.0506).
+These levels of genetic diversity are higher than those observed for other model
+systems known for their relatively large population sizes.
+For example, the genome-wide $\pi$ we observe in this population is an order of
+magnitude higher than that observed in \textit{Drosophila} (Figure~\ref{fig:sup_dmel_pi})
+\citep{nunez_footprints_2025,li_comparative_2025,pool_population_2012,
+langley_genomic_2012}.
+Even the $\pi$ observed at 0-fold degenerate sites, the least diverse and among the
+most constrained sites in the genome, is still an order of magnitude higher than the
+diversity observed genome-wide in these \textit{Drosophila} populations.
+While elevated, this level of diversity is not unique to barnacles.
+Similar magnitude of genome-wide $\pi$ ($\approx10^{-2}$) has been observed
+in other taxa, including corals \citep{meziere_corals_2025}, parasitic nematodes
+\citep{stevens_nematodes_2023}, bivalves \citep{liu_bivalves_2025}, and mosquitos
+\citep{kent_aedes_2025,small_funestus_2023}.
+Moreover, as with other marine invertebrates, barnacle's life history traits are likely
+direct drivers for the elevated polymorphism observed, as factors such as large census
+sizes, small propagule size, long larval dispersal, and broad geographic distribution
+have been positively correlated with the high genetic diversity commonly seen in these
+organisms \citep{leffler_revisiting_2012,romiguier_comparative_2014}.
+\vspace{0.2cm}
+
+% Now, bringing the hyperpolymorphic stuff. We are above the "cutfoff" of
+% hyperpolymorphic. But also, the Hart2025 "limit" of 1% for species boundaries.
+% We are past that here.
+
+The magnitude of diversity observed in \bgla{} solidly places them among
+hyperpolymorphic populations, those exhibiting diversity above 5\%
+\citep{cutter_molecular_2013}. This adds barnacles to a growing list of emerging
+hyperpolymorphic model systems, which are key to studying the limits of biological
+variation and molecular evolution in natural populations. Moreover, our observations
+of extreme genetic diversity also have important implications for the study of species
+boundaries. For example, recent work by~\cite{hart_genomic_2025} suggests that levels
+of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the
+definition of species. Barnacles and other hyperpolymorphic populations put these
+putative cutoffs into question. We observe levels of genome-wide diversity of over 5\%
+in just a very small portion of the biological range of the Pacific acorn barnacle.
+Nucleotide diversity is even higher ($\approx8\%$) at 4-fold degenerate, and putatively
+neutral, sites (Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}).
+Given the species' broader geographical and ecological distribution, genetic
+diversity is likely to increase when looking across the whole range. This
+observation reiterates the importance of future studies of genetic diversity
+of this species over its whole geographic range, providing some insights on
+the mechanisms that maintain population and species boundaries in the presence
+of extreme genetic diversity.
+\vspace{0.2cm}
+
+Beyond species boundaries, the extreme diversity observed in barnacles also speaks to
+a long-standing question in population genetics: the relationship between effective
+and census population sizes. From our results on diversity, we
+observe that this barnacle population has an effective size of approximately $10^{6}$.
+However, these populations also show densities of $10^{4}$ individuals per square meter
+\citep{menge_recruitment_2000}. Based on this estimate, the census size of the Pacific
+acorn barnacle population in central Oregon should be, conservatively, in the billions of
+individuals. While the general disparity between the effective and census size estimates
+has been highlighted for decades, i.e., Lewontin's Paradox \citep{lewontin_genetic_1974},
+the mechanisms underlying the differences have been long debated
+\citep{gillespie_role_1999,gillespie_genetic_2000,smith_hitch-hiking_1974,
+kimura_neutral_1983} and are still the subjects of study \citep{buffalo_quantifying_2021}.
+Our work on the Pacific acorn barnacle provides a unique opportunity to empirically
+study this disparity and the biological processes that maintain it.
+
 \section*{Conclusion}
 
 % ADK: The conclusion reads as a list of results rather than a synthesis. Consider
 % mentioning the TE paradox and/or the Ne/Nc disparity, which got significant Discussion
 % space. Also, "reiterating the functional constraints on genes" is still vague --
 % constraints on genes in what sense?
-In this work, we describe the first high-quality, chromosome-level genome assembly
-for the Pacific acorn barnacle, \balgla{}. Using this new assembly,
-we first identify conserved synteny among barnacle genomes despite 165 Mya of
-divergence. Functional elements are highly conserved in the genome of the
-species; however, patterns of molecular evolution highlight the role of
-positive selection as a key driver in the divergence of coding sequences between
-closely related barnacle species. At a population level, Oregon populations of
-\bgla{} appear to be hyperpolymorphic, showing levels of genetic
-diversity of over 5\% along the genome. Yet, we find preliminary evidence of
-background selection over protein-coding and non-coding genes, reiterating the
-functional constraints on genes. Overall, our work highlights the role of the
-Pacific acorn barnacle as an emerging model for the study of genetic variation
-and the mechanisms of evolution at biological extremes.
+% Andy: I reworked this some more. Hopefully it highlights some of these big picture
+% points a bit better.
+In this work, we take one of the first looks at the genomic signatures of evolution
+in large population sizes in the Pacific acorn barnacle, \balgla{}.
+In accordance to population genetics theory, we find evidence for the strengthening
+of selection in this large barnacle population, resulting in both purifying selection
+reducing diversity and maintaining conservation across functional sites, as well as
+pervasive positive selection driving adaptive evolution and divergence in protein
+coding genes.
+To our surprise, however, we find a highly repetitive genome which is in contrast to
+the expectation of purifying selection acting against the proliferation of repetitive
+sequences.
+Looking at diversity at the population scale, we observe average genome-wide
+nucleotide diversity of over 5\%, placing this species among hyperpolymorphic
+organisms.
+Yet, while this diversity indicates large effective population sizes ($\approx10^{6}$
+individuals), it still pales in comparison to the extremely large census sizes
+observed in this population.
+This finding highlights the known disparity between effective and census sizes
+seen in nature, and sets \bgla{} as a promising emerging model to study the
+underlying mechanisms of evolution at biological extremes.
 
 \section*{Materials and Methods}
 
@@ -1065,7 +1073,7 @@ and the mechanisms of evolution at biological extremes.
 
 \subsubsection*{High-molecular weight DNA and PacBio sequencing}
 
-For genome sequencing using PacBio Hi-Fi reads, we sampled several \balgla
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \balgla{}
 individuals from the docks in the Oregon Institute of Marine Biology, in Charleston,
 Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected at low tide in
 February 2023. High-molecular weight (HMW) DNA was extracted from the dissected
@@ -1415,7 +1423,7 @@ Contaminant sequences were removed from the annotation GFF file.
 \subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
 
 We annotated three classes of non-coding transcripts in the \bgla{} assembly: ribosomal
-RNAs (rRNA), transfer RNAs (tRNA), and long, non-coding RNAs (RNAs). First, we annotated
+RNAs (rRNA), transfer RNAs (tRNA), and long, non-coding RNAs (lncRNAs). First, we annotated
 rRNAs using \textsc{barrnap} version \texttt{0.9} \citep{seemann_barrnap_2018}, specifying
 the search against eukaryotic sequences (\texttt{--kingdom euk}). Transfer RNAs were
 annotated using the \textsc{tRNAscan-SE} software version \texttt{2.0.12}
@@ -1721,7 +1729,7 @@ span of annotated genomic features (coding sequences, introns, 5' UTRs, 3' UTRs,
 rRNAs, and intergenic regions).
 We reran \textsc{pixy} separately for each feature, specifiying the genomic coordinates of
 the feature's annotation using the \texttt{--bed\_file} option.
-We also calculated $\pi$ at zero-fold and four-fold degenerate sites.
+We also calculated $\pi$ at 0-fold and 4-fold degenerate sites.
 For this, we first determined the degeneracy at each coding site in the genome using the
 \texttt{degenotate} version \texttt{1.3} tool from the \textsc{snpArcher} pipeline
 \citep{mirchandani_snparcher_2023}.
