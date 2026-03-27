@@ -124,7 +124,7 @@ This processes, estimating coverage, assigning taxonomy, and filtering using
 ### Optimized contig-level assembly
 
 The directory `scripts/genome_assembly/opt_contigs` contains scripts for 
-processing and analyzing the optimized contig-level assembly.
+processing and analysing the optimized contig-level assembly.
 
 #### Assemble contigs
 
@@ -261,56 +261,20 @@ options:
 
 #### Repeat annotation
 
-Done with `EarlGrey` version `4.0.1`.
+The directory `scripts/genome_annotation/repeats` contains several scripts for the
+identification and annotation of repeats.
 
-First, we downloaded `Dfam 3.8` and extracted the repeat sequences for Arthropoda. These were used as an initial repeat database for `EarlGrey`.
+* `extract_dfam38.sh`
 
-```sh
-# Existing starting databse
-# This is the files extracted from Dfam 3.8
-# 6657 is for Crustacea
-taxid=6657
-rep_db=$work/Repbase_db/dfam3.8_${taxid}.fa
-# Set the input sequence
-in_fasta=${work}/in_genome/BalGla.fasta
-# Search term
-term=arthropoda
-# Target Species name
-name="BalGla"
-# Make an output directory for run
-outp=$(date +${work}/%y%m%d.earl_grey.${term}.${taxid})
-mkdir -p $outp
-cd $outp
+Extract the repeat sequences for Crustacea (NCBI taxid `6657`) from the `Dfam 3.8`
+database.
 
-# Repeat Masker command
-cmd=(
-    earlGrey
-    -g $in_fasta
-    -s $name
-    -o $outp
-    -t $thr
-    -l $rep_db # Starting consensus library for an inital mask
-    -r $term   # RepeatMasker search term
-    -c yes     # Cluster TE library to reduce redundancy
-    -d yes     # Create soft-masked genome
-)
+* `run_earlGrey.sh`
 
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
-
-Results:
-
-| tclassif | cov | count | proportion | gen | N Distinct Classifications |
-| -------- | --- | ----- | ---------- | --- | -----| 
-| DNA | 88203702 | 217040 | 0.084525 | 1043519078 |335 |
-| LINE | 95553328 | 199835 | 0.091568 | 1043519078 | 511 |
-| LTR | 39476928 | 87021 | 0.037830 | 1043519078 | 362 |
-| Other (Simple Repeat, Microsatellite, RNA) | 37933124 | 77043 | 0.036351 | 1043519078 | 112 |
-| Penelope | 25187297 | 61172 | 0.024136 | 1043519078 | 112 |
-| Rolling Circle | 6897773 | 17411 | 0.006610 | 1043519078 | 45 |
-| SINE | 828944 | 2039 | 0.000794 | 1043519078 | 6 |
-| Unclassified | 404513462 | 966499 | 0.387643 | 1043519078 | 1520 |
+Annotate repeats using `EarlGrey` version `4.0.1`. We are using the `Dfam 3.8`
+Crustacean repeat sequences as the starting consensus library for an initial mask,
+and using "`arthropoda`" as the initial search term for `RepeatMasker` version
+`4.1.2`.
 
 #### Annotating protein coding genes.
 
@@ -632,10 +596,10 @@ annotated lncRNAs based on their location relative to nearby genes.
 Process the output lncRNA annotation using `AGAT` version `1.4.3` to standardize into
 the GFF format and manage IDs.
 
-### Reference sample popgen
+## Reference sample popgen
 
 The directory `scripts/popgen/reference_sample` contains a series of scripts for
-calculating diversity statistics on the *B. glandula* refererence individual,
+calculating diversity statistics on the *B. glandula* reference individual,
 including aligning reads, genotyping, and filtering.
 
 * `mmp_align_hifi.sh`
@@ -662,7 +626,6 @@ Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
 Take the set of called variants and annotate their effects using `snpEff` version `5.2`.
 First, the script builds a `snpEff` database. Then, it annotates the VCF.
 
-
 ## Barnacle comparative genomics
 
 In addition to the newly-generated assemblies for *Balanus glandula* and
@@ -679,7 +642,7 @@ The `scripts/comparative_genomics/` directory contains various subdirectories de
 various comparative genomic analyses, including identifying orthologs, synteny, whole-
 genome aligments, etc.
 
-### Identifying orthologroups
+### Identifying orthogroups
 
 `scripts/comparative_genomics/orthofinder`:
 
@@ -693,7 +656,7 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 
 * `run_genespace.R`
 
-Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
+Take the output from `OrthoFinder` and identify synteny blocks using `Genespace`
 version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
 
 ### Whole-genome alignment and conserved regions
@@ -892,9 +855,9 @@ Raw data available on NCBI BioProject
 | Bgland_CPE_5  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729183 |
 | Bgland_CPE_9  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729184 |
 
-### Population genetic analysis
+### Population genetics analyses
 
-The directory `scripts/popgen/oregon` contains various script for analyzing the population
+The directory `scripts/popgen/oregon` contains various script for analysing the population
 genetics data for central Oregon barnacles. This includes the alignment and genotyping
 of individuals as well as various downstream analyses.
 
