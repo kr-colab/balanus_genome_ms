@@ -278,181 +278,63 @@ and using "`arthropoda`" as the initial search term for `RepeatMasker` version
 
 #### Annotating protein coding genes.
 
-##### Processing the short read-data
+The directory `scripts/genome_annotation/braker` contains various scripts for
+running the genome annotation using `BRAKER`. It contains script for the annotation
+woth both short-read RNAseq data and long-read PacBio IsoSeq.
 
-First, process raw RNAseq reads with `fastp` version `0.23.4`.
+##### RNAseq-based annotation
 
+* `run_fastp.sh`
 
-```sh
-cmd=(
-    fastp
-    --in1 ${in_dir}/${name}_R1_001.fastq.gz
-    --in2 ${in_dir}/${name}_R2_001.fastq.gz
-    --out1 ${out_dir}/${name}.1.fq.gz
-    --out2 ${out_dir}/${name}.2.fq.gz
-    --length_required 25
-    --detect_adapter_for_pe
-    --thread 6
-)
+Process the raw RNAseq reads with `fastp` version `0.23.4`.
 
-echo "${cmd[@]}"
-"${cmd[@]}" > $log 2>&1
-```
+* `run_histat_idx.sh`
 
-Then, align the reads to the genome using `HISAT2` version `2.2.1`. First, you need to index the assembly using `hisat2-build`.
+Index the *B. glandula* reference assembly using the `hisat2-build` command from
+`HISAT2` version `2.2.1`.
 
-```sh
-cmd=(
-    hisat2-build
-    -p $thr
-    $fasta
-    $index
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+* `run_histat_aln.sh`
 
-Then you can align. Important to set `--dta` in `hisat2` for compatibility with transcriptome assemblers.
+Align the processed RNAseq reads using `hisat2`. Important to set `--dta` in `hisat2`
+for compatibility with transcriptome assemblers. The resulting alignments are processed
+and sorted using `samtools`. Since there are two RNAseq lanes, this command is run
+separately for each lane.
 
-```sh
-# RNA seq sample lists
-sams=(
-    Balanus-mRNA_S1_L001
-    Balanus-mRNA_S1_L002
-)
+* `run_merge_bams.sh`
 
-# Loop over samples and process
-for sam in "${sams[@]}" ; do
-    echo "Working on ${sam}"
-    # Prepare files
-    fq1=$reads/${sam}.1.fq.gz
-    fq2=$reads/${sam}.2.fq.gz
-    bam=$alns/${sam}.bam
-    # Align and process alignments
-    hisat2 --threads $thr -x $index --dta -1 $fq1 -2 $fq2 | \
-        samtools view -h -b | \
-        samtools sort --threads $npr -o $bam
-    # Index alns and get stats
-    samtools index --threads $thr $bam
-    samtools flagstat --threads $thr \
-        --output-fmt tsv $bam > $alns/${sam}.stats.tsv
-done
-```
+Merge the alignment of the two RNAseq into a single BAM files. This final BAM file
+is also filtered and processed using `samtools`.
 
-Use the aligned short-read RNAseq data to run `BRAKER` version `3.0.8`.
+* `run_braker3_container.sh` 
 
-```sh
-THR=16
-export BRAKER_SIF=/home/ariverac/local/containers/braker3.sif
+Use the `BRAKER` version `3.0.8` container to annotate the genome using the processed
+short-read alignments.
 
-cmd=(
-    # Set up singularity
-    singularity exec
-    # Bind all needed inputs
-    --bind ${fasta}:${fasta}
-    --bind ${bam}:${bam}
-    --bind ${peptide}:${peptide}
-    --bind ${outdir}:${PWD}
-    # Specify container
-    ${BRAKER_SIF}
-    # Braker3 call
-    braker.pl
-    --genome=$fasta
-    --species=balGla
-    --bam=$bam
-    --threads=$THR
-    --prot_seq=$peptide
-    --workingdir=./
-    --AUGUSTUS_CONFIG_PATH=./augustus_config/
-    --busco_lineage=arthropoda_odb10
-    --useexisting
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+##### IsoSeq-based annotation
 
-##### Processing the PacBio Isoseq data
+* `run_mmap_isoseq_aln.sh`
 
-We also performed an annotation with the PacBio IsoSeq data. First, we aligned this data to the genome using `minimap2` version `2.26-r1175`.
+Align the PacBio IsoSeq data to the barnacle reference genome using `minimap2` version `2.26-r1175`, with the `-x splice:hq` command. Process and sort the alignments using
+`samtools`.
 
-```sh
-minimap2 -t ${THR} -ax splice:hq -uf $genome $reads | \
-    samtools view -bS -F4 --threads ${PRC} | \
-    samtools sort --threads ${PRC} -o $bam
-```
+* `run_braker3_lr_container.sh`
 
-Then, used the aligned IsoSeq data to run `BRAKER` v `3.0.8`. Note, these are the same commands but it is a different singularity container.
+Use the `BRAKER` version `3.0.8` long-read branch container to annotate the genome
+using the processed IsoSeq long-read alignments. Note, these are the same commands as
+the ones used for the short-read version, but it is a different singularity container
+specific for the `BRAKER` long-read development branch.
 
-```sh
-THR=16
-export BRAKER_SIF=/home/ariverac/local/containers/braker3_lr.sif
+##### Merging the short- and long-read BRAKER annotations
 
-cmd=(
-    # Set up singularityls
-    singularity exec
-    # Bind all needed inputs
-    --bind ${fasta}:${fasta}
-    --bind ${bam}:${bam}
-    --bind ${peptide}:${peptide}
-    --bind ${outdir}:${PWD}
-    # Specify container
-    ${BRAKER_SIF}
-    # Braker3 call
-    braker.pl
-    --genome=$fasta
-    --species=balGla.IsoSeq.ArthroOdb11
-    --bam=$bam
-    --threads=$THR
-    --prot_seq=$peptide
-    --workingdir=./
-    --AUGUSTUS_CONFIG_PATH=./augustus_config/
-    --busco_lineage=arthropoda_odb10
-    --useexisting
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+* `rerun_tsebra.sh`
 
-Lastly, merge the two annotations using `TSEBRA`.
+Re-run the `TSEBRA` command from `BRAKER` version `3.0.8` to merge the short-read
+and long-read annotations. 
 
-```sh
-# Run TSEBRA to combine outputs from both brakers
-cmd=(
-    tsebra.py
-    --gtf $isoseq_braker/braker.gtf,$rnaseq_braker/braker.gtf
-    --keep_gtf $rnaseq_braker/braker.gtf
-    --hintfiles $isoseq_braker/hintsfile.gff,$rnaseq_braker/hintsfile.gff
-    --out ${basename}.gtf
-)
-echo "${cmd[@]}"
-"${cmd[@]}" 2> $outdir/tsebra.stderr
+* `run_compleasm.sh`
 
-cmd=(
-    getAnnoFastaFromJoingenes.py
-    --genome $outdir/balGla.softmasked.fasta
-    --gtf ${basename}.gtf
-    --out $basename
-)
-echo "${cmd[@]}"
-"${cmd[@]}" 1> $outdir/getAnnoFastaFromJoingenes.stdout 2> $outdir/getAnnoFastaFromJoingenes.stderr
-```
-
-Then, QC the final annotation using `compleasm` version `0.2.5`.
-
-```sh
-cmd=(
-    compleasm
-    protein
-    --protein $fasta
-    --lineage arthropoda_odb10
-    --thr $thr
-    --outdir $outd
-)
-
-# run command
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+Assess the gene-completeness of the annotated transcriptiome using the `protein`
+command from `compleasm` version `0.2.5` against the `arthropoda_odb10` reference set.
 
 #### Transcript and isoform curation
 
