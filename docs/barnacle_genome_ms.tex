@@ -1756,17 +1756,60 @@ Funding.
 \pagebreak
 
 \fancyhead[L]{\textit{SUPPLEMENTS}}
-\section*{Supplements}
 
-\subsection*{Supplemental Methods}
+\section*{Supplemental Methods}
 
-\subsubsection*{Assembly and annotation of \textit{Balanus
+\subsection*{Assembly and annotation of \textit{Balanus
 crenatus}}\label{sec:sup_methods_balcre}
 
-\subsubsection*{Processing annotations of published barnacle
+\subsubsection*{High-molecular weight DNA and PacBio sequencing}
+
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{Balanus
+crenatus} individuals from the docks in the Oregon Institute of Marine Biology, in
+Charleston, Oregon, USA (43.346 N, 124.325 W) in November 2023 during low tide.
+High-molecular weight (HMW) DNA was extracted from the dissected testes using the 
+PacBio Nanobind tissue kit (PacBio).
+DNA was assesses for quality fluorometric quantification of concentration (Qubit;
+Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical).
+The extracted DNA of a single individual was sequenced on two SMRTcells of a PacBio
+Sequel II machine at the University of Oregon's Genomics and Cell Characterization
+Core Facility (GC3F).
+These two sequencing runs yielded a total of 3.06 million reads with a read N50 of
+14.8 kbp.
+
+\subsubsection*{Estimating genome size and heterozygosity}
+
+We used k-mers to estimate the size and heterozygosity of the \textit{B.
+crenatus} genome.
+First, we counted k-mers present in the PacBio HiFi reads using
+\textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, couting
+21-mers (\texttt{--mer-len 21}) present in both strands (\texttt{--canonical}).
+These counts were then used to generate an empirical distribution of 21-mers
+using the \textsc{jellyfish} \texttt{histo} command.
+The final model of the diploid, genome-wide k-mer distribution was then performed
+using \textsc{GenomeScope2} version \texttt{2.0}
+\citep{ranallo-benavidez_genomescope_2020}.
+We estimated the \textit{B. crenatus} genome size to be 755,696,144 bp in length,
+with a heterozygosity of 2.25\%.
+
+\subsubsection*{Contig-level genome assembly}
+
+% TODO: This is placeholder from BalGla. Update.
+We generated a contig-level genome assembly
+A base, contig-level genome assembly for \bgla{} was generated from
+the PacBio HiFi reads using \textsc{hifiasm} version \texttt{0.19.6-r595}
+\citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022} with default
+parameters. This base assembly was assessed for contiguity using \textsc{quast}
+version \texttt{5.2.0} \citep{gurevich_quast_2013}, and for gene-completeness with
+\textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023} using
+the \texttt{arthropoda\_odb10} reference \textsc{BUSCO} dataset \citep{simao_busco_2015,
+manni_busco_2021,tegenfeldt_orthodb_2025} (Table~\ref{tab:sup_asm_stats}).
+
+
+\subsection*{Processing annotations of published barnacle
 assemblies}\label{sec:sup_methods_barnacle_rna}
 
-\subsubsection*{Codon usage biases in \textit{Drosophila melanogaster}}
+\subsection*{Codon usage biases in \textit{Drosophila melanogaster}}
 
 As a comparison against barnacles, we calculated codon usage biases in the fruit
 fly \textit{D. melanogaster}.
@@ -1788,9 +1831,11 @@ equal codon usage across synonymous codons \citep{wright_effective_1990}, using 
 adjustments by~\cite{sun_improved_2013} to account for usage differences across
 different codon subfamilies.
 
-\subsubsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
+\subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
-\subsection*{Supplemental Tables and Figures}
+\pagebreak
+
+\section*{Supplemental Tables and Figures}
 
 % Stats for the different stages of the assembly
 \begin{table}[ht]

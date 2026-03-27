@@ -84,7 +84,8 @@ This script aligns the raw PacBio HiFi reads to the contig-level assembly using
 Determine the depth of coverage from the aligned reads and add the coverage estimates
 to the database using `blobtools add`.
 
-To assign taxonomy, we queried the contig-level assembly against NCBI's `nt` database (downloaded on 2023-12-13).
+To assign taxonomy, we queried the contig-level assembly against NCBI's `nt` database
+(downloaded on 2023-12-13).
 
 #### Adding taxonomic information
 
@@ -312,7 +313,8 @@ short-read alignments.
 
 * `run_mmap_isoseq_aln.sh`
 
-Align the PacBio IsoSeq data to the barnacle reference genome using `minimap2` version `2.26-r1175`, with the `-x splice:hq` command. Process and sort the alignments using
+Align the PacBio IsoSeq data to the barnacle reference genome using `minimap2` version
+`2.26-r1175`, with the `-x splice:hq` command. Process and sort the alignments using
 `samtools`.
 
 * `run_braker3_lr_container.sh`
@@ -800,13 +802,25 @@ Raw data available on NCBI BioProject [PRJNA1378260](https://www.ncbi.nlm.nih.go
 
 ### Genome assembly
 
+The directory `scripts/crenatus/genome_assembly` contains scripts for the assembly
+of the genome of *B. crenatus*.
+
 #### K-mer estimation
 
-TODO: Redo in the pooled data.
+* `run_jellyfish.sh`:
+ 
+Use `jellyfish` version `2.1.10` to count k-mers (`jellyfish count`)
+and generate a k-mer histogram (`jellyfish histo`).
+
+* `run_genomescope.sh`
+
+Use `GenomeScope2` version `2.0` to do the k-mer model and plot.
 
 #### Contig-level assembly
 
-Generated a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contained strict parameter for the identification and purging of haplotig sequences.
+* `run_hifiasm.sh`
+
+Generate a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contains strict parameter for the identification and purging of haplotig sequences.
 
 ```sh
 cmd=(
