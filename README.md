@@ -57,131 +57,69 @@ Assess contiguity of the assembly using `quast` version `5.2.0`.
 Assess gene-completeness of the assembly using `compleasm` version `0.12-r237`,
 comparing against the `arthropoda_odb10` `BUSCO` dataset.
 
-#### Filtering for contamination
+### Filtering for contamination
 
-We filtered both this base genome and the raw PacBio HiFi reads for contamination using `blobtoolkit` version `4.3.0`.
+The directory `scripts/genome_assembly/contamination` contains script for
+detecting and removing contaminant sequences in the assembly.
 
-First, we created a new BlobTools database:
+#### Initializing database
 
-```sh
-cmd=(
-    blobtools create
-    --fasta $fasta
-    --meta $meta
-    --taxid $taxid
-    --taxdump $taxdump
-    $blobdir
-)
+* `run_blobtools_create.sh`
 
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+This script initializes a new `BlobTools` database for the genome assembly. It uses
+`blobtoolkit` version `4.3.0` and specifies the NCBI taxonomic ID as `110520` (entry
+for *B. glandula*).
 
-We specificed the NCBI taxid as `110520` (entry for *B. glandula*). Taxdump files downloaded on 2023-12-13.
+#### Adding coverage data
 
-To obtain depth of coverage, we aligned the HiFi reads to the contigs using `minimap2` version `2.26-r1175`.
+Adding per-contig coverage estimates.
 
-```sh
-# Align
-minimap2 -x map-hifi -t $thr -a $fasta $reads | \
-    samtools view -bh -@ $thr | \
-    samtools sort -m 1G -@ $thr -o $alignments
+* `run_minimap_hifi_aln.sh`
 
-# Index
-cd $work/alignments
-samtools index --csi --threads $thr $alignments
-```
+This script aligns the raw PacBio HiFi reads to the contig-level assembly using
+`minimap2` version `2.26-r1175`.
 
-We added the coverage to the BlobTools database:
+* `run_blobtools_add_cov.sh`
 
-```sh
-cmd=(
-    blobtools add
-    --cov ${bam}
-    --cov "${bam}=def_3cell"
-    --threads $thr
-    $blobdir
-)
-
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+Determine the depth of coverage from the aligned reads and add the coverage estimates
+to the database using `blobtools add`.
 
 To assign taxonomy, we queried the contig-level assembly against NCBI's `nt` database (downloaded on 2023-12-13).
 
-```sh
-cmd=(
-    blastn
-    -query $genome
-    -db $db
-    -out -
-    -evalue "1e-10"
-    -outfmt "6 qseqid staxids bitscore std"
-    -max_target_seqs 25
-    -num_threads $thr
-)
+#### Adding taxonomic information
 
-# Run BLASTN and compress output
-"${cmd[@]}" | gzip > "${outf}"
-```
+Assign a taxonomic assignment to each assembled contig.
 
-We added the BLAST results to the BlobTools database:
+* `run_blastn.sh`
 
-```sh
-cmd=(
-    blobtools add
-    --hits $blast
-    --taxdump $taxdump
-    --taxrule bestsumorder
-    --threads $thr
-    $blobdir
-)
+Use `blastn` version `2.15.0+` to map the assembled contigs against NCBI's `nr`
+database (downloaded on 2023/12/13).
 
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+* `run_blobtools_add_hits.sh`
 
-Using the hits, we filtered the genome to include only sequences that were tagged to the taxonomical level "class Thecostraca". We also exported the IDs of all the reads that aligned to the contigs that matched to "class:Thecostraca".
+Add the `BLAST` results to the `BlobTools` database using `blobtools add`.
+Use the `bestsumorder` taxonomic rule to do the taxonomic assignment for each contig.
 
+#### Filter contaminant sequences
 
-```sh
-# Output directory for the specific filter ()
-lvl=class
-filt=Thecostraca
-rule=bestsumorder
-suffix=filtered_${lvl}-${filt}
-outd=$(date +${work}/%Y%m%d.balGla_def.filter_${lvl}-${filt}.BlobDir)
-log=${outd}/${suffix}.log
-tbl=${outd}/${suffix}.tbl
-param=${rule}_${lvl}--Keys=${filt}
-mkdir -p $outd
+Using the assigned taxonomy, filter to obtain all contigs, as well as and the
+associated reads aligned to those contigs, that match to the class Thecostraca.
 
-cmd=(
-    blobtools filter
-    --param $param
-    --fasta $fasta
-    --fastq $fastq
-    --cov $bam
-    --taxdump $taxdump
-    --taxrule $rule
-    --output $outd
-    --suffix $suffix
-    --invert # since we are keeping the matches to the filter
-    $blobdir
-)
+* `run_blobtools_filter.sh`
 
-echo "${cmd[@]}"
-"${cmd[@]}" > $log
-```
+Export the contig and read IDs of all sequences assigned to the class Thecostraca
+using `blobtools filter`. Use the `bestsumorder` taxonomic rule. In other words,
+this commands filters out anything that is not assigned to barnacles.
+
+* `run_seqtk.sh`
+
+Use `seqtk` version `1.4-r130-dirty` to subset the raw HiFi to retain only those
+assigned to Thecostraca.
 
 Use used the generated read IDs to subset the original FASTQ to obtain only the desired HiFi reads using `seqtk` version `1.4-r130-dirty`.
 
-```sh
-seqtk subseq ../m64047_blaGla.merged.ccs.fastq.gz ./Thecostraca/
-filtered_class-Thecostraca.reads.txts
-```
-
-We also filtered the ONT reads by alignming them to the `blobtools` filtered genome and retaining only the reads that aligned.
+This processes, estimating coverage, assigning taxonomy, and filtering using
+`blobtools`, was also repeated for the ONT reads.
 
 ### Optimized contig-level assembly
 
