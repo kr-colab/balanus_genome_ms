@@ -7,59 +7,17 @@ Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome pa
 * The Pacfic acorn barnacle (*Balanus glandula*).
 * NCBI TaxID: [110520](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=110520)
 
-### Sample information and sequencing.
+### Sample information and sequencing
 
-#### PacBio HiFi
+Raw data available on NCBI BioProject
+[PRJNA1378260](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA1378260).
 
-Sample is one of several individuals collected on Feb 2023 by Erin Jezuit and George von Dassow at the Oregon Institute of Marine Biology, Charleston OR ([map](https://maps.app.goo.gl/8bmcutaaJussMBcy5)).
-
-<!--- Confirm dates and locations of original --->
-
-DNA was extracted with PacBio Nanobind and sequenced on three runs of PacBio HiFi at the University of Oregon's GC3F.
-
-Path to raw data (all paths on `Poppy`):
-
-```
-/sietch_colab/data_share/balanus/hifi/read_links
-```
-
-#### Hi-C
-
-One of several individuals collected on August 2023 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
-
-<!--- Cape Perpetua or Bob Creek? --->
-
-Tissue was processed by Phase Genomics into a Hi-C library and 2x150bp sequenced on an Illumina NovaSeq 6000 at the University of Oregon's GC3F.
-
-Path to raw data:
-
-```
-/sietch_colab/data_share/balanus/hi-c/7549
-```
-
-#### RNAseq & Iso-Seq
-
-One of several individuals collected on August 2023 by the Kern-Ralph co-lab at Cape Perpetua, OR ([map](https://maps.app.goo.gl/NjL9mCNNjerpXvnY7)).
-
-<!--- Cape Perpetua or Bob Creek? --->
-
-For RNAseq, whole-tissue RNA was extracted, prepared into two libraries (testes and cirri?) and sequenced (2x150bp) on an Illumina NovaSeq 6000 at the University of Oregon's GC3F.
-
-<!--- Confirm tissue --->
-
-Path to raw reads:
-
-```
-/sietch_colab/data_share/balanus/rna-seq/raw
-```
-
-For Iso-Seq, RNA was extracted from cirri and testes, and sequenced on a PacBio SMRTcell at he University of Oregon's GC3F.
-
-Path to raw reads:
-
-```
-/sietch_colab/data_share/balanus/isoseq/6885/ccs.Q20
-```
+| Sequencing | Location | Date Collected | NCBI BioSample |
+| - | - | - | - |
+| PacBio HiFi | Oregon Institute of Marine Biology, Charleston, OR, USA | Feb 2023 | SAMN56729174 |
+| Oxford Nanopore ONT | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729176 |
+| Hi-C | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729175 |
+| RNAseq+IsoSeq | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729177 |
 
 ### Genome assembly
 
@@ -981,13 +939,54 @@ annotated lncRNAs based on their location relative to nearby genes.
 Process the output lncRNA annotation using `AGAT` version `1.4.3` to standardize into
 the GFF format and manage IDs.
 
-### Comparative genomics
+### Reference sample popgen
+
+The directory `scripts/popgen/reference_sample` contains a series of scripts for
+calculating diversity statistics on the *B. glandula* refererence individual,
+including aligning reads, genotyping, and filtering.
+
+* `mmp_align_hifi.sh`
+
+Align the processed PacBio HiFi reads using `minimap2` version `2.28-r1209`.
+Process the resulting alignments with `samtools` version `1.21`. Calculate
+depth of coverage using `mosdepth` version `0.3.10`.
+
+* `run_bcftools_hifi.sh`
+
+Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the barnacle reference
+individual. Run the genotyping per-chromosome.
+
+* `run_bcftools_norm.sh`
+
+Normalize indels and adjacent variant sites using `BCFtools norm`.
+
+* `softFilt_bcf.sh`
+
+Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
+
+* `run_snpEff.sh`
+
+Take the set of called variants and annotate their effects using `snpEff` version `5.2`.
+First, the script builds a `snpEff` database. Then, it annotates the VCF.
+
+
+## Barnacle comparative genomics
+
+In addition to the newly-generated assemblies for *Balanus glandula* and
+*Balanus crenatus*, we used publicly available data from the following sepecies:
+
+| Spp name | Class | Family | Spp Code | NCBI Accession | Assembly ID | In OrthoDB v11<sup>1</sup> | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | 
+| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCF_019059575.1` | NRLGWU_Aamphi_draft | yes | RefSeq genome |
+| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCA_037642225.1` | ASM3764222v1 | no | Lifting over annotation from `GCF_019059575.1` |
+| *Capitulum mitella* | Thecostraca | Pollicipedidae | `CapMit` | `GCA_030062745.1` | ASM3006274v1 | no | No annotation |
+| *Pollicipes pollicipes* | Thecostraca |  Pollicipedidae | `PolPol` | `GCF_011947565.3` | Ppol_2.1 | yes | RefSeq genome |
 
 The `scripts/comparative_genomics/` directory contains various subdirectories describing
 various comparative genomic analyses, including identifying orthologs, synteny, whole-
 genome aligments, etc.
 
-#### Identifying orthologroups
+### Identifying orthologroups
 
 `scripts/comparative_genomics/orthofinder`:
 
@@ -995,7 +994,7 @@ genome aligments, etc.
 
 Identify orthologous genes across barnacle genomes using `OrthoFinder` version `3.1.0`.
 
-#### Conserved synteny analysis
+### Conserved synteny analysis
 
 `scripts/comparative_genomics/synteny`:
 
@@ -1004,7 +1003,7 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 Take the output from `OrthoFinder` and indentify synteny blocks using `Genespace`
 version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
 
-#### Whole-genome alignment and conserved regions
+### Whole-genome alignment and conserved regions
 
 `scripts/comparative_genomics/phastcons`
 * `run_cactus.sh`
@@ -1053,7 +1052,7 @@ options:
                         (int) Min length of intervals in input BED files [default=1].
 ```
 
-#### dN/dS analysis
+### dN/dS analysis
 
 `scripts/comparative_genomics/dnds`
 
@@ -1130,7 +1129,7 @@ options:
                         [default=fa].
 ```
 
-#### McDonald-Kreitman test
+### McDonald-Kreitman test
 
 `scripts/comparative_genomics/mk_test`
 
@@ -1171,7 +1170,7 @@ Calculate three different versions of the McDonald-Kreitman test using the
 2. Asymptotic MK test (Messer & Petrov 2013)
 3. Tarone-Greenland estimator (Stoletzki and Eyre-Walker, 2011)
 
-#### Codon usage biases
+### Codon usage biases
 
 `scripts/comparative_genomics/codon_usage`
 
@@ -1182,37 +1181,25 @@ usage using the `cubar` version `1.2.0` R package. The script does a
 few statistics, but the main one we care about here is the effective
 number of codons (ENC).
 
-### Reference sample popgen
+## Oregon *Balanus glandula* population genetics
 
-The directory `scripts/popgen/reference_sample` contains a series of scripts for
-calculating diversity statistics on the *B. glandula* refererence individual,
-including aligning reads, genotyping, and filtering.
+### Sample information and sequencing
 
-* `mmp_align_hifi.sh`
+Raw data available on NCBI BioProject
+[PRJNA1434535](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA1434535).
 
-Align the processed PacBio HiFi reads using `minimap2` version `2.28-r1209`.
-Process the resulting alignments with `samtools` version `1.21`. Calculate
-depth of coverage using `mosdepth` version `0.3.10`.
+| Sample ID | Location | Date Collected | NCBI BioSample |
+| - | - | - | - |
+| Bgland_CPE_1  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729179 |
+| Bgland_CPE_11 | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729185 |
+| Bgland_CPE_12 | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729186 |
+| Bgland_CPE_2  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729180 |
+| Bgland_CPE_3  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729181 |
+| Bgland_CPE_4  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729182 |
+| Bgland_CPE_5  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729183 |
+| Bgland_CPE_9  | Cape Perpetua, Yachats, Oregon, USA | Aug 2023 | SAMN56729184 |
 
-* `run_bcftools_hifi.sh`
-
-Use `BCFtools` version `1.21` `mpileup` and `call` to genotype the barnacle reference
-individual. Run the genotyping per-chromosome.
-
-* `run_bcftools_norm.sh`
-
-Normalize indels and adjacent variant sites using `BCFtools norm`.
-
-* `softFilt_bcf.sh`
-
-Filter the variants using `BCFtools` version `1.21` `filter` and `view`.
-
-* `run_snpEff.sh`
-
-Take the set of called variants and annotate their effects using `snpEff` version `5.2`.
-First, the script builds a `snpEff` database. Then, it annotates the VCF.
-
-### Oregon barnacle popgen
+### Population genetic analysis
 
 The directory `scripts/popgen/oregon` contains various script for analyzing the population
 genetics data for central Oregon barnacles. This includes the alignment and genotyping
@@ -1269,17 +1256,11 @@ Example of the configuration file required by `DemInfHelper`.
 
 ### Sample information and sequencing
 
-#### PacBio HiFi
+Raw data available on NCBI BioProject [PRJNA1378260](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA1378260).
 
-Sample is one of four individuals collected on Nov 2023 by Erin Jezuit at the Oregon Institute of Marine Biology, Charleston OR ([map](https://maps.app.goo.gl/8bmcutaaJussMBcy5)).
-
-DNA was extracted with PacBio Nanobind and sequenced on two runs of PacBio HiFi at the University of Oregon's GC3F.
-
-Path to raw data:
-
-```
-/sietch_colab/data_share/balanus/balanus_crenatus/hifi_reads
-```
+| Sequencing | Location | Date Collected | NCBI BioSample |
+| - | - | - | - |
+| PacBio HiFi | Oregon Institute of Marine Biology, Charleston, OR, USA | Nov 2023 | SAMN56729178 |
 
 ### Genome assembly
 
@@ -1510,83 +1491,6 @@ In comparison with the un-purged assembly:
 * BUSCO D went from 3.16% to 3.26%
 
 * Reference-guided scaffolding
-
-## *Balanus nubilis* genome assembly and annotation
-
-* The giant acorn barnacle (*Balanus nubilis*).
-* NCBI TaxID: [6678](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=6678)
-
-<!--- TODO --->
-
-## Other genome assemblies
-
-See:
-
-```
-/sietch_colab/data_share/balanus/crustacean_outgroup_assemblies
-```
-
-All the ones downloaded:
-
-| Spp name | Class | Family | Spp Code | NCBI Accession | Assembly ID | In OrthoDB v11<sup>1</sup> | Note |
-| --- | --- | --- | --- | --- | --- | --- | --- | 
-| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCF_019059575.1` | NRLGWU_Aamphi_draft | yes | -- |
-| *Amphibalanus amphitrite* | Thecostraca | Balanidae | `AmpAmp` | `GCA_037642225.1` | ASM3764222v1 | no | Annotation from Han et al. 2024<sup>2</sup> |
-| *Artemia franciscana* | Branchiopoda | Artemiidae | `ArtFra` | `GCF_032884065.1` | ASM3288406v1 | no | -- |
-| *Capitulum mitella* | Thecostraca | Pollicipedidae | `CapMit` | `GCA_030062745.1` | ASM3006274v1 | no | No annotation |
-| *Cherax quadricarinatus* | Malacostraca | Parastacidae | `CheQua` | `GCF_026875155.1` | ASM2687515v2 | no | -- |
-| *Daphnia magna* | Branchiopoda | Daphniidae | `DapMag` | `GCF_020631705.1` | ASM2063170v1.1 | yes | -- |
-| *Daphnia pulicaria* | Branchiopoda | Daphniidae | `DapPui` | `GCF_021234035.1` | SC_F0-13Bv2  | yes | -- |
-| *Daphania pulex* | Branchiopoda | Daphniidae | `DapPul` | `GCF_021134715.1` | ASM2113471v1 | yes | -- |
-| *Eriocheir sinensis* | Malacostraca | Varunidae | `EriSin` | `GCF_024679095.1` | ASM2467909v1 | no | -- |
-| *Eurytemora carolleeae/affinis* | Hexanauplia/Copepoda | Temoridae | `EurAff` | `GCF_000591075.1` | Eaff_2.0 | yes | -- |
-| *Homarus americanus* | Malacostraca | Nephropidae | `HomAme` | `GCF_018991925.1` | GMGI_Hamer_2.0 | yes | -- |
-| *Hyalella azteca* | Malacostraca | Hyalellidae | `HyaAzt` | `GCF_000764305.2` | Hazt_2.0.2 |  yes | -- |
-| *Lepeophtheirus salmonis* | Hexanauplia/Copepoda | Caligidae | `LepSal` | `GCF_016086655.3` | UVic_Lsal_1.2 | yes | -- |
-| *Macrobrachium rosenbergii* | Malacostraca | Palaemonidae | `MacRos` | `GCF_040412425.1` | ASM4041242v1 | no | -- |
-| *Penaeus chinensis* | Malacostraca | Penaeidae | `PenChi` | `GCF_019202785.1` | ASM1920278v2 | yes | -- |
-| *Penaeus japonicus* | Malacostraca | Penaeidae | `PenJap` | `GCF_017312705.1` | Mj_TUMSAT_v1.0 | yes | -- |
-| *Penaeus monodon* | Malacostraca | Penaeidae | `PenMon` | `GCF_015228065.2` | NSTDA_Pmon_1 | yes | -- |
-| *Penaeus vannamei* | Malacostraca | Penaeidae | `PenVan` | `GCF_019202785.1` | ASM1920278v2 | yes | -- |
-| *Pollicipes pollicipes* | Thecostraca |  Pollicipedidae | `PolPol` | `GCF_011947565.3` | Ppol_2.1 | yes | -- |
-| *Portunus trituberculatus* | Malacostraca | Portunidae |  `PorTri` | `GCF_017591435.1` | ASM1759143v1 | yes | -- |
-| *Procambarus clarkii* | Malacostraca | Cambaridae | `ProCla` | `GCF_020424385.1` | ASM2042438v2 | yes | -- |
-| *Sacculina carcini* | Thecostraca | Sacculinidae | `SacCar` | `GCA_916048095.2` | qxSacCarc1.2 | no | No annotation |
-| *Scylla paramamosain*  | Malacostraca | Portunidae | `ScyPar` | `GCF_035594125.1` | ASM3559412v1 | no | -- |
-| *Tigriopus californicus* | Hexanauplia/Copepoda | Harpacticidae | `TigCal` | `GCF_007210705.1` | Tcal_SD_v2.1 | yes | -- |
-
-
-<sup>1</sup>Crustacean species in OrthoDB v11 ([link](https://www.orthodb.org/?level=6657&species=6657)). See:
-
-```
-/sietch_colab/ariverac/balanus_genome/ncbi_data/orthodb_v11_Crustacea
-```
-
-<sup>2</sup>*A. amphitrite* assembly by Han et al. 2024:
-
->Han, Z., Wang, Z., Rittschof, D. et al. New genes helped acorn barnacles adapt to a sessile lifestyle. *Nat Genet 56*, 970-981 (2024). <https://doi.org/10.1038/s41588-024-01733-7>
-
-Assembly is on NCBI ([link](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_037642225.1/)), annotation is provided by the authors on Figshare ([link](https://doi.org/10.6084/m9.figshare.21310305)).
-
-<!--- TODO --->
-
-
-## Comparative analysis
-<!--- TODO --->
-
-Add `orthofinder` code info.
-
-For downstream processing, Generating the counts table using
-
-```sh
-$ orthogroup_gene_count.py Phylogenetic_Hierarchical_Orthogroups/N0.tsv
-```
-
-This is described in the orthofinder issues
-([link](https://github.com/davidemms/OrthoFinder/issues/511)).
-
-## Popgen analysis
-<!--- TODO --->
 
 ## Authors
 
