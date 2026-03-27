@@ -40,44 +40,22 @@ Use `GenomeScope2` version `2.0` to do the k-mer model and plot.
 
 #### Initial contig-level assembly
 
-The raw HiFi reads were assemblied using `hifiasm` version `0.19.6-r595` using default parameters.
+The directory `scripts/genome_assembly/def_contigs` contains scripts for the
+base assembly of contigs.
 
-```sh
-cmd=(
-    hifiasm
-    -o $name
-    -t 24
-    $reads/m64047_230524_205253.ccs.fastq.gz
-    $reads/m64047_230531_210842.ccs.fastq.gz
-    $reads/m64047_230602_080338.ccs.fastq.gz
-)
+* `run_hifiasm_default.sh`
 
-echo "${cmd[@]}"
-"${cmd[@]}" > $log 2>&1
+Assemble the raw HiFi reads with `hifiasm` version `0.19.6-r595` using
+default parameters.
 
-# Convert the GFA to fasta
-cat ${name}.bp.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
-    gzip > ${name}.p_ctg.fasta.gz
-```
+* `run_quast.sh`
 
-Path to this data:
-```
-/sietch_colab/ariverac/balanus_genome/assemblies/20230817.3cell.hifiasm.def
-```
+Assess contiguity of the assembly using `quast` version `5.2.0`.
 
-This assembly was composed of 4,212 con tigs, with a total length of 1.64 Gbp, and a contig N50 of 734 Kbp. Largest contig was 4.25 Mbp (checked with `quast` version `5.2.0`).
+* `run_compleasm.sh`
 
-We verified gene-completeness using `compleasm` version `0.12-r237` (notice the 50% BUSCO duplicates).
-
-```
-## lineage: arthropoda_odb10
-S:45.31%, 459
-D:50.35%, 510
-F:0.79%, 8
-I:0.00%, 0
-M:3.55%, 36
-N:1013
-```
+Assess gene-completeness of the assembly using `compleasm` version `0.12-r237`,
+comparing against the `arthropoda_odb10` `BUSCO` dataset.
 
 #### Filtering for contamination
 
@@ -205,363 +183,140 @@ filtered_class-Thecostraca.reads.txts
 
 We also filtered the ONT reads by alignming them to the `blobtools` filtered genome and retaining only the reads that aligned.
 
-#### Generating updated contig-level assembly
+### Optimized contig-level assembly
 
-Using the filtered, Thecostraca-specific reads we generated a new contig-level assembly using `hifiasm` version `0.19.8-r603`. This run included both ONT and Hi-C data, and has more strict parameters for the purging of haplotig sequences.
+The directory `scripts/genome_assembly/opt_contigs` contains scripts for 
+processing and analyzing the optimized contig-level assembly.
 
-```sh
-# Main hifiasm command
-cmd=(
-    hifiasm
-    -o $name
-    -t 36
-    -s 0.25   # Min 25% similarity for haplotigs
-    --hom-cov 68
-    --hg-size 800m
-    --dual-scaf
-    --purge-max 68
-    -D 10.0
-    --ul $ul   # ONT reads
-    --h1 $hc1  # Hi-C read 1 
-    --h2 $hc2  # Hi-C read 2
-    $hifidir/m64047_blaGla.merged.ccs.filtered_class-Thecostraca.fastq.gz
-)
+#### Assemble contigs
 
-echo "${cmd[@]}"
-"${cmd[@]}" > $log 2>&1
+* `run_hifiasm_optimized.sh`
 
-# Convert the GFA to fasta
-cat ${name}.hic.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
-    gzip > ${name}.p_ctg.fasta.gz
-```
+Assemble the filtered, Thecostraca-specific reads using `hifiasm` version
+`0.19.8-r603`. This run included both ONT and Hi-C data, and has more strict
+parameters for the purging of haplotig sequences.
 
-This assembly is composed of 2,218 contigs, with a total length of 1.29 Gbp, a largest contig of 6.37 Mbp, and a contig N50 of 1.16 Mbp (checked with `quast` version `5.2.0`).
+#### Purging haplotig sequences
 
-We verified gene-completeness using `compleasm` version `0.12-r237` (95.36% complete). Duplicates went down to 21% form 50%.
+* `run_pd_mininap.sh`
 
-```
-## lineage: arthropoda_odb10
-S:73.54%, 745
-D:21.82%, 221
-F:0.89%, 9
-I:0.00%, 0
-M:3.75%, 38
-N:1013
-```
+This scripts aligns the reads back to the genome and calculate some
+coverage statistics.
 
-### Purging haplotig sequences
+1. Align the filtered reads to the optimized contig-level
+assembly using `minimap2` version `2.26-r1175`.
+2. Use `pbcstat` tool from `purge_dups` version `1.2.5` to
+calculate the read-depth histogram.
+3. Use `calcuts` tool from `purge_dups` version `1.2.5` to
+calculate the base-level depth coverage cutoffs.
+4. Split the genome for self alignment using `split_fa`.
+5. Do the self alignment of the genome with `minimap2` version
+`2.26-r1175`.
 
-We purges haplotig sequences using `purge_dups` version `1.2.5`.
+* `run_purge_dups.sh`
 
-First, aligned the PacBio HiFi to the genome and did the assembly self-alignment using `minimap2` version `2.26-r1175`.
+This script removes haplotig sequences from the assembly in the following
+steps:
 
-```sh
-# Align the reads to the reference
-minimap2 -x map-hifi -t 16 $genome $reads | gzip -c - > $paf
-
-# Calculate read-depth histogram
-pbcstat -O $alns_out $paf
-
-# Calculate base-level depth
-calcuts PB.stat > cutoffs 2>calcults.log
-
-# Do an assembly self-alignment
-split_fa $genome > $split
-minimap2 -x asm5 -t 16 -DP $split $split | gzip -c - > $self
-```
-
-We then tan `purge_dups` and the `get_seqs` utility to identify and filter haplotig sequences.
-
-```sh
-# Mark the duplicates in a bed file
-cmd=(
-    purge_dups
-    -2
-    -T $alns/cutoffs
-    -c $alns/PB.base.cov
-    $paf
-)
-echo "${cmd[@]}"
-"${cmd[@]}" > dups.bed 2> purge_dups.log
-
-# Process the assembly
-cmd=(
-    get_seqs
-    -e
-    -s
-    -p $name
-    dups.bed
-    $geno
-)
-echo "${cmd[@]}"
-"${cmd[@]}" > get_seqs.log 2>&1
-```
-
-The purged assembly is composed of 1,342 contigs, a total length of 1.05 Gbp,largest contig of 6.37 Mbp, and a contig N50 of 1.35 Mbp (checked with `quast` version `5.2.0`).
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (93.88% complete.)
-
-```
-## lineage: arthropoda_odb10
-S:89.04%, 902
-D:4.84%, 49
-F:1.18%, 12
-I:0.00%, 0
-M:4.94%, 50
-N:1013
-```
-
-In comparison with the un-purged assembly:
-
-* Number of contigs went from 2.2 K to 1.3 K
-* Total length went from 1.29 Gbp to 1.05 Gbp
-* Contig N50 went from 1.16 Mbp to 1.31 Mbp
-* BUSCO C went from 95.36% to 93.88%
-* BUSCO D went from 21.82% to 4.84%
-
-<!--- TODO --->
+1. Use `purge_dups` version `1.2.5` to mark the duplicate sequences in
+a BED file.
+2. Process the assembly to extract the haplotig sequences using `get_seqs`.
 
 ### Hi-C scaffolding
 
-After haplotig purging, the contigs were assembled using Hi-C data. The alignment and processing of Hi-C read pairs was done following the Omni-C pipeline ([link](https://omni-c.readthedocs.io/en/latest/fastq_to_bam.html)), in accordance to the `yahs` documentation.
+The directory `scripts/genome_assembly/hic_scaffolds` contains scripts
+for the scaffolding of the genome using Hi-C reads.
 
-Path to this data:
+* `run_hic_alns.sh`
 
-```sh
-/sietch_colab/ariverac/balanus_genome/assemblies/20240226.3cell_Thecostraca.hifiasm_0.19.8.s25_D10_ONT_HiC_hmc68_hgs800_dualScaff/hi-c/yahs-scaffolding
-```
-
-#### Aliging Hi-C reads
-
-The raw Hi-C reads were aligned to the genome using `bwa` version `0.7.17-r1188`. The base alignments were processed using `samtools` version `1.18`.
-
-For `bwa`, we are splitting alignments and skipping mate rescue and pairing.
-
-```sh
-# Index the reference genome
-echo "Indexing reference..."
-bwa index -p $db $fasta
-
-# Align and and store the "base" alignment
-echo "Aligning reads..."
-bwa mem -5SP -T0 -t $thr $db $r1 $r2 | \
-    samtools view -bh -@ $thr -o $base_bam
-```
-
-#### Processing Hi-C read pairs
-
-Following alignment and base processing, the aligned Hi-C read pairs were processed with `pairtools` version `1.0.2` in order to:
+This script aligns the Hi-C reads to the genome using `bwa mem` version
+`0.7.17-r1188`. Reads are then processed with `pairtools` version `1.0.2`
+in order to:
 
 1) Record valid ligation events (`pairtools parse`)
 2) Sorting the pairs (`pairtools sort`)
 3) Remove PCR duplicates (`pairtools dedup`)
 4) Splitting into corresponding aligment and read pairs file (`pairtools split`)
 
-```sh
-samtools view -h $base_bam | \
-    pairtools parse --min-mapq 40 --walks-policy 5unique --max-inter-align-gap 30 \
-        --nproc-in $npr --nproc-out $npr --chroms-path $geno | \
-    pairtools sort --tmpdir $tmp --nproc $npr | \
-    pairtools dedup --nproc-in $npr --nproc-out $npr --mark-dups --output-stats $dups | \
-    pairtools split --nproc-in $npr --nproc-out $npr --output-pairs $pairs --output-sam - | \
-    samtools view -bS -@ $npr | \
-    samtools sort -@ $npr -o $proc_bam
-
-# Index the final bam
-echo "Indexing BAM..."
-samtools index -@ $thr $proc_bam
-```
+The alignment and processing of Hi-C read pairs was done following the Omni-C
+pipeline ([link](https://omni-c.readthedocs.io/en/latest/fastq_to_bam.html)),
+in accordance to the `yahs` documentation.
 
 #### Scaffolding the genome
 
-Following alignment, the contigs were scaffolded using `yahs` version `1.2a.1`.
+* `run_yahs.sh`
 
-Since the contigs are fragmented, we reduced the minimum size of in `-r` to 1,000.
-
-```sh
-cmd=(
-    yahs
-    -o $outp
-    -q 10
-    -r 1000,5000,10000,20000,50000,100000,200000,500000,1000000,2000000,5000000,10000000,20000000,50000000,100000000,200000000,500000000
-    $fasta
-    $bam
-)
-
-echo "${cmd[@]}"
-"${cmd[@]}" > $log 2>&1
-```
+Take the processed alignments and gene `yahs` version `1.2a.1` to scaffold
+the contigs into chromosome-level scaffolds.
 
 #### Generating contact map
 
-Following the `yahs` documentation, we generated a contact map using `juicer pre` version `1.1` and `juicer tools` version `1.9.9`.
+* `run_juicer.sh`
 
-First, the base contact map (`*.hic` files) were generated:
-
-```sh
-# Juicer pre to  make the juicer input
-juicer pre $bin $agp $fai 2> $log | \
-    LC_ALL=C sort -k2,2d -k6,6d -T $outd --parallel=8 -S32G | \
-    awk 'NF' > ${outb}.part
-mv ${outb}.part ${outb}.sorted.txt
-
-# Get the adjusted chr sizes
-cat $log | grep "PRE_C_SIZE" | cut -d' ' -f2- > $chrom_sizes
-
-# Run the actual juicer tools
-juicer_tools pre \
-    ${outb}.sorted.txt \
-    ${outb}.hic.part \
-    $chrom_sizes
-mv ${outb}.hic.part ${outb}.out.hic
-```
-
-Then, we generated the `*.assembly` files, which can be edited using `juicebox`.
-
-```sh
-# Prepare the juicer pre run with assembly (-a) mode
-outf=${outb}.jbat
-log=${outf}.log
-juicer pre -a -o $outf $bin $agp $fai > $log 2>&1
-
-# Extract the adjusted assembly size
-asm_size=${outb}.assembly_size.tsv
-cat $log | grep "PRE_C_SIZE" | cut -d' ' -f2- > $asm_size
-
-# Rerun juicer_tools with the new files
-juicer_tools pre ${outf}.txt ${outf}.hic.part $asm_size
-mv ${outf}.hic.part ${outf}.hic
-```
-
-#### Validating the scaffolded assembly
-
-Checked with `quast` version `5.2.0`
-
-| statistic | value |
-| --------- | ----- |
-| Total size | 1.05 Gbp |
-| # scaffolds | 626 |
-| # contigs | 1,878 |
-| Largest scaffold | 79.9 Mbp |
-| Scaffold N50 | 34.2 Mbp |
-| Contig N50 | 1.2 Mbp |
-| Scaffold L50 | 10 |
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (94.18% complete.)
-
-```
-## lineage: arthropoda_odb10
-S:89.44%, 906
-D:4.74%, 48
-F:0.99%, 10
-I:0.00%, 0
-M:4.84%, 49
-N:1013
-```
+Following the `yahs` documentation, generate a contact map from the Hi-C
+data using `juicer pre` version `1.1` and `juicer tools` version `1.9.9`.
+The scripts also generates an `*.assembly` files, which can be edited using
+`juicebox`.
 
 #### Manual curation of the contact map
 
 Did some manual correction using `juicebox` version `2.17.00`, primarily doing large-scale changes.
 
-Re-generated the assembly using `juicer post`:
+* `run_juicer_post.sh`
+
+Re-generate the assembly after manual curation using `juicer post` version
+`1.1`.
+
+#### Correct the assembly
+
+* `run_inspector.sh`
+
+Perform a round of self-correction in the assembly using `inspector` version
+`1.0.1`. This scripts first runs `inspector.py` to align the reads and 
+evaluate the assembly, and then it corrects any errors using
+`inspector-correct.py`.
+
+#### Sorting and renaming sequences
+
+* `rename_sort_fa.py`
+
+Custom Python script to sort and rename the sequences in the genome. Here,
+we sorted the sequences by length and renamed them accordingly. Sequences
+larger than 10 Mb were assigned as chromosomes.
 
 ```sh
-cmd=(
-    juicer post
-    -o $name
-    $assm
-    $agp
-    $ctgs
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+$ python3 rename_sort_fa.py -h
+usage: rename_sort_fa.py [-h] -f IN_FASTA -i IN_FAI [-k NAME_KEY]
+                         [-o OUT_DIR] [-b BASENAME] [-m MIN_CHR_LEN]
+                         [-g GTF] [-l MIN_SEQ_LEN] [--rename-by-length]
+                         [--export-sorted]
 
-Resulting in:
+Process an input FASTA along with annotations to rename the sequences
+and sort the output.
 
-Checked with `quast` version `5.2.0`
-
-| statistic | value |
-| --------- | ----- |
-| Total size | 1.05 Gbp |
-| # scaffolds | 650 |
-| # contigs | 1,900 |
-| Largest scaffold | 80.3 Mbp |
-| Scaffold N50 | 50.96 Mbp |
-| Contig N50 | 1.18 Mbp |
-| Scaffold L50 | 9 |
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (93.98% complete).
-
-```
-## lineage: arthropoda_odb10
-S:89.24%, 904
-D:4.74%, 48
-F:0.89%, 9
-I:0.00%, 0
-M:5.13%, 52
-N:1013
-```
-
-### Inspector
-
-We performed one additional round of curation using `inspector` version `1.0.1`.
-
-```sh
-# Inspector evaluate
-cmd=(
-    inspector.py
-    --contig $fasta
-    --read $hifi
-    --thread $thr
-    --outpath $outdir
-    --datatype "hifi"
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-
-# Inspector correct
-cmd=(
-    inspector-correct.py
-    --inspector $outdir
-    --outpath $cordir
-    --datatype "pacbio-hifi"
-    --thread $thr
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
-
-#### Stats
-
-Checked with `quast` version `5.2.0`
-
-| statistic | value |
-| --------- | ----- |
-| Total size | 1.04 Gbp |
-| # scaffolds | 592 |
-| # contigs | 1,802 |
-| Largest scaffold | 80.3 Mbp |
-| Scaffold N50 | 51.41 Mbp |
-| Contig N50 | 1.18 Mbp |
-| Scaffold L50 | 9 |
-| Total len > 1 Mbp | 906.6 Mbp |
-| Fragments > 1 Mbp | 58 |
-| % len >  1 Mbp | 86.74% |
-| Total len > 8.5 Mbp | 841.2 Mbp |
-| Fragments > 8.5 Mbp | 16 |
-| % len >  10 Mbp | 80.61% |
-
-We verified gene-completeness using `compleasm` version `0.12-r237` (94.08 % complete.)
-
-```ls
-## lineage: arthropoda_odb10
-S:89.44%, 906
-D:4.64%, 47
-F:0.89%, 9
-I:0.00%, 0
-M:5.03%, 51
-N:1013
+options:
+  -h, --help            show this help message and exit
+  -f IN_FASTA, --in-fasta IN_FASTA
+                        (str) Path to input FASTA.
+  -i IN_FAI, --in-fai IN_FAI
+                        (str) Path to input FASTA index (FAI).
+  -k NAME_KEY, --name-key NAME_KEY
+                        (str) Path to name key file.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Output directory.
+  -b BASENAME, --basename BASENAME
+                        (str) Name of current run. Defaults to datetime.
+  -m MIN_CHR_LEN, --min-chr-len MIN_CHR_LEN
+                        (int/float) Minimum length of sequence to label
+                        as a chromosome. [default = 1,000,000]
+  -g GTF, --gtf GTF     (str) Path to input GTF/GFF3.
+  -l MIN_SEQ_LEN, --min-seq-len MIN_SEQ_LEN
+                        (int/float) minimum length needed to export a
+                        sequence. [default = 1,000]
+  --rename-by-length    Rename the chromosome sequences by their length
+                        in BP (i.e., longest sequences is chromosome 1).
+  --export-sorted       Export the sequences sorted by size. Defaults to
+                        the order of sequences in the FAI.
 ```
 
 ### Genome annotation
