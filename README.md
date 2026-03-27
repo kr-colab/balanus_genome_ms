@@ -116,8 +116,6 @@ this commands filters out anything that is not assigned to barnacles.
 Use `seqtk` version `1.4-r130-dirty` to subset the raw HiFi to retain only those
 assigned to Thecostraca.
 
-Use used the generated read IDs to subset the original FASTQ to obtain only the desired HiFi reads using `seqtk` version `1.4-r130-dirty`.
-
 This processes, estimating coverage, assigning taxonomy, and filtering using
 `blobtools`, was also repeated for the ONT reads.
 
@@ -1029,6 +1027,14 @@ In comparison with the un-purged assembly:
 * BUSCO D went from 3.16% to 3.26%
 
 * Reference-guided scaffolding
+
+## *Drosophila* comparions
+
+### Nucleotide diversity
+
+### Effective number of codons
+
+## Processing outgroup barnacle assemblies
 
 ## Authors
 
