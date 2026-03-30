@@ -890,9 +890,9 @@ Perform a round of self-correction in the assembly using `inspector` version
 evaluate the assembly, and then it corrects any errors using
 `inspector-correct.py`.
 
-#### Post-Inspector stats
-
 #### Reference-guided scaffolding
+
+Using `ragout` version `2.3`.
 
 #### Repeat annotation
 

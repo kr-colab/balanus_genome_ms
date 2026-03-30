@@ -1863,6 +1863,22 @@ with 3.26\% duplicates.
 
 \subsubsection*{Reference-based scaffolding}
 
+We used a \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} to
+scaffold the assembly.
+Using \textsc{cactus} version \texttt{2.9.7} we aligned the chromosome-level
+\textit{B. glandula} assembly against the \textit{B. crenatus} contigs,
+exporting the output alignments in MAF format.
+After alignment, we used the \textsc{ragout} version \texttt{2.3} software
+\citep{kolmogorov_ragout_2018} to perform reference-based scaffolding, disabling
+the breaking of input sequences (\texttt{--solid-scaffolds}) and enabling the
+repeat resolution algorithm (\texttt{--repeats}).
+After running \textsc{ragout}, we only kept the \textit{B. crenatus} sequences that
+were successfully aligned to \textit{B. glandula}.
+This scaffolded assembly was composed of 220 sequence fragments, with a total length
+of 853 Mbp, and a scaffold N50 of 5.58 Mbp.
+Additionally, the assembly was 89.64\% gene-complete (with 2.37\% duplicates) when
+compared to the \texttt{arthropoda\_odb10} reference set.
+
 \subsubsection*{Genome annotation}
 
 \subsection*{Processing annotations of published barnacle
