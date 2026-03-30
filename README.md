@@ -820,227 +820,83 @@ Use `GenomeScope2` version `2.0` to do the k-mer model and plot.
 
 * `run_hifiasm.sh`
 
-Generate a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contains strict parameter for the identification and purging of haplotig sequences.
+Generate a contig-level assembly using `hifiasm` version `0.19.8-r603`. This run contains
+strict parameter for the identification and purging of haplotig sequences.
 
-```sh
-cmd=(
-    hifiasm
-    -o $name
-    --hom-cov 40
-    -t 24
-    -s 0.25
-    --hg-size 800m
-    --dual-scaf
-    --purge-max 40
-    -D 10.0
-    -l 3
-    $reads/m64047_240125_175314.ccs.fastq.gz
-    $reads/m64047_240127_045016.ccs.fastq.gz
-)
+* `run_quast.sh`
 
-echo "${cmd[@]}"
-"${cmd[@]}" > $log 2>&1
+Assess contiguity of the contig-level assembly using `quast` version `5.2.0`.
 
-# Convert the GFA to fasta
-cat ${name}.bp.p_ctg.gfa | awk '/^S/{print ">"$2;print $3}' | \
-    gzip > ${name}.p_ctg.fasta.gz
-```
+* `run_compleasm.sh`
 
-This assembly is composed of 2,932 contigs, a total length of 1.20 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 746 Kbp (checked with `quast` version `5.2.0`).
+Assess gene-completeness of the assembly using `compleasm` version `0.12-r237`, comparing
+against the `arthropoda_odb10` reference dataset.
 
-We verified gene-completeness using `compleasm` version `0.12-r237`, `C` = 94.96%, `D` = 19.64%.
+#### Filtering contamination
 
-```
-## lineage: arthropoda_odb10
-S:75.32%, 763
-D:19.64%, 199
-F:0.89%, 9
-I:0.00%, 0
-M:4.15%, 42
-N:1013
-```
+Filtering contamination by running `MMseqs2` Release `15-6f452`.
 
-### Filtering contamination
+<!--- Check these scripts. I don't have permission. --->
+/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/tmp/latest/createindex.sh
 
-Filtering contamination by running `mmseqs2` version `X.XX`.
+/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/tmpFolder/latest/taxpercontig.sh
 
-<!--- TODO --->
-see:
+* `createindex.sh`
 
-```
-/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2
-```
+Create the `mmseqs2` index.
 
-After finishing taxonomical assignment, we only selected sequences matching the target NCBI taxonomical ID (Thecostraca: [116172](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=116172&lvl=3&lin=f&keep=1&srchmode=1&unlock)).
+* `taxpercontig.sh`
 
-```sh
-# Input FASTA (must be indexed)
-in_fasta=$work/in_genome/balCre.hmc40_D10_s25.p_ctg.fasta
+Use `mmseqs2` to assign taxonomy per contig.
 
-# Taxonomy output table from MMSeqs2
-tsv=$work/balCre_tax.tsv
+* `filter_mmseq_fasta.sh`
 
-# NCBI taxonomy category for checking
-tax=116172 # Thecostraca
+Used the `mmseqs` assignments and filter the assembly. We only selected sequences
+matching the target NCBI taxonomical ID (Thecostraca:
+[116172](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=116172&lvl=3&lin=f&keep=1&srchmode=1&unlock)).
 
-# Filter the contig IDs in TSV to only include those matching the target ID
-matches=$work/${tax}_ctgs.tsv
-cat $tsv | grep "\b${tax}\b" | cut -f1 | sort -u > $matches
+#### Purging haplotig sequences
 
-# Select the subset of matching sequences from the FASTA
-out_fasta=$work/out_genome/balCre_${tax}_ctgs.fasta
-samtools faidx --region-file $matches $in_fasta | \
-    fold -w 60 > $out_fasta
+* `run_pd_mininap.sh`
 
-# Index the resulting genome
-samtools faidx $out_genome
-```
+This scripts aligns the HiFi reads back to the assembly and calculates some coverage
+statistics for identifying haplotigs.
 
-Note: There might be other ways to do this straight from `mmseqs2`.
+1. Align the filtered reads to the optimized contig-level
+assembly using `minimap2` version `2.26-r1175`.
+2. Use `pbcstat` tool from `purge_dups` version `1.2.5` to
+calculate the read-depth histogram.
+3. Use `calcuts` tool from `purge_dups` version `1.2.5` to
+calculate the base-level depth coverage cutoffs.
+4. Split the genome for self alignment using `split_fa`.
+5. Do the self alignment of the genome with `minimap2` version
+`2.26-r1175`.
 
-#### Check the post-cleanup genome
+* `run_purge_dups.sh`
 
-This assembly is composed of 2,696 contigs, a total length of 1.18 Gbp,largest contig of 3.51 Mbp, and a contig N50 of 758.4 Kbp (checked with `quast` version `5.2.0`).
+This script removes haplotig sequences from the assembly in the following
+steps:
 
-We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 94.57%, `D` = 19.45%.
+1. Use `purge_dups` version `1.2.5` to mark the duplicate sequences in
+a BED file.
+2. Process the assembly to extract the haplotig sequences using `get_seqs`.
 
-```sh
-## lineage: arthropoda_odb10
-S:75.12%, 761
-D:19.45%, 197
-F:0.89%, 9
-I:0.00%, 0
-M:4.54%, 46
-N:1013
-```
+#### Correcting sequences
 
-### Purging haplotig sequences
+* `run_inspector.sh`
 
-We purges haplotig sequences using `purge_dups` version `1.2.5`.
-
-First, aligned the PacBio HiFi to the genome and did the assembly self-alignment using `minimap2` version `2.26-r1175`.
-
-```sh
-# Align the reads to the reference
-minimap2 -x map-hifi -t 16 $genome $reads | gzip -c - > $paf
-
-# Calculate read-depth histogram
-pbcstat -O $alns_out $paf
-
-# Calculate base-level depth
-calcuts PB.stat > cutoffs 2>calcults.log
-
-# Do an assembly self-alignment
-split_fa $genome > $split
-minimap2 -x asm20 -t 16 -DP $split $split | gzip -c - > $self
-```
-
-We then tan `purge_dups` and the `get_seqs` utility to identify and filter haplotig sequences.
-
-```sh
-# Mark the duplicates in a bed file
-cmd=(
-    purge_dups
-    -2
-    -T $alns/cutoffs
-    -c $alns/PB.base.cov
-    $paf
-)
-echo "${cmd[@]}"
-"${cmd[@]}" > dups.bed 2> purge_dups.log
-
-# Process the assembly
-cmd=(
-    get_seqs
-    -e
-    -s
-    -p $name
-    dups.bed
-    $geno
-)
-echo "${cmd[@]}"
-"${cmd[@]}" > get_seqs.log 2>&1
-```
-
-#### Post-Purge Dups stats
-
-This assembly is composed of 1,548 contigs, a total length of 907.4 Mbp,largest contig of 3.51 Mbp, and a contig N50 of 925.5 Kbp (checked with `quast` version `5.2.0`).
-
-We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 93.39%, `D` = 3.16%.
-
-```sh
-## lineage: arthropoda_odb10
-S:90.23%, 914
-D:3.16%, 32
-F:0.89%, 9
-I:0.00%, 0
-M:5.73%, 58
-N:1013
-```
-
-In comparison with the un-purged assembly:
-
-* Number of contigs went from 2.9 K to 1.5 K
-* Total length went from 1.20 Gbp to 907 Mbp
-* Contig N50 went from 746 Mbp to 1.31 Mbp
-* BUSCO C went from 94.96% to 93.39%
-* BUSCO D went from 19.64% to 3.16%
-
-### Correct sequences
-
-We performed one additional round of curation using `inspector` version `1.0.1`.
-
-```sh
-# Inspector evaluate
-cmd=(
-    inspector.py
-    --contig $fasta
-    --read $hifi
-    --thread $thr
-    --outpath $outdir
-    --datatype "hifi"
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-
-# Inspector correct
-cmd=(
-    inspector-correct.py
-    --inspector $outdir
-    --outpath $cordir
-    --datatype "pacbio-hifi"
-    --thread $thr
-)
-echo "${cmd[@]}"
-"${cmd[@]}"
-```
+Perform a round of self-correction in the assembly using `inspector` version
+`1.0.1`. This scripts first runs `inspector.py` to align the reads and 
+evaluate the assembly, and then it corrects any errors using
+`inspector-correct.py`.
 
 #### Post-Inspector stats
 
+#### Reference-guided scaffolding
 
-This assembly is composed of 1,548 contigs, a total length of 907.3 Mbp,largest contig of 3.51 Mbp, and a contig N50 of 925.6 Kbp (checked with `quast` version `5.2.0`).
+#### Repeat annotation
 
-We verified gene-completeness using `compleasm` version `0.12-r237`,  `C` = 93.39%, `D` = 3.26%.
-
-```sh
-## lineage: arthropoda_odb10
-S:90.13%, 913
-D:3.26%, 33
-F:0.89%, 9
-I:0.00%, 0
-M:5.73%, 58
-N:1013
-```
-
-In comparison with the un-purged assembly:
-
-* Number of contigs stayed the same
-* Total length went from 907.4 Mbp to 907.3 Mbp
-* Contig N50 went from 925.5 Kbp to 925.6 Kbp
-* BUSCO C stayed the same
-* BUSCO D went from 3.16% to 3.26%
-
-* Reference-guided scaffolding
+#### Annotation liftover
 
 ## *Drosophila* comparions
 

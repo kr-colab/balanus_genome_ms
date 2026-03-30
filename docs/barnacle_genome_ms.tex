@@ -1794,17 +1794,76 @@ with a heterozygosity of 2.25\%.
 
 \subsubsection*{Contig-level genome assembly}
 
-% TODO: This is placeholder from BalGla. Update.
-We generated a contig-level genome assembly
-A base, contig-level genome assembly for \bgla{} was generated from
-the PacBio HiFi reads using \textsc{hifiasm} version \texttt{0.19.6-r595}
-\citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022} with default
-parameters. This base assembly was assessed for contiguity using \textsc{quast}
-version \texttt{5.2.0} \citep{gurevich_quast_2013}, and for gene-completeness with
-\textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023} using
-the \texttt{arthropoda\_odb10} reference \textsc{BUSCO} dataset \citep{simao_busco_2015,
-manni_busco_2021,tegenfeldt_orthodb_2025} (Table~\ref{tab:sup_asm_stats}).
+We generated a contig-level genome assembly using \textsc{hifiasm} version
+\texttt{0.19.8-r603} \citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022},
+using strict parameters for the identification and purging of haplotig sequences.
+This assembly was generated using an estimated haploid genome size of 800 Mbp
+(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+For handling haplotigs, we set the we set the expected coverage at homozygous sites to
+40x (\texttt{--hom-cov 40}), the upper bound of coverage to purging duplicates to 40x
+(\texttt{--purge-max 40}), and the the similarity threshold between duplicate haplotigs
+to 25\% (\texttt{-s 0.25}). 
+We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
+\citep{gurevich_quast_2013}, showing an assembly composed of 2,932 contigs, with a total
+length of 1.20 Gbp, and a contig N50 of 746 kbp.
+Additionally, \textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023}
+revealed this assembly 94.96\% complete (with 19.64\% duplicates) against the
+\texttt{arthropoda\_odb10} reference ortholog dataset from \textsc{BUSCO}
+\citep{simao_busco_2015,manni_busco_2021,tegenfeldt_orthodb_2025}.
 
+\subsubsection*{Identifying contamination}
+
+% TODO: @Scott, please verify this.
+We screened the \textit{B. crenatus} contig-level assembly for contamination using
+\textsc{MMseqs2} release \texttt{15\-6f452} \citep{steinegger_mmseqs2_2017}.
+After indexing the assembly, taxonomic assignment was done for each contig.
+As described in the \textsc{MMseqs2} documentation, protein fragments were extracted
+across the six possible frames, which were then mapped against the NCBI \texttt{nr} and
+\texttt{SwissProt} databases.
+We retained only sequences assigned to the order Thecostraca (NCBI taxid
+\texttt{116172}).
+This process removed 236 spanning $\approx$ 19.7 Mbp, resting in an assembly with
+2,696 contigs, a total size of 1.18 Gbp, and a contig N50 of 758.4 kbp.
+The resulting gene-completeness against the \texttt{arthropoda\_odb10} reference
+set was 94.57\% with 19.45\% duplicates.
+
+\subsubsection*{Purging haplotigs}
+
+After screening the assembly for contamination, we identified and purged haplotig
+sequences using \textsc{purge\_dups} version \texttt{1.2.5}
+\citep{guan_identifying_2020}.
+We first mapped the PacBio HiFi reads to the contig-level assembly with
+\textsc{minimap2} \texttt{-x map-hifi}.
+From these alignments, we calculated the read-depth histogram using \texttt{pbcstat}
+and determined the base-level coverage cutoffs using \texttt{calcuts}.
+After splitting the assembly at gaps with \texttt{split\_fa}, we performed an
+assembly self-alignment using \textsc{minimap2} \texttt{-x asm20}.
+Haplotigs were then marked according to the empirical coverage cutoffs using the
+\texttt{purge\_dups} command.
+Lastly, the assembly FASTA was processed to remove sequences tagged as haplotigs using
+\texttt{get\_seqs}, only removing sequences at the ends of contigs (\texttt{-e}) and
+allowing the splitting of contigs (\texttt{-s}).
+The purging reduced the number of contigs in the assembly to 1,548, resulting in
+a total assembly size of 907.4 Mbp, a contig N50 of 925.5 kbp, and a gene-completeness
+of 93.39\% with 3.16\% duplicates (against the \texttt{arthropoda\_odb10} reference
+set).
+
+\subsubsection*{Polishing and correcting}
+
+The purged contig-level assembly was then polished and self-corrected using
+\textsc{Inspector} software version \texttt{1.0.1} \citep{chen_accurate_2021}.
+First, we evaluated the assembly using \texttt{inspector.py}, mapping the PacBio HiFi
+reads against the assembly.
+The assembly was then corrected using \texttt{inspector-correct.py}.
+After polishing, the assembly contained 1,548 contigs, a total length of 907.3 Mbp,
+and a contig N50 of 925.6 kbp.
+Gene-completeness against the \texttt{arthropoda\_odb10} reference set was 93.39\%
+with 3.26\% duplicates.
+
+\subsubsection*{Reference-based scaffolding}
+
+\subsubsection*{Genome annotation}
 
 \subsection*{Processing annotations of published barnacle
 assemblies}\label{sec:sup_methods_barnacle_rna}
