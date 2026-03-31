@@ -892,13 +892,31 @@ evaluate the assembly, and then it corrects any errors using
 
 #### Reference-guided scaffolding
 
-Using `ragout` version `2.3`.
+Scaffold the purged, contig-level assembly using `ragout` version `2.3`. This
+takes as input the `cactus` whole-genome assemblies, taking *B. glandula* as the
+reference.
 
 #### Repeat annotation
 
+* `run_earlGrey.sh`
+
+Annotate repeats in the scaffolded *B. crenatus* assembly using `EarlGrey` version
+`4.0.1`.
+
 #### Annotation liftover
 
-## *Drosophila* comparions
+* `run_lifton.sh`
+
+Annotate the *B. crenatus* assembly by lifting over the gene models from our curated
+*B. glandula* annotation. The liftover was done using `LiftOn` version `1.0.5`.
+
+* `run_compleasm.sh`
+
+Assess the gene-completeness of the lifted-over annotation using `compleasm`
+version `0.12-r237` in `protein` mode. This compares against the `arthropoda_odb10`
+reference `BUSCO` ortholog set.
+
+## *Drosophila* comparisons
 
 ### Nucleotide diversity
 

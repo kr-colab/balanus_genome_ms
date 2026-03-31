@@ -1875,11 +1875,51 @@ repeat resolution algorithm (\texttt{--repeats}).
 After running \textsc{ragout}, we only kept the \textit{B. crenatus} sequences that
 were successfully aligned to \textit{B. glandula}.
 This scaffolded assembly was composed of 220 sequence fragments, with a total length
-of 853 Mbp, and a scaffold N50 of 5.58 Mbp.
+of 851 Mbp, and a scaffold N50 of 5.58 Mbp.
 Additionally, the assembly was 89.64\% gene-complete (with 2.37\% duplicates) when
 compared to the \texttt{arthropoda\_odb10} reference set.
 
 \subsubsection*{Genome annotation}
+
+Repetitive elements were annotated in the scaffolded \textit{B. crenatus} assembly
+using the \textsc{EarlGrey} software version \texttt{4.1.0} \citep{baril_earl_2024}.
+When running \textsc{EarlGrey}, we provided the Crustacea \textsc{Dfam 3.8} partition
+as an initital consensus library (\texttt{-l}), specified ``arthropoda'' as the
+search term for \textsc{RepeatMasker} version \texttt{4.1.2}
+\citep{smit_repeatmasker_2013}, clustered the final TE library to reduce redundancy
+(\texttt{-c yes}), and generated a soft-masked FASTA as output (\texttt{-d yes}).
+Similar to \textit{B. glandula}, the repeat annotation for \textit{B. crenatus}
+reveleaded a highly repetitive genome, with 494.0 Mbp (58.03\%) of the assembly 
+masked.
+Moreover, the largest of proportion of identified repeats remained unclassified,
+289.4 Mbp or 40.0\% of the assembly, further highlighting the lack of
+barnacle-representitive sequences in public repeat databases.
+\vspace{0.2cm}
+
+Following the annotation of repeats, we annotated protein-coding sequences in the
+\textit{B. crenatus} assembly by lifting over gene-models from the curated \textit{B.
+glandula} annotation using \textsc{LiftOn} version \texttt{1.0.5}
+\citep{chao_lifton_2024}.
+\textsc{LiftOn} lifts over annotations between genomes by integrating both
+protein-to-genome alignments with \textsc{miniprot} \citep{li_miniprot_2023} and
+nucleotide-to-nucleotide alignments using \textsc{Lifoff} \citep{shumate_liftoff_2021}.
+Given the high divergesity observed within these genomes and the high divergence
+between them, we relaxed several of the \textsc{LiftOn} parameters to maximize the
+DNA and protein sequecne identity scores, as well as maintaining a high \textsc{BUSCO}
+completeness.
+We included 10\% of the flanking sequence of each gene as part of the alignment
+(\texttt{-f flank 0.1}), we allowed the software to identify gene copies with sequence
+similarity of at least 50\% (\texttt{-copies -sc 0.5}), used a 25\% coverage
+threshold for the mapping of parent (\texttt{-a 0.25}) and child sequences
+(\texttt{-s 0.25}), and enabled a post-liftover refinement of the transfered
+gene models (\texttt{-polish}).
+We also used the ``general'' splice model for \textsc{miniprot} (\texttt{-j 1}).
+This liftover successfully annotated 15,841 genes, including 15,904 protein-coding
+transcripts, in the \textit{B. crenatus} assembly.
+While these is $\approx$ 5,000 fewer protein-coding genes than those annotated for
+\textit{B. glandula}, this annotation was still 82.63\% gene-complete, with 9.67\%
+duplicates, when compared to the \texttt{arthropoda\_odb10} reference ortholog set
+using \textsc{compleasm} \texttt{protein}.
 
 \subsection*{Processing annotations of published barnacle
 assemblies}\label{sec:sup_methods_barnacle_rna}
