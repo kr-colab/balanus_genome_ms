@@ -479,8 +479,7 @@ of the broader selective regime acting on these large populations.
     \label{fig:phastcons}
 \end{figure}
 
-\subsection*{Patterns of molecular evolution reflect positive selection in
-protein-coding genes}
+\subsection*{Patterns of molecular evolution reflect positive selection in protein-coding genes}
 
 To examine the rate of molecular evolution in protein-coding sequences, we calculated
 the pairwise ratio of non-synonymous to synonymous substitutions (\dnds) between
@@ -1518,10 +1517,10 @@ The script uses the \texttt{dnds} Python package version \texttt{2.1}
 (\url{https://github.com/adelq/dnds}) to calculate \dnds{} using the codon-by-codon
 counting method described by~\cite{nei1986_dnds}.
 For each alignment, we calculated the total number of non-synonymous and
-synonymous sites (N\textsubscript{c} and S\textsubscript{c}, respectively),
+synonymous sites (N\textsubscript{C} and S\textsubscript{C}, respectively),
 accounting for the degenerate codons.
-We then calculated the number of non-synonymous (N\textsubscript{d}) and
-synonymous (S\textsubscript{d}) observed between the two sequences.
+We then calculated the number of non-synonymous (N\textsubscript{D}) and
+synonymous (S\textsubscript{D}) observed between the two sequences.
 The rate between the number non-synonymous (d\textsubscript{N}) and synonymous
 (d\textsubscript{S}) substitutions and sites is then calculated, and corrected for
 multiple substitutions using the Jukes-Cantor correction \citep{JC69}.
@@ -1555,7 +1554,7 @@ The MK test and associated statistics were calculated using the \textsc{MKado}
 version \texttt{0.2.0} software \citep{mkado_2026}.
 \textsc{MKado} parses the multiple-sequence alignments and computes the 
 non-synonymous and synonymous changes in divergence and polymorphism
-(D\textsubscript{n}, D\textsubscript{s}, P\textsubscript{n}, P\textsubscript{s},
+(D\textsubscript{N}, D\textsubscript{S}, P\textsubscript{N}, P\textsubscript{S},
 respectively), between ingroup and outgroup sequences.
 We ran \textsc{MKado} three times, each time calculating a different variant of
 the MK test.
@@ -1759,8 +1758,7 @@ Funding.
 
 \section*{Supplemental Methods}
 
-\subsection*{Assembly and annotation of \textit{Balanus
-crenatus}}\label{sec:sup_methods_balcre}
+\subsection*{Assembly and annotation of \textit{Balanus crenatus}}\label{sec:sup_methods_balcre}
 
 \subsubsection*{High-molecular weight DNA and PacBio sequencing}
 
@@ -1916,7 +1914,7 @@ gene models (\texttt{-polish}).
 We also used the ``general'' splice model for \textsc{miniprot} (\texttt{-j 1}).
 This liftover successfully annotated 15,841 genes, including 15,904 protein-coding
 transcripts, in the \textit{B. crenatus} assembly.
-While these is $\approx$ 5,000 fewer protein-coding genes than those annotated for
+While this is $\approx$ 5,000 fewer protein-coding genes than those annotated for
 \textit{B. glandula}, this annotation was still 82.63\% gene-complete, with 9.67\%
 duplicates, when compared to the \texttt{arthropoda\_odb10} reference ortholog set
 using \textsc{compleasm} \texttt{protein}.
