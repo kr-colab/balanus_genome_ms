@@ -242,11 +242,10 @@ suggested the presence of a large fraction of haplotig sequences, reflecting
 the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
-After optimizing the assembly with the addition of Hi-C and ONT ultra-long reads
-and more stringent purging of haplotig and contaminant sequences (see
-\nameref{sec:methods_assembly}), we generated contigs with a substantially smaller
-fraction of haplotigs, reducing the assembly size to 1.05 Gbp and the \textsc{BUSCO}
-duplicates to 4.84\%.
+After optimizing the assembly with the addition of ONT ultra-long reads and more stringent
+purging of haplotig and contaminant sequences (see \nameref{sec:methods_assembly}), we
+generated contigs with a substantially smaller fraction of haplotigs, reducing the
+assembly size to 1.05 Gbp and the \textsc{BUSCO} duplicates to 4.84\%.
 This contig-level assembly was then scaffolded with Hi-C data using the \textsc{YaHS}
 software \citep{zhou_yahs_2023} (Figure~\ref{fig:sup_hic}), generating an assembly
 with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
@@ -1189,18 +1188,19 @@ We generated a new contig-level genome assembly using the Thecostraca-specific
 data and iterating over different assembly parameters and filtering schemes,
 selecting an optimal assembly based on the best contiguity and gene-completeness
 metrics \citep{rayamajhi_evaluating_2022}, as determined by \textsc{quast} and
-\textsc{compleasm}, respectively. This optimized assembly was generated using
-\textsc{hifiasm} version \texttt{0.19.8-r603}, including our Thecostraca-specific
-PacBio HiFi reads as well as the ultra-long ONT (\texttt{--ul}) and Hi-C reads
-(\texttt{--h1}, \texttt{--h2}). This assembly was done using an estimated
-haploid genome size of 800 Mbp (\texttt{--hg-size 800m}), dropping k-mers observed
-over ten times the average coverage (\texttt{-D 10.0}), and allowing scaffolding
-(\texttt{--dual-scaf}). For identifying and correctly phasing haplotype sequences,
-we set the expected coverage at homozygous sites (\texttt{--hom-cov 68}) and the
-upper bound of coverage to purging duplicates (\texttt{--purge-max 68}) at 68x,
-along with setting the similarity threshold between duplicate haplotigs to 25\%
-(\texttt{-s 0.25}). This assembly was composed of 2,218 contigs, with a total
-length of 1.29 Gbp, and a contig N50 of 1.16 Mbp.
+\textsc{compleasm}, respectively.
+This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.19.8-r603},
+including our Thecostraca-specific PacBio HiFi reads as well as the ultra-long ONT
+(\texttt{--ul}).
+This assembly was done using an estimated haploid genome size of 800 Mbp
+(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+For identifying and correctly phasing haplotype sequences, we set the expected coverage
+at homozygous sites (\texttt{--hom-cov 68}) and the upper bound of coverage to purging
+duplicates (\texttt{--purge-max 68}) at 68x, along with setting the similarity threshold
+between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
+This assembly was composed of 2,218 contigs, with a total length of 1.29 Gbp, and a contig
+N50 of 1.16 Mbp.
 \vspace{0.2cm}
 
 Following the initial assembly of contigs, we purged haplotig sequences using the
