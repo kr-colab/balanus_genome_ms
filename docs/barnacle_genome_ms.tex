@@ -1718,12 +1718,12 @@ degenerate sites using \textsc{pixy}, specifying the specific sites of interest 
 We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
 population's effective size.
 First, we estimated the long-term average \Ne{} in this population based on the
-estimates of $\theta_\text{W}$ from \textsc{pixy}, and using the relationship
-$\text{N}_\text{e} = \theta_\text{W}/4\mu$.
+estimates of $\theta_\text{W}$ along 10 kbp window using \textsc{pixy}, and using the
+relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
-by \cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
-Using this relationship, we calculated \Ne{} along 10 kbp windows, obtaining a distribution
-of effective size along the genome.
+by~\cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+Using this relationship, we calculated \Ne{} along these 10 kbp windows, obtaining a
+distribution of effective size along the genome.
 \vspace{0.2cm}
 
 We additionally estimated the effective size of the population using the \textsc{msmc2}
@@ -1732,8 +1732,8 @@ software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
 We ran \textsc{msmc2} with 25 iterations (\texttt{-i 25}), using the default
 time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
 in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
-Since our genotypes were not phased, we ran \textsc{msmc2} for each individual separately
-(including both our reference sample and our six central Oregon individuals).
+We estimated historical \Ne{} for our six Cape Perpetua individuals; however since
+our genotypes were not phased, we ran \textsc{msmc2} for each individual separately.
 
 \subsection*{Assessment of classic allozyme loci}
 
@@ -2416,13 +2416,13 @@ DoS = Direction of Selection
         Estimation of \Ne{} through time was using the
         \textsc{msmc2} software, using a mutation rate per-base,
         per-generation ($\mu$) of $3\times10^{-9}$, and fixing the
-        generation time ($g$) to 1. Each line represents the
-        \Ne{} for each sample, with \texttt{Bgland\_00}
-        denoting the individual used to generate the reference assembly.
-        Using just these seven diploid samples, and estimating only between
-        pairs of unphased diploid genotypes within samples, we do not
-        obtain enough resolution to resolve \Ne{} at recent
-        ($<10^{5}$) time intervals.}
+        generation time ($g$) to 1.
+        Each line represents the \Ne{} trajectory for each sample.
+        Using just six diploid samples, and estimating only between pairs
+        of unphased diploid genotypes within samples we estimate the
+        historical effective size of the population in the order of $10^{6}$
+        individuals; however, we do not obtain enough resolution to resolve
+        \Ne{} at recent ($<10^{5}$) time intervals.}
     \label{fig:sup_mcmc_ne}
 \end{figure}
 
