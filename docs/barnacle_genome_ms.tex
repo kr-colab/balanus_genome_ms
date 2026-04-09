@@ -1962,27 +1962,34 @@ different codon subfamilies.
     \begin{tabular}{lrrrr}
         \toprule
         Assembly Stage &
-            \shortstack{Default \\ contigs} &
-            \shortstack{Optimized \\ contigs} &
-            \shortstack{Hi-C \\ scaffolds} &
-            \shortstack{Curated \\ assembly} \\
+            \shortstack{Default \\ contigs$^1$} &
+            \shortstack{Optimized \\ contigs$^2$} &
+            \shortstack{Hi-C \\ scaffolds$^3$} &
+            \shortstack{Curated \\ assembly$^4$} \\
         \midrule
-        Sequence length (Mbp)          & 1.64  & 1.05  & 1.05  & 1.04  \\
-        Fragments (N)                  & 4,212 & 1,342 & 650   & 592   \\
-        Contig N50 (Mbp)               & 0.734 & 1.35  & 1.18  & 1.18  \\
-        Scaffold N50 (Mbp)             & NA    & NA    & 50.96 & 51.41 \\
-        \textsc{BUSCO} Complete (\%)   & 95.66 & 93.88 & 93.98 & 94.08 \\
-        \textsc{BUSCO} Single (\%)     & 45.31 & 89.04 & 89.24 & 89.44 \\
-        \textsc{BUSCO} Duplicates (\%) & 50.35 & 4.84  & 4.74  & 4.64  \\
-        \textsc{BUSCO} Fragmented (\%) & 0.79  & 1.18  & 0.89  & 0.89  \\
-        \textsc{BUSCO} Missing (\%)    & 3.55  & 4.94  & 5.13  & 5.03  \\
-        \textsc{BUSCO} size (N)        & 1,013 & 1,013 & 1,013 & 1,013 \\
+        Sequence length (Mbp)            & 1.64  & 1.05  & 1.05  & 1.04  \\
+        Fragments (N)                    & 4,212 & 1,342 & 650   & 592   \\
+        Contig N50 (Mbp)                 & 0.734 & 1.35  & 1.18  & 1.18  \\
+        Scaffold N50 (Mbp)               & NA    & NA    & 50.96 & 51.41 \\
+        \textsc{BUSCO}$^5$ Complete (\%) & 95.66 & 93.88 & 93.98 & 94.08 \\
+        \textsc{BUSCO} Single (\%)       & 45.31 & 89.04 & 89.24 & 89.44 \\
+        \textsc{BUSCO} Duplicates (\%)   & 50.35 & 4.84  & 4.74  & 4.64  \\
+        \textsc{BUSCO} Fragmented (\%)   & 0.79  & 1.18  & 0.89  & 0.89  \\
+        \textsc{BUSCO} Missing (\%)      & 3.55  & 4.94  & 5.13  & 5.03  \\
+        \textsc{BUSCO} size (N)          & 1,013 & 1,013 & 1,013 & 1,013 \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_asm_stats}
 \footnotesize
-
-\textsc{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.\\
+\\
+\textsuperscript{1}Contigs generated using \textsc{hifiasm} with default parameters. \\
+\textsuperscript{2}Contigs generated using \textsc{hifiasm} followed by removal of
+    contaminant sequences and purging of haplotigs. \\
+\textsuperscript{3}Hi-C scaffolding of the optimized contig sequences. \\
+\textsuperscript{4}Manual curation of Hi-C contact map and polishing with
+    \textsc{Inspector.} \\
+\textsuperscript{5}\textsc{BUSCO} results refer to the \texttt{arthropoda\_odb10}
+    dataset.\\
 \end{table}
 
 % Gene-completeness in the annotation
@@ -2140,10 +2147,11 @@ different codon subfamilies.
 \begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{Patterns of \dnds{} in the \balgla{} allozyme genes.}}
-    \begin{tabular}{llrrrrrrrrr}
+    \begin{tabular}{llrrrrrrrrrr}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
             Gene &
+            \shortstack{Transcript \\ length (bp)} &
             N\textsubscript{C} & % Nc = NonSyn Sites
             S\textsubscript{C} & % Sc = Syn Sites
             N\textsubscript{D} & % Nd = NonSyn Differences
@@ -2154,14 +2162,14 @@ different codon subfamilies.
             d\textsubscript{S} & % dS = Adj Proportion Syn
             \dnds{} \\           % dN/dS
         \midrule
-        % TransID    Gene            Nc          Sc        Nd       Sd        pN       pS      dN       dS   dN/dS
-        mrna-5994  & \textit{Mpi}  & 907.167   & 322.833 & 39     & 79      & 0.0430 & 0.245 & 0.0443 & 0.296 & 0.149  \\
-        mrna-15301 & \textit{Gpi}  & 1,310.667 & 399.333 & 47.833 & 101.167 & 0.0365 & 0.253 & 0.0374 & 0.309 & 0.121  \\
-        mrna-5520  & \textit{Adh}  & 858.167   & 272.833 & 15     & 64      & 0.0175 & 0.235 & 0.0177 & 0.281 & 0.0629 \\
-        mrna-5969  & \textit{Pgm}  & 1,287.833 & 404.167 & 32.167 & 93.833  & 0.0250 & 0.232 & 0.0254 & 0.279 & 0.0914 \\
-        mrna-17464 & \textit{Sod}  & 473.167   & 150.833 & 27     & 43      & 0.0571 & 0.285 & 0.0593 & 0.359 & 0.165  \\
-        mrna-1965  & \textit{Me.1} & 1,376.667 & 438.333 & 37.500 & 113.500 & 0.0272 & 0.259 & 0.0277 & 0.318 & 0.0874 \\
-        mrna-3861  & \textit{Me.2} & 1,439.167 & 459.833 & 48     & 130     & 0.0334 & 0.283 & 0.0341 & 0.355 & 0.0961 \\
+        % TransID    Gene          length  Nc          Sc        Nd       Sd        pN       pS      dN       dS   dN/dS
+        mrna-5994  & \textit{Mpi}  & 1,233 & 907.167   & 322.833 & 39     & 79      & 0.0430 & 0.245 & 0.0443 & 0.296 & 0.149  \\
+        mrna-15301 & \textit{Gpi}  & 1,758 & 1,310.667 & 399.333 & 47.833 & 101.167 & 0.0365 & 0.253 & 0.0374 & 0.309 & 0.121  \\
+        mrna-5520  & \textit{Adh}  & 1,140 & 858.167   & 272.833 & 15     & 64      & 0.0175 & 0.235 & 0.0177 & 0.281 & 0.0629 \\
+        mrna-5969  & \textit{Pgm}  & 1,815 & 1,287.833 & 404.167 & 32.167 & 93.833  & 0.0250 & 0.232 & 0.0254 & 0.279 & 0.0914 \\
+        mrna-17464 & \textit{Sod}  &   605 & 473.167   & 150.833 & 27     & 43      & 0.0571 & 0.285 & 0.0593 & 0.359 & 0.165  \\
+        mrna-1965  & \textit{Me.1} & 1,818 & 1,376.667 & 438.333 & 37.500 & 113.500 & 0.0272 & 0.259 & 0.0277 & 0.318 & 0.0874 \\
+        mrna-3861  & \textit{Me.2} & 1,902 & 1,439.167 & 459.833 & 48     & 130     & 0.0334 & 0.283 & 0.0341 & 0.355 & 0.0961 \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_allozymes_dnds}
@@ -2179,31 +2187,32 @@ d\textsubscript{S} = Jukes-Cantor corrected proportion of
     synonymous differences.
 \end{sidewaystable}
 
-% Reference for the allozyme genes in our assembly.
+% MKT for the allozymes
 \begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{McDonald-Kreitman test on the \balgla{} allozyme genes.}}
-    \begin{tabular}{llrrrrrrrr}
+    \begin{tabular}{llrrrrrrrrr}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
             Gene &
+            \shortstack{Transcript \\ length (bp)} &
             D\textsubscript{N} &        % Dn, Fixed NonSyn differences
             D\textsubscript{S} &        % Ds, Fixed Syn differences
             P\textsubscript{N} &        % Pn, Polymorphic NonSyn sites
             P\textsubscript{S} &        % Ps, Polymorphic Syn sites
             \shortstack{Corrected \\ \textit{p}-value} &
-            \textalpha{} &
+            $\alpha$ &
             \ NI &
             \ DoS \\
         \midrule
-        % Bg trans   Gene            Dn   Ds    Pn   Ps    Pval                    alpha                    NI      DoS
-        mrna-5994  & \textit{Mpi}  & 19 & 63  & 19 & 40  & 0.443                 & -0.575                 & 1.575 & -0.090                 \\
-        mrna-15301 & \textit{Gpi}  & 36 & 76  & 7  & 62  & $2.122\mathrm{e}{-3}$ & 0.762                  & 0.239 & 0.220                  \\
-        mrna-5520  & \textit{Adh}  & 13 & 46  & 7  & 32  & 0.932                 & 0.226                  & 0.774 & 0.041                  \\
-        mrna-5969  & \textit{Pgm}  & 23 & 73  & 10 & 65  & 0.274                 & 0.512                  & 0.488 & 0.106                  \\
-        mrna-17464 & \textit{Sod}  & 22 & 39  & 6  & 13  & 0.932                 & 0.182                  & 0.818 & 0.045                  \\
-        mrna-1965  & \textit{Me.1} & 27 & 105 & 8  & 31  & 1.00                  & $-3.584\mathrm{e}{-3}$ & 1.004 & $-5.830\mathrm{e}{-4}$ \\
-        mrna-3861  & \textit{Me.2} & 37 & 81  & 15 & 117 & $1.022\mathrm{e}{-3}$ & 0.719                  & 0.281 & 0.200                  \\
+        % Bg trans   Gene          length    Dn   Ds    Pn   Ps    Pval                    alpha                    NI      DoS
+        mrna-5994  & \textit{Mpi}  & 1,233 & 19 & 63  & 19 & 40  & 0.443                 & -0.575                 & 1.575 & -0.090                 \\
+        mrna-15301 & \textit{Gpi}  & 1,758 & 36 & 76  & 7  & 62  & $2.122\mathrm{e}{-3}$ & 0.762                  & 0.239 & 0.220                  \\
+        mrna-5520  & \textit{Adh}  & 1,140 & 13 & 46  & 7  & 32  & 0.932                 & 0.226                  & 0.774 & 0.041                  \\
+        mrna-5969  & \textit{Pgm}  & 1,815 & 23 & 73  & 10 & 65  & 0.274                 & 0.512                  & 0.488 & 0.106                  \\
+        mrna-17464 & \textit{Sod}  &   605 & 22 & 39  & 6  & 13  & 0.932                 & 0.182                  & 0.818 & 0.045                  \\
+        mrna-1965  & \textit{Me.1} & 1,818 & 27 & 105 & 8  & 31  & 1.00                  & $-3.584\mathrm{e}{-3}$ & 1.004 & $-5.830\mathrm{e}{-4}$ \\
+        mrna-3861  & \textit{Me.2} & 1,902 & 37 & 81  & 15 & 117 & $1.022\mathrm{e}{-3}$ & 0.719                  & 0.281 & 0.200                  \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_allozymes_mkt}
@@ -2213,7 +2222,7 @@ D\textsubscript{N} = Fixed non-synonymous substitutions. \\
 D\textsubscript{S} = Fixed synonymous substitutions. \\
 P\textsubscript{N} = Polymorphic non-synonymous sites. \\
 P\textsubscript{S} = Polymorphic synonymous sites. \\
-\textalpha{} = Proportion of non-synonymous substitutions fixed by
+$\alpha$ = Proportion of non-synonymous substitutions fixed by
     positive selection. \\
 NI = Neutrality Index. \\
 DoS = Direction of Selection
