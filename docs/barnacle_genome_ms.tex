@@ -1267,8 +1267,15 @@ a scaffold N50 of 50.96 Mbp (Table~\ref{tab:sup_asm_stats}).
 After manual curation of the scaffolded genome, we performed one round of polishing and
 automatic curation using the \textsc{Inspector} software version \texttt{1.0.1}
 \citep{chen_accurate_2021}. First, we evaluated the assembly using \texttt{inspector.py},
-mapping the PacBio HiFi reads against the assembly. The assembly was then corrected using
-\texttt{inspector-correct.py} (Table~\ref{tab:sup_asm_stats}).
+mapping the PacBio HiFi reads against the assembly.
+\textsc{Inspector} calculated a mapping rate of 99.98\% of these reads to the assembly
+(87.94\% for larger contigs) and a quality value (QV) of 30.49.
+It additionally identified 742 structural errors larger than 50bp, including
+357 haplotype switches, 303 sequence expansions, and 16 inversions.
+Assessing smaller ($<$50 bp) errors, \textsc{Inspector} identified 1,929 small-scale
+expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
+After evaluation, the assembly was then processesed using \texttt{inspector-correct.py}
+(Table~\ref{tab:sup_asm_stats}) to export the corrected sequences in FASTA format.
 
 \subsection*{Genome annotation}\label{sec:methods_annotation}
 
