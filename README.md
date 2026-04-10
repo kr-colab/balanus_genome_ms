@@ -511,7 +511,7 @@ First, the script builds a `snpEff` database. Then, it annotates the VCF.
 ## Barnacle comparative genomics
 
 In addition to the newly-generated assemblies for *Balanus glandula* and
-*Balanus crenatus*, we used publicly available data from the following sepecies:
+*Balanus crenatus*, we used publicly available data from the following species:
 
 | Spp name | Class | Family | Spp Code | NCBI Accession | Assembly ID | In OrthoDB v11<sup>1</sup> | Note |
 | --- | --- | --- | --- | --- | --- | --- | --- | 
@@ -949,8 +949,6 @@ Take a set of coding sequences in FASTA format and calculate codon
 usage using the `cubar` version `1.2.0` R package. The script does a
 few statistics, but the main one we care about here is the effective
 number of codons (ENC).
-
-## Processing outgroup barnacle assemblies
 
 ## Authors
 
