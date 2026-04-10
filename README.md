@@ -836,11 +836,6 @@ against the `arthropoda_odb10` reference dataset.
 
 Filtering contamination by running `MMseqs2` Release `15-6f452`.
 
-<!--- Check these scripts. I don't have permission. --->
-/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/tmp/latest/createindex.sh
-
-/sietch_colab/data_share/balanus/balanus_crenatus/assemblies/20241003.hifiasm_0.19.8.s25_D10_hmc40_hgs800_dualScaff/mmseqs2/tmpFolder/latest/taxpercontig.sh
-
 * `createindex.sh`
 
 Create the `mmseqs2` index.
