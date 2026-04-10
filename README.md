@@ -913,9 +913,42 @@ reference `BUSCO` ortholog set.
 
 ## *Drosophila* comparisons
 
+The directory `scripts/dmel` contains several script for generating comparative
+statistics in *Drosophila melanogaster*, including nucleotide diversity and
+codon usage biases.
+
 ### Nucleotide diversity
 
-### Effective number of codons
+Calculate nucleotide diversity from the `RG` Sub-Saharan population of the DPGP2
+dataset.
+
+* `extract_gvcf.sh`
+
+Use `snp-sites` version `2.5.1` to process the DPGP2 aligned FASTAs into a VCF
+containing both variant and invariant sites.
+
+* `process_vcfs.sh`
+
+Process the raw gVCFs and recode deletions (using the custom `recode_deletions.awk` script)
+and clean and filter the VCF using `BCFtools` versions `1.21`.
+
+* `recode_deletions.awk`
+
+Custom AWK command to parse the VCF and recode deletions. The deletions come from the gaps
+in the alignment and are coded as missing genotypes.
+
+* `run_pixy_py.sh`
+
+Calculate nucleotide diversity from the filtered VCF using `pixy` version `2.0.0.beta12`.
+
+### Codon biases
+
+* `run_cubar.R`
+* 
+Take a set of coding sequences in FASTA format and calculate codon
+usage using the `cubar` version `1.2.0` R package. The script does a
+few statistics, but the main one we care about here is the effective
+number of codons (ENC).
 
 ## Processing outgroup barnacle assemblies
 

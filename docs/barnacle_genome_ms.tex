@@ -1957,6 +1957,23 @@ different codon subfamilies.
 
 \subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
+We calculated nucleotide diversity ($\pi$) in sub-Saharan populations of \textit{D.
+melanogaster} to establish a baseline for comparison agains our central Oregon barnacle
+population.
+To achieve this, we first obtained the sequencing data for the phase 2 of the Drosophila
+Population Genomics Project (DGPG2;~\citep{pool_population_2012,lack_dpgp_2016}).
+We processed the aligned FASTA files for all sub-Saharan samples (the `RG' population)
+to generate a VCF using the \textsc{snp-sites} version \texttt{2.5.1} software
+\citep{page_snp-sites_2016}.
+We exported both variant and invariant sites (\texttt{-b}) for downstream compatibility.
+The resulting gVCFs were then processed using a custom AWK command and \textsc{BCFtools}
+version \texttt{1.21} \citep{danecek_bcftools_2021} to recode deletion, remove missing
+alleles, and remove sites with over 25\% missing genotypes.
+Nucleotide diversity along 10kbp windows then was calculated from the filtered VCF using
+\textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
+allowing multiallelic sites to be used in the calculation
+(\texttt{--include\_multiallelic\_snps}).
+
 \pagebreak
 
 \section*{Supplemental Tables and Figures}
