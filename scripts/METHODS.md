@@ -792,6 +792,61 @@ Run `msmc2` version `2.1.4` as implemented in `DemInfHelper`.
 
 Example of the configuration file required by `DemInfHelper`.
 
+### Allozyme analysis
+
+The directory `scripts/allozymes/` contains scripts for the identification and
+analysis of the classic allozyme loci, including calculating synonymous diversity
+and divergence.
+
+* `pairwise_Ks.py`
+
+Custom Python script to calculate the pairwise synonymous substitution rate between
+aligned nucleotide sequences. It uses the Python `dnds` and `BioPython` packages.
+
+Usage:
+
+```sh
+$ python3 pairwise_Ks.py -h
+pairwise_Ks.py started on 2026-04-10 17:28:46.
+usage: pairwise_Ks.py [-h] -l SCO_LIST -a ALIGNMENTS -i INGROUP
+                      [-o OUT_DIR] [-w WINDOW_LEN] [-m MIN_ALN_LEN]
+                      [-s ALN_SUFFIX]
+
+options:
+  -h, --help            show this help message and exit
+  -l SCO_LIST, --sco-list SCO_LIST
+                        (str) Path to the single-copy orthgroup table
+                        (produced by `extract_orthogroups_cds.py`).
+  -a ALIGNMENTS, --alignments ALIGNMENTS
+                        (str) Path to the directory with the trimmed
+                        multiple sequence alignments.
+  -i INGROUP, --ingroup INGROUP
+                        (str) ID of the ingroup (focal) species in the
+                        alignment. Used to report gene/transcript IDs in
+                        the output.
+  -o OUT_DIR, --out-dir OUT_DIR
+                        (str) Path to output directory [default=./].
+  -w WINDOW_LEN, --window-len WINDOW_LEN
+                        (int) Window length over which to calculate
+                        silent substitution rate (Ks) [default=9]
+  -m MIN_ALN_LEN, --min-aln-len MIN_ALN_LEN
+                        (int) Minimum length required to keep an
+                        alignment [default=25]
+  -s ALN_SUFFIX, --aln-suffix ALN_SUFFIX
+                        (str) Suffix for the alignment FASTA files
+                        [default=fa].
+```
+
+* `run_pixy.sh`
+
+Calculate nucleotide diversity using `pixy` version `2.0.0.beta12`. This script
+calcuate per-site Pi.
+
+* `process_pi4_Ks.R`
+
+Custom R script that combines the Ks and Pi results to calculate per-codon and
+per-window estimates of the rate of synonymoyus diversity to divergence (`Pi_4/K_S`).
+
 ## *Balanus crenatus* genome assembly and annotation
 
 * The wrinkled barnacle (*Balanus crenatus*).

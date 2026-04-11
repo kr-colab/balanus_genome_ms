@@ -69,6 +69,7 @@
 \newcommand{\balgla}{\textit{Balanus glandula}\xspace}
 \newcommand{\bgla}{\textit{B. glandula}\xspace}
 \newcommand{\Ne}{N\textsubscript{e}\xspace}
+\newcommand{\Ks}{K\textsubscript{S}\xspace}
 
 \title{The genome of the {Pacific} acorn barnacle provides insights into
     the evolution of extremely large populations}
@@ -1745,7 +1746,38 @@ our genotypes were not phased, we ran \textsc{msmc2} for each individual separat
 
 \subsection*{Assessment of classic allozyme loci}
 
-TODO:
+We identified the \bgla{} orthologs to the seven classic allozyme loci first
+characterized in barnacles by \cite{flowerdew_electrophoretic_1983}.
+First, we obtained representative sequences for these seven allozyme proteins
+(Table~\ref{tab:sup_allozymes}), which we then aligned against the annotated
+\bgla{} proteins using \textsc{blastp} version \texttt{2.15.0}, as implemented
+in \textsc{BLAST+}.
+The best \textsc{BLAST} hit, based on both sequence identity and e-value, was
+then assigned as the representative \bgla{} ortholog.
+Transcript IDs and genomic coordinates of these orthologs is shown in
+Table~\ref{tab:sup_allozymes}.
+\vspace{0.2cm}
+
+To characterize patterns of molecular evolution in these allozyme loci, we first
+calculated pairwise \dnds{} between the \bgla{} allozyme transcript sequences and
+their corresponding ortholog in \textit{B. crenatus}, following the same approach
+describe above for all orthologs.
+We also implemented the McDonald-Kreitman test and associated statistics using a
+similar approach as described above for all genome-wide orthologs.
+However, to ensure we recovered results for all seven allozymes, we removed individual
+polymorphic sequences containing frameshift mutations instead of removing the whole
+ortholog altogether.
+The patterns of divergence and polymorphism were then calculated on any remaining
+sequences.
+\vspace{0.2cm}
+
+We additionally explored a regime of balancing selection on these allozyme genes by
+calculating the patterns of synonymous nucleotide diversity (in the form of $\pi$ at
+4-fold degenerate sites; $\pi_{4}$) and synonymous substitution rate (\Ks{}) along
+the gene sequences.
+
+% TODO here: mention the Ks calculation and add custom script. mention the Pi
+% calculation and add script. Add R script for merging both.
 
 \subsection*{Data availability}
 
@@ -1943,9 +1975,10 @@ This annotation was processed with \textsc{agat} version \texttt{1.4.3}
 \citep{dainat_another_2022} to filter out non-coding annotations, extract the longest 
 transcript as representative for the gene, and standarize gene and sequence IDs for
 downstream analysis.
-This RefSeq annotation contains 20,420 protein-coding genes and is 88.72\% gene-complete,
-with 35.93\% duplicates, when validated against the \texttt{arthropoda\_odb10} reference
-ortholog dataset using \textsc{hifiasm} \texttt{protein}.
+This RefSeq annotation contains 20,420 protein-coding genes and is 88.72\%
+gene-complete, with 35.93\% duplicates, when validated against the
+\texttt{arthropoda\_odb10} reference ortholog dataset using \textsc{hifiasm}
+\texttt{protein}.
 
 \subsubsection*{\textit{Amphibalanus amphitrite}}
 
