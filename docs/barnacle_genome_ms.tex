@@ -1533,7 +1533,7 @@ For each alignment, we calculated the total number of non-synonymous and
 synonymous sites (N\textsubscript{C} and S\textsubscript{C}, respectively),
 accounting for the degenerate codons.
 We then calculated the number of non-synonymous (N\textsubscript{D}) and
-synonymous (S\textsubscript{D}) observed between the two sequences.
+synonymous differences (S\textsubscript{D}) observed between the two sequences.
 The rate between the number non-synonymous (d\textsubscript{N}) and synonymous
 (d\textsubscript{S}) substitutions and sites is then calculated, and corrected for
 multiple substitutions using the Jukes-Cantor correction \citep{JC69}.
@@ -1775,9 +1775,27 @@ We additionally explored a regime of balancing selection on these allozyme genes
 calculating the patterns of synonymous nucleotide diversity (in the form of $\pi$ at
 4-fold degenerate sites; $\pi_{4}$) and synonymous substitution rate (\Ks{}) along
 the gene sequences.
-
-% TODO here: mention the Ks calculation and add custom script. mention the Pi
-% calculation and add script. Add R script for merging both.
+To achieve this, we first used a custom Python script (\texttt{pairwise\_Ks.py}) to
+calculate \Ks{} using the alignments between \bgla{} and \textit{B. crenatus}.
+The script parses the alignment and, using the \texttt{dnds} Python package version
+\texttt{2.1} (\url{https://github.com/adelq/dnds}), calculates the number of synonymous
+sites (S\textsubscript{C}) and synonymous substitutions (S\textsubscript{D}) at each
+aligned codon.
+The final output reports S\textsubscript{C}, S\textsubscript{D}, and their rate
+$\text{S}_\text{C}/\text{S}_\text{D}$ (i.e., \Ks{}) at each site according to the
+values of its corresponding codon.
+To calculate synonymous diversity, we used the central Oregon polymorphism data.
+We used \textsc{pixy} to calculate per-site (\texttt{--window\_size 1}) $\pi$ at
+4-fold degenerate sites spanning the allozyme coding sequences (specified with
+\texttt{--sites\_file}).
+Lastly, we used another custom script (\texttt{process\_pi4\_Ks.R}) to aggregate
+the \Ks{} and $\pi_{4}$ values.
+Values were aggregated along 99 bp (33 codons) windows, with a step size of 24 bp
+(8 codons), calculating the average, Jukes-Cantor corrected \Ks{}, the average
+$\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window.
+In addition to the seven allozyme genes, we repeated this analysis for all the 
+orthologs between \bgla{} and \textit{B. crenatus}in order to get a genome-wide
+estimate of $\pi_{4}/\text{K}_\text{S}$.
 
 \subsection*{Data availability}
 
