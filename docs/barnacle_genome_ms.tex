@@ -515,15 +515,15 @@ regulation), chymotrypsin-like protease CTRL-1, and the quiver gene.
 
 We expanded on our \dnds{} measures of positive selection in protein-coding sequences
 in the \bgla{} genome by incorporating population-level polymorphism using the
-McDonald-Kreitman test \citep{mcdonald_adaptive_1991}. Specifically, we used
+McDonald-Kreitman (MK) test \citep{mcdonald_adaptive_1991}. Specifically, we used
 polymorphism data from six \bgla{} individuals from the central Oregon coast
 (see below), comparing those against the orthologous coding sequences in the
 \textit{B. crenatus} outgroup.
 \vspace{0.2cm}
 
 After removing alignments shorter than 100 bp and those containing premature stop
-codons or frameshift mutations, we calculated the McDonald-Kreitman tests for
-7,374 orthologous sequences between \bgla{} and \textit{B. crenatus}.
+codons or frameshift mutations, we calculated the MK test for 7,374 orthologous
+sequences between \bgla{} and \textit{B. crenatus}.
 Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
 deviation from the expected proportion of non-synonymous and synonymous substitutions
 and polymorphisms, following \textit{p}-value correction for multiple testing
@@ -548,10 +548,10 @@ genes \citep{stoletzki_estimation_2011}.
 Across our 7,374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
 0.534--0.550), which indicates that $\approx$ 54\% of non-synonymous substitutions in
 this \bgla{} population were fixed as a product of positive selection.
-Secondly, we calculated $\alpha$ using the asymptotic McDonald-Kreitman test
-($\alpha_\text{asym}$), which corrects for the presence of weakly deleterious
-non-synonymous polymorphisms present at low frequency in the population
-\citep{messer_frequent_2013} which might obscure the signal of positive selection.
+Secondly, we calculated $\alpha$ using the asymptotic MK test ($\alpha_\text{asym}$),
+which corrects for the presence of weakly deleterious non-synonymous polymorphisms
+present at low frequency in the population \citep{messer_frequent_2013} which might
+obscure the signal of positive selection.
 We found a mean $\alpha_\text{asym}$ of 0.610 ($95\%$ CI: 0.610--0.622), a
 larger proportion than that observed in \textit{Drosophila} ($\alpha_\text{asym}$
 of 0.57; \citealp{haller_asymptoticmk_2017}).
@@ -621,12 +621,26 @@ alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi
 copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
 mannose-6-phosphate isomerase (\textit{Mpi}), phosphoglucomutase (\textit{Pgm}), and
 superoxide dismutase (\textit{Sod}).
+\vspace{0.2cm}
+
 When compared against orthologous sequences from \textit{B. crenatus}, all seven loci show
 \dnds{} less than one (Table~\ref{tab:sup_allozymes_dnds}), in agreement with our genome-wide
-estimates, suggesting that they evolving under purifying selection.
+estimates, suggesting that they are evolving under purifying selection (but see
+\nameref{sec:discussion_dnds_mkt}).
+Testing these loci using the MK test reveals different selection regimes acting on these loci.
+Among the seven allozymes, only \textit{Gpi} and \textit{Me.2} show a significant MK test
+result (corrected $p < 0.05$), showing deviation from the expected number of synonymous and
+non-synonymous divergence and polymorphism under neutrality
+(Table~\ref{tab:sup_allozymes_mkt}).
+For both of these genes, both the NI and DoS statistics show that this deviation is the
+product of excess of non-synonymous substitutions, reflecting evolution under a regime of
+positive selection.
+The $\alpha$ statistic additionally shows that the majority of non-synonymous
+substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
+reached fixation as the product of directional positive selection.
 
-% Gpi and Me2 seems to have good results from MKtest. Me1 and Mpi show
-% balancing selection. Confirm with the Pi4/Ks plots.
+% Note: mention that while not significant, all the other genes reflect excess polymorphism.
+% This is particularly strong for Me1 and Mpi. Bring in the Pi4/Ks plots.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
