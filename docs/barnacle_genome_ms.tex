@@ -613,12 +613,13 @@ may not be neutral in this large barnacle population.
 
 In barnacles, a set of allozyme loci have been extensive linked as playing an important
 role in spatial heterogeneity and local adaptation \citep{flowerdew_electrophoretic_1983,
-nunez_footprints_2020,rand_ecological_2002,schmidt_environmental_2000,flight_allozyme_2012}.
+nunez_footprints_2020,rand_ecological_2002,schmidt_environmental_2000,
+flight_allozyme_2012,veliz_regional_2004}.
 In order to assess if similar patterns of selection and local adaptation are acting on
 \bgla{} in central Oregon, we identified orthologs to seven of these classic allozyme loci
 in our assembly (Table~\ref{tab:sup_allozymes}), including
 alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
-copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
+different copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
 mannose-6-phosphate isomerase (\textit{Mpi}), phosphoglucomutase (\textit{Pgm}), and
 superoxide dismutase (\textit{Sod}).
 \vspace{0.2cm}
@@ -640,9 +641,29 @@ substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit
 reached fixation as the product of directional positive selection.
 \vspace{0.2cm}
 
-% Note: mention that while not significant, all the other genes reflect excess polymorphism.
-% This is particularly strong for Me1 and Mpi. Bring in the Pi4/Ks plots.
-Add: \ref{fig:sup_gw_piks} and \ref{fig:sup_allozyme_piks}
+% @Andy, @Scott: Trying to describe the Mpi results here since this is the main allozyme
+% seen under bal. selection in other barnacles. The Pi_4/K_S results are not as clear,
+% as we see peaks in other genes. However, Mpi is the only one that "agrees" for both
+% MKT and Pi_4/K_S. This could also simply be an exon by exon thing, where different exons
+% show different patterns of selection. MKT looks at counts gene-wide, but the windowed analysis
+% can highlight things at the exon level. Any thoughts?
+% Note: Nunez et al, 2020 also sees some of this "discordant" patterns. For example,
+% they find nothing remarkable in Gpi using the MKT, but they also have a strong peak of
+% Pi_4/K_S.
+Looking at other metrics of selection, \textit{Mpi} shows the largest excess of
+polymorphism relative to divergence ($\alpha$ = -0.575 and NI = 1.575).
+To explore this pattern further, we tested these loci for balancing selection by calculating
+the ratio between synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites;
+$\pi_{4}$) and synonymous divergence ($\text{K}_\text{S}$) along windows spanning the loci's
+coding sequence.
+All seven allozyme loci show at least one window showing $\pi_{4}/\text{K}_\text{S}$ values
+in the top 5\% of the genome-wide distribution (Figure~\ref{fig:sup_gw_piks}) and regions
+with outlier values tended to be contained in the span of single exons (Figure
+\ref{fig:sup_allozyme_piks}).
+While this trend is not unique to \textit{Mpi}, observing these elevated windows of
+$\pi_{4}/\text{K}_\text{S}$ in concert with the MK tests results suggest a regime of
+balancing selection acting on this key metabolic locus, as has been previously described in
+other barnacle species \citep{nunez_footprints_2020,rand_ecological_2002}.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
@@ -2594,9 +2615,10 @@ DoS = Direction of Selection
     \supfigurecaption{\textbf{Distribution of synonymous diversity over synonymous
         divergence for the seven allozyme loci.}
         The distribution of synonymous diversity over synonymous divergence
-        ($\pi_{4}/\text{K}_\text{S}$) along the coding sequences of 8,931 \bgla{} genes,
-        including the seven classic allozyme loci: \textit{Adh}, \textit{Gpi},
-        \textit{Me.1}, \textit{Me.2}, \textit{Mpi}, \textit{Pgm}, and \textit{Sod}.
+        ($\pi_{4}/\text{K}_\text{S}$) along the coding sequences of 8,931 \bgla{} genes
+        (denoted by ``GW''), including the seven classic barnacle allozyme loci:
+        \textit{Adh}, \textit{Gpi}, \textit{Me.1}, \textit{Me.2}, \textit{Mpi},
+        \textit{Pgm}, and \textit{Sod}.
         Each dot represents a $\pi_{4}/\text{K}_\text{S}$ value calculated in 99 bp
         (33 exon) windows along the coding sequence.
         Diamonds present the mean $\pi_{4}/\text{K}_\text{S}$.
