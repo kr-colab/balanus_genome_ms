@@ -121,15 +121,6 @@ empirical systems.
 
 \section*{Introduction}
 
-% My logic for the intro is to:
-%   1) set the primer for the theory for why we care about large pops.
-%   2) Set the system and general research on ecology and popgen.
-%   3) Previous work on barnacle popgen and how it has not been genome-wide
-%   4) Status of barnacle genomics (i.e., not much)
-%   5) General summary and why this matters paragraph.
-% Likely needs some tightening up, but wanted to get the general flow in there.
-% Modify citations in the intro as needed. I will be adding a few in the comments.
-
 The size of a population is a key factor mediating the mode and tempo of evolution,
 particularly as it relates to the strength of stochastic versus deterministic evolutionary
 forces \citep{kimura_mutation_1963,gillespie_genetic_2000}. Theory predicts that
@@ -565,9 +556,6 @@ Notably, this pervasive signal of positive selection stands in apparent tension 
 the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
 \vspace{0.2cm}
 
-% Trying to provide examples without being too listly. There's more gene to pull from,
-% but I tried to focus on the most interesting ones based on the MKT results, i.e.,
-% largest alphas, the example with excess polymorphism, and overlap with dn/ds.
 Exploring the predicted function of the candidate genes identified in the MK analysis,
 our single candidate displaying an excess of polymorphism relative to divergence is a
 homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
@@ -584,8 +572,8 @@ This gene shows the largest proportion of non-synonymous substitutions fixed by
 positive selection among the sequences studied ($\alpha = 0.988$).
 Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
 also shows strong signals of positive selection in our study ($\alpha = 0.917$).
-Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like 7
-($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
+Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like
+7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
 \citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
 ($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
 \citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
@@ -597,9 +585,9 @@ LOC122363544.
 Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
 a member of a family of proteins known to play a role in crustacean immunity
 \citep{li_formin-like_2025}.
-While the functions of all of these candidate genes are unknown in \bgla{}, they highlight
-the diverse targets of selection in this system and their characterization serves as
-an avenue for future study in barnacles.
+While the exact functions of all of these candidate genes are unknown in \bgla{}, they
+highlight the diverse targets of selection in this system and their characterization serves
+as an avenue for future study in barnacles.
 
 % MK test volcano plot
 \begin{figure}[ht]
@@ -622,8 +610,6 @@ an avenue for future study in barnacles.
         polymorphism.}
     \label{fig:mkTest}
 \end{figure}
-
-% TODO: Mention a few mkTest genes?
 
 \subsection*{Non-neutral evolution in the classic allozyme loci}
 
@@ -656,14 +642,15 @@ When compared against the \textit{B. crenatus} orthologous sequences, all seven 
 \dnds{} less than one (Table~\ref{tab:sup_allozymes_dnds}), in agreement with our genome-wide
 estimates, suggesting that they are evolving under purifying selection (but see
 \nameref{sec:discussion_dnds_mkt}).
-Testing these loci using the MK test reveals different selection regimes acting on these loci.
-Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a significant MK test
-result (corrected $p < 0.05$), showing deviation from the expected number of synonymous and
-non-synonymous divergence and polymorphism under neutrality
+Assessing these loci using the MK test reveals different selection regimes acting on these
+loci.
+Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a significant MK
+test result (corrected $p < 0.05$), showing deviation from the expected number of synonymous
+and non-synonymous divergence and polymorphism under neutrality
 (Table~\ref{tab:sup_allozymes_mkt}).
-For both of these genes, both the NI and DoS statistics show that this deviation is due to an
-excess of non-synonymous substitutions, indicating that these sequences evolved under a
-regime of positive selection.
+For both of these genes, both the NI and DoS statistics show that this deviation is due to
+an excess of non-synonymous substitutions, indicating that these sequences evolved under
+a regime of positive selection.
 The $\alpha$ statistic additionally shows that the majority of non-synonymous
 substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
 reached fixation as the product of directional positive selection.
@@ -704,24 +691,6 @@ selection we detect is acting on \textit{Me.2} specifically rather than on the m
 enzyme gene family as a whole, and it cautions against treating classical ``allozyme
 loci'' as monolithic units in genome-scale reanalyses.
 \vspace{0.2cm}
-
-% @Andy, @Scott: Trying to describe the Mpi results here since this is the main allozyme
-% seen under bal. selection in other barnacles. The Pi_4/K_S results are not as clear,
-% as we see peaks in other genes. However, Mpi is the only one that "agrees" for both
-% MKT and Pi_4/K_S. This could also simply be an exon by exon thing, where different exons
-% show different patterns of selection. MKT looks at counts gene-wide, but the windowed analysis
-% can highlight things at the exon level. Any thoughts?
-% Note: Nunez et al, 2020 also sees some of this "discordant" patterns. For example,
-% they find nothing remarkable in Gpi using the MKT, but they also have a strong peak of
-% Pi_4/K_S.
-
-% @Angel -- I've edited the text to be more cautious about the interpretation of the results
-% I think the biggest thing we could do would be either a length match null comparison
-% or a more formal HKA test to see if the excess of polymorphism is significant relative to the genome-wide background. 
-% I think the windowed Pi_4/K_S results are suggestive but not diagnostic of balancing selection, and I don't want to overstate them without a more formal test. 
-% That said, the fact that Mpi is the only one of the seven allozymes that shows an excess of polymorphism in the MK test 
-% and also has a window with elevated Pi_4/K_S is suggestive that there might be something interesting going on at this locus, 
-% even if we can't definitively say it's balancing selection at this point.
 
 Turning to \textit{Mpi}, we observe the largest excess of polymorphism relative to
 divergence among the seven allozymes (NI = 1.575), though the MK test at this locus
