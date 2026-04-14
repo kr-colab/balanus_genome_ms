@@ -12,7 +12,8 @@
 \usepackage{textgreek}
 \setlength{\headheight}{13.59999pt}
 \pagestyle{fancy}
-\fancyhead[R]{\textbf{\textit{B. glandula} genome}}
+\fancyhead[R]{\textbf{Rivera-Col\'{o}n \textit{et al.} 2026 
+    - \textit{B. glandula} genome}}
 % for figures
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -68,18 +69,23 @@
 \newcommand{\balgla}{\textit{Balanus glandula}\xspace}
 \newcommand{\bgla}{\textit{B. glandula}\xspace}
 \newcommand{\Ne}{N\textsubscript{e}\xspace}
+\newcommand{\Ks}{K\textsubscript{S}\xspace}
 
 \title{The genome of the {Pacific} acorn barnacle provides insights into
     the evolution of extremely large populations}
-\author[1]{Angel G. Rivera-Col\'{o}n}
+\author[1*]{Angel G. Rivera-Col\'{o}n}
 \author[1]{Scott T. Small}
 \author[2,3]{Erin Jezuit}
-\author[1,4]{Andrew D. Kern}
+\author[4,5]{John P. Wares}
+\author[1,6]{Andrew D. Kern}
 
-\affil[1]{\small{University of Oregon, Institute of Ecology and Evolution, USA}}
-\affil[2]{\small{University of Oregon, Institute of Molecular Biology, USA}}
-\affil[3]{\small{University of Oregon, Oregon Institute of Marine Biology, USA}}
-\affil[4]{\small{University of Oregon, Department of Biology, USA}}
+\affil[1]{\small{Institute of Ecology and Evolution, University of Oregon, USA}}
+\affil[2]{\small{Institute of Molecular Biology, University of Oregon, USA}}
+\affil[3]{\small{Oregon Institute of Marine Biology, University of Oregon, USA}}
+\affil[4]{\small{Odum School of Ecology, University of Georgia, USA}}
+\affil[5]{\small{Department of Genetics, University of Georgia, USA}}
+\affil[6]{\small{Department of Biology, University of Oregon, USA}}
+\affil[*]{\small{Address correspondence to: ariverac@uoregon.edu}}
 
 \begin{document}
 
@@ -242,11 +248,10 @@ suggested the presence of a large fraction of haplotig sequences, reflecting
 the high heterozygosity observed for the species.
 \vspace{0.2cm}
 
-After optimizing the assembly with the addition of Hi-C and ONT ultra-long reads
-and more stringent purging of haplotig and contaminant sequences (see
-\nameref{sec:methods_assembly}), we generated contigs with a substantially smaller
-fraction of haplotigs, reducing the assembly size to 1.05 Gbp and the \textsc{BUSCO}
-duplicates to 4.84\%.
+After optimizing the assembly with the addition of ONT ultra-long reads and more stringent
+purging of haplotig and contaminant sequences (see \nameref{sec:methods_assembly}), we
+generated contigs with a substantially smaller fraction of haplotigs, reducing the
+assembly size to 1.05 Gbp and the \textsc{BUSCO} duplicates to 4.84\%.
 This contig-level assembly was then scaffolded with Hi-C data using the \textsc{YaHS}
 software \citep{zhou_yahs_2023} (Figure~\ref{fig:sup_hic}), generating an assembly
 with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
@@ -339,7 +344,7 @@ genomic analyses across the order and suggests that large-scale genome
 rearrangements have not been a major driver of diversification in barnacles.
 
 % Synteny
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
@@ -354,7 +359,7 @@ rearrangements have not been a major driver of diversification in barnacles.
     \label{fig:synteny}
 \end{figure}
 
-\subsection*{High genetic diversity in the \bgla{} reference assembly}
+\subsection*{High genetic diversity in the \balgla{} reference assembly}
 
 We estimated the genetic diversity present in the \bgla{} genome by identifying
 heterozygous variants in our reference individual. After filtering low-quality sites
@@ -462,7 +467,7 @@ the highly repetitive nature of the genome, a pattern we revisit in the context
 of the broader selective regime acting on these large populations.
 
 % Phastcons and enrichment
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
     \caption{\textbf{Highly conserved elements in the \balgla{} assembly.}
@@ -479,8 +484,7 @@ of the broader selective regime acting on these large populations.
     \label{fig:phastcons}
 \end{figure}
 
-\subsection*{Patterns of molecular evolution reflect positive selection in
-protein-coding genes}
+\subsection*{Patterns of molecular evolution reflect positive selection in protein-coding genes}
 
 To examine the rate of molecular evolution in protein-coding sequences, we calculated
 the pairwise ratio of non-synonymous to synonymous substitutions (\dnds) between
@@ -493,33 +497,36 @@ sequences in these barnacle genomes are under purifying selection, reflecting th
 expected evolutionary constraints on sequences of functional importance.
 \vspace{0.2cm}
 
-Of the nine thousand genes assessed, 70 (0.77\%) displayed a
-\dnds{} $>$ 1, and are likely candidates for positive
-selection. The predicted function of the majority ($>80\%$) of these genes is
-unknown, as determined by the functional annotation generated by the \textsc{EnTAP}
-software \citep{hart_span_2020}. This is expected, since homology is likely harder
-to determine for fast-evolving sequences putatively under strong selection.
+Of the nine thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are likely
+candidates for positive selection.
+The predicted function of the majority ($>80\%$) of these genes is unknown, as
+determined by the functional annotation generated by the \textsc{EnTAP} software
+\citep{hart_span_2020}.
+This is expected, since homology is likely harder to determine for fast-evolving sequences
+putatively under strong selection.
 Regardless, we found several genes with known function in our candidates under
-positive selection. Among them, we found a follistatin-A-like homolog, known to be
-involved in myogenesis and muscle development in crustaceans
-\citep{yan_identification_2021}. We also observed a homolog of the
-gamma-interferon-inducible lysosomal thiol reductase, known to be involved in innate
-immune response in crustaceans \citep{liu_involvement_2019}. Additionally, we found
-homologs of tumor protein p53-inducible protein 11 (which is involved in cell cycle
-regulation), chymotrypsin-like protease CTRL-1, and the quiver gene.
+positive selection, among them a follistatin-A-like homolog, known to be involved in
+myogenesis and muscle development in crustaceans \citep{yan_identification_2021}.
+We also observed a homolog of gamma-interferon-inducible lysosomal thiol reductase,
+which plays a role in crustacean innate immune response \citep{liu_involvement_2019}.
+Additionally, we found evidence of positive selection in  homologs of tumor protein
+p53-inducible protein 11, which is involved in cell cycle regulation and are up-regulated
+in crabs after viral infection \citep{cheng_p53_2021}, as well quiver gene homologs,
+related to neuronal activity and sleep regulation in \textit{Drosophila}
+\citep{wang_quiver_2010}.
 \vspace{0.2cm}
 
 We expanded on our \dnds{} measures of positive selection in protein-coding sequences
 in the \bgla{} genome by incorporating population-level polymorphism using the
-McDonald-Kreitman test \citep{mcdonald_adaptive_1991}. Specifically, we used
-polymorphism data from six \bgla{} individuals from the central Oregon coast
-(see below), comparing those against the orthologous coding sequences in the
-\textit{B. crenatus} outgroup.
+McDonald-Kreitman (MK) test \citep{mcdonald_adaptive_1991}.
+Specifically, we used polymorphism data from six \bgla{} individuals from the central
+Oregon coast (see below), comparing those against the orthologous coding sequences in
+the \textit{B. crenatus} outgroup.
+After removing alignments shorter than 100 bp and those containing premature stop
+codons or frameshift mutations, we calculated the MK test for 7,374 orthologous
+sequences between \bgla{} and \textit{B. crenatus}.
 \vspace{0.2cm}
 
-After removing alignments shorter than 100 bp and those containing premature stop
-codons or frameshift mutations, we calculated the McDonald-Kreitman tests for
-7,374 orthologous sequences between \bgla{} and \textit{B. crenatus}.
 Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
 deviation from the expected proportion of non-synonymous and synonymous substitutions
 and polymorphisms, following \textit{p}-value correction for multiple testing
@@ -544,10 +551,10 @@ genes \citep{stoletzki_estimation_2011}.
 Across our 7,374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
 0.534--0.550), which indicates that $\approx$ 54\% of non-synonymous substitutions in
 this \bgla{} population were fixed as a product of positive selection.
-Secondly, we calculated $\alpha$ using the asymptotic McDonald-Kreitman test
-($\alpha_\text{asym}$), which corrects for the presence of weakly deleterious
-non-synonymous polymorphisms present at low frequency in the population
-\citep{messer_frequent_2013} which might obscure the signal of positive selection.
+Secondly, we calculated $\alpha$ using the asymptotic MK test ($\alpha_\text{asym}$),
+which corrects for the presence of weakly deleterious non-synonymous polymorphisms
+present at low frequency in the population \citep{messer_frequent_2013} which might
+obscure the signal of positive selection.
 We found a mean $\alpha_\text{asym}$ of 0.610 ($95\%$ CI: 0.610--0.622), a
 larger proportion than that observed in \textit{Drosophila} ($\alpha_\text{asym}$
 of 0.57; \citealp{haller_asymptoticmk_2017}).
@@ -555,10 +562,47 @@ Regardless of the metric used, both $\alpha_\text{TG}$ and $\alpha_\text{asym}$ 
 that the majority of non-synonymous substitutions in this barnacle population are the
 outcome of directional positive selection.
 Notably, this pervasive signal of positive selection stands in apparent tension with
-the low genome-wide \dnds{}, a discordance we address in the Discussion.
+the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
+\vspace{0.2cm}
+
+% Trying to provide examples without being too listly. There's more gene to pull from,
+% but I tried to focus on the most interesting ones based on the MKT results, i.e.,
+% largest alphas, the example with excess polymorphism, and overlap with dn/ds.
+Exploring the predicted function of the candidate genes identified in the MK analysis,
+our single candidate displaying an excess of polymorphism relative to divergence is a
+homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
+which has been observed as differentially expressed in response to osmotic stress in
+barnacles \citep{chandramouli_transcriptome_2015}.
+While its exact function in \bgla{} is unknown, the large excess of polymorphism
+observed (NI = 18.54) suggest strong balancing selection acting on this gene in
+this system.
+Looking at the genes evolving under positive directional selection, we observe a homolog
+to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
+factor essential for protein synthesis and, in humans, linked to the regulation of
+transcripts related to cell proliferation and growth \citep{lee_eif3_2015}.
+This gene shows the largest proportion of non-synonymous substitutions fixed by
+positive selection among the sequences studied ($\alpha = 0.988$).
+Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
+also shows strong signals of positive selection in our study ($\alpha = 0.917$).
+Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel
+like 7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
+\citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
+($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
+\citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
+\citep{fan_male_2007}.
+Further highlighting the discrepancy between the tests of selection, only a single
+significant gene in the MK test analysis overlaps with our candidates of selection in
+the \dnds{} analysis, a homolog to \textit{A. amphitrite}'s uncharacterized locus
+LOC122363544.
+Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
+a member of a family of proteins known to play a role in crustacean immunity
+\citep{li_formin-like_2025}.
+While the functions of all of these candidate genes in unknown in \bgla{}, they highlight
+the diverse target of selection in this system and their characterization serves as
+avenues for future study in barnacles.
 
 % MK test volcano plot
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{\textbf{Signatures of positive selection in \balgla{}
@@ -581,21 +625,71 @@ the low genome-wide \dnds{}, a discordance we address in the Discussion.
 
 % TODO: Mention a few mkTest genes?
 
-\subsection*{Molecular evolution in classic allozyme genes}
+\subsection*{Non-neutral evolution in the classic allozyme loci}
 
-Check for selection in the classic genes from \cite{flowerdew_electrophoretic_1983}.
-See Table~\ref{tab:sup_allozymes}.
+In barnacles, a set of allozyme loci have been extensive linked as playing an important
+role in spatial heterogeneity and local adaptation \citep{flowerdew_electrophoretic_1983,
+nunez_footprints_2020,rand_ecological_2002,schmidt_environmental_2000,
+flight_allozyme_2012,veliz_regional_2004}.
+In order to assess if similar patterns of selection and local adaptation are acting on
+\bgla{} in central Oregon, we identified orthologs to seven of these classic allozyme loci
+in our assembly (Table~\ref{tab:sup_allozymes}), including
+alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
+different copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
+mannose-6-phosphate isomerase (\textit{Mpi}), phosphoglucomutase (\textit{Pgm}), and
+superoxide dismutase (\textit{Sod}).
+\vspace{0.2cm}
 
-\begin{itemize}
-    \item mannose-6-phosphate isomerase (\textit{Mpi})
-    \item malic enzyme (\textit{Me})
-    \item glucose-6-phosphate isomerase (\textit{Gpi})
-    \item alcohol dehydrogenase (\textit{Adh})
-    \item superoxide dismutase (\textit{Sod})
-    \item phosphoglucomutase (\textit{Pgm})
-\end{itemize}
+When compared against the \textit{B. crenatus} orthologous sequences, all seven loci show
+\dnds{} less than one (Table~\ref{tab:sup_allozymes_dnds}), in agreement with our genome-wide
+estimates, suggesting that they are evolving under purifying selection (but see
+\nameref{sec:discussion_dnds_mkt}).
+Testing these loci using the MK test reveals different selection regimes acting on these loci.
+Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a significant MK test
+result (corrected $p < 0.05$), showing deviation from the expected number of synonymous and
+non-synonymous divergence and polymorphism under neutrality
+(Table~\ref{tab:sup_allozymes_mkt}).
+For both of these genes, both the NI and DoS statistics show that this deviation is due an
+excess of non-synonymous substitutions, indication that these sequences evolved under a
+regime of positive selection.
+The $\alpha$ statistic additionally shows that the majority of non-synonymous
+substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
+reached fixation as the product of directional positive selection.
+\vspace{0.2cm}
 
-% All under purifying from dN/dS. Gpi seems to have good results from MKtest.
+% @Andy, @Scott: Trying to describe the Mpi results here since this is the main allozyme
+% seen under bal. selection in other barnacles. The Pi_4/K_S results are not as clear,
+% as we see peaks in other genes. However, Mpi is the only one that "agrees" for both
+% MKT and Pi_4/K_S. This could also simply be an exon by exon thing, where different exons
+% show different patterns of selection. MKT looks at counts gene-wide, but the windowed analysis
+% can highlight things at the exon level. Any thoughts?
+% Note: Nunez et al, 2020 also sees some of this "discordant" patterns. For example,
+% they find nothing remarkable in Gpi using the MKT, but they also have a strong peak of
+% Pi_4/K_S.
+Looking at other metrics of selection, \textit{Mpi} shows the largest excess of
+polymorphism relative to divergence (NI = 1.575).
+To explore this pattern further, we tested these loci for balancing selection by calculating
+the ratio between synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites;
+$\pi_{4}$) and synonymous divergence ($\text{K}_\text{S}$) along windows spanning the loci's
+coding sequence.
+All seven allozyme loci show at least one window showing $\pi_{4}/\text{K}_\text{S}$ values
+in the top 5\% of the genome-wide distribution (Figure~\ref{fig:sup_gw_piks}) and regions
+with outlier values tended to be contained in the span of single exons (Figure
+\ref{fig:sup_allozyme_piks}).
+While this trend is not unique to \textit{Mpi}, observing these elevated windows of
+$\pi_{4}/\text{K}_\text{S}$ in concert with the MK tests results suggest a regime of
+balancing selection acting on this key metabolic locus.
+Similar patterns have been previously described in other barnacle species
+\citep{nunez_footprints_2020,rand_ecological_2002}, where alternative alleles of \textit{Mpi}
+are beneficial at different intertidal habitats.
+While intertidal microhabitat should be uniform in our sampling, these signatures of
+balancing selection suggest complex patterns of non-neutral evolution and local adaptation at
+\textit{Mpi} on this barnacle population.
+Future work should aim to further describe genetic variation at this locus, particularly
+across \bgla{}'s large geographic range.
+These findings would aid in the understanding of the interaction of space and selection in
+\textit{Mpi} and other adaptive loci, and their similarly (or lack thereof) with the
+adaptive history observed across other barnacle species.
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -610,7 +704,7 @@ indicates a codon usage bias stronger than that observed in \textit{Drosophila}
 may not be neutral in this large barnacle population.
 
 % ENC codon bias
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
     \caption{\textbf{Codon usage biases in \balgla.}
@@ -623,13 +717,13 @@ may not be neutral in this large barnacle population.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}
 
-We sequenced the whole genomes of six \bgla{} individuals from the central Oregon coast.
-After stringent filtering of sites with low coverage, low quality, and/or missing
-genotypes, we retained a total of 111.6 million genotyped sites
-(Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%) of which were variant in the
-sequenced individuals.
-Among these variant sites, we recovered 20.5 million point mutations, including nearly 
-1 million SNPs that were multiallelic in this set of just six individuals.
+We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast.
+After removal of two samples with poor quality sequences, and the stringent filtering of
+sites with low coverage, low quality, and/or missing genotypes, we retained a total of
+111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%)
+of which were variant in the retained individuals.
+Among these variant sites, we recovered 20.5 million point mutations, 4.86\% of which 
+were multiallelic in just these six individuals.
 In total, the amount of polymorphism observed in our sampling translates to a mean
 density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82).
 Moreover, 1.12 million of these variant sites (5.23\%) were located in coding sequences.
@@ -659,7 +753,7 @@ genotypes located within repetitive intervals in the reference
 \vspace{0.2cm}
 
 % Genome-wide pi & repeat and gene density
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/genome_pi.pdf}
     \caption{\textbf{Nucleotide diversity ($\pi$) and coding and repeat density
@@ -714,7 +808,7 @@ highly effective in this population, consistent with theoretical predictions for
 species with large effective population sizes.
 
 % Distribution of pi for different features in the genome
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/feature_pi.pdf}
     \caption{\textbf{Nucleotide diversity ($\pi$) across genomic
@@ -754,7 +848,7 @@ largest known effective population sizes for any eukaryote, yet orders of
 magnitude below the census sizes observed in the field --- a disparity
 central to Lewontin's Paradox and one we return to in the Discussion.
 
-\section*{Discussion}
+\section*{Discussion}\label{sec:discussion}
 
 \subsection*{Genome assembly in highly polymorphic species}
 
@@ -900,6 +994,7 @@ and transposable elements in this and other large populations.
 
 \subsection*{Molecular evolution in large populations: reconciling \dnds{} and the
 McDonald-Kreitman test}\label{sec:discussion_dnds_mkt}
+
 One of the more striking patterns in our results is the apparent discordance between
 our two measures of selection on protein-coding genes.
 The average pairwise \dnds{} between \bgla{} and \textit{B. crenatus} is 0.206,
@@ -1189,18 +1284,19 @@ We generated a new contig-level genome assembly using the Thecostraca-specific
 data and iterating over different assembly parameters and filtering schemes,
 selecting an optimal assembly based on the best contiguity and gene-completeness
 metrics \citep{rayamajhi_evaluating_2022}, as determined by \textsc{quast} and
-\textsc{compleasm}, respectively. This optimized assembly was generated using
-\textsc{hifiasm} version \texttt{0.19.8-r603}, including our Thecostraca-specific
-PacBio HiFi reads as well as the ultra-long ONT (\texttt{--ul}) and Hi-C reads
-(\texttt{--h1}, \texttt{--h2}). This assembly was done using an estimated
-haploid genome size of 800 Mbp (\texttt{--hg-size 800m}), dropping k-mers observed
-over ten times the average coverage (\texttt{-D 10.0}), and allowing scaffolding
-(\texttt{--dual-scaf}). For identifying and correctly phasing haplotype sequences,
-we set the expected coverage at homozygous sites (\texttt{--hom-cov 68}) and the
-upper bound of coverage to purging duplicates (\texttt{--purge-max 68}) at 68x,
-along with setting the similarity threshold between duplicate haplotigs to 25\%
-(\texttt{-s 0.25}). This assembly was composed of 2,218 contigs, with a total
-length of 1.29 Gbp, and a contig N50 of 1.16 Mbp.
+\textsc{compleasm}, respectively.
+This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.19.8-r603},
+including our Thecostraca-specific PacBio HiFi reads as well as the ultra-long ONT
+(\texttt{--ul}).
+This assembly was done using an estimated haploid genome size of 800 Mbp
+(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+For identifying and correctly phasing haplotype sequences, we set the expected coverage
+at homozygous sites (\texttt{--hom-cov 68}) and the upper bound of coverage to purging
+duplicates (\texttt{--purge-max 68}) at 68x, along with setting the similarity threshold
+between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
+This assembly was composed of 2,218 contigs, with a total length of 1.29 Gbp, and a contig
+N50 of 1.16 Mbp.
 \vspace{0.2cm}
 
 Following the initial assembly of contigs, we purged haplotig sequences using the
@@ -1263,8 +1359,15 @@ a scaffold N50 of 50.96 Mbp (Table~\ref{tab:sup_asm_stats}).
 After manual curation of the scaffolded genome, we performed one round of polishing and
 automatic curation using the \textsc{Inspector} software version \texttt{1.0.1}
 \citep{chen_accurate_2021}. First, we evaluated the assembly using \texttt{inspector.py},
-mapping the PacBio HiFi reads against the assembly. The assembly was then corrected using
-\texttt{inspector-correct.py} (Table~\ref{tab:sup_asm_stats}).
+mapping the PacBio HiFi reads against the assembly.
+\textsc{Inspector} calculated a mapping rate of 99.98\% of these reads to the assembly
+(87.94\% for larger contigs) and a quality value (QV) of 30.49.
+It additionally identified 742 structural errors larger than 50bp, including
+357 haplotype switches, 303 sequence expansions, and 16 inversions.
+Assessing smaller ($<$50 bp) errors, \textsc{Inspector} identified 1,929 small-scale
+expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
+After evaluation, the assembly was then processed using \texttt{inspector-correct.py}
+(Table~\ref{tab:sup_asm_stats}) to export the corrected sequences in FASTA format.
 
 \subsection*{Genome annotation}\label{sec:methods_annotation}
 
@@ -1273,7 +1376,7 @@ mapping the PacBio HiFi reads against the assembly. The assembly was then correc
 We identified and classified repetitive elements in the \bgla{} genome
 using the \textsc{EarlGrey} software version \texttt{4.1.0} \citep{baril_earl_2024}.
 Before running \textsc{EarlGrey}, we first downloaded the \textsc{Dfam 3.8} database
-\citep{storer_dfam_2021}, extracting the annotated arthropod repeat sequences to generate
+\citep{storer_dfam_2021}, extracting the annotated crustacean repeat sequences to generate
 an initial consensus masking library. We provided this initial consensus library to
 \textsc{EarlGrey} (\texttt{-l}). We also used ``arthropoda'' as the search term for
 \textsc{RepeatMasker} version \texttt{4.1.2} \citep{smit_repeatmasker_2013}. In addition,
@@ -1388,7 +1491,8 @@ We compared the bgla{} protein sequences against the following curated databases
 \texttt{eggNOG} (downloaded on 2025/07/08), \texttt{NCBI nr} (downloaded on 2025/10/08),
 \texttt{RefSeq Protein} (downloaded on 2025/08/08), \texttt{Swiss-Prot}
 (downloaded on 2025/08/08), and \texttt{InterProScan} (downloaded on 2025/07/25).
-We considered sequences as contaminant if they had high similarity to bacteria, fungi, viridiplantae, archaea, nematoda, cestoda, and trematoda.
+We considered sequences as contaminant if they had high similarity to bacteria, fungi,
+viridiplantae, archaea, nematoda, cestoda, and trematoda.
 Contaminant sequences were removed from the annotation GFF file.
 
 \subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
@@ -1474,7 +1578,7 @@ barnacle species (\bgla, \textit{B. crenatus}, \textit{A. amphitrite},
 First, we generated a whole-genome alignment of these five species using
 \textsc{cactus} version \texttt{2.9.7} \citep{armstrong_progressive_2020}.
 We used the phylogenetic tree generated by \textsc{OrthoFinder} as the guide tree
-for the alignment. % TODO: more supps on this, since it has CapMat.
+for the alignment.
 Next, we ran the \texttt{phyloFit} program, part of \textsc{phast} version
 \texttt{1.5} \citep{siepel_evolutionarily_2005} to generate a neutral
 phylogenetic model based on the resulting alignment and general time reversible
@@ -1516,10 +1620,10 @@ The script uses the \texttt{dnds} Python package version \texttt{2.1}
 (\url{https://github.com/adelq/dnds}) to calculate \dnds{} using the codon-by-codon
 counting method described by~\cite{nei1986_dnds}.
 For each alignment, we calculated the total number of non-synonymous and
-synonymous sites (N\textsubscript{c} and S\textsubscript{c}, respectively),
+synonymous sites (N\textsubscript{C} and S\textsubscript{C}, respectively),
 accounting for the degenerate codons.
-We then calculated the number of non-synonymous (N\textsubscript{d}) and
-synonymous (S\textsubscript{d}) observed between the two sequences.
+We then calculated the number of non-synonymous (N\textsubscript{D}) and
+synonymous differences (S\textsubscript{D}) observed between the two sequences.
 The rate between the number non-synonymous (d\textsubscript{N}) and synonymous
 (d\textsubscript{S}) substitutions and sites is then calculated, and corrected for
 multiple substitutions using the Jukes-Cantor correction \citep{JC69}.
@@ -1553,7 +1657,7 @@ The MK test and associated statistics were calculated using the \textsc{MKado}
 version \texttt{0.2.0} software \citep{mkado_2026}.
 \textsc{MKado} parses the multiple-sequence alignments and computes the 
 non-synonymous and synonymous changes in divergence and polymorphism
-(D\textsubscript{n}, D\textsubscript{s}, P\textsubscript{n}, P\textsubscript{s},
+(D\textsubscript{N}, D\textsubscript{S}, P\textsubscript{N}, P\textsubscript{S},
 respectively), between ingroup and outgroup sequences.
 We ran \textsc{MKado} three times, each time calculating a different variant of
 the MK test.
@@ -1563,13 +1667,68 @@ per-gene proportion of non-synonymous sites fixed by selection ($\alpha$;
 \citealp{smith_adaptive_2002}), Neutrality Index (NI;~\citealp{rand_excess_1996})
 and Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}).
 Next, we calculated the asymptotic MK test (\texttt{--asymptotic};
-\citealp{messer_frequent_2013}) to correct for the biases introduced by low frequency
-polymorphism, and estimating $\alpha_\text{asym}$ aggregated across
+\citealp{messer_frequent_2013}) to correct for the biases introduced by low
+frequency polymorphism, and estimating $\alpha_\text{asym}$ aggregated across
 all genes.
 Lastly, we calculated the Tarone-Greenland weighted estimator
 ($\alpha_\text{TG}$;~\citealp{stoletzki_estimation_2011}) using
 \textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiased estimator of
 genome-wide $\alpha$ when comparing across multiple genes.
+
+\subsection*{Assessment of classic allozyme loci}
+
+We identified the \bgla{} orthologs to the seven classic allozyme loci first
+characterized in barnacles by \cite{flowerdew_electrophoretic_1983}.
+First, we obtained representative sequences for these seven allozyme proteins
+(Table~\ref{tab:sup_allozymes}), which we then aligned against the annotated
+\bgla{} proteins using \textsc{blastp} version \texttt{2.15.0}, as implemented
+in \textsc{BLAST+}.
+The best \textsc{BLAST} hit, based on both sequence identity and e-value, was
+then assigned as the representative \bgla{} ortholog.
+Transcript IDs and genomic coordinates of these orthologs is shown in
+Table~\ref{tab:sup_allozymes}.
+\vspace{0.2cm}
+
+To characterize patterns of molecular evolution in these allozyme loci, we first
+calculated pairwise \dnds{} between the \bgla{} allozyme transcript sequences and
+their corresponding ortholog in \textit{B. crenatus}, following the same approach
+describe above for all orthologs.
+We also implemented the McDonald-Kreitman test and associated statistics using a
+similar approach as described above for all genome-wide orthologs.
+However, to ensure we recovered results for all seven allozymes, we removed
+individual polymorphic sequences containing frameshift mutations instead of removing
+the whole ortholog altogether.
+The patterns of divergence and polymorphism were then calculated on any remaining
+sequences.
+\vspace{0.2cm}
+
+We additionally explored a regime of balancing selection on these allozyme genes by
+calculating the patterns of synonymous nucleotide diversity (in the form of $\pi$ at
+4-fold degenerate sites; $\pi_{4}$) and synonymous substitution rate (\Ks{}) along
+the gene sequences.
+To achieve this, we first used a custom Python script (\texttt{pairwise\_Ks.py}) to
+calculate \Ks{} using the alignments between \bgla{} and \textit{B. crenatus}.
+The script parses the alignment and, using the \texttt{dnds} Python package version
+\texttt{2.1} (\url{https://github.com/adelq/dnds}), calculates the number of
+synonymous sites (S\textsubscript{C}) and synonymous substitutions
+(S\textsubscript{D}) at each aligned codon.
+The final output reports S\textsubscript{C}, S\textsubscript{D}, and their rate
+$\text{S}_\text{C}/\text{S}_\text{D}$ (i.e., \Ks{}) at each site according to the
+values of its corresponding codon.
+To calculate synonymous diversity, we used the central Oregon polymorphism data.
+We used \textsc{pixy} to calculate per-site (\texttt{--window\_size 1}) $\pi$ at
+4-fold degenerate sites spanning the allozyme coding sequences (specified with
+\texttt{--sites\_file}).
+Lastly, we used another custom script (\texttt{process\_pi4\_Ks.R}) to aggregate
+the \Ks{} and $\pi_{4}$ values.
+Values were aggregated along 99 bp (33 codons) windows, with a step size of 24 bp
+(8 codons), filtering out windows with data for fewer than three codons.
+At each window, we calculated the average, Jukes-Cantor corrected \Ks{}, the
+average $\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window.
+In addition to the seven allozyme genes, we repeated this analysis for all the 
+orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
+estimate of $\pi_{4}/\text{K}_\text{S}$.
+After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
 
 \subsection*{Codon usage biases}
 
@@ -1713,30 +1872,27 @@ degenerate sites using \textsc{pixy}, specifying the specific sites of interest 
 We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
 population's effective size.
 First, we estimated the long-term average \Ne{} in this population based on the
-estimates of $\theta_\text{W}$ from \textsc{pixy}, and using the relationship
-$\text{N}_\text{e} = \theta_\text{W}/4\mu$.
+estimates of $\theta_\text{W}$ along 10 kbp window using \textsc{pixy}, and using the
+relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
-by \cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
-Using this relationship, we calculated \Ne{} along 10 kbp windows, obtaining a distribution
-of effective size along the genome.
+by~\cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+Using this relationship, we calculated \Ne{} along these 10 kbp windows, obtaining a
+distribution of effective size along the genome.
 \vspace{0.2cm}
 
 We additionally estimated the effective size of the population using the \textsc{msmc2}
 software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
-\textsc{DemInfHelper} program \citep{forest_popsize_2024}.
+\textsc{DemInfHelper} program version \texttt{0.1.1} \citep{forest_popsize_2024}.
 We ran \textsc{msmc2} with 25 iterations (\texttt{-i 25}), using the default
 time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
 in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
-Since our genotypes were not phased, we ran \textsc{msmc2} for each individual separately
-(including both our reference sample and our six central Oregon individuals).
-
-\subsection*{Assessment of classic allozyme loci}
-
-TODO:
+We estimated historical \Ne{} for our six Cape Perpetua individuals; however since
+our genotypes were not phased, we ran \textsc{msmc2} for each individual separately.
 
 \subsection*{Data availability}
 
-Assembly and annotation on PRJNA1378260. Popgen Illumina data on PRJNA1434535.
+Assembly and annotation on \texttt{PRJNA1378260}.
+Popgen Illumina data on \texttt{PRJNA1434535}.
 Code repo: \url{https://github.com/kr-colab/balanus_genome_ms}.
 
 \section*{Acknowledgments}
@@ -1754,22 +1910,258 @@ Funding.
 \pagebreak
 
 \fancyhead[L]{\textit{SUPPLEMENTS}}
-\section*{Supplements}
 
-\subsection*{Supplemental Methods}
+\section*{Supplemental Methods}
 
-\subsubsection*{Assembly and annotation of \textit{Balanus
-crenatus}}\label{sec:sup_methods_balcre}
+\subsection*{Assembly and annotation of \textit{Balanus crenatus}}\label{sec:sup_methods_balcre}
 
-\subsubsection*{Processing annotations of published barnacle
-assemblies}\label{sec:sup_methods_barnacle_rna}
+\subsubsection*{High-molecular weight DNA and PacBio sequencing}
 
-\subsubsection*{Codon usage biases in \textit{Drosophila melanogaster}}
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \textit{Balanus
+crenatus} individuals from the docks in the Oregon Institute of Marine Biology, in
+Charleston, Oregon, USA (43.346 N, 124.325 W) in November 2023 during low tide.
+High-molecular weight (HMW) DNA was extracted from the dissected testes using the 
+PacBio Nanobind tissue kit (PacBio).
+DNA was assesses for quality fluorometric quantification of concentration (Qubit;
+Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical).
+The extracted DNA of a single individual was sequenced on two SMRTcells of a PacBio
+Sequel II machine at the University of Oregon's Genomics and Cell Characterization
+Core Facility (GC3F).
+These two sequencing runs yielded a total of 3.06 million reads with a read N50 of
+14.8 kbp.
+
+\subsubsection*{Estimating genome size and heterozygosity}
+
+We used k-mers to estimate the size and heterozygosity of the \textit{B.
+crenatus} genome.
+First, we counted k-mers present in the PacBio HiFi reads using
+\textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, couting
+21-mers (\texttt{--mer-len 21}) present in both strands (\texttt{--canonical}).
+These counts were then used to generate an empirical distribution of 21-mers
+using the \textsc{jellyfish} \texttt{histo} command.
+The final model of the diploid, genome-wide k-mer distribution was then performed
+using \textsc{GenomeScope2} version \texttt{2.0}
+\citep{ranallo-benavidez_genomescope_2020}.
+We estimated the \textit{B. crenatus} genome size to be 755,696,144 bp in length,
+with a heterozygosity of 2.25\%.
+
+\subsubsection*{Contig-level genome assembly}
+
+We generated a contig-level genome assembly using \textsc{hifiasm} version
+\texttt{0.19.8-r603} \citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022},
+using strict parameters for the identification and purging of haplotig sequences.
+This assembly was generated using an estimated haploid genome size of 800 Mbp
+(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+For handling haplotigs, we set the we set the expected coverage at homozygous sites to
+40x (\texttt{--hom-cov 40}), the upper bound of coverage to purging duplicates to 40x
+(\texttt{--purge-max 40}), and the the similarity threshold between duplicate haplotigs
+to 25\% (\texttt{-s 0.25}). 
+We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
+\citep{gurevich_quast_2013}, showing an assembly composed of 2,932 contigs, with a total
+length of 1.20 Gbp, and a contig N50 of 746 kbp.
+Additionally, \textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023}
+revealed this assembly 94.96\% complete (with 19.64\% duplicates) against the
+\texttt{arthropoda\_odb10} reference ortholog dataset from \textsc{BUSCO}
+\citep{simao_busco_2015,manni_busco_2021,tegenfeldt_orthodb_2025}.
+
+\subsubsection*{Identifying contamination}
+
+% TODO: @Scott, please verify this.
+We screened the \textit{B. crenatus} contig-level assembly for contamination using
+\textsc{MMseqs2} release \texttt{15\-6f452} \citep{steinegger_mmseqs2_2017}.
+After indexing the assembly, taxonomic assignment was done for each contig.
+As described in the \textsc{MMseqs2} documentation, protein fragments were extracted
+across the six possible frames, which were then mapped against the NCBI \texttt{nr} and
+\texttt{SwissProt} databases.
+We retained only sequences assigned to the order Thecostraca (NCBI taxid
+\texttt{116172}).
+This process removed 236 fragments spanning $\approx$ 19.7 Mbp, producing an assembly
+with 2,696 contigs, a total size of 1.18 Gbp, and a contig N50 of 758.4 kbp.
+The resulting gene-completeness against the \texttt{arthropoda\_odb10} reference
+set was 94.57\% with 19.45\% duplicates.
+
+\subsubsection*{Purging haplotigs}
+
+After screening the assembly for contamination, we identified and purged haplotig
+sequences using \textsc{purge\_dups} version \texttt{1.2.5}
+\citep{guan_identifying_2020}.
+We first mapped the PacBio HiFi reads to the contig-level assembly with
+\textsc{minimap2} \texttt{-x map-hifi}.
+From these alignments, we calculated the read-depth histogram using \texttt{pbcstat}
+and determined the base-level coverage cutoffs using \texttt{calcuts}.
+After splitting the assembly at gaps with \texttt{split\_fa}, we performed an
+assembly self-alignment using \textsc{minimap2} \texttt{-x asm20}.
+Haplotigs were then marked according to the empirical coverage cutoffs using the
+\texttt{purge\_dups} command.
+Lastly, the assembly FASTA was processed to remove sequences tagged as haplotigs using
+\texttt{get\_seqs}, only removing sequences at the ends of contigs (\texttt{-e}) and
+allowing the splitting of contigs (\texttt{-s}).
+The purging reduced the number of contigs in the assembly to 1,548, resulting in
+a total assembly size of 907.4 Mbp, a contig N50 of 925.5 kbp, and a gene-completeness
+of 93.39\% with 3.16\% duplicates (against the \texttt{arthropoda\_odb10} reference
+set).
+
+\subsubsection*{Polishing and correcting}
+
+The purged contig-level assembly was then polished and self-corrected using
+\textsc{Inspector} software version \texttt{1.0.1} \citep{chen_accurate_2021}.
+First, we evaluated the assembly using \texttt{inspector.py}, mapping the PacBio HiFi
+reads against the assembly.
+The assembly was then corrected using \texttt{inspector-correct.py}.
+After polishing, the assembly contained 1,548 contigs, a total length of 907.3 Mbp,
+and a contig N50 of 925.6 kbp.
+Gene-completeness against the \texttt{arthropoda\_odb10} reference set was 93.39\%
+with 3.26\% duplicates.
+
+\subsubsection*{Reference-based scaffolding}
+
+We used a \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} to
+scaffold the assembly.
+Using \textsc{cactus} version \texttt{2.9.7} we aligned the chromosome-level
+\textit{B. glandula} assembly against the \textit{B. crenatus} contigs,
+exporting the output alignments in MAF format.
+After alignment, we used the \textsc{ragout} version \texttt{2.3} software
+\citep{kolmogorov_ragout_2018} to perform reference-based scaffolding, disabling
+the breaking of input sequences (\texttt{--solid-scaffolds}) and enabling the
+repeat resolution algorithm (\texttt{--repeats}).
+After running \textsc{ragout}, we only kept the \textit{B. crenatus} sequences that
+were successfully aligned to \textit{B. glandula}.
+This scaffolded assembly was composed of 220 sequence fragments, with a total length
+of 851 Mbp, and a scaffold N50 of 5.58 Mbp.
+Additionally, the assembly was 89.64\% gene-complete (with 2.37\% duplicates) when
+compared to the \texttt{arthropoda\_odb10} reference set.
+
+\subsubsection*{Genome annotation}
+
+Repetitive elements were annotated in the scaffolded \textit{B. crenatus} assembly
+using the \textsc{EarlGrey} software version \texttt{4.1.0} \citep{baril_earl_2024}.
+When running \textsc{EarlGrey}, we provided the Crustacea \textsc{Dfam 3.8} partition
+as an initital consensus library (\texttt{-l}), specified ``arthropoda'' as the
+search term for \textsc{RepeatMasker} version \texttt{4.1.2}
+\citep{smit_repeatmasker_2013}, clustered the final TE library to reduce redundancy
+(\texttt{-c yes}), and generated a soft-masked FASTA as output (\texttt{-d yes}).
+Similar to \textit{B. glandula}, the repeat annotation for \textit{B. crenatus}
+reveleaded a highly repetitive genome, with 494.0 Mbp (58.03\%) of the assembly 
+masked.
+Moreover, the largest of proportion of identified repeats remained unclassified,
+289.4 Mbp or 40.0\% of the assembly, further highlighting the lack of
+barnacle-representitive sequences in public repeat databases.
+\vspace{0.2cm}
+
+Following the annotation of repeats, we annotated protein-coding sequences in the
+\textit{B. crenatus} assembly by lifting over gene-models from the curated \textit{B.
+glandula} annotation using \textsc{LiftOn} version \texttt{1.0.5}
+\citep{chao_lifton_2024}.
+\textsc{LiftOn} lifts over annotations between genomes by integrating both
+protein-to-genome alignments with \textsc{miniprot} \citep{li_miniprot_2023} and
+nucleotide-to-nucleotide alignments using \textsc{Lifoff} \citep{shumate_liftoff_2021}.
+Given the high divergesity observed within these genomes and the high divergence
+between them, we relaxed several of the \textsc{LiftOn} parameters to maximize the
+DNA and protein sequecne identity scores, as well as maintaining a high \textsc{BUSCO}
+completeness.
+We included 10\% of the flanking sequence of each gene as part of the alignment
+(\texttt{-f flank 0.1}), we allowed the software to identify gene copies with sequence
+similarity of at least 50\% (\texttt{-copies -sc 0.5}), used a 25\% coverage
+threshold for the mapping of parent (\texttt{-a 0.25}) and child sequences
+(\texttt{-s 0.25}), and enabled a post-liftover refinement of the transfered
+gene models (\texttt{-polish}).
+We also used the ``general'' splice model for \textsc{miniprot} (\texttt{-j 1}).
+This liftover successfully annotated 15,841 genes, including 15,904 protein-coding
+transcripts, in the \textit{B. crenatus} assembly.
+While this is $\approx$ 5,000 fewer protein-coding genes than those annotated for
+\textit{B. glandula}, this annotation was still 82.63\% gene-complete, with 9.67\%
+duplicates, when compared to the \texttt{arthropoda\_odb10} reference ortholog set
+using \textsc{compleasm} \texttt{protein}.
+
+\subsection*{Processing annotations of published barnacle assemblies}\label{sec:sup_methods_barnacle_rna}
+
+\subsubsection*{\textit{Pollicipes pollicipes}}
+
+We used the published RefSeq annotation for the gooseneck barnacle \textit{P.
+pollicipes} (NCBI accession: \texttt{GCF\_011947565.3};
+\cite{bernot_chromosome-level_2022}; Table~\ref{tab:sup_ncbi_genomes}).
+This annotation was processed with \textsc{agat} version \texttt{1.4.3}
+\citep{dainat_another_2022} to filter out non-coding annotations, extract the longest 
+transcript as representative for the gene, and standarize gene and sequence IDs for
+downstream analysis.
+This RefSeq annotation contains 20,420 protein-coding genes and is 88.72\%
+gene-complete, with 35.93\% duplicates, when validated against the
+\texttt{arthropoda\_odb10} reference ortholog dataset using \textsc{hifiasm}
+\texttt{protein}.
+
+\subsubsection*{\textit{Amphibalanus amphitrite}}
+
+We combined the genome and the annotation across two different assemblies for the
+striped barnacle, \textit{A. amphitrite}.
+First, we used the chromosome-level genome assembly for the species generated by
+\cite{han_new_2024}.
+While the assembled sequences for this genome are available (NCBI accession:
+\texttt{GCA\_037642225.1}; Table~\ref{tab:sup_ncbi_genomes}), no annotation has
+been published for this assembly.
+Therefore, we then took the published RefSeq annotation (NCBI accession:
+\texttt{GCF\_019059575.1}; Table~\ref{tab:sup_ncbi_genomes}), based on the
+scaffold-level genome assembly by \cite{kim_draft_2019}.
+Annotated the chromosome-level assembly by lifting over the RefSeq annotation using 
+the \textsc{LiftOn} software version \texttt{1.0.5} \citep{chao_lifton_2024},
+allowing the software to identify gene copies with a sequence similarity of 80\%
+(\texttt{-copies -sc 0.8}), and using the ``general'' splice model in
+\textsc{miniprot} (\texttt{-j 1}).
+This liftover process successfully annotated 23,035 protein-coding genes.
+The annotation was then processed with \textsc{agat} version \texttt{1.4.3} to
+extract the longest transcript as representative for the gene and to standarize gene
+and sequence IDs for downstream analysis.
+This processed annotation was then validated using \textsc{compleasm} \texttt{protein}
+using the \texttt{arthropoda\_odb10} reference ortholog set, showing it was 88.08\%
+complete with 12.24\% duplicates.
+
+\subsubsection*{\textit{Amphibalanus improvisus}}
+
+We annotated the chromosome-level assembly of the Bay barnacle, \textit{A. improvisus}
+(NCBI accession: \texttt{GCA\_964274985.1};~\cite{bishop_genome_2025};
+Table~\ref{tab:sup_ncbi_genomes}) using publicly available transcriptomic data.
+We downloaded two public RNAseq datasets for this species, from NCBI BioProjects
+\texttt{PRJNA528777} and \texttt{PRJNA528169} (Table~\ref{tab:sup_sra_data};
+\cite{abramova_sensory_2019}).
+The raw reads were then processed using \textsc{fastp} version \texttt{0.23.4}
+\citep{chen_ultrafast_2023,chen_fastp_2018}, and aligned to the \textit{A. improvisus}
+assembly using \textsc{hisat2} version \texttt{2.2.1} \citep{kim_graph-based_2019}.
+We then used \textsc{BRAKER} version \texttt{3.0.8} \citep{gabriel_braker3_2024} to
+annotate the genome using the evidence from both the RNAseq alignments and the
+Arthropod representative protein sequences from \textsc{OrthoDBv11}
+\citep{kriventseva_orthodb_2019,zdobnov_orthodb_2021}.
+In \textsc{BRAKER}, we enforced the recovery of orthologs from the Arthropod
+\textsc{BUSCO} dataset in the annotation (\texttt{--busco\_lineage=arthropoda\_odb10}).
+After running \textsc{BRAKER}, we processed the resulting annotation using \textsc{agat}
+to extract the longest transcript as representative for the gene and to standarize gene
+and sequence IDs for downstream analysis.
+This process annotated 16,098 protein coding genes, and was 96.05\% gene-complete,
+with 16.36\% after validation with \textsc{compleasm} against the
+\texttt{arthropoda\_odb10} reference ortholog dataset.
+
+\subsubsection*{\textit{Capitulum mitella}}
+
+We annotated the publicly-available chromosome-level genome assembly of the pedunculate
+barnacle, \textit{C. mitella} (NCBI accesion: \texttt{GCA\_030062745.1};
+\cite{chen_capmit_2021}; Table~\ref{tab:sup_ncbi_genomes}) using RNAseq short read data
+publicly available on the NCBI SRA database (Table~\ref{tab:sup_sra_data}).
+We followed the same methodology used for \textit{A. improvisus}: processing the
+short reads with \textsc{fastp}, aligning to the genome with \textsc{hisat2}, annotating
+with \textsc{BRAKER}, and processing the resulting annotation with \textsc{agat}.
+This approach resulted in the annotation of 10,504 protein coding genes, which
+produced an annotation that was 97.53\% gene-complete, with 14.02\% duplicate sequences
+when compared to the \texttt{arthropoda\_odb10} reference ortholog dataset.
+However, given the comparatively smaller number of annotated sequences, and the
+resulting reduction in the number of orthologous sequences recovered when incorporting
+this species, we excluded \textit{C. mitella} from most downstream analyses.
+
+\subsection*{Codon usage biases in \textit{Drosophila melanogaster}}
 
 As a comparison against barnacles, we calculated codon usage biases in the fruit
 fly \textit{D. melanogaster}.
 To do this, we first downloaded the reference annotation from NCBI RefSeq
-(Release 6 plus ISO1 MT, NCBI accession: \texttt{GCF\_000001215.4}).
+(Release 6 plus ISO1 MT, NCBI accession: \texttt{GCF\_000001215.4};
+Table~\ref{tab:sup_ncbi_genomes}).
 We processed the annotation using \textsc{agat} version \texttt{1.4.3}
 \citep{dainat_another_2022} to select the longest isoform per gene
 and clean the IDs of the extracted coding sequences.
@@ -1786,43 +2178,69 @@ equal codon usage across synonymous codons \citep{wright_effective_1990}, using 
 adjustments by~\cite{sun_improved_2013} to account for usage differences across
 different codon subfamilies.
 
-\subsubsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
+\subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
-\subsection*{Supplemental Tables and Figures}
+We calculated nucleotide diversity ($\pi$) in sub-Saharan populations of \textit{D.
+melanogaster} to establish a baseline for comparison agains our central Oregon barnacle
+population.
+To achieve this, we first obtained the sequencing data for the phase 2 of the Drosophila
+Population Genomics Project (DGPG2;~\citep{pool_population_2012,lack_dpgp_2016}).
+We processed the aligned FASTA files for all sub-Saharan samples (the `RG' population)
+to generate a VCF using the \textsc{snp-sites} version \texttt{2.5.1} software
+\citep{page_snp-sites_2016}.
+We exported both variant and invariant sites (\texttt{-b}) for downstream compatibility.
+The resulting gVCFs were then processed using a custom AWK command and \textsc{BCFtools}
+version \texttt{1.21} \citep{danecek_bcftools_2021} to recode deletion, remove missing
+alleles, and remove sites with over 25\% missing genotypes.
+Nucleotide diversity along 10kbp windows then was calculated from the filtered VCF using
+\textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
+allowing multiallelic sites to be used in the calculation
+(\texttt{--include\_multiallelic\_snps}).
+
+\pagebreak
+
+\section*{Supplemental Tables}
 
 % Stats for the different stages of the assembly
-\begin{table}[htbp]
+\begin{table}[ht]
     \centering
     \suptablecaption{\textbf{Assembly statistics for the \balgla{} genome
         at different stages of the assembly process.}}
     \begin{tabular}{lrrrr}
         \toprule
         Assembly Stage &
-            \shortstack{Default \\ contigs} &
-            \shortstack{Optimized \\ contigs} &
-            \shortstack{Hi-C \\ scaffolds} &
-            \shortstack{Curated \\ assembly} \\
+            \shortstack{Default \\ contigs$^1$} &
+            \shortstack{Optimized \\ contigs$^2$} &
+            \shortstack{Hi-C \\ scaffolds$^3$} &
+            \shortstack{Curated \\ assembly$^4$} \\
         \midrule
-        Sequence length (Mbp)          & 1.64  & 1.05  & 1.05  & 1.04  \\
-        Fragments (N)                  & 4,212 & 1,342 & 650   & 592   \\
-        Contig N50 (Mbp)               & 0.734 & 1.35  & 1.18  & 1.18  \\
-        Scaffold N50 (Mbp)             & NA    & NA    & 50.96 & 51.41 \\
-        \textsc{BUSCO} Complete (\%)   & 95.66 & 93.88 & 93.98 & 94.08 \\
-        \textsc{BUSCO} Single (\%)     & 45.31 & 89.04 & 89.24 & 89.44 \\
-        \textsc{BUSCO} Duplicates (\%) & 50.35 & 4.84  & 4.74  & 4.64  \\
-        \textsc{BUSCO} Fragmented (\%) & 0.79  & 1.18  & 0.89  & 0.89  \\
-        \textsc{BUSCO} Missing (\%)    & 3.55  & 4.94  & 5.13  & 5.03  \\
-        \textsc{BUSCO} size (N)        & 1,013 & 1,013 & 1,013 & 1,013 \\
+        Sequence length (Mbp)            & 1.64  & 1.05  & 1.05  & 1.04  \\
+        Fragments (N)                    & 4,212 & 1,342 & 650   & 592   \\
+        Contig N50 (Mbp)                 & 0.734 & 1.35  & 1.18  & 1.18  \\
+        Scaffold N50 (Mbp)               & NA    & NA    & 50.96 & 51.41 \\
+        \textsc{BUSCO}$^5$ Complete (\%) & 95.66 & 93.88 & 93.98 & 94.08 \\
+        \textsc{BUSCO} Single (\%)       & 45.31 & 89.04 & 89.24 & 89.44 \\
+        \textsc{BUSCO} Duplicates (\%)   & 50.35 & 4.84  & 4.74  & 4.64  \\
+        \textsc{BUSCO} Fragmented (\%)   & 0.79  & 1.18  & 0.89  & 0.89  \\
+        \textsc{BUSCO} Missing (\%)      & 3.55  & 4.94  & 5.13  & 5.03  \\
+        \textsc{BUSCO} size (N)          & 1,013 & 1,013 & 1,013 & 1,013 \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_asm_stats}
 \footnotesize
-
-\textsc{BUSCO} results refer to the \texttt{arthropoda\_odb10} dataset.\\
+\\
+\textsuperscript{1}Contigs generated using \textsc{hifiasm} with default parameters. \\
+\textsuperscript{2}Contigs generated using \textsc{hifiasm} followed by removal of
+    contaminant sequences and purging of haplotigs. \\
+\textsuperscript{3}Hi-C scaffolding of the optimized contig sequences. \\
+\textsuperscript{4}Manual curation of Hi-C contact map and polishing with
+    \textsc{Inspector.} \\
+\textsuperscript{5}\textsc{BUSCO} results refer to the \texttt{arthropoda\_odb10}
+    dataset.\\
 \end{table}
 
 % Gene-completeness in the annotation
-\begin{table}[htbp]
+\begin{table}[ht]
     \centering
     \suptablecaption{\textbf{Completeness metrics for the \balgla{} protein-coding
         gene annotation.}}
@@ -1844,7 +2262,7 @@ different codon subfamilies.
 \end{table}
 
 % Repeat annotation
-\begin{table}[htbp]
+\begin{table}[ht]
     \centering
     \suptablecaption{\textbf{\textsc{EarlGrey} high-level annotation of the
         \balgla{} assembly}}
@@ -1871,7 +2289,7 @@ different codon subfamilies.
 \end{table}
 
 % Stats about polymorphism in the reference individual and the popgen samples.
-\begin{table}[htbp]
+\begin{table}[ht]
     \centering
     \suptablecaption{\textbf{Genetic variation in central Oregon \balgla{}.}}
     \begin{tabular}{lrr}
@@ -1887,6 +2305,7 @@ different codon subfamilies.
         SNPs (N)                            & 8,725,877   & 20,501,788  \\
         Indels (N)                          & 356,012     & 893,429     \\
         Multiallelic SNPs (N)               & NA          & 996,103     \\
+        Percent multiallelic SNPs (\%)      & NA          & 4.86        \\
         Mean variant sites per kbp (N)      & 14.66       & 41.05       \\
         Median variant sites per kbp (N)    & 6           & 29          \\
         St Dev variant sites per kbp (N)    & 19.86       & 40.82       \\
@@ -1901,7 +2320,7 @@ different codon subfamilies.
 \end{table}
 
 % Stats about the phasCons conserved elements and enrichment of genomic elements.
-\begin{sidewaystable}[htbp]
+\begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{Enchrichment of annotated features among \textsc{phastCons}
         highly conserved elements}}
@@ -1918,13 +2337,13 @@ different codon subfamilies.
             \shortstack{St Dev $\log_2$ \\ enrichment} &
             \shortstack{Number of \\ chromosomes\textsuperscript{3}} \\
     \midrule
-        3' UTR     & 2,358,104   & $2.80\mathrm{e}{-3}$ & 152,598    & $3.00\mathrm{e}{-3}$ & -0.0861      & 0.0332       & 0.508        & 16 \\
-        5' UTR     & 530,151     & $6.30\mathrm{e}{-4}$ & 27,679     & $5.44\mathrm{e}{-4}$ & -0.292       & -0.332       & 0.453        & 16 \\
+        3' UTR     & 2,358,104   & $2.80\mathrm{e}{-3}$ & 152,598    & $3.00\mathrm{e}{-3}$ & $-0.0861$    & 0.0332       & 0.508        & 16 \\
+        5' UTR     & 530,151     & $6.30\mathrm{e}{-4}$ & 27,679     & $5.44\mathrm{e}{-4}$ & $-0.292$     & $-0.332$     & 0.453        & 16 \\
         CDS        & 16,273,411  & 0.0193               & 2,225,138  & 0.0438               & 0.752        & 0.984        & 0.926        & 16 \\
-        TE         & 370,573,528 & 0.441                & 17,505,920 & 0.344                & -0.359       & -0.305       & 0.180        & 16 \\
-        intergenic & 196,612,776 & 0.234                & 10,688,761 & 0.210                & -0.167       & -0.178       & 0.167        & 16 \\
+        TE         & 370,573,528 & 0.441                & 17,505,920 & 0.344                & $-0.359$     & $-0.305$     & 0.180        & 16 \\
+        intergenic & 196,612,776 & 0.234                & 10,688,761 & 0.210                & $-0.167$     & $-0.178$     & 0.167        & 16 \\
         intron     & 111,562,654 & 0.133                & 8,575,960  & 0.169                & 0.419        & 0.297        & 0.432        & 16 \\
-        lncRNA     & 2,211,027   & $2.63\mathrm{e}{-3}$ & 130,744    & $2.57\mathrm{e}{-3}$ & -0.174       & -0.133       & 0.567        & 16 \\
+        lncRNA     & 2,211,027   & $2.63\mathrm{e}{-3}$ & 130,744    & $2.57\mathrm{e}{-3}$ & $-0.174$     & $-0.133$     & 0.567        & 16 \\
         multiple   & 141,022,121 & 0.168                & 11,537,936 & 0.227                & 0.418        & 0.438        & 0.167        & 16 \\
         rRNA       & 2,106       & $2.50\mathrm{e}{-6}$ & 0.000      & 0.000                & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & 6  \\
         tRNA       & 20,220      & $2.40\mathrm{e}{-5}$ & 5,162      & $1.02\mathrm{e}{-4}$ & 2.143        & 2.041        & 0.959        & 16 \\
@@ -1941,45 +2360,57 @@ different codon subfamilies.
 \end{sidewaystable}
 
 % Reference for the allozyme genes in our assembly.
-% TODO: add coordinates
-\begin{table}[htbp]
+\begin{sidewaystable}[ht]
     \centering
-    \suptablecaption{\textbf{Allozyme genes identified in the \balgla{} genome assembly.}}
-    \begin{tabular}{llllll}
+    \suptablecaption{\textbf{Allozyme genes identified in the \balgla{}
+        genome assembly.}}
+    \begin{tabular}{lllrrllll}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
             Gene &
+            Chromosome &
+            Start (bp) &
+            End (bp) & 
             Gene description &
-            \shortstack{NCBI \\ Accession} &
+            \shortstack{NCBI \\ accession} &
             Reference \\
         \midrule
-        mrna-5994 & \textit{Mpi} & \shortstack[l]{mannose-6-phosphate \\ isomerase} &
-            QIA50417.1 & \cite{nunez_footprints_2020} \\
-        mrna-15301 & \textit{Gpi} & \shortstack[l]{glucose phosphate \\ isomerase} &
-            QIA50414.1 & \cite{nunez_footprints_2020} \\
-        mrna-5520 & \textit{Adh} & alcohol dehydrogenase &
-            QIA50413.1 & \cite{nunez_footprints_2020}\\
-        mrna-5969 & \textit{Pgm} & phosphoglucomutase &
-            QIA50416.1 & \cite{nunez_footprints_2020} \\
-        mrna-17464 & \textit{Sod} & superoxide dismutase &
-            QIA50415.1 & \cite{nunez_footprints_2020} \\
-        mrna-1965 & \textit{Me.1} & \shortstack[l]{NADP-dependent \\ malic enzyme} &
-            KAF0299259.1 & \cite{kim_draft_2019} \\
-        mrna-3861 & \textit{Me.2} & \shortstack[l]{NADP-dependent \\ malic enzyme} &
-            KAF0308712.1 & \cite{kim_draft_2019} \\
+        mrna-5520 & \textit{Adh} & chr04 & 19,904,033 & 19,930,487 &
+            alcohol dehydrogenase &
+            \texttt{QIA50413.1} & \cite{nunez_footprints_2020} \\
+        mrna-15301 & \textit{Gpi} & chr12 & 15,750,365 & 15,777,818 &
+            \shortstack[l]{glucose phosphate \\ isomerase} &
+            \texttt{QIA50414.1} & \cite{nunez_footprints_2020} \\
+        mrna-1965 & \textit{Me.1} & chr02 & 5,827,144 & 5,858,664 &
+            \shortstack[l]{NADP-dependent \\ malic enzyme} &
+            \texttt{KAF0299259.1} & \cite{kim_draft_2019} \\
+        mrna-3861 & \textit{Me.2} & chr03 & 12,307,597 & 12,337,955 &
+            \shortstack[l]{NADP-dependent \\ malic enzyme} &
+            \texttt{KAF0308712.1} & \cite{kim_draft_2019} \\
+        mrna-5994 & \textit{Mpi} & chr04 & 40,166,344 & 40,173,580 &
+            \shortstack[l]{mannose-6-phosphate \\ isomerase} &
+            \texttt{QIA50417.1} & \cite{nunez_footprints_2020} \\
+        mrna-5969 & \textit{Pgm} & chr04 & 38,875,727 & 38,886,668 &
+            phosphoglucomutase &
+            \texttt{QIA50416.1} & \cite{nunez_footprints_2020} \\
+        mrna-17464 & \textit{Sod} & chr14 & 42,896,065 & 42,935,242 &
+            superoxide dismutase &
+            \texttt{QIA50415.1} & \cite{nunez_footprints_2020} \\
+
         \bottomrule
     \end{tabular}
     \label{tab:sup_allozymes}
-\end{table}
+\end{sidewaystable}
 
 % dN/dS for the allozymes.
-\begin{sidewaystable}[htbp]
+\begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{Patterns of \dnds{} in the \balgla{} allozyme genes.}}
-    \begin{tabular}{llrrrrrrrrr}
+    \begin{tabular}{llrrrrrrrrrr}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
             Gene &
+            \shortstack{Transcript \\ length (bp)} &
             N\textsubscript{C} & % Nc = NonSyn Sites
             S\textsubscript{C} & % Sc = Syn Sites
             N\textsubscript{D} & % Nd = NonSyn Differences
@@ -1990,14 +2421,14 @@ different codon subfamilies.
             d\textsubscript{S} & % dS = Adj Proportion Syn
             \dnds{} \\           % dN/dS
         \midrule
-        % TransID    Gene            Nc          Sc        Nd       Sd        pN       pS      dN       dS   dN/dS
-        mrna-5994  & \textit{Mpi}  & 907.167   & 322.833 & 39     & 79      & 0.0430 & 0.245 & 0.0443 & 0.296 & 0.149  \\
-        mrna-15301 & \textit{Gpi}  & 1,310.667 & 399.333 & 47.833 & 101.167 & 0.0365 & 0.253 & 0.0374 & 0.309 & 0.121  \\
-        mrna-5520  & \textit{Adh}  & 858.167   & 272.833 & 15     & 64      & 0.0175 & 0.235 & 0.0177 & 0.281 & 0.0629 \\
-        mrna-5969  & \textit{Pgm}  & 1,287.833 & 404.167 & 32.167 & 93.833  & 0.0250 & 0.232 & 0.0254 & 0.279 & 0.0914 \\
-        mrna-17464 & \textit{Sod}  & 473.167   & 150.833 & 27     & 43      & 0.0571 & 0.285 & 0.0593 & 0.359 & 0.165  \\
-        mrna-1965  & \textit{Me.1} & 1,376.667 & 438.333 & 37.500 & 113.500 & 0.0272 & 0.259 & 0.0277 & 0.318 & 0.0874 \\
-        mrna-3861  & \textit{Me.2} & 1,439.167 & 459.833 & 48     & 130     & 0.0334 & 0.283 & 0.0341 & 0.355 & 0.0961 \\
+            % TransID    Gene          length  Nc          Sc        Nd       Sd        pN       pS      dN       dS   dN/dS
+            mrna-5520  & \textit{Adh}  & 1,140 & 858.167   & 272.833 & 15     & 64      & 0.0175 & 0.235 & 0.0177 & 0.281 & 0.0629 \\
+            mrna-15301 & \textit{Gpi}  & 1,758 & 1,310.667 & 399.333 & 47.833 & 101.167 & 0.0365 & 0.253 & 0.0374 & 0.309 & 0.121  \\
+            mrna-5994  & \textit{Mpi}  & 1,233 & 907.167   & 322.833 & 39     & 79      & 0.0430 & 0.245 & 0.0443 & 0.296 & 0.149  \\
+            mrna-1965  & \textit{Me.1} & 1,818 & 1,376.667 & 438.333 & 37.500 & 113.500 & 0.0272 & 0.259 & 0.0277 & 0.318 & 0.0874 \\
+            mrna-3861  & \textit{Me.2} & 1,902 & 1,439.167 & 459.833 & 48     & 130     & 0.0334 & 0.283 & 0.0341 & 0.355 & 0.0961 \\
+            mrna-5969  & \textit{Pgm}  & 1,815 & 1,287.833 & 404.167 & 32.167 & 93.833  & 0.0250 & 0.232 & 0.0254 & 0.279 & 0.0914 \\
+            mrna-17464 & \textit{Sod}  &   605 & 473.167   & 150.833 & 27     & 43      & 0.0571 & 0.285 & 0.0593 & 0.359 & 0.165  \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_allozymes_dnds}
@@ -2015,31 +2446,32 @@ d\textsubscript{S} = Jukes-Cantor corrected proportion of
     synonymous differences.
 \end{sidewaystable}
 
-% Reference for the allozyme genes in our assembly.
-\begin{sidewaystable}[htbp]
+% MKT for the allozymes
+\begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{McDonald-Kreitman test on the \balgla{} allozyme genes.}}
-    \begin{tabular}{llrrrrrrrr}
+    \begin{tabular}{llrrrrrrrrr}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
             Gene &
+            \shortstack{Transcript \\ length (bp)} &
             D\textsubscript{N} &        % Dn, Fixed NonSyn differences
             D\textsubscript{S} &        % Ds, Fixed Syn differences
             P\textsubscript{N} &        % Pn, Polymorphic NonSyn sites
             P\textsubscript{S} &        % Ps, Polymorphic Syn sites
             \shortstack{Corrected \\ \textit{p}-value} &
-            \textalpha{} &
+            $\alpha$ &
             \ NI &
             \ DoS \\
         \midrule
-        % Bg trans   Gene            Dn   Ds    Pn   Ps    Pval                    alpha                    NI      DoS
-        mrna-5994  & \textit{Mpi}  & 19 & 63  & 19 & 40  & 0.443                 & -0.575                 & 1.575 & -0.090                 \\
-        mrna-15301 & \textit{Gpi}  & 36 & 76  & 7  & 62  & $2.122\mathrm{e}{-3}$ & 0.762                  & 0.239 & 0.220                  \\
-        mrna-5520  & \textit{Adh}  & 13 & 46  & 7  & 32  & 0.932                 & 0.226                  & 0.774 & 0.041                  \\
-        mrna-5969  & \textit{Pgm}  & 23 & 73  & 10 & 65  & 0.274                 & 0.512                  & 0.488 & 0.106                  \\
-        mrna-17464 & \textit{Sod}  & 22 & 39  & 6  & 13  & 0.932                 & 0.182                  & 0.818 & 0.045                  \\
-        mrna-1965  & \textit{Me.1} & 27 & 105 & 8  & 31  & 1.00                  & $-3.584\mathrm{e}{-3}$ & 1.004 & $-5.830\mathrm{e}{-4}$ \\
-        mrna-3861  & \textit{Me.2} & 37 & 81  & 15 & 117 & $1.022\mathrm{e}{-3}$ & 0.719                  & 0.281 & 0.200                  \\
+            % Bg trans   Gene          length    Dn   Ds    Pn   Ps    Pval                    alpha                    NI      DoS
+            mrna-5520  & \textit{Adh}  & 1,140 & 13 & 46  & 7  & 32  & 0.932                 & 0.226                  & 0.774 & 0.041                  \\
+            mrna-15301 & \textit{Gpi}  & 1,758 & 36 & 76  & 7  & 62  & $2.122\mathrm{e}{-3}$ & 0.762                  & 0.239 & 0.220                  \\
+            mrna-1965  & \textit{Me.1} & 1,818 & 27 & 105 & 8  & 31  & 1.00                  & $-3.584\mathrm{e}{-3}$ & 1.004 & $-5.830\mathrm{e}{-4}$ \\
+            mrna-3861  & \textit{Me.2} & 1,902 & 37 & 81  & 15 & 117 & $1.022\mathrm{e}{-3}$ & 0.719                  & 0.281 & 0.200                  \\
+            mrna-5994  & \textit{Mpi}  & 1,233 & 19 & 63  & 19 & 40  & 0.443                 & $-0.575$               & 1.575 & $-0.090$               \\
+            mrna-5969  & \textit{Pgm}  & 1,815 & 23 & 73  & 10 & 65  & 0.274                 & 0.512                  & 0.488 & 0.106                  \\
+            mrna-17464 & \textit{Sod}  &   605 & 22 & 39  & 6  & 13  & 0.932                 & 0.182                  & 0.818 & 0.045                  \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_allozymes_mkt}
@@ -2049,14 +2481,14 @@ D\textsubscript{N} = Fixed non-synonymous substitutions. \\
 D\textsubscript{S} = Fixed synonymous substitutions. \\
 P\textsubscript{N} = Polymorphic non-synonymous sites. \\
 P\textsubscript{S} = Polymorphic synonymous sites. \\
-\textalpha{} = Proportion of non-synonymous substitutions fixed by
+$\alpha$ = Proportion of non-synonymous substitutions fixed by
     positive selection. \\
 NI = Neutrality Index. \\
 DoS = Direction of Selection
 \end{sidewaystable}
 
 % Breakdown of the per-feature Pi
-\begin{sidewaystable}[htbp]
+\begin{sidewaystable}[ht]
     \centering
     \suptablecaption{\textbf{Nucleotide diversity ($\pi$) across different
         genomic features}}
@@ -2091,13 +2523,87 @@ DoS = Direction of Selection
     \end{tabular}
 \end{sidewaystable}
 
+% Genebank/RefSeq data used
+\begin{table}[ht]
+    \centering
+    \suptablecaption{\textbf{Publicly available NCBI genomes used for comparative
+        analyses}}
+    \begin{tabular}{llll}
+        \toprule
+            Species & NCBI accession & Reference &  Note \\
+        \midrule
+            \textit{Amphibalanus amphitrite} & \texttt{GCF\_019059575.1} & \cite{kim_draft_2019}               & \shortstack[l]{RefSeq genome\\and annotation} \\
+            \textit{Amphibalanus amphitrite} & \texttt{GCA\_037642225.1} & \cite{han_new_2024}                 & \shortstack[l]{GenBank genome\\without annotation} \\
+            \textit{Capitulum mitella}       & \texttt{GCA\_030062745.1} & \cite{chen_capmit_2021}             & \shortstack[l]{GenBank genome\\without annotation} \\
+            \textit{Pollicipes pollicipes}   & \texttt{GCF\_011947565.3} & \cite{bernot_chromosome-level_2022} & \shortstack[l]{RefSeq genome\\and annotation} \\
+            \textit{Drosophila melanogaster} & \texttt{GCF\_000001215.4} & \cite{adams_drosophila_2000}        & \shortstack[l]{RefSeq genome\\and annotation} \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_ncbi_genomes}
+\end{table}
+
+% SRA data
+\begin{table}[ht]
+    \centering
+    \suptablecaption{\textbf{Publicly available NCBI short-read archive data used
+        for comparative analyses}}
+    \begin{tabular}{lll}
+        \toprule
+            SRA & BioProject & Species \\
+        \midrule
+            % SRA                  BioProject             Species
+            \texttt{SRR8775109}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775110}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775111}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775112}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775113}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775114}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775115}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775116}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775117}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775118}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775119}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775120}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775121}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775122}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775123}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775124}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775125}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775126}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775127}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775128}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775129}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775130}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8775131}  & \texttt{PRJNA528777} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR8755479}  & \texttt{PRJNA528169} & \textit{Amphibalanus improvisus} \\
+            \texttt{SRR18959849} & \texttt{PRJNA816681} & \textit{Capitulum mitella} \\
+            \texttt{SRR14354747} & \texttt{PRJNA725059} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067441} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067442} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067443} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067446} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067447} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067448} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067449} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067444} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR20067445} & \texttt{PRJNA856037} & \textit{Capitulum mitella} \\
+            \texttt{SRR13527601} & \texttt{PRJNA681321} & \textit{Capitulum mitella} \\
+            \texttt{SRR13527602} & \texttt{PRJNA681321} & \textit{Capitulum mitella} \\
+            \texttt{SRR13527603} & \texttt{PRJNA681321} & \textit{Capitulum mitella} \\
+            \texttt{SRR13527604} & \texttt{PRJNA681321} & \textit{Capitulum mitella} \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_sra_data}
+\end{table}
+
 % Supplemental Figures
-\pagebreak
+\clearpage
+\section*{Supplemental Figures}
 
 % k-mer distribution of the raw hi-fi reads
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/sups_kmers.png}
+    \includegraphics[width=0.9\textwidth]{figures/sups_kmers.png}
     \supfigurecaption{\textbf{\textsc{GenomeScope} profile of the raw PacBio HiFi
         data.} Distribution of 21-mers shows an estimated genome size of
         845.01 Mbp and a heterozygosity of 3.3\% in the \bgla{}
@@ -2106,7 +2612,7 @@ DoS = Direction of Selection
 \end{figure}
 
 % Hi-C contact map
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_hic.pdf}
     \supfigurecaption{\textbf{Hi-C contact map of the \bgla{} assembly.}
@@ -2121,24 +2627,25 @@ DoS = Direction of Selection
 \end{figure}
 
 % dN/dS
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/dnds.pdf}
+    \includegraphics[width=0.7\textwidth]{figures/dnds.pdf}
     \supfigurecaption{\textbf{Distribution of the pairwise rate of non-synonymous
         to synonymous substitutions (\dnds{}).}
         The distribution is calculated across 9,082 single-copy orthologs
         identified between \balgla{} and \textit{Balanus
         crenatus}. The solid gray line marks the boundary between genes under
         positive selection (\dnds{} $>$ 1) and genes under purifying selection
-        (\dnds{} $<$ 1). The dashed line shows the mean \dnds{} (0.206), while
-        the dotted line shows the median (0.158).}
+        (\dnds{} $<$ 1). The dashed and dotted lines show the mean (0.206) and
+        median (0.158) \dnds{}, both showing that on average \bgla{} coding
+        sequences are evolving under a regime of purifying selection.}
     \label{fig:sup_dnds}
 \end{figure}
 
 % Direction of selection.
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sups_mkt_dos.pdf}
+    \includegraphics[width=0.7\textwidth]{figures/sups_mkt_dos.pdf}
     \supfigurecaption{\textbf{Distribution of per-gene direction of selection values.}
         The distribution shows Direction of Selection (DoS) calculated across 7,056
         single-copy orthologs identified between \balgla{} and
@@ -2146,28 +2653,77 @@ DoS = Direction of Selection
         between genes evolving under a regime of positive selection (DoS $>1$) and
         genes exhibiting an excess of slightly deleterious non-synonymous polymorphism
         (DoS $<1$). The light blue dashed line shows the mean DoS (0.103), while
-        the dark blue dotted line shows the median DoS (0.109).}
+        the dark blue dotted line shows the median DoS (0.109).
+        This distribution shows that, on average, conding sequences in \bgla{} appear
+        to be evolving under positive selection.}
     \label{fig:sup_dos}
 \end{figure}
 
-% Codon usage biases vs Drosophila
-\begin{figure}[htbp]
+% Genome-wide Pi_4/K_S
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sups_dmel_codons.pdf}
+    \includegraphics[width=0.8\textwidth]{figures/sups_gw_pi4ks.png}
+    \supfigurecaption{\textbf{Distribution of synonymous diversity over synonymous
+        divergence for the seven allozyme loci.}
+        The distribution of synonymous diversity over synonymous divergence
+        ($\pi_{4}/\text{K}_\text{S}$) along the coding sequences of 8,931 \bgla{} genes
+        (denoted by ``GW''), including the seven classic barnacle allozyme loci:
+        \textit{Adh}, \textit{Gpi}, \textit{Me.1}, \textit{Me.2}, \textit{Mpi},
+        \textit{Pgm}, and \textit{Sod}.
+        Each dot represents a $\pi_{4}/\text{K}_\text{S}$ value calculated in 99 bp
+        (33 exon) windows along the coding sequence.
+        Diamonds present the mean $\pi_{4}/\text{K}_\text{S}$.
+        Dashed and dotted lines show the 95th and 99th percentiles of the genome-wide
+        $\pi_{4}/\text{K}_\text{S}$ empirical distribution, respectively.
+        While more extreme $\pi_{4}/\text{K}_\text{S}$ values are observed in the
+        genome, all seven allozyme loci show windows with $\pi_{4}/\text{K}_\text{S}$
+        in the top 5\% of the genome-wide distribution.}
+    \label{fig:sup_gw_piks}
+\end{figure}
+
+% Per-allozyme Pi_4/K_S
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/sups_allozyme_pi4ks.pdf}
+    \supfigurecaption{\textbf{Landscape of synonymous diversity over synonymous
+        divergence along the seven allozyme loci.}
+        The plots show the rate synonymous diversity over synonymous divergence
+        ($\pi_{4}/\text{K}_\text{S}$) as a function of the position in the transcript
+        for the seven classic allozyme loci: \textit{Adh}, \textit{Gpi},
+        \textit{Me.1}, \textit{Me.2}, \textit{Mpi}, \textit{Pgm}, and \textit{Sod}.
+        Each dot represents the value of $\pi_{4}/\text{K}_\text{S}$ calculated in
+        99 bp (33 exon) windows along the coding sequence, while the blue line shows
+        the averaged, kernel-smoothed $\pi_{4}/\text{K}_\text{S}$ along the sequence.
+        The alternating grey and white blocks show the breaks between the different
+        exons, with the dashed and dotted lines show the 95th and 99th percentiles of
+        the genome-wide $\pi_{4}/\text{K}_\text{S}$ empirical distribution.
+        Across all loci, peaks in $\pi_{4}/\text{K}_\text{S}$ tend to be contained
+        in the span of single exons, suggesting balancing selection acting at small
+        scales along the genome.}
+    \label{fig:sup_allozyme_piks}
+\end{figure}
+
+% Codon usage biases vs Drosophila
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/sups_dmel_codons.pdf}
     \supfigurecaption{\textbf{Comparing codon usage biases between barnacles and
         fruit flies.}
         The distribution of effective number of codons (ENC) between genes in the
         Pacific acorn barnacle (\balgla{}; \texttt{BalGla}) and the fruit fly
         (\textit{Drosophila melanogaster}; \texttt{DroMel}). Barnacles show a
         mean ENC of 43.1 (median: 42.7, standard deviation: 5.56), while the mean
-        ENC in flies is 50.1 (median: 50.6, standard deviation: 3.95).}
+        ENC in flies is 50.1 (median: 50.6, standard deviation: 3.95).
+        This distribution shows stronger biases in codon usage in \bgla{} than the
+        one observed in \textit{B. melanogaster}, consistent with the expectation
+        of large \Ne{} and strong selection in barnacle populations.}
     \label{fig:sup_dmel_enc}
 \end{figure}
 
 % Pi vs Drosophila.
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sups_dmel_pi.pdf}
+    \includegraphics[width=0.7\textwidth]{figures/sups_dmel_pi.pdf}
     \supfigurecaption{\textbf{Comparing nucleotide diversity ($\pi$) between
         barnacles and fruit flies.}
         Average $\pi$ in 10 kbp windows between the Oregon Pacific
@@ -2176,16 +2732,17 @@ DoS = Direction of Selection
         \texttt{DroMel}). This barnacle population shows an average nucleotide
         diversity (mean = 0.0506, median = 0.0532, standard deviation = 0.0188)
         an order of magnitude higher than that of this \textit{Drosophila}
-        population (mean = 0.0076, median = 0.0077, standard deviation = 0.0035).}
+        population (mean = 0.0076, median = 0.0077, standard deviation = 0.0035),
+        consistent with the expactation of large \Ne{} in this species.}
     \label{fig:sup_dmel_pi}
 \end{figure}
 
 % Genetic diversity of different genomic features. Similar to the figure
 % in the main text, but histogram instead of density plot.
 % TODO: Figure likely needs some cleaning.
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/sups_feature_pi_hist.pdf}
+    \includegraphics[width=0.9\textwidth]{figures/sups_feature_pi_hist.pdf}
     \supfigurecaption{\textbf{Histogram of nucleotide diversity ($\pi$) across
         different genomic features in Oregon \balgla{}.}
         The histogram shows the distribution of windowed $\pi$ values across
@@ -2197,7 +2754,7 @@ DoS = Direction of Selection
 \end{figure}
 
 % Pairwise correlation among different genomic feature and diversity metrics.
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
     \supfigurecaption{\textbf{Pairplot of genomic features and genetic variation
@@ -2214,33 +2771,35 @@ DoS = Direction of Selection
 \end{figure}
 
 % Theta_W Ne
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\textwidth]{figures/sups_theta_ne.pdf}
+    \includegraphics[width=0.7\textwidth]{figures/sups_theta_ne.pdf}
     \supfigurecaption{\textbf{Effective population (\Ne) size estimation
         of \balgla{} based on the Watterson's estimator ($\theta_\text{W}$).}
         Effective size of the population was calculated according to the
         relationship $\theta_\text{W}=4N_{e}\mu$, using a mutation rate per-base,
-        per-generation ($\mu$) of $3\times10^{-9}$.}
+        per-generation ($\mu$) of $3\times10^{-9}$.
+        This estimate yields a long-term \Ne{} of $\approx5.2\times10^{6}$ for
+        this barnacle population.}
     \label{fig:sup_theta_ne}
 \end{figure}
 
 % msmc2 Ne
-\begin{figure}[htbp]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/sups_msmc2_ne.pdf}
+    \includegraphics[width=0.9\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{\textbf{Coalescent estimation of the effective
     population (\Ne) size estimation of \balgla{}.}
         Estimation of \Ne{} through time was using the
         \textsc{msmc2} software, using a mutation rate per-base,
         per-generation ($\mu$) of $3\times10^{-9}$, and fixing the
-        generation time ($g$) to 1. Each line represents the
-        \Ne{} for each sample, with \texttt{Bgland\_00}
-        denoting the individual used to generate the reference assembly.
-        Using just these seven diploid samples, and estimating only between
-        pairs of unphased diploid genotypes within samples, we do not
-        obtain enough resolution to resolve \Ne{} at recent
-        ($<10^{5}$) time intervals.}
+        generation time ($g$) to 1.
+        Each line represents the \Ne{} trajectory for each sample.
+        Using just six diploid samples, and estimating only between pairs
+        of unphased diploid genotypes within samples we estimate the
+        historical effective size of the population in the order of $10^{6}$
+        individuals; however, we do not obtain enough resolution to resolve
+        \Ne{} at recent ($<10^{5}$) time intervals.}
     \label{fig:sup_mcmc_ne}
 \end{figure}
 
