@@ -509,9 +509,9 @@ positive selection, among them a follistatin-A-like homolog, known to be involve
 myogenesis and muscle development in crustaceans \citep{yan_identification_2021}.
 We also observed a homolog of gamma-interferon-inducible lysosomal thiol reductase,
 which plays a role in crustacean innate immune response \citep{liu_involvement_2019}.
-Additionally, we found evidence of positive selection in  homologs of tumor protein
-p53-inducible protein 11, which is involved in cell cycle regulation and are up-regulated
-in crabs after viral infection \citep{cheng_p53_2021}, as well quiver gene homologs,
+Additionally, we found evidence of positive selection in homologs of tumor protein
+p53-inducible protein 11, which is involved in cell cycle regulation and is up-regulated
+in crabs after viral infection \citep{cheng_p53_2021}, as well as quiver gene homologs,
 related to neuronal activity and sleep regulation in \textit{Drosophila}
 \citep{wang_quiver_2010}.
 \vspace{0.2cm}
@@ -574,7 +574,7 @@ homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
 which has been observed as differentially expressed in response to osmotic stress in
 barnacles \citep{chandramouli_transcriptome_2015}.
 While its exact function in \bgla{} is unknown, the large excess of polymorphism
-observed (NI = 18.54) suggest strong balancing selection acting on this gene in
+observed (NI = 18.54) suggests strong balancing selection acting on this gene in
 this system.
 Looking at the genes evolving under positive directional selection, we observe a homolog
 to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
@@ -584,8 +584,8 @@ This gene shows the largest proportion of non-synonymous substitutions fixed by
 positive selection among the sequences studied ($\alpha = 0.988$).
 Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
 also shows strong signals of positive selection in our study ($\alpha = 0.917$).
-Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel
-like 7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
+Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like 7
+($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
 \citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
 ($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
 \citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
@@ -597,9 +597,9 @@ LOC122363544.
 Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
 a member of a family of proteins known to play a role in crustacean immunity
 \citep{li_formin-like_2025}.
-While the functions of all of these candidate genes in unknown in \bgla{}, they highlight
-the diverse target of selection in this system and their characterization serves as
-avenues for future study in barnacles.
+While the functions of all of these candidate genes are unknown in \bgla{}, they highlight
+the diverse targets of selection in this system and their characterization serves as
+an avenue for future study in barnacles.
 
 % MK test volcano plot
 \begin{figure}[ht]
@@ -607,18 +607,18 @@ avenues for future study in barnacles.
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{\textbf{Signatures of positive selection in \balgla{}
         protein-coding genes.}
-        Selection on 7,374 protein-coding genes was assessed for using the
+        Selection on 7,374 protein-coding genes was assessed using the
         McDonald-Kreitman test.
         X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
         right (NI $<1$) indicating sequences with an excess of non-synonymous
         substitutions indicative of positive selection.
         Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
-        The dashed and dot-dashed lines shows the raw ($p<0.05$) and corrected
+        The dashed and dot-dashed lines show the raw ($p<0.05$) and corrected
         ($p<6.20\times10^{-6}$) significance thresholds, respectively.
         Points in red show the 444 genes significant after \textit{p}-value correction
         showing an excess of fixed non-synonymous substitutions indicating positive
         selection.
-        Points in green shows the one significant gene with an excess of non-synonymous
+        Points in green show the one significant gene with an excess of non-synonymous
         polymorphism.}
     \label{fig:mkTest}
 \end{figure}
@@ -627,12 +627,24 @@ avenues for future study in barnacles.
 
 \subsection*{Non-neutral evolution in the classic allozyme loci}
 
-In barnacles, a set of allozyme loci have been extensive linked as playing an important
-role in spatial heterogeneity and local adaptation \citep{flowerdew_electrophoretic_1983,
-nunez_footprints_2020,rand_ecological_2002,schmidt_environmental_2000,
-flight_allozyme_2012,veliz_regional_2004}.
-In order to assess if similar patterns of selection and local adaptation are acting on
-\bgla{} in central Oregon, we identified orthologs to seven of these classic allozyme loci
+In the Atlantic acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
+have been extensively linked to spatial heterogeneity and local adaptation
+\citep{flowerdew_electrophoretic_1983,nunez_footprints_2020,rand_ecological_2002,
+schmidt_environmental_2000,flight_allozyme_2012,veliz_regional_2004}.
+Prior allozyme work in \bgla{} itself is more limited but also revealing:
+\cite{hedgecock_temporal_1994} surveyed five polymorphic loci (including
+\textit{Mpi} and \textit{Gpi}) across ten localities from central California to
+Alaska, and while broad-scale differentiation was low ($\text{F}_\text{LT} = 0.023$),
+four of the five loci showed slight but statistically significant allele-frequency
+heterogeneity at microgeographic scales --- including heterogeneity at \textit{Mpi}
+across a single 1-m intertidal transect at Bodega Harbor.
+These allozyme-era observations left open the question of whether the microgeographic
+signal reflects protein-level selection, drift among sweepstakes-limited recruitment
+cohorts \citep{hedgecock_does_1994}, or some combination of the two.
+With chromosome-level assemblies now available for both \bgla{} and \textit{B. crenatus},
+together with population-level polymorphism data, we can revisit these classic allozyme
+loci at molecular resolution.
+To do so, we identified orthologs to seven of these classic allozyme loci
 in our assembly (Table~\ref{tab:sup_allozymes}), including
 alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
 different copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
@@ -649,12 +661,48 @@ Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a signif
 result (corrected $p < 0.05$), showing deviation from the expected number of synonymous and
 non-synonymous divergence and polymorphism under neutrality
 (Table~\ref{tab:sup_allozymes_mkt}).
-For both of these genes, both the NI and DoS statistics show that this deviation is due an
-excess of non-synonymous substitutions, indication that these sequences evolved under a
+For both of these genes, both the NI and DoS statistics show that this deviation is due to an
+excess of non-synonymous substitutions, indicating that these sequences evolved under a
 regime of positive selection.
 The $\alpha$ statistic additionally shows that the majority of non-synonymous
 substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
 reached fixation as the product of directional positive selection.
+Both estimates sit meaningfully above the genome-wide asymptotic estimate
+($\alpha_\text{asym} = 0.610$), placing these two classic allozyme loci among the more
+adaptively evolving protein-coding sequences in the \bgla{} genome.
+\vspace{0.2cm}
+
+The \textit{Gpi} result is particularly notable.
+\cite{hedgecock_temporal_1994} had already identified \textit{Gpi} as one of several
+\bgla{} allozyme loci showing significant microgeographic heterogeneity in allele
+frequencies, but allozyme-era methods could not distinguish whether that heterogeneity
+reflected protein-level selection, drift, or chaotic recruitment among sweepstakes-limited
+larval cohorts \citep{hedgecock_does_1994}.
+Our sequence-level data now show that \textit{Gpi} in \bgla{} has accumulated a
+substantial excess of non-synonymous fixations relative to the neutral expectation,
+consistent with a history of directional positive selection on the protein itself.
+This pattern also contrasts with prior work at the \textit{Gpi} ortholog in
+\textit{S. balanoides}, where the MK test has not yielded a comparable signal
+\citep{nunez_footprints_2020,rand_ecological_2002} --- illustrating that ``same allozyme
+locus'' comparisons across congeneric barnacles can obscure real divergence in
+selective history.
+\textit{Gpi} encodes a glycolytic enzyme whose activity sits at the branch point between
+glycolysis and the pentose phosphate pathway; protein-coding variation at \textit{Gpi}
+in other marine invertebrates has been linked to thermal tolerance and metabolic
+flux under osmotic and thermal stress \citep{flight_allozyme_2012}, providing a
+plausible functional axis along which directional selection could act in Pacific
+intertidal populations.
+\vspace{0.2cm}
+
+The two malic-enzyme paralogs provide a second line of evidence that is worth noting
+explicitly.
+Only \textit{Me.2} shows a significant MK signal ($\alpha = 0.719$), while its paralog
+\textit{Me.1} is indistinguishable from neutrality (Table~\ref{tab:sup_allozymes_mkt}).
+Because the two copies of NADP-dependent malic enzyme share deep sequence homology but
+differ in genomic context, this paralog-level asymmetry suggests that the positive
+selection we detect is acting on \textit{Me.2} specifically rather than on the malic
+enzyme gene family as a whole, and it cautions against treating classical ``allozyme
+loci'' as monolithic units in genome-scale reanalyses.
 \vspace{0.2cm}
 
 % @Andy, @Scott: Trying to describe the Mpi results here since this is the main allozyme
@@ -666,30 +714,52 @@ reached fixation as the product of directional positive selection.
 % Note: Nunez et al, 2020 also sees some of this "discordant" patterns. For example,
 % they find nothing remarkable in Gpi using the MKT, but they also have a strong peak of
 % Pi_4/K_S.
-Looking at other metrics of selection, \textit{Mpi} shows the largest excess of
-polymorphism relative to divergence (NI = 1.575).
-To explore this pattern further, we tested these loci for balancing selection by calculating
-the ratio between synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites;
-$\pi_{4}$) and synonymous divergence ($\text{K}_\text{S}$) along windows spanning the loci's
-coding sequence.
-All seven allozyme loci show at least one window showing $\pi_{4}/\text{K}_\text{S}$ values
-in the top 5\% of the genome-wide distribution (Figure~\ref{fig:sup_gw_piks}) and regions
-with outlier values tended to be contained in the span of single exons (Figure
-\ref{fig:sup_allozyme_piks}).
-While this trend is not unique to \textit{Mpi}, observing these elevated windows of
-$\pi_{4}/\text{K}_\text{S}$ in concert with the MK tests results suggest a regime of
-balancing selection acting on this key metabolic locus.
-Similar patterns have been previously described in other barnacle species
-\citep{nunez_footprints_2020,rand_ecological_2002}, where alternative alleles of \textit{Mpi}
-are beneficial at different intertidal habitats.
-While intertidal microhabitat should be uniform in our sampling, these signatures of
-balancing selection suggest complex patterns of non-neutral evolution and local adaptation at
-\textit{Mpi} on this barnacle population.
-Future work should aim to further describe genetic variation at this locus, particularly
-across \bgla{}'s large geographic range.
-These findings would aid in the understanding of the interaction of space and selection in
-\textit{Mpi} and other adaptive loci, and their similarly (or lack thereof) with the
-adaptive history observed across other barnacle species.
+
+% @Angel -- I've edited the text to be more cautious about the interpretation of the results
+% I think the biggest thing we could do would be either a length match null comparison
+% or a more formal HKA test to see if the excess of polymorphism is significant relative to the genome-wide background. 
+% I think the windowed Pi_4/K_S results are suggestive but not diagnostic of balancing selection, and I don't want to overstate them without a more formal test. 
+% That said, the fact that Mpi is the only one of the seven allozymes that shows an excess of polymorphism in the MK test 
+% and also has a window with elevated Pi_4/K_S is suggestive that there might be something interesting going on at this locus, 
+% even if we can't definitively say it's balancing selection at this point.
+
+Turning to \textit{Mpi}, we observe the largest excess of polymorphism relative to
+divergence among the seven allozymes (NI = 1.575), though the MK test at this locus
+is not significant after correction ($p = 0.443$).
+To further probe the landscape of variation at these loci, we examined the ratio of
+synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites; $\pi_{4}$) to
+synonymous divergence ($\text{K}_\text{S}$) along windows spanning each coding sequence.
+All seven allozyme loci contain at least one window whose $\pi_{4}/\text{K}_\text{S}$
+value falls in the top 5\% of the genome-wide distribution
+(Figure~\ref{fig:sup_gw_piks}), and these outlier windows tend to be contained within
+the span of single exons (Figure~\ref{fig:sup_allozyme_piks}).
+We note that with roughly 50 overlapping windows per gene, a single window exceeding
+the 95th percentile of the genome-wide distribution is a weak test of locus-level
+balancing selection and is largely expected by chance; we therefore interpret these
+patterns as localized elevations in $\pi_{4}/\text{K}_\text{S}$ consistent with, but
+not diagnostic of, balancing selection acting over short sequence scales.
+\vspace{0.2cm}
+
+This caveat aside, the \textit{Mpi} result does connect to earlier allozyme observations
+in \bgla{}: \cite{hedgecock_temporal_1994} documented significant allele-frequency
+heterogeneity at \textit{Mpi} across a 1-m intertidal transect at Bodega Harbor, a
+pattern of microgeographic structure analogous to that subsequently documented at the
+\textit{Mpi} ortholog in \textit{S. balanoides}
+\citep{nunez_footprints_2020,rand_ecological_2002}, where alternative alleles are
+beneficial at different intertidal habitats.
+Taken together, the modest excess of non-synonymous polymorphism (NI $>$ 1) and the
+localized elevation of $\pi_{4}/\text{K}_\text{S}$ at \textit{Mpi} are suggestive of
+--- but by themselves do not establish --- a regime of balancing selection at this
+locus in \bgla{}.
+We further caution that intertidal microhabitat should be approximately uniform in our
+central Oregon sampling, so we cannot directly test the habitat-based
+balancing-selection hypothesis developed in \textit{S. balanoides}.
+Future sampling of \bgla{} across its large geographic range, and across intertidal
+microhabitats, together with formal tests such as the HKA test or matched-length
+null distributions for the $\pi_{4}/\text{K}_\text{S}$ windows, will be needed to
+determine whether the mechanism of balancing selection at \textit{Mpi} is shared
+across these congeneric systems or reflects distinct evolutionary histories in
+Atlantic and Pacific barnacles.
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -1685,14 +1755,14 @@ First, we obtained representative sequences for these seven allozyme proteins
 in \textsc{BLAST+}.
 The best \textsc{BLAST} hit, based on both sequence identity and e-value, was
 then assigned as the representative \bgla{} ortholog.
-Transcript IDs and genomic coordinates of these orthologs is shown in
+Transcript IDs and genomic coordinates of these orthologs are shown in
 Table~\ref{tab:sup_allozymes}.
 \vspace{0.2cm}
 
 To characterize patterns of molecular evolution in these allozyme loci, we first
 calculated pairwise \dnds{} between the \bgla{} allozyme transcript sequences and
 their corresponding ortholog in \textit{B. crenatus}, following the same approach
-describe above for all orthologs.
+described above for all orthologs.
 We also implemented the McDonald-Kreitman test and associated statistics using a
 similar approach as described above for all genome-wide orthologs.
 However, to ensure we recovered results for all seven allozymes, we removed
@@ -1872,7 +1942,7 @@ degenerate sites using \textsc{pixy}, specifying the specific sites of interest 
 We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
 population's effective size.
 First, we estimated the long-term average \Ne{} in this population based on the
-estimates of $\theta_\text{W}$ along 10 kbp window using \textsc{pixy}, and using the
+estimates of $\theta_\text{W}$ along 10 kbp windows using \textsc{pixy}, and using the
 relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
 by~\cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
@@ -1922,7 +1992,7 @@ crenatus} individuals from the docks in the Oregon Institute of Marine Biology, 
 Charleston, Oregon, USA (43.346 N, 124.325 W) in November 2023 during low tide.
 High-molecular weight (HMW) DNA was extracted from the dissected testes using the 
 PacBio Nanobind tissue kit (PacBio).
-DNA was assesses for quality fluorometric quantification of concentration (Qubit;
+DNA was assessed for quality by fluorometric quantification of concentration (Qubit;
 Invitrogen) and fragment length distribution (Fragment Analyzer; Advanced Analytical).
 The extracted DNA of a single individual was sequenced on two SMRTcells of a PacBio
 Sequel II machine at the University of Oregon's Genomics and Cell Characterization
@@ -1935,7 +2005,7 @@ These two sequencing runs yielded a total of 3.06 million reads with a read N50 
 We used k-mers to estimate the size and heterozygosity of the \textit{B.
 crenatus} genome.
 First, we counted k-mers present in the PacBio HiFi reads using
-\textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, couting
+\textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, counting
 21-mers (\texttt{--mer-len 21}) present in both strands (\texttt{--canonical}).
 These counts were then used to generate an empirical distribution of 21-mers
 using the \textsc{jellyfish} \texttt{histo} command.
@@ -1953,10 +2023,10 @@ using strict parameters for the identification and purging of haplotig sequences
 This assembly was generated using an estimated haploid genome size of 800 Mbp
 (\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
-For handling haplotigs, we set the we set the expected coverage at homozygous sites to
+For handling haplotigs, we set the expected coverage at homozygous sites to
 40x (\texttt{--hom-cov 40}), the upper bound of coverage to purging duplicates to 40x
-(\texttt{--purge-max 40}), and the the similarity threshold between duplicate haplotigs
-to 25\% (\texttt{-s 0.25}). 
+(\texttt{--purge-max 40}), and the similarity threshold between duplicate haplotigs
+to 25\% (\texttt{-s 0.25}).
 We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
 \citep{gurevich_quast_2013}, showing an assembly composed of 2,932 contigs, with a total
 length of 1.20 Gbp, and a contig N50 of 746 kbp.
@@ -2037,16 +2107,16 @@ compared to the \texttt{arthropoda\_odb10} reference set.
 Repetitive elements were annotated in the scaffolded \textit{B. crenatus} assembly
 using the \textsc{EarlGrey} software version \texttt{4.1.0} \citep{baril_earl_2024}.
 When running \textsc{EarlGrey}, we provided the Crustacea \textsc{Dfam 3.8} partition
-as an initital consensus library (\texttt{-l}), specified ``arthropoda'' as the
+as an initial consensus library (\texttt{-l}), specified ``arthropoda'' as the
 search term for \textsc{RepeatMasker} version \texttt{4.1.2}
 \citep{smit_repeatmasker_2013}, clustered the final TE library to reduce redundancy
 (\texttt{-c yes}), and generated a soft-masked FASTA as output (\texttt{-d yes}).
 Similar to \textit{B. glandula}, the repeat annotation for \textit{B. crenatus}
-reveleaded a highly repetitive genome, with 494.0 Mbp (58.03\%) of the assembly 
+revealed a highly repetitive genome, with 494.0 Mbp (58.03\%) of the assembly
 masked.
-Moreover, the largest of proportion of identified repeats remained unclassified,
+Moreover, the largest proportion of identified repeats remained unclassified,
 289.4 Mbp or 40.0\% of the assembly, further highlighting the lack of
-barnacle-representitive sequences in public repeat databases.
+barnacle-representative sequences in public repeat databases.
 \vspace{0.2cm}
 
 Following the annotation of repeats, we annotated protein-coding sequences in the
@@ -2055,16 +2125,16 @@ glandula} annotation using \textsc{LiftOn} version \texttt{1.0.5}
 \citep{chao_lifton_2024}.
 \textsc{LiftOn} lifts over annotations between genomes by integrating both
 protein-to-genome alignments with \textsc{miniprot} \citep{li_miniprot_2023} and
-nucleotide-to-nucleotide alignments using \textsc{Lifoff} \citep{shumate_liftoff_2021}.
-Given the high divergesity observed within these genomes and the high divergence
+nucleotide-to-nucleotide alignments using \textsc{Liftoff} \citep{shumate_liftoff_2021}.
+Given the high diversity observed within these genomes and the high divergence
 between them, we relaxed several of the \textsc{LiftOn} parameters to maximize the
-DNA and protein sequecne identity scores, as well as maintaining a high \textsc{BUSCO}
+DNA and protein sequence identity scores, as well as maintaining a high \textsc{BUSCO}
 completeness.
 We included 10\% of the flanking sequence of each gene as part of the alignment
 (\texttt{-f flank 0.1}), we allowed the software to identify gene copies with sequence
 similarity of at least 50\% (\texttt{-copies -sc 0.5}), used a 25\% coverage
 threshold for the mapping of parent (\texttt{-a 0.25}) and child sequences
-(\texttt{-s 0.25}), and enabled a post-liftover refinement of the transfered
+(\texttt{-s 0.25}), and enabled a post-liftover refinement of the transferred
 gene models (\texttt{-polish}).
 We also used the ``general'' splice model for \textsc{miniprot} (\texttt{-j 1}).
 This liftover successfully annotated 15,841 genes, including 15,904 protein-coding
@@ -2083,11 +2153,11 @@ pollicipes} (NCBI accession: \texttt{GCF\_011947565.3};
 \cite{bernot_chromosome-level_2022}; Table~\ref{tab:sup_ncbi_genomes}).
 This annotation was processed with \textsc{agat} version \texttt{1.4.3}
 \citep{dainat_another_2022} to filter out non-coding annotations, extract the longest 
-transcript as representative for the gene, and standarize gene and sequence IDs for
+transcript as representative for the gene, and standardize gene and sequence IDs for
 downstream analysis.
 This RefSeq annotation contains 20,420 protein-coding genes and is 88.72\%
 gene-complete, with 35.93\% duplicates, when validated against the
-\texttt{arthropoda\_odb10} reference ortholog dataset using \textsc{hifiasm}
+\texttt{arthropoda\_odb10} reference ortholog dataset using \textsc{compleasm}
 \texttt{protein}.
 
 \subsubsection*{\textit{Amphibalanus amphitrite}}
@@ -2102,14 +2172,14 @@ been published for this assembly.
 Therefore, we then took the published RefSeq annotation (NCBI accession:
 \texttt{GCF\_019059575.1}; Table~\ref{tab:sup_ncbi_genomes}), based on the
 scaffold-level genome assembly by \cite{kim_draft_2019}.
-Annotated the chromosome-level assembly by lifting over the RefSeq annotation using 
+We annotated the chromosome-level assembly by lifting over the RefSeq annotation using
 the \textsc{LiftOn} software version \texttt{1.0.5} \citep{chao_lifton_2024},
 allowing the software to identify gene copies with a sequence similarity of 80\%
 (\texttt{-copies -sc 0.8}), and using the ``general'' splice model in
 \textsc{miniprot} (\texttt{-j 1}).
 This liftover process successfully annotated 23,035 protein-coding genes.
 The annotation was then processed with \textsc{agat} version \texttt{1.4.3} to
-extract the longest transcript as representative for the gene and to standarize gene
+extract the longest transcript as representative for the gene and to standardize gene
 and sequence IDs for downstream analysis.
 This processed annotation was then validated using \textsc{compleasm} \texttt{protein}
 using the \texttt{arthropoda\_odb10} reference ortholog set, showing it was 88.08\%
@@ -2133,26 +2203,26 @@ Arthropod representative protein sequences from \textsc{OrthoDBv11}
 In \textsc{BRAKER}, we enforced the recovery of orthologs from the Arthropod
 \textsc{BUSCO} dataset in the annotation (\texttt{--busco\_lineage=arthropoda\_odb10}).
 After running \textsc{BRAKER}, we processed the resulting annotation using \textsc{agat}
-to extract the longest transcript as representative for the gene and to standarize gene
+to extract the longest transcript as representative for the gene and to standardize gene
 and sequence IDs for downstream analysis.
-This process annotated 16,098 protein coding genes, and was 96.05\% gene-complete,
-with 16.36\% after validation with \textsc{compleasm} against the
+This process annotated 16,098 protein-coding genes, and was 96.05\% gene-complete,
+with 16.36\% duplicates, after validation with \textsc{compleasm} against the
 \texttt{arthropoda\_odb10} reference ortholog dataset.
 
 \subsubsection*{\textit{Capitulum mitella}}
 
 We annotated the publicly-available chromosome-level genome assembly of the pedunculate
-barnacle, \textit{C. mitella} (NCBI accesion: \texttt{GCA\_030062745.1};
+barnacle, \textit{C. mitella} (NCBI accession: \texttt{GCA\_030062745.1};
 \cite{chen_capmit_2021}; Table~\ref{tab:sup_ncbi_genomes}) using RNAseq short read data
 publicly available on the NCBI SRA database (Table~\ref{tab:sup_sra_data}).
 We followed the same methodology used for \textit{A. improvisus}: processing the
 short reads with \textsc{fastp}, aligning to the genome with \textsc{hisat2}, annotating
 with \textsc{BRAKER}, and processing the resulting annotation with \textsc{agat}.
-This approach resulted in the annotation of 10,504 protein coding genes, which
+This approach resulted in the annotation of 10,504 protein-coding genes, which
 produced an annotation that was 97.53\% gene-complete, with 14.02\% duplicate sequences
 when compared to the \texttt{arthropoda\_odb10} reference ortholog dataset.
 However, given the comparatively smaller number of annotated sequences, and the
-resulting reduction in the number of orthologous sequences recovered when incorporting
+resulting reduction in the number of orthologous sequences recovered when incorporating
 this species, we excluded \textit{C. mitella} from most downstream analyses.
 
 \subsection*{Codon usage biases in \textit{Drosophila melanogaster}}
@@ -2181,18 +2251,18 @@ different codon subfamilies.
 \subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
 We calculated nucleotide diversity ($\pi$) in sub-Saharan populations of \textit{D.
-melanogaster} to establish a baseline for comparison agains our central Oregon barnacle
+melanogaster} to establish a baseline for comparison against our central Oregon barnacle
 population.
-To achieve this, we first obtained the sequencing data for the phase 2 of the Drosophila
-Population Genomics Project (DGPG2;~\citep{pool_population_2012,lack_dpgp_2016}).
+To achieve this, we first obtained the sequencing data for phase 2 of the Drosophila
+Population Genomics Project (DPGP2;~\citep{pool_population_2012,lack_dpgp_2016}).
 We processed the aligned FASTA files for all sub-Saharan samples (the `RG' population)
 to generate a VCF using the \textsc{snp-sites} version \texttt{2.5.1} software
 \citep{page_snp-sites_2016}.
 We exported both variant and invariant sites (\texttt{-b}) for downstream compatibility.
 The resulting gVCFs were then processed using a custom AWK command and \textsc{BCFtools}
-version \texttt{1.21} \citep{danecek_bcftools_2021} to recode deletion, remove missing
+version \texttt{1.21} \citep{danecek_bcftools_2021} to recode deletions, remove missing
 alleles, and remove sites with over 25\% missing genotypes.
-Nucleotide diversity along 10kbp windows then was calculated from the filtered VCF using
+Nucleotide diversity along 10 kbp windows was then calculated from the filtered VCF using
 \textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
 allowing multiallelic sites to be used in the calculation
 (\texttt{--include\_multiallelic\_snps}).
@@ -2649,12 +2719,12 @@ DoS = Direction of Selection
     \supfigurecaption{\textbf{Distribution of per-gene direction of selection values.}
         The distribution shows Direction of Selection (DoS) calculated across 7,056
         single-copy orthologs identified between \balgla{} and
-        \textit{Balanus crenatus}. The solid back line at zero marks the boundary
-        between genes evolving under a regime of positive selection (DoS $>1$) and
+        \textit{Balanus crenatus}. The solid black line at zero marks the boundary
+        between genes evolving under a regime of positive selection (DoS $>0$) and
         genes exhibiting an excess of slightly deleterious non-synonymous polymorphism
-        (DoS $<1$). The light blue dashed line shows the mean DoS (0.103), while
+        (DoS $<0$). The light blue dashed line shows the mean DoS (0.103), while
         the dark blue dotted line shows the median DoS (0.109).
-        This distribution shows that, on average, conding sequences in \bgla{} appear
+        This distribution shows that, on average, coding sequences in \bgla{} appear
         to be evolving under positive selection.}
     \label{fig:sup_dos}
 \end{figure}
@@ -2687,7 +2757,7 @@ DoS = Direction of Selection
     \includegraphics[width=0.9\textwidth]{figures/sups_allozyme_pi4ks.pdf}
     \supfigurecaption{\textbf{Landscape of synonymous diversity over synonymous
         divergence along the seven allozyme loci.}
-        The plots show the rate synonymous diversity over synonymous divergence
+        The plots show the rate of synonymous diversity over synonymous divergence
         ($\pi_{4}/\text{K}_\text{S}$) as a function of the position in the transcript
         for the seven classic allozyme loci: \textit{Adh}, \textit{Gpi},
         \textit{Me.1}, \textit{Me.2}, \textit{Mpi}, \textit{Pgm}, and \textit{Sod}.
@@ -2695,7 +2765,7 @@ DoS = Direction of Selection
         99 bp (33 exon) windows along the coding sequence, while the blue line shows
         the averaged, kernel-smoothed $\pi_{4}/\text{K}_\text{S}$ along the sequence.
         The alternating grey and white blocks show the breaks between the different
-        exons, with the dashed and dotted lines show the 95th and 99th percentiles of
+        exons, with the dashed and dotted lines showing the 95th and 99th percentiles of
         the genome-wide $\pi_{4}/\text{K}_\text{S}$ empirical distribution.
         Across all loci, peaks in $\pi_{4}/\text{K}_\text{S}$ tend to be contained
         in the span of single exons, suggesting balancing selection acting at small
@@ -2715,7 +2785,7 @@ DoS = Direction of Selection
         mean ENC of 43.1 (median: 42.7, standard deviation: 5.56), while the mean
         ENC in flies is 50.1 (median: 50.6, standard deviation: 3.95).
         This distribution shows stronger biases in codon usage in \bgla{} than the
-        one observed in \textit{B. melanogaster}, consistent with the expectation
+        one observed in \textit{D. melanogaster}, consistent with the expectation
         of large \Ne{} and strong selection in barnacle populations.}
     \label{fig:sup_dmel_enc}
 \end{figure}
@@ -2733,7 +2803,7 @@ DoS = Direction of Selection
         diversity (mean = 0.0506, median = 0.0532, standard deviation = 0.0188)
         an order of magnitude higher than that of this \textit{Drosophila}
         population (mean = 0.0076, median = 0.0077, standard deviation = 0.0035),
-        consistent with the expactation of large \Ne{} in this species.}
+        consistent with the expectation of large \Ne{} in this species.}
     \label{fig:sup_dmel_pi}
 \end{figure}
 
@@ -2790,13 +2860,13 @@ DoS = Direction of Selection
     \includegraphics[width=0.9\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{\textbf{Coalescent estimation of the effective
     population (\Ne) size estimation of \balgla{}.}
-        Estimation of \Ne{} through time was using the
+        Estimation of \Ne{} through time was done using the
         \textsc{msmc2} software, using a mutation rate per-base,
         per-generation ($\mu$) of $3\times10^{-9}$, and fixing the
         generation time ($g$) to 1.
         Each line represents the \Ne{} trajectory for each sample.
         Using just six diploid samples, and estimating only between pairs
-        of unphased diploid genotypes within samples we estimate the
+        of unphased diploid genotypes within samples, we estimate the
         historical effective size of the population in the order of $10^{6}$
         individuals; however, we do not obtain enough resolution to resolve
         \Ne{} at recent ($<10^{5}$) time intervals.}
