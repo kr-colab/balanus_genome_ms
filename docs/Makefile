@@ -1,4 +1,4 @@
-TEX = barnacle_genome_ms
+TEX = main
 INTERMEDIATES = $(TEX).aux $(TEX).bbl $(TEX).blg $(TEX).log $(TEX).out \
                 $(TEX).run.xml $(TEX).bcf $(TEX).toc $(TEX).lof $(TEX).lot
 

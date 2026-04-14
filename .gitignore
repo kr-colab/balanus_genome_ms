@@ -47,4 +47,4 @@ Thumbs.db
 
 # PDF output
 docs/*.pdf
-docs/%OUTDIR%/barnacle_genome_ms.bcf-SAVE-ERROR
+docs/%OUTDIR%/main.bcf-SAVE-ERROR
