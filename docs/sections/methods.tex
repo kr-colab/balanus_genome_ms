@@ -139,7 +139,7 @@ barnacle class Thecostraca).
 
 Lastly, we used the IDs of the Thecostraca-assigned reads to filter our raw
 PacBio HiFi FASTQ file using the \texttt{subseq} command from the \textsc{seqtk}
-software version \texttt{1.4-r130} (\url{https://github.com/lh3/seqtk}). This
+software version \texttt{1.4-r130} \citep{li_seqtk}. This
 filtering retained 5.74 million Thecostraca-specific PacBio HiFi reads, representing
 96.8\% of the total sequencing library. This taxonomic assignment and read
 filtering was also performed on the ONT reads, retaining 371 thousand (95.8\%)
@@ -195,7 +195,7 @@ to BAM format using \textsc{samtools} version \texttt{1.18}.
 
 We processed the aligned Hi-C data using \textsc{pairtools} version \texttt{1.0.2}
 \citep{open2c_pairtools_2023}, following the Dovetail analysis pipeline
-(\url{https://dovetail-analysis.readthedocs.io}). Briefly, we recorded valid ligation
+\citep{dovetail}. Briefly, we recorded valid ligation
 events using \textsc{pairtools} \texttt{parse}, setting a minimum mapping quality of
 40 (\texttt{--min-mapq 40}), a maximum inter-alignment gap of 30 kbp
 (\texttt{--max-inter-align-gap 30}), and reporting the 5'-most unique alignment when
@@ -484,7 +484,7 @@ After generating and processing alignments for the resulting 9,082 single-copy
 orthologs, we calculated \dnds{} rates using a custom Python script
 (\texttt{pairwise\_dnds.py}).
 The script uses the \texttt{dnds} Python package version \texttt{2.1}
-(\url{https://github.com/adelq/dnds}) to calculate \dnds{} using the codon-by-codon
+\citep{qalieh_dnds} to calculate \dnds{} using the codon-by-codon
 counting method described by~\cite{nei1986_dnds}.
 For each alignment, we calculated the total number of non-synonymous and
 synonymous sites (N\textsubscript{C} and S\textsubscript{C}, respectively),
@@ -576,7 +576,7 @@ the gene sequences.
 To achieve this, we first used a custom Python script (\texttt{pairwise\_Ks.py}) to
 calculate \Ks{} using the alignments between \bgla{} and \textit{B. crenatus}.
 The script parses the alignment and, using the \texttt{dnds} Python package version
-\texttt{2.1} (\url{https://github.com/adelq/dnds}), calculates the number of
+\texttt{2.1} \citep{qalieh_dnds}, calculates the number of
 synonymous sites (S\textsubscript{C}) and synonymous substitutions
 (S\textsubscript{D}) at each aligned codon.
 The final output reports S\textsubscript{C}, S\textsubscript{D}, and their rate
@@ -678,7 +678,7 @@ We aligned the Illumina paired-end reads to the reference genome using \textsc{b
 Resulting alignments were processed and sorted using \textsc{samtools} version
 \texttt{1.21}.
 We used \textsc{Picard} \texttt{MarkDuplicates} version \texttt{3.3.0}
-(\url{https://broadinstitute.github.io/picard/}) to identify PCR duplicate reads, and
+\citep{picard} to identify PCR duplicate reads, and
 \textsc{gtak} \texttt{LeftAlignIndels} version \texttt{4.6.1.0}
 \citep{mckenna_gatk_2010,depristo_framework_2011} to process indels.
 Then, we used \textsc{samtools} \texttt{view} to filter and export the alignments,
