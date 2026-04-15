@@ -14,6 +14,13 @@ The `scripts/` contains a copy and example of the scripts uses for the analysis 
 data. See the `scripts/METHODS.md` document for a file-by-file description of the contents
 of this directory.
 
+## Building
+
+```sh
+cd docs/
+make         # generate PDF (main.pdf)
+make clean   # remove build artifacts
+```
 
 ## Authors
 
