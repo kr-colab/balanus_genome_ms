@@ -25,16 +25,15 @@ reads with a read N50 of 12.4 kbp.
 We generated chromosome conformation capture (Hi-C) libraries from a \textit{B.
 glandula} individual collected from Cape Perpetua, Oregon, USA (44.279 N, 124.112
 W) in August 2023. Library construction was performed by Phase Genomics, Inc.
-using its proprietary Phase Hi-C kit. The final library was sequenced on an
-Illumina NovaSeq6000 S4 lane at the University of Oregon's GC3F, yielding
-414.3 million read pairs.
+The final library was sequenced on an Illumina NovaSeq6000 S4 lane at the University
+of Oregon's GC3F, yielding 414.3 million read pairs.
 
 \subsubsection*{ONT ultra-long read sequencing}
 
 % TODO: library info?
 The HMW DNA from a \bgla{} individual collected from Cape Perpetua,
-Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit.
-This HMW DNA was then processed using an Ultra-Long DNA Sequencing Kit and sequenced
+Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit,
+processed using an Ultra-Long DNA Sequencing Kit and sequenced
 using an Oxford Nanopore (ONT) GridION at the University of Oregon's GC3F. This
 library yielded 387 thousand ONT reads with a read N50 of 42.7 kbp.
 
@@ -43,10 +42,9 @@ library yielded 387 thousand ONT reads with a read N50 of 42.7 kbp.
 % TODO: extraction protocol? library info for these?
 RNA was extracted from a \bgla{} individual collected from Cape
 Perpetua, Oregon, USA in August 2023. For RNAseq, RNA was extracted from the
-testes and cirri, and sequenced, pooled along other samples, on two Illumina
-NovaSeq6000 S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F,
-resulting in 276.8 million read pairs across both tissue types. The same
-extracted RNA was used for Iso-Seq, preparing libraries from cirri and testes,
+testes and cirri, and sequenced on an Illumina NovaSeq6000 S4 lane at the University
+of Oregon's GC3F, resulting in 276.8 million read pairs across both tissue types.
+The same extracted RNA was used for Iso-Seq, preparing libraries from cirri and testes,
 and sequenced on a PacBio SMRTcell at the University of Oregon's GC3F. The
 testes library yielded 1.4 million reads with a read N50 of 1.4 kbp, while the
 cirri library yielded 1.9 million reads with a read N50 of 1.5 kbp. In total,
@@ -92,7 +90,7 @@ manni_busco_2021,tegenfeldt_orthodb_2025} (Table~\ref{tab:sup_asm_stats}).
 
 \subsubsection*{Assembly decontamination}
 
-Following the generation of a base, contig-level genome assembly, we detected
+Following the generation of a contig-level genome assembly, we detected
 exogenous contamination (i.e., sequences not belonging to \bgla)
 in both reads and assembled contigs using the \textsc{BlobToolKit} software version
 \texttt{4.3.0} \citep{challis_blobtoolkit_2020}. To achieve this, we first created
@@ -147,13 +145,13 @@ reads.
 
 \subsubsection*{Optimized contig-level genome assembly}\label{sec:methods_optimized_assembly}
 
-We generated a new contig-level genome assembly using the Thecostraca-specific
-data and iterating over different assembly parameters and filtering schemes,
+We generated a new contig-level genome assembly using the filtered data and iterating over
+different assembly parameters and filtering schemes,
 selecting an optimal assembly based on the best contiguity and gene-completeness
 metrics \citep{rayamajhi_evaluating_2022}, as determined by \textsc{quast} and
 \textsc{compleasm}, respectively.
 This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.19.8-r603},
-including our Thecostraca-specific PacBio HiFi reads as well as the ultra-long ONT
+including our filtered PacBio HiFi reads as well as the ultra-long ONT
 (\texttt{--ul}).
 This assembly was done using an estimated haploid genome size of 800 Mbp
 (\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
@@ -234,7 +232,7 @@ It additionally identified 742 structural errors larger than 50bp, including
 Assessing smaller ($<$50 bp) errors, \textsc{Inspector} identified 1,929 small-scale
 expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
 After evaluation, the assembly was then processed using \texttt{inspector-correct.py}
-(Table~\ref{tab:sup_asm_stats}) to export the corrected sequences in FASTA format.
+(Table~\ref{tab:sup_asm_stats}) to export the corrected scaffolds in FASTA format.
 
 \subsection*{Genome annotation}\label{sec:methods_annotation}
 
@@ -354,7 +352,7 @@ and \texttt{crustacea\_odb12} reference datasets (Table~\ref{tab:sup_annot_stats
 
 Functional annotation of the processed protein coding genes was performed using the
 \textsc{EnTAP} software version \texttt{2.3.0} \citep{hart_span_2020}.
-We compared the bgla{} protein sequences against the following curated databases:
+We compared the \bgla{} protein sequences against the following curated databases:
 \texttt{eggNOG} (downloaded on 2025/07/08), \texttt{NCBI nr} (downloaded on 2025/10/08),
 \texttt{RefSeq Protein} (downloaded on 2025/08/08), \texttt{Swiss-Prot}
 (downloaded on 2025/08/08), and \texttt{InterProScan} (downloaded on 2025/07/25).
@@ -626,7 +624,7 @@ Lastly, we used the \textsc{mosdepth} software version \texttt{0.3.10}
 \citep{pedersen_mosdepth_2018} to calculate the depth of coverage along 10 kbp windows
 (\texttt{--no-per-base}; \texttt{--by 10000}) and calculating the proportion of bases
 covered at specified coverage thresholds (\texttt{--thresholds "1,3,5,10,20"}).
-After filtering and processing alignments, we reference individual retained a mean
+After filtering and processing alignments, the reference individual retained a mean
 depth of coverage of 50.88x (median: 47.94x, standard deviation: 100.32x).
 \vspace{0.2cm}
 

@@ -23,6 +23,9 @@
 \usepackage{rotating}
 \usepackage{xspace}
 \usepackage{fixltx2e}
+% for highlighting text
+\usepackage{xcolor}
+\usepackage{soul}
 \usepackage[dvipsnames]{xcolor}
 
 % For supplemental figure and table numbering
@@ -44,18 +47,15 @@
     \renewcommand{\thefigure}{\arabic{figure}}% Restore normal figure numbering
 }
 
-% for hyperlinks
+% Colors for hyperlinks and other things
 \hypersetup{
     colorlinks=true,
     citecolor=MidnightBlue,
     urlcolor=RoyalBlue,
     linkcolor=Blue
 }
+\setstcolor{Red}
 \urlstyle{same}
-
-% for highlighting text
-\usepackage{xcolor}
-\usepackage{soul}
 
 % For the citations
 \usepackage[round]{natbib}
@@ -66,6 +66,7 @@
 \newcommand{\bgla}{\textit{B. glandula}\xspace}
 \newcommand{\Ne}{N\textsubscript{e}\xspace}
 \newcommand{\Ks}{K\textsubscript{S}\xspace}
+\newcommand{\comment}[1]{{\color{RedViolet} #1}}
 
 \title{The genome of the {Pacific} acorn barnacle provides insights into
     the evolution of extremely large populations}
@@ -99,8 +100,14 @@ The Pacific acorn barnacle (\balgla) presents an exceptional model to study evol
 in extremely large populations, exhibiting census sizes often exceeding the tens of
 thousands of individuals per meter squared. We present one of the first large-scale
 genomic analyses in this system, generating a new chromosome-level genome assembly
-for this species. This assembly reveals high levels of genetic polymorphism even in a
-single individual. At a population level, \bgla{} exhibits extreme levels of polymorphism,
+for this species.
+\comment{From Scott: I dont think this is relevant. esp since you immediately discuss
+the population. If you want to discuss individuals in terms of variation something about
+haplotypes being XX\% diff.}
+\comment{Angel idea: This assembly reveals a highly polymorphic genome with over 3\%
+heterozygosity.}
+This assembly reveals high levels of genetic polymorphism \st{even in a single individual}.
+At a population level, \bgla{} exhibits extreme levels of polymorphism,
 with nucleotide diversity surpassing 5\% genome-wide in just a small collection of
 individuals. Across the genome, nucleotide diversity predictably decreases at functional
 elements, including both coding and non-coding sequences, likely reflecting strong

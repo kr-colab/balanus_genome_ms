@@ -68,6 +68,7 @@ representative barnacle sequences among curated repeat reference libraries,
 reflecting the status of barnacles as a genomically understudied group. Among the
 classified repeats, DNA and LINE elements were the two most abundant repeat
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
+\comment{From Scott: did you look at the Kimura distance?}
 \vspace{0.2cm}
 
 Following repeat masking of the reference assembly, we annotated protein-coding
@@ -97,7 +98,16 @@ This comprehensive annotation provides the basis for examining
 how selection has shaped both coding and non-coding sequences in this
 large-population species.
 
+\comment{From Scott: in these above sections you are repeating everything you already
+noted in the methods. At the very least move it to the supplement if not entirely delete
+it. You could report the bit on the number of genes (the final paragraph of annotation)
+and something about repeats, but keep it short, as this is not the interesting part of
+the paper.}
+
 \subsection*{Conserved architecture across barnacle genomes}
+
+\comment{From Scott: I think this shoudl be the first section of the results, that
+stuff above here is supplement and largely redundant with the methods}
 
 % Just touching on synteny. Things are fairly clean, so not much to say for now.
 
@@ -206,6 +216,7 @@ drastically underrepresented. The enrichment pattern in barnacles follows the sa
 observed in both plants and animals: tRNAs are the most enriched feature
 ($\approx$4-fold), followed by CDSs ($\approx$2-fold), while transposable elements
 are depleted among HCEs.
+\comment{From Scott: this is discussion not results}
 \vspace{0.2cm}
 
 As fellow arthropods, insects provide the most phylogenetically relevant comparison for
@@ -240,6 +251,9 @@ Overall, the conservation of functional elements across barnacle genomes indicat
 that purifying selection has been effective at maintaining these sequences despite
 the highly repetitive nature of the genome, a pattern we revisit in the context
 of the broader selective regime acting on these large populations.
+\comment{From Scott: results should stick to explaining the figures and data, much
+of what you have here is comparison and interpretation which shoudl be left for the
+methods}
 
 % Phastcons and enrichment
 \begin{figure}[ht]
@@ -348,6 +362,7 @@ barnacles \citep{chandramouli_transcriptome_2015}.
 While its exact function in \bgla{} is unknown, the large excess of polymorphism
 observed (NI = 18.54) suggests strong balancing selection acting on this gene in
 this system.
+\comment{From Scott: could be a paralog? did you check the HWE in bglandula?}
 Looking at the genes evolving under positive directional selection, we observe a homolog
 to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
 factor essential for protein synthesis and, in humans, linked to the regulation of
@@ -440,7 +455,8 @@ substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit
 reached fixation as the product of directional positive selection.
 Both estimates sit meaningfully above the genome-wide asymptotic estimate
 ($\alpha_\text{asym} = 0.610$), placing these two classic allozyme loci among the more
-adaptively evolving protein-coding sequences in the \bgla{} genome.
+adaptively evolving \comment{From Scott: outliers? quickly? rapidly evolving?}
+protein-coding sequences in the \bgla{} genome.
 \vspace{0.2cm}
 
 The \textit{Gpi} result is particularly notable.
@@ -513,6 +529,8 @@ null distributions for the $\pi_{4}/\text{K}_\text{S}$ windows, will be needed t
 determine whether the mechanism of balancing selection at \textit{Mpi} is shared
 across these congeneric systems or reflects distinct evolutionary histories in
 Atlantic and Pacific barnacles.
+\comment{From Scott: soooo much of this should go in the discussion this section is
+very long because of it}
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
@@ -670,4 +688,8 @@ Nevertheless, even these conservative estimates place \bgla{} among the
 largest known effective population sizes for any eukaryote, yet orders of
 magnitude below the census sizes observed in the field --- a disparity
 central to Lewontin's Paradox and one we return to in the Discussion.
-
+\comment{From Scott: there is so very very much already w/ the comparative genomics,
+it feels like the popgen stuff is tacked on. Maybe it would be more impactful before
+the comparative genomic section esp as you use it for the MK tests. you could simply
+note that 6 samples is not enough to conduct a selection test w/ any power so you
+used other methods.}
