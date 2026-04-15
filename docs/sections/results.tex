@@ -1,0 +1,673 @@
+\section*{Results}
+
+\subsection*{Genome assembly}
+
+% General stats on assembly. Confirming the quality and status of the genome.
+
+We assembled a chromosome-level reference genome for the Pacific acorn barnacle
+using PacBio HiFi long reads and Hi-C chromosome conformation capture. Preliminary
+assessment of the PacBio HiFi data using k-mers revealed an expected genome size
+of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}).
+Our initial contig-level assembly, generated using \textsc{hifiasm}
+\citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022} with
+default parameters, produced sequences with a total length of 1.64 Gbp,
+composed of 4,212 fragments, and a contig N50 of 734 kbp. We also assessed
+gene-completeness using \textsc{BUSCO}s \citep{simao_busco_2015,manni_busco_2021,
+tegenfeldt_orthodb_2025}, as implemented in \textsc{compleasm}
+\citep{huang_compleasm_2023}, resulting in a completeness of 95.66\%
+with over 50\% duplicated orthologs
+for the \texttt{arthropoda\_odb10} single-copy ortholog set
+(Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with
+twice the expected genome size and over 50\% duplicated \textsc{BUSCO}s,
+suggested the presence of a large fraction of haplotig sequences, reflecting
+the high heterozygosity observed for the species.
+\vspace{0.2cm}
+
+After optimizing the assembly with the addition of ONT ultra-long reads and more stringent
+purging of haplotig and contaminant sequences (see \nameref{sec:methods_assembly}), we
+generated contigs with a substantially smaller fraction of haplotigs, reducing the
+assembly size to 1.05 Gbp and the \textsc{BUSCO} duplicates to 4.84\%.
+This contig-level assembly was then scaffolded with Hi-C data using the \textsc{YaHS}
+software \citep{zhou_yahs_2023} (Figure~\ref{fig:sup_hic}), generating an assembly
+with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
+of 50.96 Mbp, and a \textsc{BUSCO} completeness of 93.98\% (4.74\% duplicated;
+\texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
+\vspace{0.2cm}
+
+This scaffold-level assembly was further processed by performing manual curation
+of the Hi-C contact map and polishing using the software \textsc{Inspector}
+\citep{chen_accurate_2021}. This curated assembly was composed of 592 fragments,
+a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base
+quality value (QV) of 30.49. When assessing completeness, the curated assembly was
+94.08\% and 92.77\% gene-complete for the \texttt{arthropoda\_odb10} and
+\texttt{crustacea\_odb12} \textsc{BUSCO} datasets, respectively
+(Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence,
+906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover,
+the 16 largest sequences (larger than 8.5 Mbp) contained 841.2 Mbp (80.61\%) of
+the total sequence, and likely represent 16 chromosomes. This karyotype
+number, N=16, is in agreement with that observed for other species in the genus
+\textit{Balanus} \citep{austin_chromosome_1958} and other acorn barnacles in the
+family Balanidae \citep{han_new_2024}.
+Together, the high contiguity, gene-completeness, and chromosome-level scaffolding
+of this assembly make it among the most complete genomic resources available for
+any barnacle species, and a strong foundation for downstream population genomic
+and comparative analyses.
+
+\subsection*{Genome annotation}
+
+% Stats and QC on the annotation.
+
+Once the assembly and scaffolding were completed, we annotated and masked repeat
+sequences in the \bgla{} reference assembly using \textsc{EarlGrey}
+\citep{baril_earl_2024}. This analysis identified 698.6 Mbp (66.94\%)
+of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary});
+however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remained
+unclassified among the major repeat element types. This large proportion of
+unclassified repeat elements is likely the product of the small number of
+representative barnacle sequences among curated repeat reference libraries,
+reflecting the status of barnacles as a genomically understudied group. Among the
+classified repeats, DNA and LINE elements were the two most abundant repeat
+classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
+\vspace{0.2cm}
+
+Following repeat masking of the reference assembly, we annotated protein-coding
+genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining
+and curating annotations generated from the two data types (see
+\nameref{sec:methods_protein_coding}). This process resulted in 20,234
+protein-coding genes annotated in the genome. The resulting annotation has a
+\textsc{BUSCO} completeness of 93.58\% and 84.77\% for the
+\texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} datasets, respectively
+(Table~\ref{tab:sup_annot_stats}). Additionally, we compared our annotation against
+the proteomes of four other barnacle species (see \nameref{sec:methods_orthologs})
+using \textsc{OrthoFinder} \citep{emms_orthofinder_2015,emms_orthofinder_2019,
+emms_orthofinder_2025}, resulting in the assignment of 16,978 (83.91\%) \bgla{}
+genes to orthologous groups across barnacles and the identification of 2,576
+single-copy orthologs across all five species.
+\vspace{0.2cm}
+
+% Short paragraph, but unsure what to say here. Just wanted to mention that
+% we annotated non-coding stuff too.
+
+In addition to protein-coding genes, we also annotated non-coding elements in the
+\bgla{} reference assembly. We identified 7,532 long, non-coding RNAs
+(lncRNA), 1,203 transfer RNAs (tRNA), and 24 ribosomal RNA (rRNA) genes. In total,
+across protein-coding and non-coding transcripts, we were able to annotate 28,993
+genes in the genome.
+This comprehensive annotation provides the basis for examining
+how selection has shaped both coding and non-coding sequences in this
+large-population species.
+
+\subsection*{Conserved architecture across barnacle genomes}
+
+% Just touching on synteny. Things are fairly clean, so not much to say for now.
+
+To assess large-scale structural conservation across barnacle genomes, we performed
+a synteny analysis using the software \textsc{Genespace}
+\citep{lovell_genespace_2022}. We compared our \bgla{} genome against the
+chromosome-level genome assemblies of the striped barnacle \textit{Amphibalanus
+amphitrite} \citep[Balanidae;][]{han_new_2024} and the gooseneck barnacle
+\textit{Pollicipes pollicipes} \citep[Pollicipedidae;][]{bernot_chromosome-level_2022}.
+These genomes display conservation in their large-scale organization, including
+one-to-one correspondence between 16 putatively orthologous chromosomes across the
+three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding
+of the \bgla{} assembly likely reflects the biological structure of
+the genome and is not the product of technical artifacts, and further suggests
+conservation of genome architecture across barnacles spanning $\approx$165 Mya
+of evolution \citep{han_new_2024,bernot_chromosome-level_2022}.
+This striking chromosomal stability provides a shared framework for comparative
+genomic analyses across the order and suggests that large-scale genome
+rearrangements have not been a major driver of diversification in barnacles.
+
+% Synteny
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
+    \caption{\textbf{Conserved synteny across barnacle genomes.}
+        Genome-wide riparian plots showing one-to-one correspondence across
+        16 putatively orthologous chromosomes between the genomes of \balgla{}
+        (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes
+        pollicipes} (bottom). Each set of colored lines shows syntenic orthologous genes
+        across the three assemblies, colored according to their chromosome of origin.
+        Chromosomes are drawn according to their order in \textit{A. amphitrite}.
+        Cladogram on the left shows the evolutionary relationship among the three
+        species.}
+    \label{fig:synteny}
+\end{figure}
+
+\subsection*{High genetic diversity in the \balgla{} reference assembly}
+
+We estimated the genetic diversity present in the \bgla{} genome by identifying
+heterozygous variants in our reference individual. After filtering low-quality sites
+and masking regions with annotated repeats, we obtained genotypes for 314 million
+sites along the genome, equivalent to 34.71\% of the 904.94 Mbp present in the 58
+scaffolds larger than 1 Mbp (Table~\ref{tab:sup_popgen_stats}). Among these sites, 
+9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73
+million SNPs and 356 thousand indels.
+In total, this variation represents a mean density of 14.66 heterozygous sites per kbp
+(median: 6 per kbp; standard deviation: 19.86). Moreover, we observed nearly 400
+thousand variant sites within protein-coding sequences, including 144 thousand
+non-synonymous point mutations, as categorized by the \textsc{snpEff} software
+\citep{cingolani_program_2012}. In this reference individual, transcripts had a mean
+of 7.74 (median: 3, standard deviation: 14.97) non-synonymous variants, indicating
+considerable coding variation segregating within a single individual.
+Even from this single genome, the sheer volume of heterozygosity underscores
+the exceptionally large population sizes of this species and foreshadows
+the extreme diversity observed at the population level.
+
+\subsection*{Functional elements are conserved in barnacle genomes}
+
+% For phastCons, mostly saying how we found the hughly conserved stuff and what
+% it is. The enrichment results are generally expected (tRNAs and CDSs are conserved).
+
+We used the \textsc{phastCons} package \citep{siepel_evolutionarily_2005} on the
+\textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} between
+six barnacle species to identify highly conserved sites in the Pacific acorn barnacle
+genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly,
+\textsc{phastCons} identified 196,141 highly conserved elements (HCEs), spanning
+50.85 Mbp (6.05\%) of the 16 assembled chromosomes.
+In \textit{B. glandula}, the HCEs had a mean length of 259.25 bp (median: 42 bp,
+standard deviation: 990.40 bp).
+\vspace{0.2cm}
+
+Following the identification of HCEs, we compared their sequence composition against
+the genome-wide background (Figure~\ref{fig:phastcons}).
+We first intersected the genomic coordinates of the HCEs with the \bgla{}
+annotation, obtaining the proportion of annotated features among HCE sites
+(Figure~\ref{fig:phastcons}A). Among our target features — which include an
+``intergenic'' class for the unannotated fraction of the genome and a ``multiple''
+class for annotation overlaps (e.g., a site spanning both a transposable element
+and an intron) — all but one are present among HCEs. We did not observe any conserved
+rRNA sites; however, this is likely the product of the whole-genome alignment, given
+rRNA's repetitive nature and alignment difficulty \citep{gillespie_characterizing_2004},
+and not an accurate measure of conservation (or lack thereof).
+Aside from the absence of rRNAs, the sequence composition of HCEs largely followed that of
+the whole genome.
+Most annotated features do not appear substantially enriched among HCE sites
+(Figure~\ref{fig:phastcons}B, Table~\ref{tab:sup_phastcons_enrichment}).
+The two clear exceptions are coding sequences (CDSs) and tRNAs.
+Protein-coding sequences display an approximately 2-fold enrichment among HCEs (mean
+$\log_2$ enrichment: 0.75, median: 0.98, standard deviation: 0.93), reflecting the
+conservation of protein-coding genes among barnacle genomes.
+Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enrichment: 2.14,
+median: 2.04, standard deviation: 0.96), likely reflecting the strong functional constraints
+on these sequences.
+\vspace{0.2cm}
+
+The rank order of enrichment among conserved elements in \bgla{} mirrors patterns
+observed across other groups of organisms. \cite{siepel_evolutionarily_2005} characterized
+the distribution of \textsc{phastCons}-conserved elements across vertebrate, insect, worm,
+and yeast genomes, finding that coding sequences are consistently enriched among conserved
+elements, with enrichment values ranging from 15.5-fold in vertebrates to lower values in
+the more compact insect and worm genomes. A subsequent analysis of 20 angiosperm plant
+genomes using the same framework \citep{hupalo_conservation_2013} found that translational
+RNAs were the most enriched annotation among conserved regions ($\approx$3.6-fold),
+followed by coding sequences ($\approx$1.3-fold), while transposable elements were
+drastically underrepresented. The enrichment pattern in barnacles follows the same ordering
+observed in both plants and animals: tRNAs are the most enriched feature
+($\approx$4-fold), followed by CDSs ($\approx$2-fold), while transposable elements
+are depleted among HCEs.
+\vspace{0.2cm}
+
+As fellow arthropods, insects provide the most phylogenetically relevant comparison for
+barnacles.
+In \textit{Drosophila}, conserved elements cover 44.5\% of the genome, with 34\% of
+conserved bases falling in protein-coding exons \citep{siepel_evolutionarily_2005}.
+Less dramatic differences in enrichment across annotation classes are also observed when
+compared with vertebrate genomes.
+In \bgla{}, HCEs cover a substantially smaller fraction of the genome (6.05\%), and only
+4.4\% of HCE bases overlap CDSs (Table~\ref{tab:sup_phastcons_enrichment}).
+Both of these values are lower than those observed in insects; however, this difference is
+likely driven by the repeat-rich nature of the barnacle genome (67\% repetitive elements,
+compared with $\approx$15\% in \textit{D. melanogaster}), which both makes aligning these
+genomes more difficult while also contributing to a larger fraction of HCE bases in
+transposable element and overlapping annotation categories.
+Despite these differences in raw composition, CDSs are enriched among conserved elements
+in both insects and barnacles, consistent with the expectation that protein-coding
+sequences are among the most functionally constrained regions in arthropod genomes.
+More broadly, \cite{siepel_evolutionarily_2005} showed that the proportion of conserved
+bases that overlap protein-coding exons scales with genome compactness, from 86\% in
+yeast to 59\% in worms, 34\% in insects, and 28\% in vertebrates, with plants at 42\%
+\citep{hupalo_conservation_2013}.
+The low CDS proportion in barnacle HCEs extends this trend to an arthropod with a much
+larger, more repeat-rich genome than the model insects examined in previous studies.
+Additionally, introns are mildly enriched among barnacle HCEs
+($\approx$1.3-fold), in contrast with their depletion in plant ($\approx$0.4-fold;
+\citealp{hupalo_conservation_2013}), insect, and vertebrate conserved elements
+\citep{siepel_evolutionarily_2005}.
+However, it remains unknown if this enrichment reflects the larger intronic fraction
+of the barnacle genome or genuine intronic conservation in this lineage.
+Overall, the conservation of functional elements across barnacle genomes indicates
+that purifying selection has been effective at maintaining these sequences despite
+the highly repetitive nature of the genome, a pattern we revisit in the context
+of the broader selective regime acting on these large populations.
+
+% Phastcons and enrichment
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
+    \caption{\textbf{Highly conserved elements in the \balgla{} assembly.}
+        \textbf{A.} Proportion of annotated features in the whole genome
+        (left column) and \textsc{phastCons}-conserved elements (right column). Values
+        are shown only for elements with proportions larger than 0.01. Sites that span
+        more than one non-intergenic annotation type are represented by the ``multiple''
+        feature.
+        \textbf{B.} Enrichment of the annotated features in the highly conserved
+        elements compared to the genome-wide background, calculated as the $\log_2$ of
+        the relative enrichment. The $\log_2$ enrichment values for each of the 16
+        chromosomes are shown as points. The diamonds in the boxplot indicate the
+        mean enrichment across the genome.}
+    \label{fig:phastcons}
+\end{figure}
+
+\subsection*{Patterns of molecular evolution reflect positive selection in protein-coding genes}
+
+To examine the rate of molecular evolution in protein-coding sequences, we calculated
+the pairwise ratio of non-synonymous to synonymous substitutions (\dnds) between
+\bgla{} and its congener, the wrinkled barnacle \textit{Balanus crenatus},
+using the codon counting approach described by \cite{nei1986_dnds}.
+We identified and aligned 9,082 single-copy orthologs between the two species.
+The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
+Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
+sequences in these barnacle genomes are under purifying selection, reflecting the
+expected evolutionary constraints on sequences of functional importance.
+\vspace{0.2cm}
+
+Of the nine thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are likely
+candidates for positive selection.
+The predicted function of the majority ($>80\%$) of these genes is unknown, as
+determined by the functional annotation generated by the \textsc{EnTAP} software
+\citep{hart_span_2020}.
+This is expected, since homology is likely harder to determine for fast-evolving sequences
+putatively under strong selection.
+Regardless, we found several genes with known function in our candidates under
+positive selection, among them a follistatin-A-like homolog, known to be involved in
+myogenesis and muscle development in crustaceans \citep{yan_identification_2021}.
+We also observed a homolog of gamma-interferon-inducible lysosomal thiol reductase,
+which plays a role in crustacean innate immune response \citep{liu_involvement_2019}.
+Additionally, we found evidence of positive selection in homologs of tumor protein
+p53-inducible protein 11, which is involved in cell cycle regulation and is up-regulated
+in crabs after viral infection \citep{cheng_p53_2021}, as well as quiver gene homologs,
+related to neuronal activity and sleep regulation in \textit{Drosophila}
+\citep{wang_quiver_2010}.
+\vspace{0.2cm}
+
+We expanded on our \dnds{} measures of positive selection in protein-coding sequences
+in the \bgla{} genome by incorporating population-level polymorphism using the
+McDonald-Kreitman (MK) test \citep{mcdonald_adaptive_1991}.
+Specifically, we used polymorphism data from six \bgla{} individuals from the central
+Oregon coast (see below), comparing those against the orthologous coding sequences in
+the \textit{B. crenatus} outgroup.
+After removing alignments shorter than 100 bp and those containing premature stop
+codons or frameshift mutations, we calculated the MK test for 7,374 orthologous
+sequences between \bgla{} and \textit{B. crenatus}.
+\vspace{0.2cm}
+
+Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
+deviation from the expected proportion of non-synonymous and synonymous substitutions
+and polymorphisms, following \textit{p}-value correction for multiple testing
+(Figure~\ref{fig:mkTest}).
+We additionally calculated the Neutrality Index (NI;~\citealp{rand_excess_1996}) and
+Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}) at each ortholog.
+We observed a mean NI value of 0.745 (median: 0.554; standard deviation: 1.079) and
+a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; Figure~\ref{fig:sup_dos}).
+Both of these statistics show that on average, and in contrast with our measurements
+of \dnds{} (see \nameref{sec:discussion_dnds_mkt}), protein-coding sequences in \bgla{}
+exhibit an excess of non-synonymous substitutions, suggesting that they are evolving
+under positive directional selection when compared to the outgroup sequence.
+\vspace{0.2cm}
+
+In addition to NI and DoS, we calculated $\alpha$, a measure of the proportion
+of non-synonymous substitutions fixed by positive selection \citep{smith_adaptive_2002}.
+We calculated two adjusted versions of $\alpha$ to account for the presence of known
+biases.
+First, we calculated the Tarone-Greenland $\alpha$ estimator ($\alpha_\text{TG}$), a
+weighted estimator that corrects for the effects of averaging over a large number of
+genes \citep{stoletzki_estimation_2011}.
+Across our 7,374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
+0.534--0.550), which indicates that $\approx$ 54\% of non-synonymous substitutions in
+this \bgla{} population were fixed as a product of positive selection.
+Secondly, we calculated $\alpha$ using the asymptotic MK test ($\alpha_\text{asym}$),
+which corrects for the presence of weakly deleterious non-synonymous polymorphisms
+present at low frequency in the population \citep{messer_frequent_2013} which might
+obscure the signal of positive selection.
+We found a mean $\alpha_\text{asym}$ of 0.610 ($95\%$ CI: 0.610--0.622), a
+larger proportion than that observed in \textit{Drosophila} ($\alpha_\text{asym}$
+of 0.57; \citealp{haller_asymptoticmk_2017}).
+Regardless of the metric used, both $\alpha_\text{TG}$ and $\alpha_\text{asym}$ agree
+that the majority of non-synonymous substitutions in this barnacle population are the
+outcome of directional positive selection.
+Notably, this pervasive signal of positive selection stands in apparent tension with
+the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
+\vspace{0.2cm}
+
+Exploring the predicted function of the candidate genes identified in the MK analysis,
+our single candidate displaying an excess of polymorphism relative to divergence is a
+homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
+which has been observed as differentially expressed in response to osmotic stress in
+barnacles \citep{chandramouli_transcriptome_2015}.
+While its exact function in \bgla{} is unknown, the large excess of polymorphism
+observed (NI = 18.54) suggests strong balancing selection acting on this gene in
+this system.
+Looking at the genes evolving under positive directional selection, we observe a homolog
+to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
+factor essential for protein synthesis and, in humans, linked to the regulation of
+transcripts related to cell proliferation and growth \citep{lee_eif3_2015}.
+This gene shows the largest proportion of non-synonymous substitutions fixed by
+positive selection among the sequences studied ($\alpha = 0.988$).
+Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
+also shows strong signals of positive selection in our study ($\alpha = 0.917$).
+Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like
+7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
+\citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
+($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
+\citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
+\citep{fan_male_2007}.
+Further highlighting the discrepancy between the tests of selection, only a single
+significant gene in the MK test analysis overlaps with our candidates of selection in
+the \dnds{} analysis, a homolog to \textit{A. amphitrite}'s uncharacterized locus
+LOC122363544.
+Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
+a member of a family of proteins known to play a role in crustacean immunity
+\citep{li_formin-like_2025}.
+While the exact functions of all of these candidate genes are unknown in \bgla{}, they
+highlight the diverse targets of selection in this system and their characterization serves
+as an avenue for future study in barnacles.
+
+% MK test volcano plot
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
+    \caption{\textbf{Signatures of positive selection in \balgla{}
+        protein-coding genes.}
+        Selection on 7,374 protein-coding genes was assessed using the
+        McDonald-Kreitman test.
+        X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
+        right (NI $<1$) indicating sequences with an excess of non-synonymous
+        substitutions indicative of positive selection.
+        Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
+        The dashed and dot-dashed lines show the raw ($p<0.05$) and corrected
+        ($p<6.20\times10^{-6}$) significance thresholds, respectively.
+        Points in red show the 444 genes significant after \textit{p}-value correction
+        showing an excess of fixed non-synonymous substitutions indicating positive
+        selection.
+        Points in green show the one significant gene with an excess of non-synonymous
+        polymorphism.}
+    \label{fig:mkTest}
+\end{figure}
+
+\subsection*{Non-neutral evolution in the classic allozyme loci}
+
+In the Atlantic acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
+have been extensively linked to spatial heterogeneity and local adaptation
+\citep{flowerdew_electrophoretic_1983,nunez_footprints_2020,rand_ecological_2002,
+schmidt_environmental_2000,flight_allozyme_2012,veliz_regional_2004}.
+Prior allozyme work in \bgla{} itself is more limited but also revealing:
+\cite{hedgecock_temporal_1994} surveyed five polymorphic loci (including
+\textit{Mpi} and \textit{Gpi}) across ten localities from central California to
+Alaska, and while broad-scale differentiation was low ($\text{F}_\text{LT} = 0.023$),
+four of the five loci showed slight but statistically significant allele-frequency
+heterogeneity at microgeographic scales --- including heterogeneity at \textit{Mpi}
+across a single 1-m intertidal transect at Bodega Harbor.
+These allozyme-era observations left open the question of whether the microgeographic
+signal reflects protein-level selection, drift among sweepstakes-limited recruitment
+cohorts \citep{hedgecock_does_1994}, or some combination of the two.
+With chromosome-level assemblies now available for both \bgla{} and \textit{B. crenatus},
+together with population-level polymorphism data, we can revisit these classic allozyme
+loci at molecular resolution.
+To do so, we identified orthologs to seven of these classic allozyme loci
+in our assembly (Table~\ref{tab:sup_allozymes}), including
+alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
+different copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
+mannose-6-phosphate isomerase (\textit{Mpi}), phosphoglucomutase (\textit{Pgm}), and
+superoxide dismutase (\textit{Sod}).
+\vspace{0.2cm}
+
+When compared against the \textit{B. crenatus} orthologous sequences, all seven loci show
+\dnds{} less than one (Table~\ref{tab:sup_allozymes_dnds}), in agreement with our genome-wide
+estimates, suggesting that they are evolving under purifying selection (but see
+\nameref{sec:discussion_dnds_mkt}).
+Assessing these loci using the MK test reveals different selection regimes acting on these
+loci.
+Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a significant MK
+test result (corrected $p < 0.05$), showing deviation from the expected number of synonymous
+and non-synonymous divergence and polymorphism under neutrality
+(Table~\ref{tab:sup_allozymes_mkt}).
+For both of these genes, both the NI and DoS statistics show that this deviation is due to
+an excess of non-synonymous substitutions, indicating that these sequences evolved under
+a regime of positive selection.
+The $\alpha$ statistic additionally shows that the majority of non-synonymous
+substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
+reached fixation as the product of directional positive selection.
+Both estimates sit meaningfully above the genome-wide asymptotic estimate
+($\alpha_\text{asym} = 0.610$), placing these two classic allozyme loci among the more
+adaptively evolving protein-coding sequences in the \bgla{} genome.
+\vspace{0.2cm}
+
+The \textit{Gpi} result is particularly notable.
+\cite{hedgecock_temporal_1994} had already identified \textit{Gpi} as one of several
+\bgla{} allozyme loci showing significant microgeographic heterogeneity in allele
+frequencies, but allozyme-era methods could not distinguish whether that heterogeneity
+reflected protein-level selection, drift, or chaotic recruitment among sweepstakes-limited
+larval cohorts \citep{hedgecock_does_1994}.
+Our sequence-level data now show that \textit{Gpi} in \bgla{} has accumulated a
+substantial excess of non-synonymous fixations relative to the neutral expectation,
+consistent with a history of directional positive selection on the protein itself.
+This pattern also contrasts with prior work at the \textit{Gpi} ortholog in
+\textit{S. balanoides}, where the MK test has not yielded a comparable signal
+\citep{nunez_footprints_2020,rand_ecological_2002} --- illustrating that ``same allozyme
+locus'' comparisons across congeneric barnacles can obscure real divergence in
+selective history.
+\textit{Gpi} encodes a glycolytic enzyme whose activity sits at the branch point between
+glycolysis and the pentose phosphate pathway; protein-coding variation at \textit{Gpi}
+in other marine invertebrates has been linked to thermal tolerance and metabolic
+flux under osmotic and thermal stress \citep{flight_allozyme_2012}, providing a
+plausible functional axis along which directional selection could act in Pacific
+intertidal populations.
+\vspace{0.2cm}
+
+The two malic-enzyme paralogs provide a second line of evidence that is worth noting
+explicitly.
+Only \textit{Me.2} shows a significant MK signal ($\alpha = 0.719$), while its paralog
+\textit{Me.1} is indistinguishable from neutrality (Table~\ref{tab:sup_allozymes_mkt}).
+Because the two copies of NADP-dependent malic enzyme share deep sequence homology but
+differ in genomic context, this paralog-level asymmetry suggests that the positive
+selection we detect is acting on \textit{Me.2} specifically rather than on the malic
+enzyme gene family as a whole, and it cautions against treating classical ``allozyme
+loci'' as monolithic units in genome-scale reanalyses.
+\vspace{0.2cm}
+
+Turning to \textit{Mpi}, we observe the largest excess of polymorphism relative to
+divergence among the seven allozymes (NI = 1.575), though the MK test at this locus
+is not significant after correction ($p = 0.443$).
+To further probe the landscape of variation at these loci, we examined the ratio of
+synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites; $\pi_{4}$) to
+synonymous divergence ($\text{K}_\text{S}$) along windows spanning each coding sequence.
+All seven allozyme loci contain at least one window whose $\pi_{4}/\text{K}_\text{S}$
+value falls in the top 5\% of the genome-wide distribution
+(Figure~\ref{fig:sup_gw_piks}), and these outlier windows tend to be contained within
+the span of single exons (Figure~\ref{fig:sup_allozyme_piks}).
+We note that with roughly 50 overlapping windows per gene, a single window exceeding
+the 95th percentile of the genome-wide distribution is a weak test of locus-level
+balancing selection and is largely expected by chance; we therefore interpret these
+patterns as localized elevations in $\pi_{4}/\text{K}_\text{S}$ consistent with, but
+not diagnostic of, balancing selection acting over short sequence scales.
+\vspace{0.2cm}
+
+This caveat aside, the \textit{Mpi} result does connect to earlier allozyme observations
+in \bgla{}: \cite{hedgecock_temporal_1994} documented significant allele-frequency
+heterogeneity at \textit{Mpi} across a 1-m intertidal transect at Bodega Harbor, a
+pattern of microgeographic structure analogous to that subsequently documented at the
+\textit{Mpi} ortholog in \textit{S. balanoides}
+\citep{nunez_footprints_2020,rand_ecological_2002}, where alternative alleles are
+beneficial at different intertidal habitats.
+Taken together, the modest excess of non-synonymous polymorphism (NI $>$ 1) and the
+localized elevation of $\pi_{4}/\text{K}_\text{S}$ at \textit{Mpi} are suggestive of
+--- but by themselves do not establish --- a regime of balancing selection at this
+locus in \bgla{}.
+We further caution that intertidal microhabitat should be approximately uniform in our
+central Oregon sampling, so we cannot directly test the habitat-based
+balancing-selection hypothesis developed in \textit{S. balanoides}.
+Future sampling of \bgla{} across its large geographic range, and across intertidal
+microhabitats, together with formal tests such as the HKA test or matched-length
+null distributions for the $\pi_{4}/\text{K}_\text{S}$ windows, will be needed to
+determine whether the mechanism of balancing selection at \textit{Mpi} is shared
+across these congeneric systems or reflects distinct evolutionary histories in
+Atlantic and Pacific barnacles.
+
+\subsection*{Barnacle genes show a biased use of synonymous codons}
+
+We used the annotated transcript sequences of our Pacific acorn barnacle genome
+to calculate the effective number of codons (ENC), a measure of the extent of
+departure from equal usage across synonymous codons \citep{wright_effective_1990,
+sun_improved_2013}. We calculated ENC across the coding sequences of
+16,904 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
+standard deviation: 5.56, Figure~\ref{fig:codon_enc}). This ENC distribution
+indicates a codon usage bias stronger than that observed in \textit{Drosophila}
+(Figure~\ref{fig:sup_dmel_enc}), suggesting that a large portion of synonymous mutations
+may not be neutral in this large barnacle population.
+
+% ENC codon bias
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
+    \caption{\textbf{Codon usage biases in \balgla.}
+        Distribution of the effective number of codons (ENC) across
+        16,904 \bgla{} protein-coding genes. Dashed light blue line
+        shows the mean ENC (43.1), while the dot-dashed dark blue
+        line shows the median ENC (42.7)}
+    \label{fig:codon_enc}
+\end{figure}
+
+\subsection*{Barnacle populations exhibit elevated genetic polymorphism}
+
+We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast.
+After removal of two samples with poor quality sequences, and the stringent filtering of
+sites with low coverage, low quality, and/or missing genotypes, we retained a total of
+111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%)
+of which were variant in the retained individuals.
+Among these variant sites, we recovered 20.5 million point mutations, 4.86\% of which 
+were multiallelic in just these six individuals.
+In total, the amount of polymorphism observed in our sampling translates to a mean
+density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82).
+Moreover, 1.12 million of these variant sites (5.23\%) were located in coding sequences.
+These coding variants included 360 thousand missense (non-synonymous) mutations,
+corresponding to a mean of 18.93 non-synonymous variants per transcript
+(median: 10, standard deviation: 28.50).
+Overall, these represent a substantial proportion of coding variation segregating in
+this central Oregon population.
+This \bgla{} population displayed a mean genome-wide nucleotide
+diversity ($\pi$) of 0.0506 (median: 0.0531, standard deviation: 0.0188;
+Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}), a degree of diversity that
+is an order of magnitude higher than that observed in diverse \textit{Drosophila}
+populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
+\vspace{0.2cm}
+
+Along each chromosome, we did not observe any strong correlation between the density
+of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and
+$\pi$, particularly not at the scale of 10 kbp (Figure~\ref{fig:genome_pi};
+Figure~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present
+at smaller genomic intervals (see below). The strongest correlation was, as expected,
+observed between the density of segregating sites within 10 kbp windows and $\pi$
+(Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}). The proportion of
+segregating sites in itself was not correlated with the density of particular genomic
+features, except for repeats; however, this is likely an artifact of the masking of
+genotypes located within repetitive intervals in the reference
+(see \nameref{sec:methods_popgen}).
+\vspace{0.2cm}
+
+% Genome-wide pi & repeat and gene density
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/genome_pi.pdf}
+    \caption{\textbf{Nucleotide diversity ($\pi$) and coding and repeat density
+        along the \balgla{} genome.}
+        \textbf{A.} Density of coding sequences (CDS) along the genome, defined as the
+        proportion of bases annotated as CDS within 10 kbp windows. Line reflects the
+        kernel-smoothed values along a 1 Mbp window. Dashed horizontal line shows
+        the genome-wide average proportion of CDS bases (0.0288). Top and bottom
+        horizontal axes show the chromosome number and genomic position, respectively.
+        \textbf{B.} Density of repeat elements annotated within 10 kbp windows, smoothed
+        along 1 Mbp intervals. Dashed horizontal line shows the genome-wide average
+        proportion of repeat bases (0.597).
+        \textbf{C.} Density of segregating sites, calculated as the proportion of SNPs
+        within 10 kbp windows, smoothed along 1 Mbp intervals. Dashed horizontal line
+        shows the genome-wide average proportion of segregating SNPs per 10 kbp
+        (0.0307).
+        \textbf{D.} $\pi$ within 10 kbp windows, smoothed along 1 Mbp intervals.
+        Horizontal dashed line shows the mean genome-wide $\pi$ (0.0506).}
+    \label{fig:genome_pi}
+\end{figure}
+
+Looking at diversity across the genome, we observed an overall reduction in $\pi$
+at putatively functional sites. For example, the mean $\pi$ in sequences spanning
+annotated CDSs is 0.0302 (median: 0.0270, standard deviation: 0.0221;
+Figure~\ref{fig:feature_pi}; Figure~\ref{fig:sup_pi_hist}; Table~\ref{tab:sup_feature_pi}),
+which represents a $\approx$ 1.6x reduction in diversity when compared to the
+genome-wide average. A reduction in diversity of similar magnitude is also observed
+in the sequences of lncRNAs (1.4x) and 5' UTRs (1.3x). The largest reduction in
+diversity when compared to the genome-wide background was observed in tRNAs, with
+$\pi$ $\approx$ 4.3x lower than the genomic background and consistent with the strong
+functional constraint evidenced by their enrichment in highly conserved elements. In
+contrast to most other elements of the genome, introns display a relative increase in
+diversity, with a mean $\pi$ of 0.0646 (median: 0.0650, standard deviation: 0.0299),
+approximately 1.3x higher than the genome-wide average.
+\vspace{0.2cm}
+
+Zooming in further on coding sequences, we explored the patterns of $\pi$
+at 0-fold degenerate ($\pi_{0}$), in which any mutation produces a non-synonymous
+substitution, and 4-fold degenerate sites ($\pi_{4}$), in which any mutation results
+in a synonymous change.
+This comparison allows us to compare diversity at constrained versus neutral (or
+putatively neutral) sites.
+In this central Oregon population of \bgla{}, the mean $\pi_{0}$, was 0.0107 (median:
+0.00292, standard deviation: 0.0178).
+This is the lowest diversity among the studied categories in the genome, not a
+surprising result given the higher functional constraint expected at these sites.
+In contrast, mean $\pi_{4}$ was 0.0790 (median: 0.0750, standard deviation: 0.0483),
+$\approx$ 1.6x higher than the genome-wide average and the highest in the genome.
+The nearly 8-fold difference between $\pi_{0}$ and $\pi_{4}$ highlights the
+strong constraint on non-synonymous sites and suggests that purifying selection is
+highly effective in this population, consistent with theoretical predictions for
+species with large effective population sizes.
+
+% Distribution of pi for different features in the genome
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/feature_pi.pdf}
+    \caption{\textbf{Nucleotide diversity ($\pi$) across genomic
+        features in Oregon \balgla.}
+        The density histogram shows the distribution of windowed
+        $\pi$ values across different genomic features annotated
+        in the \bgla{} assembly. The vertical lines show the
+        50\textsuperscript{th} quantile (median) of the distribution,
+        while the crosses show the mean value.}
+    \label{fig:feature_pi}
+\end{figure}
+
+\subsection*{\balgla{} exhibits large effective population sizes}
+
+We estimated the effective population size (\Ne) for a central
+Oregon \textit{B. glandula} population sample using the whole-genome genotypes.
+As a simple estimate of the long-term \Ne{} of this population, we first
+calculated \Ne{} using Watterson's estimator of genetic diversity ($\theta_\text{W}$),
+observing a mean genome-wide $\theta_\text{W}$ of 0.0617 (median: 0.0635, standard
+deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Assuming a per-base,
+per-generation mutation rate ($\mu$) of $3\times10^{-9}$ (as estimated by
+\cite{nunez_footprints_2020} for the acorn barnacle \textit{S. balanoides})
+and using the relationship between \Ne{} and $\theta_\text{W}$, this yields a
+mean effective size of 5,137,172 (median: 5,289,211, standard deviation: 1,862,683),
+which is consistent with the expectation of large \Ne{} in this species.
+\vspace{0.2cm}
+
+Additionally, we estimated \Ne{} through time using a coalescent-based
+approach with \textsc{msmc2} \citep{dutheil_msmc_2020}. This estimate also placed
+the historical effective size of the population on the order of $10^{6}$ individuals
+(between $10^{6}$ and $10^{7}$ generations ago) (Figure~\ref{fig:sup_mcmc_ne});
+however, given our small sample size and the use of only within sample pairwise
+comparisons, we were unable to obtain accurate \Ne{} estimates at more recent
+($<10^{5}$ generations) timescales using \textsc{msmc2}.
+Nevertheless, even these conservative estimates place \bgla{} among the
+largest known effective population sizes for any eukaryote, yet orders of
+magnitude below the census sizes observed in the field --- a disparity
+central to Lewontin's Paradox and one we return to in the Discussion.
+

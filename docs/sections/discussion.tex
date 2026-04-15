@@ -1,0 +1,262 @@
+\section*{Discussion}\label{sec:discussion}
+
+\subsection*{Genome assembly in highly polymorphic species}
+
+% The idea here is to say that we have all these improvement in assembly and data
+% analysis for genomes. These are all good, but not really applicable for these very
+% diverse system. Just highlighting the gap in knowledge and the need for improvements
+% in the field. Good hook for cyclothone and other projects.
+
+Improvements in the affordability, accessibility, and accuracy in sequencing
+technologies have increased the generation of high quality reference genomes across
+the tree of life. Over the last decade, we have seen the research outcomes of large
+genome assembly consortiums, e.g., the Vertebrate Genome Project
+\citep{rhie_towards_2021} and the Earth BioGenome Project
+\citep{blaxter_earth_2025}, tackling the production of high quality genomes across
+diverse taxa. We have also seen the generation of complete genomes, sequencing
+whole chromosomes at a telomere-to-telomere scale \citep{nurk_complete_2022,
+yoo_complete_2025}, as well as the sequencing and assembly of some of the largest
+and most repetitive genomes known in nature \citep{campos-dominguez_genome_2025}.
+Best practice protocols have also become available to applying these methods to new
+taxa in a reproducible fashion \citep{lawniczak_best-practice_2025,li_genome_2024}.
+\vspace{0.2cm}
+
+Despite these advances, there appears to be a gap in knowledge in the analysis of
+highly polymorphic organisms, such as barnacles. High heterozygosity presents
+problems during the assembly process, e.g., hindering the differentiation between
+paralogs and haplotypes, which often results in the inflation of the genome size and
+a high proportion of duplicated sequences \citep{guiglielmoni_phasing_2024,
+asalone_regional_2020,roach_purge_2018,mochizuki_practical_2023}. The most common
+approach is to manage these haplotypes \textit{a posteriori}, purging them after
+initial assembly \citep{guan_identifying_2020,roach_purge_2018}; however, while this
+approach can be successful in generating haploid assemblies, as we have shown here,
+it is not without its drawbacks. First, purging haplotypes could lead to a reduction
+in the gene completeness in the main assembly, as primary haplotypes might be
+incorrectly labelled as haplotigs, leading to their removal. Secondly, the ability
+to identify and remove haplotypes is dependent on the properties of the assembly.
+Sequences that are too fragmented and/or too divergent from one another are likely
+harder to purge due to difficulties in mapping. Moreover, when performing phased
+diploid assemblies, the excessive presence of haplotypes will interfere with
+phasing, leading to a main haploid assembly that is a mosaic between the two
+haplotypes and/or the poor quality of the secondary assembly.
+\vspace{0.2cm}
+
+These difficulties drive the need for the development of methods and analysis
+best-practices focused on the assembly of highly heterozygous genomes, and for a
+further exploration of how elevated heterozygosity affects \textit{de novo} assembly
+parameters.
+In particular, the assembly of phased diploid genomes has seen several improvements
+in recent years, e.g.,
+the direct purging of haplotigs and the integration of Hi-C data to phase haplotypes
+without the need of parental genotypes in \textsc{hifiasm}
+\citep{cheng_haplotype-resolved_2022},
+and the integration of Hi-C and ultra-long read data for phased telomere-to-telomere
+haplotypes in \textsc{Verkko2} \citep{antipov_verkko2_2025}.
+Yet, it is presently unknown if these new methods are all equally suitable for highly
+heterozygous genomes and further work is likely needed before we can obtain
+haplotype-resolved genome assemblies for hyperpolymorphic organisms.
+Despite these limitations, our work here, assembling a chromosome-level assembly for
+a heterozygous barnacle species --- even if not fully phased --- is a step in the
+right direction of generating high-quality genomic resources for these
+highly diverse and difficult genomes.
+
+\subsection*{Genome evolution in large populations}
+
+Evolutionary processes at large demographic scales are expected to leave distinct
+signatures in the genome, several of which are observed in our Pacific acorn
+barnacle assembly.
+For example, large populations are expected to harbor increased levels of segregating
+polymorphism, the product of both the reduction in the stochastic loss due to
+genetic drift and the increase in the population-scale mutation rate.
+In accordance, we observe a barnacle genome with extreme levels of genetic diversity,
+both at the individual and population level (Figure~\ref{fig:sup_kmers};
+Table~\ref{tab:sup_popgen_stats}), a substantial proportion of which is located in
+coding sequences.
+\vspace{0.2cm}
+
+Similarly, large populations experience an increase in the efficacy of purifying
+selection, which is expected to reduce the levels of diversity and increase 
+conservation across functional sequences.
+We see these patterns reflected in the \bgla{} genome.
+Putatively functional sites, particularly coding exons and tRNAs, show both increased
+levels of sequence conservation (Figure~\ref{fig:phastcons}) and a reduction in
+population-level genetic diversity (Figure~\ref{fig:feature_pi};
+Table~\ref{tab:sup_feature_pi}) compared to less constrained features of the genome.
+Notably, the rank ordering of the enrichment of conserved elements, with tRNAs and CDSs
+as the most enriched, parallels findings in insects \citep{siepel_evolutionarily_2005},
+suggesting that the targets of purifying selection are broadly conserved across
+arthropods despite the much larger and more repeat-rich genome of \bgla{}.
+Increased efficacy of purifying selection is also reflected in the results of the
+McDonald-Kreitman test (Figure~\ref{fig:mkTest}), where we observe a relative decrease
+in the proportion of non-synonymous polymorphism in a central Oregon \bgla{} population,
+suggesting that weakly deleterious variants are more efficiently purged by selection
+\citep{li_reverse_2008}.
+Positive selection is also expected to increase in efficacy in large populations,
+resulting in the fixation of a larger fraction of beneficial non-synonymous mutations.
+We observe this pattern as well: in this central Oregon population, the majority
+(54 to 61\%, depending on the metric of $\alpha$ used) of non-synonymous substitutions
+reached fixation due to positive selection, a proportion higher than that observed in
+diverse \textit{Drosophila} populations \citep{haller_asymptoticmk_2017}.
+\vspace{0.2cm}
+
+In large enough populations, selection should be efficacious enough that its effects
+extend to synonymous sites, where substitutions are normally considered neutral.
+This could result in a bias in the usage of synonymous codons, as different codons are
+favored over others due to GC biases, tRNA abundance, and other factors
+\citep{galtier_codon_2018}.
+These effects are observed in the \bgla{} assembly in the form of reduction in the
+effective number of codons seen across protein-coding genes (Figure~\ref{fig:codon_enc}).
+On average, \bgla{} uses $\approx$ 43 out of 61 available codons, a greater reduction
+than that observed in \textit{D. melanogaster} (Figure~\ref{fig:sup_dmel_enc}).
+This strong bias in codon usage further reflects an increase in the efficacy of natural
+selection due to the large size of Pacific acorn barnacle populations.
+Moreover, these biases put into question the neutrality of at least some synonymous
+substitutions in this system, which could have important ramifications for the study of
+molecular evolution; however, the extent of these effects remain presently unknown and
+should be the subject of future study.
+\vspace{0.2cm}
+
+In contrast, the distribution of transposable and repeat elements in the
+\bgla{} assembly was unexpected, as we find a highly repetitive genome
+composed of over 60\% repeat sequences (Figure~\ref{fig:genome_pi};
+Table~\ref{tab:sup_earlgrey_summary}).
+Previous work has shown that purifying selection plays a key role in the accumulation
+and fixation of transposable elements \citep{merel_relaxed_2025,langmuller_genomic_2023,
+bourque_ten_2018}, following the expectation that repetitive sequences are, on average,
+slightly deleterious.
+Given the increased efficacy of selection we observed in the rest of the genome,
+our expectation was to find a genome with a relatively small proportion of repeats.
+However, the high repeat content observed in the genome does not necessarily
+reflect the low efficacy of selection in these populations.
+Some could be low-frequency, slightly deleterious variants in the process of being purged
+from the population.
+Other repeats might represent beneficial genetic variation, as transposable elements are
+known to play roles in adaptive evolution \citep{schrader_impact_2019}.
+For example, repeat elements can act as regulators of gene expression
+\citep{trizzino_transposable_2017,rech_population-scale_2022}, and as such may provide
+the regulatory plasticity required for survival in rapidly changing
+intertidal environments.
+Regardless of their role, disentangling the population-wide repeat landscape and its
+fitness effects is likely impossible with a single haploid reference assembly.
+Thus, this observation drives the need for larger comparative genomic studies across
+barnacle populations before we can fully understand the dynamics of genomic repeats
+and transposable elements in this and other large populations.
+
+\subsection*{Molecular evolution in large populations: reconciling \dnds{} and the
+McDonald-Kreitman test}\label{sec:discussion_dnds_mkt}
+
+One of the more striking patterns in our results is the apparent discordance between
+our two measures of selection on protein-coding genes.
+The average pairwise \dnds{} between \bgla{} and \textit{B. crenatus} is 0.206,
+indicating that the majority of coding sites are under purifying selection.
+Yet the McDonald-Kreitman test reveals a seemingly opposite pattern: $\approx61\%$
+of non-synonymous substitutions fixed between these species were driven by
+positive selection ($\alpha_\text{asym}$ = 0.610).
+At first glance, these results appear contradictory: how can coding sequences be
+under strong purifying selection while simultaneously showing pervasive adaptive
+evolution?
+\vspace{0.2cm}
+
+The resolution lies in the fact that \dnds{} and the McDonald-Kreitman test measure
+fundamentally different quantities. The \dnds{} ratio averages across all
+non-synonymous sites in a gene, the vast majority of which are under functional
+constraint, resulting in a ratio well below one. In contrast, the McDonald-Kreitman
+test partitions changes into polymorphism and divergence, using synonymous changes
+as a neutral baseline to ask whether there is an \textit{excess} of non-synonymous
+fixations relative to the neutral expectation. This test is therefore sensitive to
+the subset of non-synonymous mutations that escape purifying selection and reach
+fixation, even when most non-synonymous sites in a gene are constrained.
+Moreover, pairwise \dnds{} is calculated from a single sequence per species and
+therefore incorporates segregating polymorphisms into its divergence estimate. In
+species with many weakly deleterious non-synonymous variants segregating at
+appreciable frequencies, this can inflate the non-synonymous divergence and distort
+estimates of selection \citep{li_reverse_2008}. By explicitly separating
+polymorphism from fixation, the McDonald-Kreitman test avoids this conflation.
+\vspace{0.2cm}
+
+\cite{li_reverse_2008} compared the performance of \dnds{} and the McDonald-Kreitman
+test across human, \textit{Drosophila}, and yeast genomes and found that the two
+approaches identify distinct but correlated sets of genes as targets of selection.
+Notably, the McDonald-Kreitman test was more powerful than \dnds{} only in
+\textit{Drosophila}, the species with the most abundant polymorphism data, where it
+identified nearly three times as many genes under positive selection. In the
+lower-diversity human and yeast datasets, the pattern was reversed. This finding
+suggests that the statistical power of the McDonald-Kreitman test is greatest in
+high-polymorphism species, making it particularly well suited for systems like
+barnacles where segregating variation is abundant.
+\vspace{0.2cm}
+
+The pattern we observe in barnacles is thus consistent with theoretical expectations
+for large populations: strong purifying selection efficiently removes the majority
+of deleterious non-synonymous mutations, keeping \dnds{} low, while at the same time
+the increased efficacy of positive selection drives a disproportionate fraction of
+the remaining non-synonymous substitutions to fixation, producing a high
+$\alpha$. This coupling of strong purifying and positive selection is a hallmark
+of evolution in large populations and has been observed in \textit{Drosophila}, where
+$\alpha_\text{asym}$ is approximately 0.57 \citep{messer_frequent_2013}.
+Our estimate of $\alpha_\text{asym}$ of 0.610 in \bgla{} is comparable to
+or slightly higher than that in \textit{Drosophila}, consistent with the expectation
+that the even larger effective population size in barnacles further increases the
+efficacy of both modes of selection.
+
+\subsection*{Barnacles as models for evolution at biological extremes}
+
+Our work shows that a Pacific acorn barnacle population from central Oregon exhibits
+genetic diversity of over 5\% (mean genome-wide $\pi$ of 0.0506).
+These levels of genetic diversity are higher than those observed for other model
+systems known for their relatively large population sizes.
+For example, the genome-wide $\pi$ we observe in this population is an order of
+magnitude higher than that observed in \textit{Drosophila} (Figure~\ref{fig:sup_dmel_pi})
+\citep{nunez_footprints_2025,li_comparative_2025,pool_population_2012,
+langley_genomic_2012}.
+Even the $\pi$ observed at 0-fold degenerate sites, the least diverse and among the
+most constrained sites in the genome, is still an order of magnitude higher than the
+diversity observed genome-wide in these \textit{Drosophila} populations.
+While elevated, this level of diversity is not unique to barnacles.
+Similar magnitudes of genome-wide $\pi$ ($\approx10^{-2}$) have been observed
+in other taxa, including corals \citep{meziere_corals_2025}, parasitic nematodes
+\citep{stevens_nematodes_2023}, bivalves \citep{liu_bivalves_2025}, and mosquitoes
+\citep{kent_aedes_2025,small_funestus_2023}.
+Moreover, as with other marine invertebrates, barnacle life history traits are likely
+direct drivers of the elevated polymorphism observed, as factors such as large census
+sizes, small propagule size, long larval dispersal, and broad geographic distribution
+have been positively correlated with high genetic diversity in these
+organisms \citep{leffler_revisiting_2012,romiguier_comparative_2014}.
+\vspace{0.2cm}
+
+The magnitude of diversity observed in \bgla{} solidly places them among
+hyperpolymorphic populations, those exhibiting diversity above 5\%
+\citep{cutter_molecular_2013}. This adds barnacles to a growing list of emerging
+hyperpolymorphic model systems, which are key to studying the limits of biological
+variation and molecular evolution in natural populations. Moreover, our observations
+of extreme genetic diversity also have important implications for the study of species
+boundaries. For example, recent work by~\cite{hart_genomic_2025} suggests that levels
+of above 1\% neutral diversity in Eukaryotes likely serve as biological limits for the
+definition of species. Barnacles and other hyperpolymorphic populations put these
+putative cutoffs into question. We observe levels of genome-wide diversity of over 5\%
+in just a very small portion of the biological range of the Pacific acorn barnacle.
+Nucleotide diversity is even higher ($\approx8\%$) at 4-fold degenerate, and putatively
+neutral, sites (Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}).
+Given the species' broader geographical and ecological distribution, genetic
+diversity is likely to increase when looking across the whole range. This
+observation reiterates the importance of future studies of genetic diversity
+of this species over its whole geographic range, providing some insights on
+the mechanisms that maintain population and species boundaries in the presence
+of extreme genetic diversity.
+\vspace{0.2cm}
+
+Beyond species boundaries, the extreme diversity observed in barnacles also speaks to
+a long-standing question in population genetics: the relationship between effective
+and census population sizes. From our results on diversity, we
+observe that this barnacle population has an effective size of approximately $10^{6}$.
+However, these populations also show densities of $10^{4}$ individuals per square meter
+\citep{menge_recruitment_2000}. Based on this estimate, the census size of the Pacific
+acorn barnacle population in central Oregon should be, conservatively, in the billions of
+individuals. While the general disparity between the effective and census size estimates
+has been highlighted for decades, i.e., Lewontin's Paradox \citep{lewontin_genetic_1974},
+the mechanisms underlying the differences have been long debated
+\citep{gillespie_role_1999,gillespie_genetic_2000,smith_hitch-hiking_1974,
+kimura_neutral_1983} and are still the subjects of study \citep{buffalo_quantifying_2021}.
+Our work on the Pacific acorn barnacle provides a unique opportunity to empirically
+study this disparity and the biological processes that maintain it.
+

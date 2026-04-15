@@ -1,0 +1,205 @@
+\section*{Supplemental Figures}
+
+% k-mer distribution of the raw hi-fi reads
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/sups_kmers.png}
+    \supfigurecaption{\textbf{\textsc{GenomeScope} profile of the raw PacBio HiFi
+        data.} Distribution of 21-mers shows an estimated genome size of
+        845.01 Mbp and a heterozygosity of 3.3\% in the \bgla{}
+        reference assembly.}
+    \label{fig:sup_kmers}
+\end{figure}
+
+% Hi-C contact map
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/sups_hic.pdf}
+    \supfigurecaption{\textbf{Hi-C contact map of the \balgla{} assembly.}
+        The contact map shows the assembly following manual curation in
+        \textsc{Juicebox}. The numbers (1--16) denote the 16 chromosome-level
+        scaffolds. The dashed lines show the boundary between these 16
+        chromosome-level scaffolds and the unplaced contigs. Note that this
+        numbering does not reflect the final ID of the assembled sequences.
+        IDs were re-assigned following additional curation and sorting of the
+        sequences.}
+    \label{fig:sup_hic}
+\end{figure}
+
+% dN/dS
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/dnds.pdf}
+    \supfigurecaption{\textbf{Distribution of the pairwise rate of non-synonymous
+        to synonymous substitutions (\dnds{}).}
+        The distribution is calculated across 9,082 single-copy orthologs
+        identified between \balgla{} and \textit{Balanus
+        crenatus}. The solid gray line marks the boundary between genes under
+        positive selection (\dnds{} $>$ 1) and genes under purifying selection
+        (\dnds{} $<$ 1). The dashed and dotted lines show the mean (0.206) and
+        median (0.158) \dnds{}, both showing that on average \bgla{} coding
+        sequences are evolving under a regime of purifying selection.}
+    \label{fig:sup_dnds}
+\end{figure}
+
+% Direction of selection.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/sups_mkt_dos.pdf}
+    \supfigurecaption{\textbf{Distribution of per-gene direction of selection values.}
+        The distribution shows Direction of Selection (DoS) calculated across 7,056
+        single-copy orthologs identified between \balgla{} and
+        \textit{Balanus crenatus}. The solid black line at zero marks the boundary
+        between genes evolving under a regime of positive selection (DoS $>0$) and
+        genes exhibiting an excess of slightly deleterious non-synonymous polymorphism
+        (DoS $<0$). The light blue dashed line shows the mean DoS (0.103), while
+        the dark blue dotted line shows the median DoS (0.109).
+        This distribution shows that, on average, coding sequences in \bgla{} appear
+        to be evolving under positive selection.}
+    \label{fig:sup_dos}
+\end{figure}
+
+% Genome-wide Pi_4/K_S
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sups_gw_pi4ks.png}
+    \supfigurecaption{\textbf{Distribution of synonymous diversity over synonymous
+        divergence for the seven allozyme loci.}
+        The distribution of synonymous diversity over synonymous divergence
+        ($\pi_{4}/\text{K}_\text{S}$) along the coding sequences of 8,931 \bgla{} genes
+        (denoted by ``GW''), including the seven classic barnacle allozyme loci:
+        \textit{Adh}, \textit{Gpi}, \textit{Me.1}, \textit{Me.2}, \textit{Mpi},
+        \textit{Pgm}, and \textit{Sod}.
+        Each dot represents a $\pi_{4}/\text{K}_\text{S}$ value calculated in 99 bp
+        (33 exon) windows along the coding sequence.
+        Diamonds present the mean $\pi_{4}/\text{K}_\text{S}$.
+        Dashed and dotted lines show the 95th and 99th percentiles of the genome-wide
+        $\pi_{4}/\text{K}_\text{S}$ empirical distribution, respectively.
+        While more extreme $\pi_{4}/\text{K}_\text{S}$ values are observed in the
+        genome, all seven allozyme loci show windows with $\pi_{4}/\text{K}_\text{S}$
+        in the top 5\% of the genome-wide distribution.}
+    \label{fig:sup_gw_piks}
+\end{figure}
+
+% Per-allozyme Pi_4/K_S
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/sups_allozyme_pi4ks.pdf}
+    \supfigurecaption{\textbf{Landscape of synonymous diversity over synonymous
+        divergence along the seven allozyme loci.}
+        The plots show the rate of synonymous diversity over synonymous divergence
+        ($\pi_{4}/\text{K}_\text{S}$) as a function of the position in the transcript
+        for the seven classic allozyme loci: \textit{Adh}, \textit{Gpi},
+        \textit{Me.1}, \textit{Me.2}, \textit{Mpi}, \textit{Pgm}, and \textit{Sod}.
+        Each dot represents the value of $\pi_{4}/\text{K}_\text{S}$ calculated in
+        99 bp (33 exon) windows along the coding sequence, while the blue line shows
+        the averaged, kernel-smoothed $\pi_{4}/\text{K}_\text{S}$ along the sequence.
+        The alternating grey and white blocks show the breaks between the different
+        exons, with the dashed and dotted lines showing the 95th and 99th percentiles of
+        the genome-wide $\pi_{4}/\text{K}_\text{S}$ empirical distribution.
+        Across all loci, peaks in $\pi_{4}/\text{K}_\text{S}$ tend to be contained
+        in the span of single exons, suggesting balancing selection acting at small
+        scales along the genome.}
+    \label{fig:sup_allozyme_piks}
+\end{figure}
+
+% Codon usage biases vs Drosophila
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/sups_dmel_codons.pdf}
+    \supfigurecaption{\textbf{Comparing codon usage biases between barnacles and
+        fruit flies.}
+        The distribution of effective number of codons (ENC) between genes in the
+        Pacific acorn barnacle (\balgla{}; \texttt{BalGla}) and the fruit fly
+        (\textit{Drosophila melanogaster}; \texttt{DroMel}). Barnacles show a
+        mean ENC of 43.1 (median: 42.7, standard deviation: 5.56), while the mean
+        ENC in flies is 50.1 (median: 50.6, standard deviation: 3.95).
+        This distribution shows stronger biases in codon usage in \bgla{} than the
+        one observed in \textit{D. melanogaster}, consistent with the expectation
+        of large \Ne{} and strong selection in barnacle populations.}
+    \label{fig:sup_dmel_enc}
+\end{figure}
+
+% Pi vs Drosophila.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/sups_dmel_pi.pdf}
+    \supfigurecaption{\textbf{Comparing nucleotide diversity ($\pi$) between
+        barnacles and fruit flies.}
+        Average $\pi$ in 10 kbp windows between the Oregon Pacific
+        acorn barnacle (\balgla{}; \texttt{BalGla}) and Sub-Saharan
+        populations of the fruit fly (\textit{Drosophila melanogaster};
+        \texttt{DroMel}). This barnacle population shows an average nucleotide
+        diversity (mean = 0.0506, median = 0.0532, standard deviation = 0.0188)
+        an order of magnitude higher than that of this \textit{Drosophila}
+        population (mean = 0.0076, median = 0.0077, standard deviation = 0.0035),
+        consistent with the expectation of large \Ne{} in this species.}
+    \label{fig:sup_dmel_pi}
+\end{figure}
+
+% Genetic diversity of different genomic features. Similar to the figure
+% in the main text, but histogram instead of density plot.
+% TODO: Figure likely needs some cleaning.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/sups_feature_pi_hist.pdf}
+    \supfigurecaption{\textbf{Histogram of nucleotide diversity ($\pi$) across
+        different genomic features in Oregon \balgla{}.}
+        The histogram shows the distribution of windowed $\pi$ values across
+        different genomic features annotated in the \bgla{} assembly.
+        The dotted lines show the median $\pi$, while the crosses show the
+        mean $\pi$. Legend: gwide = genome-wide, degen0 = 0-fold degenerate
+        sites, degen4 = 4-fold degenerate sites.}
+    \label{fig:sup_pi_hist}
+\end{figure}
+
+% Pairwise correlation among different genomic feature and diversity metrics.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
+    \supfigurecaption{\textbf{Pairplot of genomic features and genetic variation
+        in Oregon \balgla{}.}
+        Diagonal shows the density histogram of the proportion of the genomics
+        elements (e.g., CDS, lncRNA, tRNA, repeats, and introns), proportion of
+        variant sites, proportion of callable sites post-filtering, and nucleotide
+        diversity ($\pi$). All values computed across 10 kbp windows. Below
+        the diagonal, plots show the correlation across all pairwise comparisons.
+        Red and blue lines show the linear and Loess regression, respectively.
+        Above the diagonal, panels show the Spearman's rank correlation
+        coefficient ($\rho$) for the given pairwise comparison.}
+    \label{fig:sup_pi_pairplot}
+\end{figure}
+
+% Theta_W Ne
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/sups_theta_ne.pdf}
+    \supfigurecaption{\textbf{Effective population (\Ne) size estimation
+        of \balgla{} based on the Watterson's estimator ($\theta_\text{W}$).}
+        Effective size of the population was calculated according to the
+        relationship $\theta_\text{W}=4N_{e}\mu$, using a mutation rate per-base,
+        per-generation ($\mu$) of $3\times10^{-9}$.
+        This estimate yields a long-term \Ne{} of $\approx5.2\times10^{6}$ for
+        this barnacle population.}
+    \label{fig:sup_theta_ne}
+\end{figure}
+
+% msmc2 Ne
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/sups_msmc2_ne.pdf}
+    \supfigurecaption{\textbf{Coalescent estimation of the effective
+    population (\Ne) size estimation of \balgla{}.}
+        Estimation of \Ne{} through time was done using the
+        \textsc{msmc2} software, using a mutation rate per-base,
+        per-generation ($\mu$) of $3\times10^{-9}$, and fixing the
+        generation time ($g$) to 1.
+        Each line represents the \Ne{} trajectory for each sample.
+        Using just six diploid samples, and estimating only between pairs
+        of unphased diploid genotypes within samples, we estimate the
+        historical effective size of the population in the order of $10^{6}$
+        individuals; however, we do not obtain enough resolution to resolve
+        \Ne{} at recent ($<10^{5}$) time intervals.}
+    \label{fig:sup_mcmc_ne}
+\end{figure}
+
