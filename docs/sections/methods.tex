@@ -1,0 +1,764 @@
+\section*{Materials and Methods}
+
+% @Scott: could you verify the sequencing info?
+
+\subsection*{DNA and RNA sequencing}
+
+\subsubsection*{High-molecular weight DNA and PacBio sequencing}
+
+For genome sequencing using PacBio Hi-Fi reads, we sampled several \balgla{}
+individuals from the docks in the Oregon Institute of Marine Biology, in Charleston,
+Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected at low tide in
+February 2023. High-molecular weight (HMW) DNA was extracted from the dissected
+testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using
+fluorometric quantification of concentration (Qubit; Invitrogen) and fragment
+length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA
+of a single individual was sequenced on three SMRTcells of a PacBio Sequel
+II machine at the University of Oregon's Genomics and Cell Characterization Core
+Facility (GC3F). These three sequencing runs yielded a total of 5.93 million
+reads with a read N50 of 12.4 kbp.
+% Some of this happened before me, so we might need some more details on the
+% library and sequencing, e.g., library prep? specific machine?
+
+\subsubsection*{Chromosome conformation capture}
+
+We generated chromosome conformation capture (Hi-C) libraries from a \textit{B.
+glandula} individual collected from Cape Perpetua, Oregon, USA (44.279 N, 124.112
+W) in August 2023. Library construction was performed by Phase Genomics, Inc.
+using its proprietary Phase Hi-C kit. The final library was sequenced on an
+Illumina NovaSeq6000 S4 lane at the University of Oregon's GC3F, yielding
+414.3 million read pairs.
+
+\subsubsection*{ONT ultra-long read sequencing}
+
+% TODO: library info?
+The HMW DNA from a \bgla{} individual collected from Cape Perpetua,
+Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit.
+This HMW DNA was then processed using an Ultra-Long DNA Sequencing Kit and sequenced
+using an Oxford Nanopore (ONT) GridION at the University of Oregon's GC3F. This
+library yielded 387 thousand ONT reads with a read N50 of 42.7 kbp.
+
+\subsubsection*{RNA sequencing}
+
+% TODO: extraction protocol? library info for these?
+RNA was extracted from a \bgla{} individual collected from Cape
+Perpetua, Oregon, USA in August 2023. For RNAseq, RNA was extracted from the
+testes and cirri, and sequenced, pooled along other samples, on two Illumina
+NovaSeq6000 S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F,
+resulting in 276.8 million read pairs across both tissue types. The same
+extracted RNA was used for Iso-Seq, preparing libraries from cirri and testes,
+and sequenced on a PacBio SMRTcell at the University of Oregon's GC3F. The
+testes library yielded 1.4 million reads with a read N50 of 1.4 kbp, while the
+cirri library yielded 1.9 million reads with a read N50 of 1.5 kbp. In total,
+the two libraries combined resulted in 3.3 million reads, with a read N50 of
+1.5 kbp.
+
+\subsubsection*{Whole-genome shotgun sequencing}
+
+Genomic DNA was extracted from eight \bgla{} individuals collected
+from Cape Perpetua, Oregon, USA in August 2023 using the QIAGEN Genomic-Tips
+20/G kit. The extracted DNA was processed using the Illumina TrueSeq library
+kit and sequenced, pooled along with other samples, on two Illumina NovaSeq6000
+S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F. Across both lanes,
+the sequencing process yielded 1.97 billion reads across the eight individuals,
+an average of 246.3 million reads per individual. In total, these individuals
+were sequenced at an estimated depth of $\approx$ 60x.
+
+\subsection*{Genome assembly}\label{sec:methods_assembly}
+
+\subsubsection*{Genome size and heterozygosity estimation}
+
+We estimated the genome size and heterozygosity of the \bgla{}
+genome using k-mers. First, we used the \texttt{count} command of the
+\textsc{jellyfish} software version \texttt{2.2.10} \citep{marcais_fast_2011}
+to count the unique k-mers present in the PacBio HiFi reads. We counted k-mers
+of size 21 (\texttt{--mer-len 21}) present in both strands (\texttt{--canonical}).
+From these counts, we then generated an empirical k-mer distribution using
+\textsc{jellyfish}'s \texttt{histo} command. Finally, we used
+\textsc{GenomeScope2} version \texttt{2.0} \citep{ranallo-benavidez_genomescope_2020}
+to model the distribution of k-mers in the diploid genome (\texttt{--ploidy 2})
+based on the empirical counts.
+
+\subsubsection*{Base contig-level genome assembly}
+
+A base, contig-level genome assembly for \bgla{} was generated from
+the PacBio HiFi reads using \textsc{hifiasm} version \texttt{0.19.6-r595}
+\citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022} with default
+parameters. This base assembly was assessed for contiguity using \textsc{quast}
+version \texttt{5.2.0} \citep{gurevich_quast_2013}, and for gene-completeness with
+\textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023} using
+the \texttt{arthropoda\_odb10} reference \textsc{BUSCO} dataset \citep{simao_busco_2015,
+manni_busco_2021,tegenfeldt_orthodb_2025} (Table~\ref{tab:sup_asm_stats}).
+
+\subsubsection*{Assembly decontamination}
+
+Following the generation of a base, contig-level genome assembly, we detected
+exogenous contamination (i.e., sequences not belonging to \bgla)
+in both reads and assembled contigs using the \textsc{BlobToolKit} software version
+\texttt{4.3.0} \citep{challis_blobtoolkit_2020}. To achieve this, we first created
+a new \textsc{blobtools} database, using the \texttt{create} command, specifying the
+contig-level assembly as our reference sequence (\texttt{--fasta}), the NCBI
+taxonomic identifier for \bgla{} (\texttt{--taxid 110520}), and the NCBI reference
+taxonomy files (\texttt{--taxdump}, downloaded on 2023/12/13).
+\vspace{0.2cm}
+
+To add depth of coverage to this database, we aligned our PacBio HiFi sequencing
+reads to our base, contig-level reference assembly using \textsc{minimap2} version
+\texttt{2.26-r1175} \citep{li_minimap2_2018}, running in the \texttt{map-hifi}
+configuration (\texttt{-x map-hifi}) and exporting alignments in SAM format
+(\texttt{-a}). Alignments were then processed, sorted, and indexed using
+\textsc{samtools} version \texttt{1.18} \citep{li_sequence_2009}. The processed
+alignments were then added to the \textsc{blobtools} database using the \texttt{add}
+command.
+\vspace{0.2cm}
+
+We performed taxonomic assignment of each sequence in the assembly by first aligning
+our contigs against NCBI's non-redundant (\texttt{nr}) database (downloaded on
+2023/12/13). We aligned each contig against the database using \textsc{blastn} version
+\texttt{2.15.0+}, as implemented in \textsc{BLAST+} \citep{camacho_blast_2009},
+specifying a minimum e-value cutoff (\texttt{-evalue}) of $1\times10^{-10}$, exporting
+hits for a maximum of 25 target sequences (\texttt{-max\_target\_seqs 25}), and exporting
+results in tabular format (\texttt{-outfmt 6}). These \textsc{BLAST} alignments
+were then added to the \textsc{blobtools} database using the \texttt{add} command,
+specifying the rule for taxonomic assignment (\texttt{--taxrule bestsumorder}).
+Using this approach, the \textsc{blobtools} database provides a single taxonomic
+assignment to each contig.
+\vspace{0.2cm}
+
+Following taxonomic assignment of the assembled contigs, we used
+\textsc{blobtools}'s \texttt{filter} command to obtain the IDs of sequencing
+reads that were assigned to a given taxon. We specified paths of our reference
+contigs (\texttt{--fasta}), alignments (\texttt{--cov}), and sequencing reads
+(\texttt{--fastq}). For filtering, we specified the parameters to select the reads
+aligned to contigs assigned to the class Thecostraca (\texttt{--Keys=Thecostraca})
+using a given taxonomic assignment rule (\texttt{--param bestsumorder\_class}). We
+then used the (\texttt{--invert}) option to specify that we wished to export the
+IDs of reads matching this assignment (i.e., keeping only reads specific to the
+barnacle class Thecostraca).
+\vspace{0.2cm}
+
+Lastly, we used the IDs of the Thecostraca-assigned reads to filter our raw
+PacBio HiFi FASTQ file using the \texttt{subseq} command from the \textsc{seqtk}
+software version \texttt{1.4-r130} \citep{li_seqtk}. This
+filtering retained 5.74 million Thecostraca-specific PacBio HiFi reads, representing
+96.8\% of the total sequencing library. This taxonomic assignment and read
+filtering was also performed on the ONT reads, retaining 371 thousand (95.8\%)
+reads.
+
+\subsubsection*{Optimized contig-level genome assembly}\label{sec:methods_optimized_assembly}
+
+We generated a new contig-level genome assembly using the Thecostraca-specific
+data and iterating over different assembly parameters and filtering schemes,
+selecting an optimal assembly based on the best contiguity and gene-completeness
+metrics \citep{rayamajhi_evaluating_2022}, as determined by \textsc{quast} and
+\textsc{compleasm}, respectively.
+This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.19.8-r603},
+including our Thecostraca-specific PacBio HiFi reads as well as the ultra-long ONT
+(\texttt{--ul}).
+This assembly was done using an estimated haploid genome size of 800 Mbp
+(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+For identifying and correctly phasing haplotype sequences, we set the expected coverage
+at homozygous sites (\texttt{--hom-cov 68}) and the upper bound of coverage to purging
+duplicates (\texttt{--purge-max 68}) at 68x, along with setting the similarity threshold
+between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
+This assembly was composed of 2,218 contigs, with a total length of 1.29 Gbp, and a contig
+N50 of 1.16 Mbp.
+\vspace{0.2cm}
+
+Following the initial assembly of contigs, we purged haplotig sequences using the
+\textsc{purge\_dups} software version \texttt{1.2.5} \citep{guan_identifying_2020}.
+Following the \textsc{purge\_dups} documentation, we first mapped the PacBio HiFi
+reads to this contig-level assembly using \textsc{minimap2} \texttt{-x map-hifi}.
+We then calculated the read-depth histogram using the \texttt{pbcstat} command,
+followed by determining the base-level coverage cutoffs using the command
+\texttt{calcuts}. Subsequently, we split the assembly at gaps, if present, using
+the \texttt{split\_fa} command, followed by a self-alignment using \textsc{minimap2}
+\texttt{-x asm5}. The \texttt{purge\_dups} command was then used to mark haplotig
+sequences in a BED file according to the coverage cutoffs empirically determined
+from the data. Lastly, the assembly FASTA was processed to remove sequences tagged
+as haplotigs using the \texttt{get\_seqs} command, only removing sequences at the
+ends of contigs (\texttt{-e}) and allowing the splitting of contigs (\texttt{-s}).
+The purging process removed 876 fragments from the primary assembly, accounting for
+$\approx$ 240 Mbp of haplotig sequences (Table~\ref{tab:sup_asm_stats}).
+
+\subsubsection*{Hi-C scaffolding}
+
+We scaffolded the purged contig-level assembly into chromosome-level scaffolds using
+Hi-C data. First, we aligned the Hi-C short-read data to our assembly using
+\textsc{bwa} \texttt{mem} version \texttt{0.7.17-r1188} \citep{li_aligning_2013},
+setting the minimum alignment score to output to zero (\texttt{-T 0}), skipping mate
+rescue (\texttt{-S}), mate pairing (\texttt{-P}), and setting the smallest query
+coordinate as primary for split alignments (\texttt{-5}). Alignments were converted
+to BAM format using \textsc{samtools} version \texttt{1.18}.
+\vspace{0.2cm}
+
+We processed the aligned Hi-C data using \textsc{pairtools} version \texttt{1.0.2}
+\citep{open2c_pairtools_2023}, following the Dovetail analysis pipeline
+\citep{dovetail}. Briefly, we recorded valid ligation
+events using \textsc{pairtools} \texttt{parse}, setting a minimum mapping quality of
+40 (\texttt{--min-mapq 40}), a maximum inter-alignment gap of 30 kbp
+(\texttt{--max-inter-align-gap 30}), and reporting the 5'-most unique alignment when
+detecting multiple ligation events (\texttt{--walks-policy 5unique}). We then sorted
+the processed alignment pairs using \textsc{pairtools} \texttt{sort}, and marked PCR
+duplicate reads using \textsc{pairtools} \texttt{dedup --mark-dups}. Finally, we used
+\textsc{pairtools} \texttt{split} to process the data into a BAM file of valid
+alignments and a ``pairs'' file with the read pairs forming the contact map. The
+resulting alignment BAM was sorted and indexed using \textsc{samtools}.
+\vspace{0.2cm}
+
+The processed Hi-C alignments were used to scaffold the genome using the \textsc{YaHS}
+software version \texttt{1.2a.1} \citep{zhou_yahs_2023}. Since our assembly consisted of
+highly fragmented contigs, we reduced the minimum resolution size to 1 kbp (\texttt{-r
+1000}). Following the \textsc{YaHS} documentation, we generated a Hi-C contact map
+using the \textsc{juicer} suite of tools \citep{durand_juicer_2016,dudchenko_juicebox_2018}.
+First, we used the \textsc{juicer} \texttt{pre} command (version \texttt{1.1}) to
+convert the \textsc{YaHS} output into the \textsc{juicer} format in assembly mode
+(\texttt{-a}). We then ran \textsc{juicer tools} version \texttt{1.9.9} to generate
+the \texttt{*.assembly} and \texttt{*.hic} files required for manual curation using
+the \textsc{Juicebox} GUI version \texttt{2.17.00}. Following manual curation of
+the contact map, we regenerated the assembly using \textsc{juicer} \texttt{post}. This
+scaffolded assembly was composed of 650 fragments, a total length of 1.05 Gbp, and
+a scaffold N50 of 50.96 Mbp (Table~\ref{tab:sup_asm_stats}).
+
+\subsubsection*{Polishing and correcting}
+
+After manual curation of the scaffolded genome, we performed one round of polishing and
+automatic curation using the \textsc{Inspector} software version \texttt{1.0.1}
+\citep{chen_accurate_2021}. First, we evaluated the assembly using \texttt{inspector.py},
+mapping the PacBio HiFi reads against the assembly.
+\textsc{Inspector} calculated a mapping rate of 99.98\% of these reads to the assembly
+(87.94\% for larger contigs) and a quality value (QV) of 30.49.
+It additionally identified 742 structural errors larger than 50bp, including
+357 haplotype switches, 303 sequence expansions, and 16 inversions.
+Assessing smaller ($<$50 bp) errors, \textsc{Inspector} identified 1,929 small-scale
+expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
+After evaluation, the assembly was then processed using \texttt{inspector-correct.py}
+(Table~\ref{tab:sup_asm_stats}) to export the corrected sequences in FASTA format.
+
+\subsection*{Genome annotation}\label{sec:methods_annotation}
+
+\subsubsection*{Repeat annotation}
+
+We identified and classified repetitive elements in the \bgla{} genome
+using the \textsc{EarlGrey} software version \texttt{4.1.0} \citep{baril_earl_2024}.
+Before running \textsc{EarlGrey}, we first downloaded the \textsc{Dfam 3.8} database
+\citep{storer_dfam_2021}, extracting the annotated crustacean repeat sequences to generate
+an initial consensus masking library. We provided this initial consensus library to
+\textsc{EarlGrey} (\texttt{-l}). We also used ``arthropoda'' as the search term for
+\textsc{RepeatMasker} version \texttt{4.1.2} \citep{smit_repeatmasker_2013}. In addition,
+we clustered the final TE library to reduce redundancy (\texttt{-c yes}) and generated a
+soft-masked genome (\texttt{-d yes}).
+
+\subsubsection*{Annotation of protein-coding genes}\label{sec:methods_protein_coding}
+
+After masking the repetitive sequences in the genome, we took an integrative approach to
+annotate protein-coding genes, combining evidence from short-read RNAseq data, PacBio
+IsoSeq long reads, and protein sequences. For protein-level evidence, we downloaded the
+Arthropoda and Crustacea partitions of \textsc{OrthoDB} version \texttt{11}
+\citep{kriventseva_orthodb_2019,zdobnov_orthodb_2021}.
+\vspace{0.2cm}
+
+When processing the short-read data, we first filtered and processed the raw RNAseq
+Illumina reads using \textsc{fastp} version \texttt{0.23.4} \citep{chen_fastp_2018,
+chen_ultrafast_2023}, setting the minimum length of reads post-filtering to 25 bp
+(\texttt{--length\_required 25}) and enabling the detection of adapter sequences in the
+paired reads (\texttt{--detect\_adapter\_for\_pe}). We then aligned the processed RNAseq
+reads to the \bgla{} assembly using \textsc{hisat2} version \texttt{2.2.1}
+\citep{kim_graph-based_2019}, exporting alignments tailored for \textit{de novo}
+transcriptome assemblers (\texttt{--dta}). The alignments were further processed and
+sorted using \textsc{samtools}.
+\vspace{0.2cm}
+
+Using this aligned RNAseq data, we annotated protein-coding genes using \textsc{BRAKER}
+version \texttt{3.0.8} \citep{gabriel_braker3_2024}. We ran \textsc{BRAKER} in
+\texttt{ETP} mode \citep{bruna_genemark-etp_2024}, providing both RNAseq alignments
+(\texttt{--bams}) and Arthropod protein sequences (\texttt{--prot\_seq}) as evidence.
+We also used the Arthropod dataset from \textsc{BUSCO} \citep{simao_busco_2015} to
+enforce this set of orthologs as hints for \textsc{Augustus} \citep{stanke_using_2008}
+and reduce the number of missing single-copy orthologs in the final annotation
+(\texttt{--busco\_lineage arthropoda\_odb10}). After running \textsc{BRAKER}, we assessed
+the quality of the generated annotation using \textsc{compleasm} version \texttt{0.2.5}
+\citep{huang_compleasm_2023} in \texttt{protein} mode, using the Arthropod ortholog set
+as reference (\texttt{--lineage arthropoda\_odb10}).
+\vspace{0.2cm}
+
+In parallel, we annotated protein-coding genes using the PacBio IsoSeq data, aligning it
+to the assembly using \textsc{minimap2} version \texttt{2.26-r1175} (\texttt{-x splice:hq})
+and processing the downstream alignments with \textsc{samtools}. We then annotated the
+genome using the long-read branch of \textsc{BRAKER} version \texttt{3.0.8}. Similar to
+the short-read annotation, we ran \textsc{BRAKER} in \texttt{ETP} mode, using the aligned
+IsoSeq data (\texttt{--bam}) and Arthropod protein sequences (\texttt{--prot\_seq}) as
+evidence, and enforcing the \textsc{BUSCO} Arthropod reference set in the annotation
+(\texttt{--busco\_lineage arthropoda\_odb10}). Lastly, we used \textsc{compleasm}
+\texttt{protein} to assess the completeness of the annotation.
+\vspace{0.2cm}
+
+Once the RNAseq- and IsoSeq-based \textsc{BRAKER} annotations were completed, we merged
+the two using \textsc{TSEBRA} \citep{gabriel_tsebra_2021}. As recommended by published
+protocols \citep{bonizzoni_navigating_2025}, we merged the two annotations by providing
+the hint files (\texttt{--hintfiles}) and final GTF (\texttt{--gtf}) of each
+individual \textsc{BRAKER} run as inputs to the \texttt{tsebra.py} script. We assessed
+the gene-completeness of the merged annotation using \textsc{compleasm} \texttt{protein},
+using both the \texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} reference datasets.
+
+\subsubsection*{Transcript and isoform curation}
+
+We performed an additional curation of the annotated protein coding sequences using
+our PacBio Iso-Seq data.
+First, transcripts and isoforms were annotated from the Iso-Seq long reads using
+the \textsc{nf-core/isoseq} pipeline version \texttt{2.0.0}
+\citep{guizard_nf-coreisoseq_2023}.
+Quality control of the annotated isoforms was then performed using \textsc{sqanti3}
+pipeline version \texttt{5.2.2} \citep{pardo_sqanti3_2024}.
+Following the \textsc{sqanti3} documentation, we first performed quality control
+of the isoforms using \texttt{sqanti3\_gc}, using the \textsc{braker} GTF as our
+reference annotation, and providing short-read RNAseq reads to infer junction
+coverage and determine expression levels.
+Isoforms were then filtered using \texttt{sqanti3\_filter} using the default rules,
+except that we retained mono-exonic transcripts.
+Lastly, we rescued filtered transcripts and isoforms using \texttt{sqanti3\_rescue},
+rescuing all isoform types (\texttt{--mode "full"}) and using default parameters.
+\vspace{0.2cm}
+
+The rescued isoforms from \textsc{sqanti3} were processed using \textsc{TransDecoder}
+version \texttt{5.7.1} \citep{hass_transdecoder} to identify protein-coding sequences
+among the annotated sequences.
+Following the \textsc{TransDecoder} documentation, we first extracted the longest coding
+sequences from the rescued \textsc{sqanti3} GFF using \texttt{TransDecoder.LongOrfs}.
+We then identified homology among the putative transcripts using \textsc{hmmsearch}
+version \texttt{3.4} \citep{eddy_hmmer_2011} against the \texttt{Pfam} database
+(downloaded on 2025/07/25), and using \textsc{blastp} version \texttt{2.15.0+} against
+the \texttt{UniProtSprot} database (downloaded on 2025/08/08).
+Then, we performed the final coding sequence prediction integrating the homology
+results using \texttt{TransDecoder.Predict}.
+Predicted transcripts were mapped back to the genome and to the isoform annotation
+using the \textsc{TransDecoder} auxiliary scripts, filtering whole transcripts and
+isoforms lacking homology and coding predictions.
+\vspace{0.2cm}
+
+Lastly, we merged this curated isoform annotation with our \textsc{braker} annotation
+using the \textsc{tacoRNA} software version \texttt{0.7.3} \citep{niknafs_taco_2017}.
+First, we used \texttt{taco\_run} to merge the two annotations, disabling the filter
+by expression levels (\texttt{--filter-min-expr "0.0"}).
+The merged annotation was then compared to the reference genome and annotation using
+\texttt{taco\_refcomp} to ensure overlap of the merged transcripts.
+The final annotation was processed using the \textsc{agat} software version \texttt{1.4.3}
+\citep{dainat_another_2022} to sort by genomic coordinates, add missing annotation features,
+and standardize annotation IDs.
+We performed quality control of the merged annotation by assessing gene-completeness
+using \textsc{compleasm} \texttt{protein} against both the \texttt{arthropoda\_odb10}
+and \texttt{crustacea\_odb12} reference datasets (Table~\ref{tab:sup_annot_stats}).
+
+\subsubsection*{Functional annotation}
+
+Functional annotation of the processed protein coding genes was performed using the
+\textsc{EnTAP} software version \texttt{2.3.0} \citep{hart_span_2020}.
+We compared the bgla{} protein sequences against the following curated databases:
+\texttt{eggNOG} (downloaded on 2025/07/08), \texttt{NCBI nr} (downloaded on 2025/10/08),
+\texttt{RefSeq Protein} (downloaded on 2025/08/08), \texttt{Swiss-Prot}
+(downloaded on 2025/08/08), and \texttt{InterProScan} (downloaded on 2025/07/25).
+We considered sequences as contaminant if they had high similarity to bacteria, fungi,
+viridiplantae, archaea, nematoda, cestoda, and trematoda.
+Contaminant sequences were removed from the annotation GFF file.
+
+\subsubsection*{Annotation of non-coding RNAs}\label{sec:methods_ncrna}
+
+We annotated three classes of non-coding transcripts in the \bgla{} assembly: ribosomal
+RNAs (rRNA), transfer RNAs (tRNA), and long, non-coding RNAs (lncRNAs). First, we annotated
+rRNAs using \textsc{barrnap} version \texttt{0.9} \citep{seemann_barrnap_2018}, specifying
+the search against eukaryotic sequences (\texttt{--kingdom euk}). Transfer RNAs were
+annotated using the \textsc{tRNAscan-SE} software version \texttt{2.0.12}
+\citep{chan_trnascan-se_2021}. We specified the annotation of eukaryotic tRNA motifs
+(\texttt{-E}) and reporting the source of all sequence hits in the outputs
+(\texttt{--hitsrc}). We removed pseudogenized tRNA copies from downstream analyses.
+\vspace{0.2cm}
+
+For annotating lncRNAs, we first re-aligned our PacBio IsoSeq transcripts to the
+assembly using \textsc{minimap2} (using the \texttt{-ax splice:hq} option). Then, we
+called \textit{de novo} transcripts from the aligned long-reads using \textsc{StringTie}
+version \texttt{2.2.1} \citep{shumate_improved_2022,kovaka_transcriptome_2019}. We ran
+\textsc{StringTie} in long-read mode (\texttt{-L}), providing our curated protein-coding
+annotation as a guide for transcript assembly (\texttt{-G}). After calling \textit{de novo}
+transcripts, we annotated lncRNAs using the \textsc{FEELnc} pipeline version \texttt{0.01}
+\citep{wucher_feelnc_2017}. In this pipeline, we used \texttt{FEELnc\_filter} to filter
+the \textsc{StringTie} annotation to look for candidate non-coding transcripts not
+present in the reference protein-coding gene annotation. We then used
+\texttt{FEELnc\_codpot} to calculate the coding potential of the candidate transcripts,
+modeling the coding potential against a non-coding fraction of the genome
+(\texttt{--mode=intergenic}). Lastly, we classified candidate non-coding transcripts
+according to their location relative to nearby genes using \texttt{FEELnc\_classifier}.
+\vspace{0.2cm}
+
+After their annotation, all three non-coding RNA classes were separately processed
+using the \textsc{agat} in order to sort features by chromosomal coordinates, add
+missing features, add biotypes, standardize IDs, and merge records into a single GFF file.
+
+\subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
+
+We identified orthologous gene families across annotated barnacle genomes. In
+addition to the \bgla{} annotated protein-coding genes, we used annotations for
+a newly generated assembly and annotation for the wrinkled barnacle
+(\textit{Balanus crenatus}; see \nameref{sec:sup_methods_balcre}), as well as
+published annotations and/or transcriptomic data for the striped barnacle
+(\textit{Amphibalanus amphitrite};~\citealp{han_new_2024,kim_draft_2019}), the
+Bay barnacle (\textit{Amphibalanus improvisus};~\citealp{bishop_genome_2025}),
+and the gooseneck barnacle (\textit{Pollicipes pollicipes};
+\citealp{bernot_chromosome-level_2022}).
+See \nameref{sec:sup_methods_barnacle_rna} for additional details.
+For all species, we used the longest isoform as representative for each gene for
+all downstream analyses.
+\vspace{0.2cm}
+
+We identified orthologs across the protein-coding genes of these five genomes using
+\textsc{OrthoFinder} version \texttt{3.1.0} \citep{emms_orthofinder_2015,
+emms_orthofinder_2019,emms_orthofinder_2025}. We used the default search parameters
+in \textsc{OrthoFinder}, inferring gene trees from multiple-sequence alignments
+(\texttt{-M msa}), searching homologous sequences using \textsc{diamond} version
+\texttt{2.1.9.163}, generating multiple-sequence alignments using \textsc{famsa}
+version \texttt{2.4.1}, and building gene trees using \textsc{fasttree} version
+\texttt{2.1.11}. Additionally, we split paralogous claded below the root into
+separate orthogroups (\texttt{-y}). Across all genomes, we assigned $88.5\%$ of
+genes into 15,184 orthogroups, including 2,576 containing single-copy orthologs
+present in all five species.
+
+\subsection*{Conserved synteny analysis}
+
+We calculated conserved synteny between barnacle genomes using the
+\textsc{genespace} version \texttt{1.3.1} software \citep{lovell_genespace_2022}.
+We used our \textsc{OrthoFinder} analysis as input for \textsc{genespace}, subsetting
+to only include orthologs for \bgla, \textit{A. amphitrite}, and \textit{P.
+pollicipes} using the \texttt{genomeID} parameter in the \texttt{init\_genespace}
+function. We set the minimum number of genes pairs required to define a syntenic
+block to two (\texttt{blkSize=2}) to identify synteny across smaller/more
+fragmented genomic regions across these highly-diverged species. Lastly, we
+generated a riparian plot for the three genomes using the \texttt{plot\_riparian}
+function, only plotting sequences larger than 5 Mb (\texttt{minChrLen2plot}),
+and setting \textit{A. amphitrite} as the reference for ordering the chromosomes
+(\texttt{ref}).
+
+\subsection*{Identifying highly-conserved elements}
+
+We identified highly-conserved genomic elements (HCE) across the genomes of six
+barnacle species (\bgla, \textit{B. crenatus}, \textit{A. amphitrite},
+\textit{A. improvisus}, \textit{C. mitella}, and \textit{P. pollicipes}).
+First, we generated a whole-genome alignment of these five species using
+\textsc{cactus} version \texttt{2.9.7} \citep{armstrong_progressive_2020}.
+We used the phylogenetic tree generated by \textsc{OrthoFinder} as the guide tree
+for the alignment.
+Next, we ran the \texttt{phyloFit} program, part of \textsc{phast} version
+\texttt{1.5} \citep{siepel_evolutionarily_2005} to generate a neutral
+phylogenetic model based on the resulting alignment and general time reversible
+substitution model (\texttt{--subst-mod REV}).
+Lastly, we calculated conservation scores on the aligned sequences using 
+\texttt{phastCons}.
+We exported the coordinates (\texttt{--most-conserved}) and assigned
+log-odd scores (\texttt{--scores}) to the HCEs.
+\vspace{0.2cm}
+
+We used a custom Python script (\texttt{tally\_phastcon\_elements.py}) to
+annotate and calculate the enrichment of known annotated features present in
+the \texttt{phastCons}. The script provides general statistics about the HCEs
+(e.g., number of HCE and size distribution) and annotates conserved sites
+based on their overlap to annotated features in the genome.
+
+\subsection*{Estimating rates of non-synonymous to synonymous substitution}
+
+We calculated pairwise \dnds{} between the coding sequences of \bgla{} and its
+congener \textit{B. crenatus}. We first took the orthologous protein coding genes
+identified between the two species by \textsc{OrthoFinder}.
+Then, we used a custom Python script (\texttt{extract\_orthogroups\_cds.py}) to
+extract the per-species coding sequences for each single-copy ortholog between the
+two species.
+We generated a multiple-sequence alignment (MSA) for each ortholog using
+\textsc{prank} version \texttt{v.170427} \citep{loytynoja2005_prank} in codon
+mode (\texttt{-codon}), using the \textsc{OrthoFinder} phylogeny as the guide
+tree for alignment (\texttt{-tree}; \texttt{-prunetree}), and performing three
+iterations of re-alignments (\texttt{-iterate=3}).
+The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
+\citep{steenwyk2020_clipkit}, trimming the alignment by codons (\texttt{--codon}).
+Lastly, we filtered all alignments shorter than 100 bp.
+\vspace{0.2cm}
+
+After generating and processing alignments for the resulting 9,082 single-copy
+orthologs, we calculated \dnds{} rates using a custom Python script
+(\texttt{pairwise\_dnds.py}).
+The script uses the \texttt{dnds} Python package version \texttt{2.1}
+\citep{qalieh_dnds} to calculate \dnds{} using the codon-by-codon
+counting method described by~\cite{nei1986_dnds}.
+For each alignment, we calculated the total number of non-synonymous and
+synonymous sites (N\textsubscript{C} and S\textsubscript{C}, respectively),
+accounting for the degenerate codons.
+We then calculated the number of non-synonymous (N\textsubscript{D}) and
+synonymous differences (S\textsubscript{D}) observed between the two sequences.
+The rate between the number non-synonymous (d\textsubscript{N}) and synonymous
+(d\textsubscript{S}) substitutions and sites is then calculated, and corrected for
+multiple substitutions using the Jukes-Cantor correction \citep{JC69}.
+
+\subsection*{McDonald-Kreitman test}
+
+We calculated the deviation from synonymous to non-synonymous polymorphism and
+divergence using the McDonald-Kreitman (MK) test \citep{mcdonald_adaptive_1991},
+using the single-copy orthologs between \bgla{} and \textit{B. crenatus} described
+above.
+For determining the levels of polymorphism, we took population genetic data from
+\bgla{} from Central Oregon (see \nameref{sec:methods_popgen}).
+We used a custom Python script (\texttt{extract\_hap\_cds.py}) to map these
+variants (both SNPs and indels) to the \bgla{} coding sequences, effectively
+creating two allelic variants for each sample for each protein coding gene.
+This polymorphism data was re-organized for each ortholog, generating a
+per-ortholog multi-species FASTA file, containing both polymorphic sequences for
+\bgla{} and the corresponding \textit{B. crenatus} outgroup sequence.
+Similar to the \dnds{} analysis, we generated codon-aware multiple-sequence
+alignments of all coding sequences using \textsc{prank} \texttt{-codon}.
+Orthologs whose alignments contained frameshift mutations were removed from the
+analysis.
+The resulting alignments were processed with \textsc{ClipKIT}, trimming the
+alignment by codons (\texttt{--codon}), and trimming sites above a gap threshold
+of 25\% (\texttt{--mode gappy}; \texttt{--gaps 0.25}).
+Alignments smaller than 100 bp were also discarded, retaining sequences for 7,374 
+orthologs.
+\vspace{0.2cm}
+
+The MK test and associated statistics were calculated using the \textsc{MKado}
+version \texttt{0.2.0} software \citep{mkado_2026}.
+\textsc{MKado} parses the multiple-sequence alignments and computes the 
+non-synonymous and synonymous changes in divergence and polymorphism
+(D\textsubscript{N}, D\textsubscript{S}, P\textsubscript{N}, P\textsubscript{S},
+respectively), between ingroup and outgroup sequences.
+We ran \textsc{MKado} three times, each time calculating a different variant of
+the MK test.
+First, we calculated the standard MK test \citep{mcdonald_adaptive_1991} for all
+7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating the
+per-gene proportion of non-synonymous sites fixed by selection ($\alpha$;
+\citealp{smith_adaptive_2002}), Neutrality Index (NI;~\citealp{rand_excess_1996})
+and Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}).
+Next, we calculated the asymptotic MK test (\texttt{--asymptotic};
+\citealp{messer_frequent_2013}) to correct for the biases introduced by low
+frequency polymorphism, and estimating $\alpha_\text{asym}$ aggregated across
+all genes.
+Lastly, we calculated the Tarone-Greenland weighted estimator
+($\alpha_\text{TG}$;~\citealp{stoletzki_estimation_2011}) using
+\textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiased estimator of
+genome-wide $\alpha$ when comparing across multiple genes.
+
+\subsection*{Assessment of classic allozyme loci}
+
+We identified the \bgla{} orthologs to the seven classic allozyme loci first
+characterized in barnacles by \cite{flowerdew_electrophoretic_1983}.
+First, we obtained representative sequences for these seven allozyme proteins
+(Table~\ref{tab:sup_allozymes}), which we then aligned against the annotated
+\bgla{} proteins using \textsc{blastp} version \texttt{2.15.0}, as implemented
+in \textsc{BLAST+}.
+The best \textsc{BLAST} hit, based on both sequence identity and e-value, was
+then assigned as the representative \bgla{} ortholog.
+Transcript IDs and genomic coordinates of these orthologs are shown in
+Table~\ref{tab:sup_allozymes}.
+\vspace{0.2cm}
+
+To characterize patterns of molecular evolution in these allozyme loci, we first
+calculated pairwise \dnds{} between the \bgla{} allozyme transcript sequences and
+their corresponding ortholog in \textit{B. crenatus}, following the same approach
+described above for all orthologs.
+We also implemented the McDonald-Kreitman test and associated statistics using a
+similar approach as described above for all genome-wide orthologs.
+However, to ensure we recovered results for all seven allozymes, we removed
+individual polymorphic sequences containing frameshift mutations instead of removing
+the whole ortholog altogether.
+The patterns of divergence and polymorphism were then calculated on any remaining
+sequences.
+\vspace{0.2cm}
+
+We additionally explored a regime of balancing selection on these allozyme genes by
+calculating the patterns of synonymous nucleotide diversity (in the form of $\pi$ at
+4-fold degenerate sites; $\pi_{4}$) and synonymous substitution rate (\Ks{}) along
+the gene sequences.
+To achieve this, we first used a custom Python script (\texttt{pairwise\_Ks.py}) to
+calculate \Ks{} using the alignments between \bgla{} and \textit{B. crenatus}.
+The script parses the alignment and, using the \texttt{dnds} Python package version
+\texttt{2.1} \citep{qalieh_dnds}, calculates the number of
+synonymous sites (S\textsubscript{C}) and synonymous substitutions
+(S\textsubscript{D}) at each aligned codon.
+The final output reports S\textsubscript{C}, S\textsubscript{D}, and their rate
+$\text{S}_\text{C}/\text{S}_\text{D}$ (i.e., \Ks{}) at each site according to the
+values of its corresponding codon.
+To calculate synonymous diversity, we used the central Oregon polymorphism data.
+We used \textsc{pixy} to calculate per-site (\texttt{--window\_size 1}) $\pi$ at
+4-fold degenerate sites spanning the allozyme coding sequences (specified with
+\texttt{--sites\_file}).
+Lastly, we used another custom script (\texttt{process\_pi4\_Ks.R}) to aggregate
+the \Ks{} and $\pi_{4}$ values.
+Values were aggregated along 99 bp (33 codons) windows, with a step size of 24 bp
+(8 codons), filtering out windows with data for fewer than three codons.
+At each window, we calculated the average, Jukes-Cantor corrected \Ks{}, the
+average $\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window.
+In addition to the seven allozyme genes, we repeated this analysis for all the 
+orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
+estimate of $\pi_{4}/\text{K}_\text{S}$.
+After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
+
+\subsection*{Codon usage biases}
+
+We calculated codon usage biases on the \bgla{} coding sequences using the R package
+\textsc{cubar} version \texttt{1.2.0} \citep{liu_cubar_2026}.
+We first filtered coding sequences using the \texttt{check\_cds} function,
+ensuring the presence of canonical start and stop codons, retaining 16,904
+sequences.
+Then we calculated the distribution of observed codons using the
+\texttt{count\_codons} function.
+Lastly, we used the \texttt{get\_enc} function to calculate codon usage biases
+in the empirical codon distribution using the effective number of codons (ENC)
+metric, which captures the deviation from equal codon usage across synonymous
+codons \citep{wright_effective_1990}.
+More specifically, we calculated an improved implementation of ENC, accounting for
+usage differences across different codon subfamilies \citep{sun_improved_2013}.
+
+\subsection*{Genetic variation in the \balgla{} reference}\label{sec:methods_ref_geno}
+
+We genotyped our barnacle reference individual to assess the levels of genetic variation
+present in our genome assembly.
+To achieve this, we first re-aligned our processed PacBio HiFi reads to the assembly using
+\textsc{minimap2} version \texttt{2.28-r1209} with the \texttt{-x map-hifi} preset.
+A total of 99.97\% of reads were successfully mapped to the reference.
+The aligned reads were then sorted and filtered using \textsc{samtools} version \texttt{1.21}
+to remove non-primary and supplementary alignments.
+Lastly, we used the \textsc{mosdepth} software version \texttt{0.3.10}
+\citep{pedersen_mosdepth_2018} to calculate the depth of coverage along 10 kbp windows
+(\texttt{--no-per-base}; \texttt{--by 10000}) and calculating the proportion of bases
+covered at specified coverage thresholds (\texttt{--thresholds "1,3,5,10,20"}).
+After filtering and processing alignments, we reference individual retained a mean
+depth of coverage of 50.88x (median: 47.94x, standard deviation: 100.32x).
+\vspace{0.2cm}
+
+Genotypes were called from these alignments using the standard \textsc{bcftools} version
+\texttt{1.21} \citep{danecek_bcftools_2021} genotyping pipeline, consisting of the
+\texttt{mpileup} and \texttt{call} commands for generating genotype likelihoods and calling
+genotypes, respectively.
+We only genotyped the 58 contigs larger than 1 Mbp, processing each contig separately
+(using \texttt{--regions}).
+For \texttt{mpileup}, we only used a maximum depth of 250 x (\texttt{--max-depth 250}),
+and adding an annotation for both per-sample and per-site total and allelic depth
+(\texttt{--annotate "FORMAT/AD,FORMAT/DP,INFO/AD"}).
+For the \texttt{call} command, we used the updated calling model
+(\texttt{--multiallelic-caller}), adding annotations for genotype qualities and posterior
+probabilities (\texttt{--annotate "GQ,GP"}).
+Additionally, we used the \textsc{bcftools} \texttt{norm} command to join adjacent SNPs
+and indels into single multiallelic sites.
+\vspace{0.2cm}
+
+After calling genotypes, we filtered the resulting variants using \textsc{bcftools}.
+Using the \texttt{filter} command, we removed sites (both variant and invariant) with
+low quality (\texttt{--exclude "QUAL < 30"}), with too high coverage (\texttt{--exclude
+"INFO/DP > 125"}), adjacent to indels (\texttt{--SnpGap 3}; \texttt{--IndelGap 5}), and
+within the span of annotated repeats (\texttt{--mask-file repeats.bed}). We filtered
+individual genotypes with a low genotyping quality (\texttt{--exclude "FORMAT/GQ < 30"}),
+low depth (\texttt{--exclude "FORMAT/DP < 10"}), and a large allelic imbalance
+(\texttt{--exclude "(GT=='het') \& \%MAX(FMT/AD)/(FMT/DP) < 0.3"}).
+We also removed sites with more than two alleles using (\texttt{--max-alleles 2}) from
+the \texttt{view} command.
+Lastly, we merged all the files together in a single genome-wide VCF using
+\textsc{bcftools} \texttt{concat}.
+\vspace{0.2cm}
+
+We classified the effects of heterozygous variants present in the reference genome using
+\textsc{snpEff} version \texttt{5.2} \citep{cingolani_program_2012}.
+We first built a \textsc{snpEff} database of our \bgla{} reference genome and annotation
+using the \texttt{build} command.
+Then, we estimated the effects of variants using the \texttt{eff} command, exporting a
+CSV file containing a breakdown of all annotated variants (\texttt{-csvStats}).
+
+\subsection*{Population genetics of central Oregon barnacles}\label{sec:methods_popgen}
+
+\subsubsection*{Aligning reads}
+
+We used whole-genome shotgun sequencing in order to assess the genetic diversity of
+a \bgla{} population in central Oregon.
+We aligned the Illumina paired-end reads to the reference genome using \textsc{bwa}
+\texttt{mem} version \texttt{0.7.18-r1243}.
+Resulting alignments were processed and sorted using \textsc{samtools} version
+\texttt{1.21}.
+We used \textsc{Picard} \texttt{MarkDuplicates} version \texttt{3.3.0}
+\citep{picard} to identify PCR duplicate reads, and
+\textsc{gtak} \texttt{LeftAlignIndels} version \texttt{4.6.1.0}
+\citep{mckenna_gatk_2010,depristo_framework_2011} to process indels.
+Then, we used \textsc{samtools} \texttt{view} to filter and export the alignments,
+removing those with low mapping quality (\texttt{-q 30}), unmapped reads (\texttt{-F 4}),
+non-primary (\texttt{-F 256}) and secondary (\texttt{-F 2048}) alignments, and those
+flagged as PCR duplicates (\texttt{-F 1024}).
+Lastly, we calculated depth of coverage using \textsc{mosdepth}.
+Two individuals had low genome-wide average coverage ($<$5x) and were removed from
+downstream analysis.
+For the six remaining individuals, an average of 94.13\% of reads aligned to the 
+reference genome, resulting in a mean genome-wide coverage of 48.83x.
+
+\subsubsection*{Genotyping}
+
+These six individuals were genotyped using the same \textsc{bcftools}
+\texttt{mpileup}/\texttt{call} approach used for our reference sample
+(see \nameref{sec:methods_ref_geno}), except allowing for a maximum depth of 1000x when
+genotyping (\texttt{--max-depth 1000}).
+After normalizing indels using \textsc{bcftools} \texttt{norm}, we filtered the called
+variants using \textsc{bcftools} \texttt{filter} and \texttt{view}.
+We removed sites with low quality, adjacent to indels, and within the span of annotated
+repeats.
+Additionally, we removed sites with per-sample coverage lower than 10x, genotype quality
+lower than 30, and allelic imbalance larger than 30\%.
+After merging individual per-chromosome variants into a single genome-wide VCF, we also
+removed any sites containing missing genotypes (\texttt{bcftools view -g \^{}miss}).
+The effects of the kept variants was determined using \textsc{snpEff}.
+
+\subsubsection*{Population genetic statistics}
+
+We used the \textsc{pixy} software version \texttt{2.0.0.beta12}
+\citep{korunes_pixy_2021,bailey_pixy2_2025} to obtain genome-wide measures of genetic
+diversity. We calculated both nucleotide diversity ($\pi$) and Watterson's Theta
+($\theta_\text{W}$; \texttt{--stats pi watterson\_theta}) on 10 kbp windows
+(\texttt{--window\_size 10000}).
+We allowed multiallelic sites to be used in the calculations
+(\texttt{--include\_multiallelic\_snps}), limiting the calculation to sites present in our
+input VCF file (\texttt{--sites\_file}).
+\vspace{0.2cm}
+
+We performed additional diversity calculations with \textsc{pixy} on different regions
+of interest in the genome.
+Instead of running on uniform 10 kbp windows along the genome, we calculated $\pi$ along the
+span of annotated genomic features (coding sequences, introns, 5' UTRs, 3' UTRs, lncRNAs,
+rRNAs, and intergenic regions).
+We reran \textsc{pixy} separately for each feature, specifying the genomic coordinates of
+the feature's annotation using the \texttt{--bed\_file} option.
+We also calculated $\pi$ at 0-fold and 4-fold degenerate sites.
+For this, we first determined the degeneracy at each coding site in the genome using the
+\texttt{degenotate} version \texttt{1.3} tool from the \textsc{snpArcher} pipeline
+\citep{mirchandani_snparcher_2023}.
+After determining degeneracy we separately calculated $\pi$ for 0-fold and 4-fold
+degenerate sites using \textsc{pixy}, specifying the specific sites of interest using
+\texttt{--sites\_file} and averaging within the span of each exon (using \texttt{--bed\_file}).
+
+\subsection*{Inference of effective population size}
+
+We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
+population's effective size.
+First, we estimated the long-term average \Ne{} in this population based on the
+estimates of $\theta_\text{W}$ along 10 kbp windows using \textsc{pixy}, and using the
+relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
+We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
+by~\cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+Using this relationship, we calculated \Ne{} along these 10 kbp windows, obtaining a
+distribution of effective size along the genome.
+\vspace{0.2cm}
+
+We additionally estimated the effective size of the population using the \textsc{msmc2}
+software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
+\textsc{DemInfHelper} program version \texttt{0.1.1} \citep{forest_popsize_2024}.
+We ran \textsc{msmc2} with 25 iterations (\texttt{-i 25}), using the default
+time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
+in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
+We estimated historical \Ne{} for our six Cape Perpetua individuals; however since
+our genotypes were not phased, we ran \textsc{msmc2} for each individual separately.
+
+\subsection*{Data availability}
+
+Assembly and annotation on \texttt{PRJNA1378260}.
+Popgen Illumina data on \texttt{PRJNA1434535}.
+Code repo: \url{https://github.com/kr-colab/balanus_genome_ms}.
+
