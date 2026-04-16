@@ -2,7 +2,8 @@
 
 \subsection*{Genome assembly}
 
-% General stats on assembly. Confirming the quality and status of the genome.
+\comment{From Angel: Let's maybe reduce this to 1 paragraph discussing the assembly
+and annotation. Like Scott said, the details are in the methods.}
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle
 using PacBio HiFi long reads and Hi-C chromosome conformation capture. Preliminary
@@ -55,8 +56,6 @@ and comparative analyses.
 
 \subsection*{Genome annotation}
 
-% Stats and QC on the annotation.
-
 Once the assembly and scaffolding were completed, we annotated and masked repeat
 sequences in the \bgla{} reference assembly using \textsc{EarlGrey}
 \citep{baril_earl_2024}. This analysis identified 698.6 Mbp (66.94\%)
@@ -68,7 +67,7 @@ representative barnacle sequences among curated repeat reference libraries,
 reflecting the status of barnacles as a genomically understudied group. Among the
 classified repeats, DNA and LINE elements were the two most abundant repeat
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
-\comment{From Scott: did you look at the Kimura distance?}
+\comment{From Scott: did you look at the Kimura distance? Angel: not recently.}
 \vspace{0.2cm}
 
 Following repeat masking of the reference assembly, we annotated protein-coding
@@ -85,9 +84,6 @@ emms_orthofinder_2025}, resulting in the assignment of 16,978 (83.91\%) \bgla{}
 genes to orthologous groups across barnacles and the identification of 2,576
 single-copy orthologs across all five species.
 \vspace{0.2cm}
-
-% Short paragraph, but unsure what to say here. Just wanted to mention that
-% we annotated non-coding stuff too.
 
 In addition to protein-coding genes, we also annotated non-coding elements in the
 \bgla{} reference assembly. We identified 7,532 long, non-coding RNAs
@@ -108,8 +104,6 @@ the paper.}
 
 \comment{From Scott: I think this shoudl be the first section of the results, that
 stuff above here is supplement and largely redundant with the methods}
-
-% Just touching on synteny. Things are fairly clean, so not much to say for now.
 
 To assess large-scale structural conservation across barnacle genomes, we performed
 a synteny analysis using the software \textsc{Genespace}
@@ -165,9 +159,6 @@ the exceptionally large population sizes of this species and foreshadows
 the extreme diversity observed at the population level.
 
 \subsection*{Functional elements are conserved in barnacle genomes}
-
-% For phastCons, mostly saying how we found the hughly conserved stuff and what
-% it is. The enrichment results are generally expected (tRNAs and CDSs are conserved).
 
 We used the \textsc{phastCons} package \citep{siepel_evolutionarily_2005} on the
 \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} between
