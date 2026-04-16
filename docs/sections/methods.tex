@@ -594,6 +594,33 @@ In addition to the seven allozyme genes, we repeated this analysis for all the
 orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
 estimate of $\pi_{4}/\text{K}_\text{S}$.
 After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
+\vspace{0.2cm}
+
+To formally test each allozyme locus for departures from neutrality using both
+polymorphism and divergence, we applied the Hudson-Kreitman-Aguad\'{e} (HKA) test
+\citep{hudson_test_1987} and its sliding-window extension
+\citep{kreitman_inferring_1991}, as implemented in the \texttt{sliding\_hka}
+Python package (\url{https://github.com/andrewkern/sliding_hka}). For each of
+the seven allozyme loci we constructed a per-locus full-length multiple sequence
+alignment spanning the gene body plus 5\,kb of flanking sequence on either side.
+Coding regions were aligned codon-aware using the existing \bgla{} /
+\textit{B. crenatus} CDS alignments from the MK analysis; intronic and
+intergenic flanks were aligned pairwise with \textsc{lastz} version 1.04.52
+under permissive sister-species parameters
+(\texttt{--seed=match8 --hspthresh=1500 --gappedthresh=1000 --ydrop=9400
+--inner=2000}); the two tracks were stitched together in genomic coordinates.
+Per-sample ingroup haplotype sequences for the same windows were extracted
+via \texttt{bcftools consensus} (\texttt{-H 1,2}) against the filtered
+all-sites VCFs, then profile-aligned onto the stitched reference alignment
+with \textsc{mafft} \texttt{--add} \texttt{--keeplength}
+\texttt{--adjustdirectionaccurately}. For the classic HKA test each locus was tested
+against the pool of the remaining six under the segregating-sites variant;
+$T+1$ was estimated jointly across all seven loci. CDS columns were
+treated codon-aware (Nei-Gojobori synonymous-site denominator and path-based
+synonymous classification), while non-coding columns were treated per-site
+as fully silent, following the 1991 convention. For the sliding-window
+diagnostic we used a window width of 500 silent sites; windows anchored in
+alignment dead zones were omitted.
 
 \subsection*{Codon usage biases}
 

@@ -531,6 +531,57 @@ across these congeneric systems or reflects distinct evolutionary histories in
 Atlantic and Pacific barnacles.
 \comment{From Scott: soooo much of this should go in the discussion this section is
 very long because of it}
+\vspace{0.2cm}
+
+To test the seven allozyme loci for departures from neutrality at the level of within-species
+polymorphism relative to between-species divergence, we applied the Hudson-Kreitman-Aguad\'{e}
+test \citep{hudson_test_1987}. For each locus we assembled a full-length alignment spanning
+the gene body plus 5\,kb of flanking sequence on either side, stitching the codon-aware
+\bgla{} / \textit{B. crenatus} coding alignment together with pairwise alignment of introns
+and intergenic flanks, and augmented with twelve per-sample \bgla{} ingroup haplotypes
+derived from our population panel. Testing each allozyme locus against the pooled remainder
+under the segregating-sites variant of the test (Table~\ref{tab:sup_hka}), only \textit{Me.1}
+showed a significant deviation ($p = 0.032$), exhibiting a deficit of polymorphism
+relative to its divergence --- the signature expected under a recent selective sweep or
+strong purifying constraint at linked sites. This result parallels the paralog-level
+asymmetry uncovered by the MK analysis, where only \textit{Me.2} --- and not \textit{Me.1}
+--- showed evidence of positive selection, and reinforces the interpretation that the two
+copies of malic enzyme are under fundamentally different selective regimes in \bgla{}.
+\vspace{0.2cm}
+
+The two MK outliers, \textit{Gpi} and \textit{Me.2}, did not reach significance individually
+under the classic HKA test, but both showed direction-consistent excess polymorphism
+relative to divergence. To visualize where along each locus the signal concentrates we
+applied the sliding-window HKA diagnostic \citep{kreitman_inferring_1991} using a window
+of 500 silent sites centered on each nucleotide position (Figure~\ref{fig:sliding_hka}).
+Both \textit{Me.2} and \textit{Pgm} show observed silent diversity exceeding the
+divergence-scaled neutral expectation across multiple sub-regions of the gene body, with
+the largest excesses localized to coding and intronic windows rather than spread
+uniformly. These localized peaks echo the single-exon elevations in
+$\pi_{4}/\text{K}_\text{S}$ reported above and are consistent with selection acting
+heterogeneously along the gene body at these loci (see Figure~\ref{fig:sup_sliding_hka}
+for the full set of seven loci).
+
+% Sliding HKA main figure
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_pgm.pdf}\hfill
+    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_me2.pdf}
+    \caption{\textbf{Sliding-window HKA diagnostic at \textit{Pgm} and \textit{Me.2}.}
+        For each locus we show observed mean ingroup pairwise silent diversity ($\pi$;
+        solid black line) alongside the divergence-scaled neutral expectation
+        ($\textit{D} / (T+1)$; dashed grey line), both computed in sliding windows
+        of 500 silent sites centered on each nucleotide position. $T + 1$ is a joint
+        estimate pooled across all seven allozyme loci. Windows anchored in alignment
+        dead zones (positions where \textit{B. glandula} and \textit{B. crenatus} could
+        not be homologized) are omitted. The gene structure track below each panel
+        shows exons (filled black blocks), untranslated regions (open outlined blocks),
+        and introns (thin black baseline). Both loci exhibit sub-regions where
+        observed $\pi$ stands meaningfully above the expected curve, the pattern
+        predicted under balancing selection or recent positive selection on standing
+        variation at linked sites.}
+    \label{fig:sliding_hka}
+\end{figure}
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
