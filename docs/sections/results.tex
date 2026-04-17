@@ -1,115 +1,69 @@
 \section*{Results}
 
-\subsection*{Genome assembly}
+\subsection*{Genome assembly and annotation}
 
-% General stats on assembly. Confirming the quality and status of the genome.
+\commentauth{Angel}{Following Scott's comments. Didn't remove this completely, but merged
+the assembly and annotation into a more streamlined section. The remaining details are in
+the methods.}
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle
-using PacBio HiFi long reads and Hi-C chromosome conformation capture. Preliminary
-assessment of the PacBio HiFi data using k-mers revealed an expected genome size
-of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}).
-Our initial contig-level assembly, generated using \textsc{hifiasm}
-\citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022} with
-default parameters, produced sequences with a total length of 1.64 Gbp,
-composed of 4,212 fragments, and a contig N50 of 734 kbp. We also assessed
-gene-completeness using \textsc{BUSCO}s \citep{simao_busco_2015,manni_busco_2021,
-tegenfeldt_orthodb_2025}, as implemented in \textsc{compleasm}
-\citep{huang_compleasm_2023}, resulting in a completeness of 95.66\%
-with over 50\% duplicated orthologs
-for the \texttt{arthropoda\_odb10} single-copy ortholog set
-(Table~\ref{tab:sup_asm_stats}). The statistics for this initial assembly, with
-twice the expected genome size and over 50\% duplicated \textsc{BUSCO}s,
-suggested the presence of a large fraction of haplotig sequences, reflecting
-the high heterozygosity observed for the species.
+using PacBio HiFi long reads and Hi-C chromosome conformation capture.
+Preliminary k-mer assessment of the PacBio HiFi data revealed an expected genome
+size of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}).
+After purging haplotigs, scaffolding, and polishing the sequences (see
+\nameref{sec:methods_assembly}), the final assembly was composed of 592 fragments, had
+a total sequence length of 1.04 Gbp, and a scaffold N50 of 51.41 Mbp
+(Table~\ref{tab:sup_asm_stats}).
+The assembly was 94.08\% gene-complete, with 4.64\% duplicates, for the
+\texttt{arthropoda\_odb10} \textsc{BUSCO} dataset
+\citep{simao_busco_2015,manni_busco_2021,tegenfeldt_orthodb_2025}.
 \vspace{0.2cm}
 
-After optimizing the assembly with the addition of ONT ultra-long reads and more stringent
-purging of haplotig and contaminant sequences (see \nameref{sec:methods_assembly}), we
-generated contigs with a substantially smaller fraction of haplotigs, reducing the
-assembly size to 1.05 Gbp and the \textsc{BUSCO} duplicates to 4.84\%.
-This contig-level assembly was then scaffolded with Hi-C data using the \textsc{YaHS}
-software \citep{zhou_yahs_2023} (Figure~\ref{fig:sup_hic}), generating an assembly
-with a total length of 1.05 Gbp, composed of 650 scaffolds, a scaffold N50
-of 50.96 Mbp, and a \textsc{BUSCO} completeness of 93.98\% (4.74\% duplicated;
-\texttt{arthropoda\_odb10}) (Table~\ref{tab:sup_asm_stats}).
-\vspace{0.2cm}
-
-This scaffold-level assembly was further processed by performing manual curation
-of the Hi-C contact map and polishing using the software \textsc{Inspector}
-\citep{chen_accurate_2021}. This curated assembly was composed of 592 fragments,
-a total sequence length of 1.04 Gbp, a scaffold N50 of 51.41 Mbp, and a per-base
-quality value (QV) of 30.49. When assessing completeness, the curated assembly was
-94.08\% and 92.77\% gene-complete for the \texttt{arthropoda\_odb10} and
-\texttt{crustacea\_odb12} \textsc{BUSCO} datasets, respectively
-(Table~\ref{tab:sup_asm_stats}). Of the 1.04 Gbp of total sequence,
-906.6 Mbp (86.74\%) was contained in 58 scaffolds larger than 1 Mbp. Moreover,
-the 16 largest sequences (larger than 8.5 Mbp) contained 841.2 Mbp (80.61\%) of
-the total sequence, and likely represent 16 chromosomes. This karyotype
-number, N=16, is in agreement with that observed for other species in the genus
-\textit{Balanus} \citep{austin_chromosome_1958} and other acorn barnacles in the
+Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds
+larger than 1 Mbp.
+Moreover, the 16 largest fragments (larger than 8.5 Mbp; Figure~\ref{fig:sup_hic})
+contained 841.2 Mbp (80.61\%) of the total sequence, and likely represent 16 chromosomes.
+This karyotype number, N=16, is in agreement with that observed for other species in the
+genus \textit{Balanus} \citep{austin_chromosome_1958} and other acorn barnacles in the
 family Balanidae \citep{han_new_2024}.
-Together, the high contiguity, gene-completeness, and chromosome-level scaffolding
-of this assembly make it among the most complete genomic resources available for
-any barnacle species, and a strong foundation for downstream population genomic
-and comparative analyses.
+\vspace{0.2cm}
 
-\subsection*{Genome annotation}
-
-% Stats and QC on the annotation.
-
-Once the assembly and scaffolding were completed, we annotated and masked repeat
-sequences in the \bgla{} reference assembly using \textsc{EarlGrey}
-\citep{baril_earl_2024}. This analysis identified 698.6 Mbp (66.94\%)
-of the assembly as repetitive elements (Table~\ref{tab:sup_earlgrey_summary});
+Following assembly, we annotated and masked repeat sequences in the genome using
+\textsc{EarlGrey} \citep{baril_earl_2024}.
+This analysis identified 698.6 Mbp (66.94\%) of the assembly as repetitive elements
+(Table~\ref{tab:sup_earlgrey_summary});
 however, the majority of these, 404.5 Mbp (38.76\% of the assembly), remained
-unclassified among the major repeat element types. This large proportion of
-unclassified repeat elements is likely the product of the small number of
-representative barnacle sequences among curated repeat reference libraries,
-reflecting the status of barnacles as a genomically understudied group. Among the
-classified repeats, DNA and LINE elements were the two most abundant repeat
+unclassified among the major repeat families.
+This large fraction of unclassified repeats is likely the product of the small number of
+representative barnacle sequences among repeat reference libraries, further reflecting the
+status of barnacles as a genomically understudied group.
+Among the repeats that could be classified, DNA and LINE elements were the two most abundant
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
-\comment{From Scott: did you look at the Kimura distance?}
 \vspace{0.2cm}
 
-Following repeat masking of the reference assembly, we annotated protein-coding
-genes using short-read RNAseq and long-read PacBio Iso-Seq sequencing, combining
-and curating annotations generated from the two data types (see
-\nameref{sec:methods_protein_coding}). This process resulted in 20,234
-protein-coding genes annotated in the genome. The resulting annotation has a
-\textsc{BUSCO} completeness of 93.58\% and 84.77\% for the
-\texttt{arthropoda\_odb10} and \texttt{crustacea\_odb12} datasets, respectively
-(Table~\ref{tab:sup_annot_stats}). Additionally, we compared our annotation against
-the proteomes of four other barnacle species (see \nameref{sec:methods_orthologs})
-using \textsc{OrthoFinder} \citep{emms_orthofinder_2015,emms_orthofinder_2019,
-emms_orthofinder_2025}, resulting in the assignment of 16,978 (83.91\%) \bgla{}
-genes to orthologous groups across barnacles and the identification of 2,576
-single-copy orthologs across all five species.
-\vspace{0.2cm}
-
-% Short paragraph, but unsure what to say here. Just wanted to mention that
-% we annotated non-coding stuff too.
-
+We annotated protein-coding genes in the \bgla{} assembly using a combination of
+short-read RNAseq and long-read PacBio Iso-Seq data (see
+\nameref{sec:methods_protein_coding}).
+This process resulted in 20,234 protein-coding genes annotated, with a \textsc{BUSCO}
+completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10} and
+\texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
+Comparing this annotation against the proteomes of four other barnacle species (see
+\nameref{sec:methods_orthologs}) assigned 16,978 (83.91\%) \bgla{}
+protein-coding genes to orthologs across barnacles, including 2,576 single-copy
+orthologs across all five species.
 In addition to protein-coding genes, we also annotated non-coding elements in the
-\bgla{} reference assembly. We identified 7,532 long, non-coding RNAs
-(lncRNA), 1,203 transfer RNAs (tRNA), and 24 ribosomal RNA (rRNA) genes. In total,
-across protein-coding and non-coding transcripts, we were able to annotate 28,993
-genes in the genome.
-This comprehensive annotation provides the basis for examining
-how selection has shaped both coding and non-coding sequences in this
-large-population species.
+genome, identifying 7,532 long, non-coding RNAs (lncRNA), 1,203 transfer RNAs (tRNA),
+and 24 ribosomal RNA (rRNA) genes.
+In total, across protein-coding and non-coding transcripts, we were able to annotate
+28,993 genes in the \bgla{} reference assembly.
+\vspace{0.2cm}
 
-\comment{From Scott: in these above sections you are repeating everything you already
-noted in the methods. At the very least move it to the supplement if not entirely delete
-it. You could report the bit on the number of genes (the final paragraph of annotation)
-and something about repeats, but keep it short, as this is not the interesting part of
-the paper.}
+Together, the high contiguity, gene-completeness, chromosome-level scaffolding,
+and comprehensive annotation of this assembly make it among the most complete genomic
+resources available for any barnacle species, and a strong foundation for downstream
+population genomic and comparative analyses.
 
 \subsection*{Conserved architecture across barnacle genomes}
-
-\comment{From Scott: I think this shoudl be the first section of the results, that
-stuff above here is supplement and largely redundant with the methods}
-
-% Just touching on synteny. Things are fairly clean, so not much to say for now.
 
 To assess large-scale structural conservation across barnacle genomes, we performed
 a synteny analysis using the software \textsc{Genespace}
@@ -166,9 +120,6 @@ the extreme diversity observed at the population level.
 
 \subsection*{Functional elements are conserved in barnacle genomes}
 
-% For phastCons, mostly saying how we found the hughly conserved stuff and what
-% it is. The enrichment results are generally expected (tRNAs and CDSs are conserved).
-
 We used the \textsc{phastCons} package \citep{siepel_evolutionarily_2005} on the
 \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} between
 six barnacle species to identify highly conserved sites in the Pacific acorn barnacle
@@ -216,7 +167,6 @@ drastically underrepresented. The enrichment pattern in barnacles follows the sa
 observed in both plants and animals: tRNAs are the most enriched feature
 ($\approx$4-fold), followed by CDSs ($\approx$2-fold), while transposable elements
 are depleted among HCEs.
-\comment{From Scott: this is discussion not results}
 \vspace{0.2cm}
 
 As fellow arthropods, insects provide the most phylogenetically relevant comparison for
@@ -251,9 +201,6 @@ Overall, the conservation of functional elements across barnacle genomes indicat
 that purifying selection has been effective at maintaining these sequences despite
 the highly repetitive nature of the genome, a pattern we revisit in the context
 of the broader selective regime acting on these large populations.
-\comment{From Scott: results should stick to explaining the figures and data, much
-of what you have here is comparison and interpretation which shoudl be left for the
-methods}
 
 % Phastcons and enrichment
 \begin{figure}[ht]
@@ -360,9 +307,7 @@ homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
 which has been observed as differentially expressed in response to osmotic stress in
 barnacles \citep{chandramouli_transcriptome_2015}.
 While its exact function in \bgla{} is unknown, the large excess of polymorphism
-observed (NI = 18.54) suggests strong balancing selection acting on this gene in
-this system.
-\comment{From Scott: could be a paralog? did you check the HWE in bglandula?}
+observed (NI = 18.54) suggests strong balancing selection acting on this gene.
 Looking at the genes evolving under positive directional selection, we observe a homolog
 to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
 factor essential for protein synthesis and, in humans, linked to the regulation of
@@ -671,8 +616,3 @@ Nevertheless, even these conservative estimates place \bgla{} among the
 largest known effective population sizes for any eukaryote, yet orders of
 magnitude below the census sizes observed in the field --- a disparity
 central to Lewontin's Paradox and one we return to in the Discussion.
-\comment{From Scott: there is so very very much already w/ the comparative genomics,
-it feels like the popgen stuff is tacked on. Maybe it would be more impactful before
-the comparative genomic section esp as you use it for the MK tests. you could simply
-note that 6 samples is not enough to conduct a selection test w/ any power so you
-used other methods.}
