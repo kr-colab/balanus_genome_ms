@@ -400,79 +400,65 @@ substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit
 reached fixation as the product of directional positive selection.
 Both estimates sit meaningfully above the genome-wide asymptotic estimate
 ($\alpha_\text{asym} = 0.610$), placing these two classic allozyme loci among the more
-adaptively evolving protein-coding sequences in the \bgla{} genome.
+rapidly evolving
+protein-coding sequences in the \bgla{} genome.
+Among the remaining loci, \textit{Mpi} shows the largest excess of polymorphism
+relative to divergence (NI = 1.575), though the MK test is not significant after
+correction ($p = 0.443$).
+Examination of synonymous diversity ($\pi_{4}$) relative to synonymous divergence
+($\text{K}_\text{S}$) in sliding windows along each allozyme coding sequence reveals
+localized elevations at all seven loci, with outlier windows tending to fall within
+single exons (Figure~\ref{fig:sup_gw_piks}; Figure~\ref{fig:sup_allozyme_piks}).
 \vspace{0.2cm}
 
-The \textit{Gpi} result is particularly notable.
-\cite{hedgecock_temporal_1994} had already identified \textit{Gpi} as one of several
-\bgla{} allozyme loci showing significant microgeographic heterogeneity in allele
-frequencies, but allozyme-era methods could not distinguish whether that heterogeneity
-reflected protein-level selection, drift, or chaotic recruitment among sweepstakes-limited
-larval cohorts \citep{hedgecock_does_1994}.
-Our sequence-level data now show that \textit{Gpi} in \bgla{} has accumulated a
-substantial excess of non-synonymous fixations relative to the neutral expectation,
-consistent with a history of directional positive selection on the protein itself.
-This pattern also contrasts with prior work at the \textit{Gpi} ortholog in
-\textit{S. balanoides}, where the MK test has not yielded a comparable signal
-\citep{nunez_footprints_2020,rand_ecological_2002} --- illustrating that ``same allozyme
-locus'' comparisons across congeneric barnacles can obscure real divergence in
-selective history.
-\textit{Gpi} encodes a glycolytic enzyme whose activity sits at the branch point between
-glycolysis and the pentose phosphate pathway; protein-coding variation at \textit{Gpi}
-in other marine invertebrates has been linked to thermal tolerance and metabolic
-flux under osmotic and thermal stress \citep{flight_allozyme_2012}, providing a
-plausible functional axis along which directional selection could act in Pacific
-intertidal populations.
+To test the seven allozyme loci for departures from neutrality at the level of within-species
+polymorphism relative to between-species divergence, we applied the Hudson-Kreitman-Aguad\'{e}
+test \citep{hudson_test_1987}. For each locus we assembled a full-length alignment spanning
+the gene body plus 5\,kb of flanking sequence on either side, stitching the codon-aware
+\bgla{} / \textit{B. crenatus} coding alignment together with pairwise alignment of introns
+and intergenic flanks, and augmented with twelve per-sample \bgla{} ingroup haplotypes
+derived from our population panel. Testing each allozyme locus against the pooled remainder
+under the segregating-sites variant of the test (Table~\ref{tab:sup_hka}), only \textit{Me.1}
+showed a nominally significant deviation ($p = 0.032$, uncorrected for multiple
+comparisons across seven loci), exhibiting a deficit of polymorphism relative to its
+divergence --- the direction expected under a recent selective sweep or strong purifying
+constraint at linked sites.
 \vspace{0.2cm}
 
-The two malic-enzyme paralogs provide a second line of evidence that is worth noting
-explicitly.
-Only \textit{Me.2} shows a significant MK signal ($\alpha = 0.719$), while its paralog
-\textit{Me.1} is indistinguishable from neutrality (Table~\ref{tab:sup_allozymes_mkt}).
-Because the two copies of NADP-dependent malic enzyme share deep sequence homology but
-differ in genomic context, this paralog-level asymmetry suggests that the positive
-selection we detect is acting on \textit{Me.2} specifically rather than on the malic
-enzyme gene family as a whole, and it cautions against treating classical ``allozyme
-loci'' as monolithic units in genome-scale reanalyses.
-\vspace{0.2cm}
+The two MK outliers, \textit{Gpi} and \textit{Me.2}, did not reach significance individually
+under the classic HKA test, but both showed direction-consistent excess polymorphism
+relative to divergence. To visualize where along each locus the signal concentrates we
+applied the sliding-window HKA diagnostic \citep{kreitman_inferring_1991}, which
+displays local departures from the neutral expectation but does not yield a formal
+significance threshold, using a window of 500 silent sites centered on each nucleotide
+position (Figure~\ref{fig:sliding_hka}).
+Both \textit{Me.2} and \textit{Pgm} show observed silent diversity exceeding the
+divergence-scaled neutral expectation across multiple sub-regions of the gene body, with
+the largest excesses localized to coding and intronic windows rather than spread
+uniformly. These localized peaks are consistent with selection acting
+heterogeneously along the gene body at these loci (see Figure~\ref{fig:sup_sliding_hka}
+for the full set of seven loci).
 
-Turning to \textit{Mpi}, we observe the largest excess of polymorphism relative to
-divergence among the seven allozymes (NI = 1.575), though the MK test at this locus
-is not significant after correction ($p = 0.443$).
-To further probe the landscape of variation at these loci, we examined the ratio of
-synonymous diversity (in the form of $\pi$ at 4-fold degenerate sites; $\pi_{4}$) to
-synonymous divergence ($\text{K}_\text{S}$) along windows spanning each coding sequence.
-All seven allozyme loci contain at least one window whose $\pi_{4}/\text{K}_\text{S}$
-value falls in the top 5\% of the genome-wide distribution
-(Figure~\ref{fig:sup_gw_piks}), and these outlier windows tend to be contained within
-the span of single exons (Figure~\ref{fig:sup_allozyme_piks}).
-We note that with roughly 50 overlapping windows per gene, a single window exceeding
-the 95th percentile of the genome-wide distribution is a weak test of locus-level
-balancing selection and is largely expected by chance; we therefore interpret these
-patterns as localized elevations in $\pi_{4}/\text{K}_\text{S}$ consistent with, but
-not diagnostic of, balancing selection acting over short sequence scales.
-\vspace{0.2cm}
-
-This caveat aside, the \textit{Mpi} result does connect to earlier allozyme observations
-in \bgla{}: \cite{hedgecock_temporal_1994} documented significant allele-frequency
-heterogeneity at \textit{Mpi} across a 1-m intertidal transect at Bodega Harbor, a
-pattern of microgeographic structure analogous to that subsequently documented at the
-\textit{Mpi} ortholog in \textit{S. balanoides}
-\citep{nunez_footprints_2020,rand_ecological_2002}, where alternative alleles are
-beneficial at different intertidal habitats.
-Taken together, the modest excess of non-synonymous polymorphism (NI $>$ 1) and the
-localized elevation of $\pi_{4}/\text{K}_\text{S}$ at \textit{Mpi} are suggestive of
---- but by themselves do not establish --- a regime of balancing selection at this
-locus in \bgla{}.
-We further caution that intertidal microhabitat should be approximately uniform in our
-central Oregon sampling, so we cannot directly test the habitat-based
-balancing-selection hypothesis developed in \textit{S. balanoides}.
-Future sampling of \bgla{} across its large geographic range, and across intertidal
-microhabitats, together with formal tests such as the HKA test or matched-length
-null distributions for the $\pi_{4}/\text{K}_\text{S}$ windows, will be needed to
-determine whether the mechanism of balancing selection at \textit{Mpi} is shared
-across these congeneric systems or reflects distinct evolutionary histories in
-Atlantic and Pacific barnacles.
+% Sliding HKA main figure
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_pgm.pdf}\hfill
+    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_me2.pdf}
+    \caption{\textbf{Sliding-window HKA diagnostic at \textit{Pgm} and \textit{Me.2}.}
+        For each locus we show observed mean ingroup pairwise silent diversity ($\pi$;
+        solid black line) alongside the divergence-scaled neutral expectation
+        ($\textit{D} / (T+1)$; dashed grey line), both computed in sliding windows
+        of 500 silent sites centered on each nucleotide position. $T + 1$ is a joint
+        estimate pooled across all seven allozyme loci. Windows anchored in alignment
+        dead zones (positions where \textit{B. glandula} and \textit{B. crenatus} could
+        not be homologized) are omitted. The gene structure track below each panel
+        shows exons (filled black blocks), untranslated regions (open outlined blocks),
+        and introns (thin black baseline). Both loci exhibit sub-regions where
+        observed $\pi$ stands meaningfully above the expected curve, the pattern
+        predicted under balancing selection or recent positive selection on standing
+        variation at linked sites.}
+    \label{fig:sliding_hka}
+\end{figure}
 
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
