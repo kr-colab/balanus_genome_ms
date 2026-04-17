@@ -286,6 +286,33 @@ NI = Neutrality Index. \\
 DoS = Direction of Selection
 \end{sidewaystable}
 
+% HKA test per-locus vs pooled remainder
+\begin{table}[ht]
+    \footnotesize
+    \suptablecaption{\textbf{Classic Hudson-Kreitman-Aguad\'{e} test for the seven
+        classic allozyme loci, testing each locus against the pooled remainder.}
+        Polymorphism was measured as segregating silent sites, pooling synonymous
+        sites within CDS with all alignable sites in introns and 5\,kb flanks per
+        the 1991 convention. Divergence was measured against the \textit{B.
+        crenatus} ortholog across the same sites. $T+1$ was jointly estimated as
+        8.15 across all seven loci. Only \textit{Me.1} reached significance, with
+        a deficit of polymorphism relative to divergence.}
+    \begin{tabular}{l r r r r r r l}
+        \toprule
+        Locus & obs\textsubscript{poly} & exp\textsubscript{poly} & obs\textsubscript{div} & exp\textsubscript{div} & $\chi^2$ & $p$ & Direction \\
+        \midrule
+        \textit{Adh}  &  439 &  544 & 1{,}548 & 1{,}458 & 0.54 & 0.461 & deficit \\
+        \textit{Gpi}  & 1651 & 1403 & 3{,}461 & 3{,}764 & 0.52 & 0.471 & excess  \\
+        \textit{Me.1} &  441 &  989 & 3{,}198 & 2{,}650 & 4.59 & \textbf{0.032} & deficit \\
+        \textit{Me.2} & 2017 & 1586 & 3{,}821 & 4{,}252 & 1.15 & 0.284 & excess  \\
+        \textit{Mpi}  &  712 &  861 & 2{,}457 & 2{,}308 & 0.45 & 0.505 & deficit \\
+        \textit{Pgm}  &  861 &  776 & 1{,}995 & 2{,}080 & 0.18 & 0.673 & excess  \\
+        \textit{Sod}  & 2553 & 2526 & 6{,}744 & 6{,}771 & 0.00 & 0.964 & excess  \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:sup_hka}
+\end{table}
+
 % Breakdown of the per-feature Pi
 \begin{sidewaystable}[ht]
     \centering
