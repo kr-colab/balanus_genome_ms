@@ -2,13 +2,9 @@
 
 \subsection*{Genome assembly and annotation}
 
-\commentauth{Angel}{Following Scott's comments. Didn't remove this completely, but merged
-the assembly and annotation into a more streamlined section. The remaining details are in
-the methods.}
-
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle
-using PacBio HiFi long reads and Hi-C chromosome conformation capture.
-Preliminary k-mer assessment of the PacBio HiFi data revealed an expected genome
+using PacBio HiFi long reads and Hi-C data.
+Preliminary k-mer assessment of the HiFi reads revealed an expected genome
 size of around 845 Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}).
 After purging haplotigs, scaffolding, and polishing the sequences (see
 \nameref{sec:methods_assembly}), the final assembly was composed of 592 fragments, had
@@ -17,8 +13,6 @@ a total sequence length of 1.04 Gbp, and a scaffold N50 of 51.41 Mbp
 The assembly was 94.08\% gene-complete, with 4.64\% duplicates, for the
 \texttt{arthropoda\_odb10} \textsc{BUSCO} dataset
 \citep{simao_busco_2015,manni_busco_2021,tegenfeldt_orthodb_2025}.
-\vspace{0.2cm}
-
 Of the 1.04 Gbp of total sequence, 906.6 Mbp (86.74\%) was contained in 58 scaffolds
 larger than 1 Mbp.
 Moreover, the 16 largest fragments (larger than 8.5 Mbp; Figure~\ref{fig:sup_hic})
@@ -357,7 +351,7 @@ as an avenue for future study in barnacles.
 
 \subsection*{Non-neutral evolution in the classic allozyme loci}
 
-In the Atlantic acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
+In the northern acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
 have been extensively linked to spatial heterogeneity and local adaptation
 \citep{flowerdew_electrophoretic_1983,nunez_footprints_2020,rand_ecological_2002,
 schmidt_environmental_2000,flight_allozyme_2012,veliz_regional_2004}.
@@ -414,7 +408,7 @@ single exons (Figure~\ref{fig:sup_gw_piks}; Figure~\ref{fig:sup_allozyme_piks}).
 To test the seven allozyme loci for departures from neutrality at the level of within-species
 polymorphism relative to between-species divergence, we applied the Hudson-Kreitman-Aguad\'{e}
 test \citep{hudson_test_1987}. For each locus we assembled a full-length alignment spanning
-the gene body plus 5\,kb of flanking sequence on either side, stitching the codon-aware
+the gene body plus 5\,kbp of flanking sequence on either side, stitching the codon-aware
 \bgla{} / \textit{B. crenatus} coding alignment together with pairwise alignment of introns
 and intergenic flanks, and augmented with twelve per-sample \bgla{} ingroup haplotypes
 derived from our population panel. Testing each allozyme locus against the pooled remainder
