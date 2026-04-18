@@ -847,6 +847,11 @@ calcuate per-site Pi.
 Custom R script that combines the Ks and Pi results to calculate per-codon and
 per-window estimates of the rate of synonymoyus diversity to divergence (`Pi_4/K_S`).
 
+* `run_stitch_pipeline.sh`
+
+Pipeline to process the allozyme MSAs, extract flanking sequences, and run an HKA
+analysis using `sliding_hka`.
+
 ## *Balanus crenatus* genome assembly and annotation
 
 * The wrinkled barnacle (*Balanus crenatus*).
