@@ -42,7 +42,9 @@
 \begin{table}[ht]
     \centering
     \suptablecaption{\textbf{Completeness metrics for the \balgla{} protein-coding
-        gene annotation.}}
+        gene annotation.}
+        \textsc{BUSCO} completeness was determined by \textsc{compleasm}
+        \texttt{protein}.}
     \begin{tabular}{lrr}
         \toprule
         Metric &
@@ -120,7 +122,6 @@
 
 % Stats about the phasCons conserved elements and enrichment of genomic elements.
 \begin{sidewaystable}[ht]
-    \centering
     \suptablecaption{\textbf{Enchrichment of annotated features among \textsc{phastCons}
         highly conserved elements}}
     \label{tab:sup_phastcons_enrichment}
@@ -160,9 +161,10 @@
 
 % Reference for the allozyme genes in our assembly.
 \begin{sidewaystable}[ht]
-    \centering
-    \suptablecaption{\textbf{Allozyme genes identified in the \balgla{}
-        genome assembly.}}
+    \suptablecaption{\textbf{Allozyme loci identified in the \balgla{}
+        genome assembly.}
+        Homology between the allozyme loci and the \bgla{} transcript
+        was determined using \textsc{BLAST}.}
     \begin{tabular}{lllrrllll}
         \toprule
         \shortstack{\bgla{} \\ transcript ID} &
@@ -203,7 +205,6 @@
 
 % dN/dS for the allozymes.
 \begin{sidewaystable}[ht]
-    \centering
     \suptablecaption{\textbf{Patterns of \dnds{} in the \balgla{} allozyme genes.}}
     \begin{tabular}{llrrrrrrrrrr}
         \toprule
@@ -247,7 +248,6 @@ d\textsubscript{S} = Jukes-Cantor corrected proportion of
 
 % MKT for the allozymes
 \begin{sidewaystable}[ht]
-    \centering
     \suptablecaption{\textbf{McDonald-Kreitman test on the \balgla{} allozyme genes.}}
     \begin{tabular}{llrrrrrrrrr}
         \toprule
@@ -288,7 +288,7 @@ DoS = Direction of Selection
 
 % HKA test per-locus vs pooled remainder
 \begin{table}[ht]
-    \footnotesize
+    \centering
     \suptablecaption{\textbf{Classic Hudson-Kreitman-Aguad\'{e} test for the seven
         classic allozyme loci, testing each locus against the pooled remainder.}
         Polymorphism was measured as segregating silent sites, pooling synonymous

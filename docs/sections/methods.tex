@@ -16,7 +16,7 @@ length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA
 of a single individual was sequenced on three SMRTcells of a PacBio Sequel
 II machine at the University of Oregon's Genomics and Cell Characterization Core
 Facility (GC3F). These three sequencing runs yielded a total of 5.93 million
-reads with a read N50 of 12.4 kbp.
+reads with a read N50 of 12.4\,kbp.
 % Some of this happened before me, so we might need some more details on the
 % library and sequencing, e.g., library prep? specific machine?
 
@@ -35,7 +35,7 @@ The HMW DNA from a \bgla{} individual collected from Cape Perpetua,
 Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit,
 processed using an Ultra-Long DNA Sequencing Kit and sequenced
 using an Oxford Nanopore (ONT) GridION at the University of Oregon's GC3F. This
-library yielded 387 thousand ONT reads with a read N50 of 42.7 kbp.
+library yielded 387 thousand ONT reads with a read N50 of 42.7\,kbp.
 
 \subsubsection*{RNA sequencing}
 
@@ -46,10 +46,10 @@ testes and cirri, and sequenced on an Illumina NovaSeq6000 S4 lane at the Univer
 of Oregon's GC3F, resulting in 276.8 million read pairs across both tissue types.
 The same extracted RNA was used for Iso-Seq, preparing libraries from cirri and testes,
 and sequenced on a PacBio SMRTcell at the University of Oregon's GC3F. The
-testes library yielded 1.4 million reads with a read N50 of 1.4 kbp, while the
-cirri library yielded 1.9 million reads with a read N50 of 1.5 kbp. In total,
+testes library yielded 1.4 million reads with a read N50 of 1.4\,kbp, while the
+cirri library yielded 1.9 million reads with a read N50 of 1.5\,kbp. In total,
 the two libraries combined resulted in 3.3 million reads, with a read N50 of
-1.5 kbp.
+1.5\,kbp.
 
 \subsubsection*{Whole-genome shotgun sequencing}
 
@@ -57,7 +57,7 @@ Genomic DNA was extracted from eight \bgla{} individuals collected
 from Cape Perpetua, Oregon, USA in August 2023 using the QIAGEN Genomic-Tips
 20/G kit. The extracted DNA was processed using the Illumina TrueSeq library
 kit and sequenced, pooled along with other samples, on two Illumina NovaSeq6000
-S4 2 $\times$ 150bp lanes at the University of Oregon's GC3F. Across both lanes,
+S4 2 $\times$ 150\,bp lanes at the University of Oregon's GC3F. Across both lanes,
 the sequencing process yielded 1.97 billion reads across the eight individuals,
 an average of 246.3 million reads per individual. In total, these individuals
 were sequenced at an estimated depth of $\approx$ 60x.
@@ -153,15 +153,15 @@ metrics \citep{rayamajhi_evaluating_2022}, as determined by \textsc{quast} and
 This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.19.8-r603},
 including our filtered PacBio HiFi reads as well as the ultra-long ONT
 (\texttt{--ul}).
-This assembly was done using an estimated haploid genome size of 800 Mbp
+This assembly was done using an estimated haploid genome size of 800\,Mbp
 (\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
 For identifying and correctly phasing haplotype sequences, we set the expected coverage
 at homozygous sites (\texttt{--hom-cov 68}) and the upper bound of coverage to purging
 duplicates (\texttt{--purge-max 68}) at 68x, along with setting the similarity threshold
 between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
-This assembly was composed of 2,218 contigs, with a total length of 1.29 Gbp, and a contig
-N50 of 1.16 Mbp.
+This assembly was composed of 2,218 contigs, with a total length of 1.29\,Gbp, and a contig
+N50 of 1.16\,Mbp.
 \vspace{0.2cm}
 
 Following the initial assembly of contigs, we purged haplotig sequences using the
@@ -178,7 +178,7 @@ from the data. Lastly, the assembly FASTA was processed to remove sequences tagg
 as haplotigs using the \texttt{get\_seqs} command, only removing sequences at the
 ends of contigs (\texttt{-e}) and allowing the splitting of contigs (\texttt{-s}).
 The purging process removed 876 fragments from the primary assembly, accounting for
-$\approx$ 240 Mbp of haplotig sequences (Table~\ref{tab:sup_asm_stats}).
+$\approx$ 240\,Mbp of haplotig sequences (Table~\ref{tab:sup_asm_stats}).
 
 \subsubsection*{Hi-C scaffolding}
 
@@ -195,7 +195,7 @@ We processed the aligned Hi-C data using \textsc{pairtools} version \texttt{1.0.
 \citep{open2c_pairtools_2023}, following the Dovetail analysis pipeline
 \citep{dovetail}. Briefly, we recorded valid ligation
 events using \textsc{pairtools} \texttt{parse}, setting a minimum mapping quality of
-40 (\texttt{--min-mapq 40}), a maximum inter-alignment gap of 30 kbp
+40 (\texttt{--min-mapq 40}), a maximum inter-alignment gap of 30\,kbp
 (\texttt{--max-inter-align-gap 30}), and reporting the 5'-most unique alignment when
 detecting multiple ligation events (\texttt{--walks-policy 5unique}). We then sorted
 the processed alignment pairs using \textsc{pairtools} \texttt{sort}, and marked PCR
@@ -207,7 +207,7 @@ resulting alignment BAM was sorted and indexed using \textsc{samtools}.
 
 The processed Hi-C alignments were used to scaffold the genome using the \textsc{YaHS}
 software version \texttt{1.2a.1} \citep{zhou_yahs_2023}. Since our assembly consisted of
-highly fragmented contigs, we reduced the minimum resolution size to 1 kbp (\texttt{-r
+highly fragmented contigs, we reduced the minimum resolution size to 1\,kbp (\texttt{-r
 1000}). Following the \textsc{YaHS} documentation, we generated a Hi-C contact map
 using the \textsc{juicer} suite of tools \citep{durand_juicer_2016,dudchenko_juicebox_2018}.
 First, we used the \textsc{juicer} \texttt{pre} command (version \texttt{1.1}) to
@@ -216,8 +216,8 @@ convert the \textsc{YaHS} output into the \textsc{juicer} format in assembly mod
 the \texttt{*.assembly} and \texttt{*.hic} files required for manual curation using
 the \textsc{Juicebox} GUI version \texttt{2.17.00}. Following manual curation of
 the contact map, we regenerated the assembly using \textsc{juicer} \texttt{post}. This
-scaffolded assembly was composed of 650 fragments, a total length of 1.05 Gbp, and
-a scaffold N50 of 50.96 Mbp (Table~\ref{tab:sup_asm_stats}).
+scaffolded assembly was composed of 650 fragments, a total length of 1.05\,Gbp, and
+a scaffold N50 of 50.96\,Mbp (Table~\ref{tab:sup_asm_stats}).
 
 \subsubsection*{Polishing and correcting}
 
@@ -227,9 +227,9 @@ automatic curation using the \textsc{Inspector} software version \texttt{1.0.1}
 mapping the PacBio HiFi reads against the assembly.
 \textsc{Inspector} calculated a mapping rate of 99.98\% of these reads to the assembly
 (87.94\% for larger contigs) and a quality value (QV) of 30.49.
-It additionally identified 742 structural errors larger than 50bp, including
+It additionally identified 742 structural errors larger than 50\,bp, including
 357 haplotype switches, 303 sequence expansions, and 16 inversions.
-Assessing smaller ($<$50 bp) errors, \textsc{Inspector} identified 1,929 small-scale
+Assessing smaller ($<$50\,bp) errors, \textsc{Inspector} identified 1,929 small-scale
 expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
 After evaluation, the assembly was then processed using \texttt{inspector-correct.py}
 (Table~\ref{tab:sup_asm_stats}) to export the corrected scaffolds in FASTA format.
@@ -259,7 +259,7 @@ Arthropoda and Crustacea partitions of \textsc{OrthoDB} version \texttt{11}
 
 When processing the short-read data, we first filtered and processed the raw RNAseq
 Illumina reads using \textsc{fastp} version \texttt{0.23.4} \citep{chen_fastp_2018,
-chen_ultrafast_2023}, setting the minimum length of reads post-filtering to 25 bp
+chen_ultrafast_2023}, setting the minimum length of reads post-filtering to 25\,bp
 (\texttt{--length\_required 25}) and enabling the detection of adapter sequences in the
 paired reads (\texttt{--detect\_adapter\_for\_pe}). We then aligned the processed RNAseq
 reads to the \bgla{} assembly using \textsc{hisat2} version \texttt{2.2.1}
@@ -310,7 +310,7 @@ the \textsc{nf-core/isoseq} pipeline version \texttt{2.0.0}
 Quality control of the annotated isoforms was then performed using \textsc{sqanti3}
 pipeline version \texttt{5.2.2} \citep{pardo_sqanti3_2024}.
 Following the \textsc{sqanti3} documentation, we first performed quality control
-of the isoforms using \texttt{sqanti3\_gc}, using the \textsc{braker} GTF as our
+of the isoforms using \texttt{sqanti3\_gc}, using the \textsc{BRAKER} GTF as our
 reference annotation, and providing short-read RNAseq reads to infer junction
 coverage and determine expression levels.
 Isoforms were then filtered using \texttt{sqanti3\_filter} using the default rules,
@@ -475,7 +475,7 @@ tree for alignment (\texttt{-tree}; \texttt{-prunetree}), and performing three
 iterations of re-alignments (\texttt{-iterate=3}).
 The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
 \citep{steenwyk2020_clipkit}, trimming the alignment by codons (\texttt{--codon}).
-Lastly, we filtered all alignments shorter than 100 bp.
+Lastly, we filtered all alignments shorter than 100\,bp.
 \vspace{0.2cm}
 
 After generating and processing alignments for the resulting 9,082 single-copy
@@ -514,7 +514,7 @@ analysis.
 The resulting alignments were processed with \textsc{ClipKIT}, trimming the
 alignment by codons (\texttt{--codon}), and trimming sites above a gap threshold
 of 25\% (\texttt{--mode gappy}; \texttt{--gaps 0.25}).
-Alignments smaller than 100 bp were also discarded, retaining sequences for 7,374 
+Alignments smaller than 100\,bp were also discarded, retaining sequences for 7,374 
 orthologs.
 \vspace{0.2cm}
 
@@ -586,11 +586,11 @@ We used \textsc{pixy} to calculate per-site (\texttt{--window\_size 1}) $\pi$ at
 \texttt{--sites\_file}).
 Lastly, we used another custom script (\texttt{process\_pi4\_Ks.R}) to aggregate
 the \Ks{} and $\pi_{4}$ values.
-Values were aggregated along 99 bp (33 codons) windows, with a step size of 24 bp
+Values were aggregated along 99\,bp (33 codons) windows, with a step size of 24\,bp
 (8 codons), filtering out windows with data for fewer than three codons.
 At each window, we calculated the average, Jukes-Cantor corrected \Ks{}, the
 average $\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window.
-In addition to the seven allozyme genes, we repeated this analysis for all the 
+In addition to the seven allozyme loci, we repeated this analysis for all the 
 orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
 estimate of $\pi_{4}/\text{K}_\text{S}$.
 After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
@@ -599,28 +599,31 @@ After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
 To formally test each allozyme locus for departures from neutrality using both
 polymorphism and divergence, we applied the Hudson-Kreitman-Aguad\'{e} (HKA) test
 \citep{hudson_test_1987} and its sliding-window extension
-\citep{kreitman_inferring_1991}, as implemented in the \texttt{sliding\_hka}
-Python package (\url{https://github.com/andrewkern/sliding_hka}). For each of
-the seven allozyme loci we constructed a per-locus full-length multiple sequence
-alignment spanning the gene body plus 5\,kb of flanking sequence on either side.
-Coding regions were aligned codon-aware using the existing \bgla{} /
-\textit{B. crenatus} CDS alignments from the MK analysis; intronic and
+\citep{kreitman_inferring_1991}, as implemented in the \textsc{sliding\_hka}
+Python package \citep{kern_hka}. 
+For each of the seven allozyme loci we constructed a per-locus full-length multiple
+sequence alignment spanning the gene body plus 5\,kbp of flanking sequence on either side.
+Coding regions were aligned codon-aware using the existing CDS alignments between
+\bgla{} and \textit{B. crenatus} from the MK analysis; intronic and
 intergenic flanks were aligned pairwise with \textsc{lastz} version 1.04.52
-under permissive sister-species parameters
-(\texttt{--seed=match8 --hspthresh=1500 --gappedthresh=1000 --ydrop=9400
---inner=2000}); the two tracks were stitched together in genomic coordinates.
+\citep{harris_lastz} under permissive sister-species parameters
+(\texttt{--seed=match8} \texttt{--hspthresh=1500} \texttt{--gappedthresh=1000}
+\texttt{--ydrop=9400} \texttt{--inner=2000}); the two tracks were stitched together
+in genomic coordinates.
 Per-sample ingroup haplotype sequences for the same windows were extracted
-via \texttt{bcftools consensus} (\texttt{-H 1,2}) against the filtered
+via \textsc{bcftools} \texttt{consensus} (\texttt{-H 1,2}) against the filtered
 all-sites VCFs, then profile-aligned onto the stitched reference alignment
 with \textsc{mafft} \texttt{--add} \texttt{--keeplength}
-\texttt{--adjustdirectionaccurately}. For the classic HKA test each locus was tested
-against the pool of the remaining six under the segregating-sites variant;
-$T+1$ was estimated jointly across all seven loci. CDS columns were
-treated codon-aware (Nei-Gojobori synonymous-site denominator and path-based
-synonymous classification), while non-coding columns were treated per-site
+\texttt{--adjustdirectionaccurately} \citep{katoh_mafft_2013}.
+For the classic HKA test each locus was tested against the pool of the remaining
+six under the segregating-sites variant;
+$T+1$ was estimated jointly across all seven loci.
+CDS columns were treated codon-aware (Nei-Gojobori synonymous-site denominator and
+path-based synonymous classification), while non-coding columns were treated per-site
 as fully silent, following the 1991 convention. For the sliding-window
 diagnostic we used a window width of 500 silent sites; windows anchored in
 alignment dead zones were omitted.
+\commentauth{Angel}{TODO for Angel: Add this to the README and script repo.}
 
 \subsection*{Codon usage biases}
 
@@ -648,7 +651,7 @@ A total of 99.97\% of reads were successfully mapped to the reference.
 The aligned reads were then sorted and filtered using \textsc{samtools} version \texttt{1.21}
 to remove non-primary and supplementary alignments.
 Lastly, we used the \textsc{mosdepth} software version \texttt{0.3.10}
-\citep{pedersen_mosdepth_2018} to calculate the depth of coverage along 10 kbp windows
+\citep{pedersen_mosdepth_2018} to calculate the depth of coverage along 10\,kbp windows
 (\texttt{--no-per-base}; \texttt{--by 10000}) and calculating the proportion of bases
 covered at specified coverage thresholds (\texttt{--thresholds "1,3,5,10,20"}).
 After filtering and processing alignments, the reference individual retained a mean
@@ -659,7 +662,7 @@ Genotypes were called from these alignments using the standard \textsc{bcftools}
 \texttt{1.21} \citep{danecek_bcftools_2021} genotyping pipeline, consisting of the
 \texttt{mpileup} and \texttt{call} commands for generating genotype likelihoods and calling
 genotypes, respectively.
-We only genotyped the 58 contigs larger than 1 Mbp, processing each contig separately
+We only genotyped the 58 contigs larger than 1\,Mbp, processing each contig separately
 (using \texttt{--regions}).
 For \texttt{mpileup}, we only used a maximum depth of 250 x (\texttt{--max-depth 250}),
 and adding an annotation for both per-sample and per-site total and allelic depth
@@ -737,7 +740,7 @@ The effects of the kept variants was determined using \textsc{snpEff}.
 We used the \textsc{pixy} software version \texttt{2.0.0.beta12}
 \citep{korunes_pixy_2021,bailey_pixy2_2025} to obtain genome-wide measures of genetic
 diversity. We calculated both nucleotide diversity ($\pi$) and Watterson's Theta
-($\theta_\text{W}$; \texttt{--stats pi watterson\_theta}) on 10 kbp windows
+($\theta_\text{W}$; \texttt{--stats pi watterson\_theta}) on 10\,kbp windows
 (\texttt{--window\_size 10000}).
 We allowed multiallelic sites to be used in the calculations
 (\texttt{--include\_multiallelic\_snps}), limiting the calculation to sites present in our
@@ -746,7 +749,7 @@ input VCF file (\texttt{--sites\_file}).
 
 We performed additional diversity calculations with \textsc{pixy} on different regions
 of interest in the genome.
-Instead of running on uniform 10 kbp windows along the genome, we calculated $\pi$ along the
+Instead of running on uniform 10\,kbp windows along the genome, we calculated $\pi$ along the
 span of annotated genomic features (coding sequences, introns, 5' UTRs, 3' UTRs, lncRNAs,
 rRNAs, and intergenic regions).
 We reran \textsc{pixy} separately for each feature, specifying the genomic coordinates of
@@ -764,11 +767,11 @@ degenerate sites using \textsc{pixy}, specifying the specific sites of interest 
 We used our filtered whole-genome genotypes from central Oregon \bgla{} to estimate the
 population's effective size.
 First, we estimated the long-term average \Ne{} in this population based on the
-estimates of $\theta_\text{W}$ along 10 kbp windows using \textsc{pixy}, and using the
+estimates of $\theta_\text{W}$ along 10\,kbp windows using \textsc{pixy}, and using the
 relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
 by~\cite{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
-Using this relationship, we calculated \Ne{} along these 10 kbp windows, obtaining a
+Using this relationship, we calculated \Ne{} along these 10\,kbp windows, obtaining a
 distribution of effective size along the genome.
 \vspace{0.2cm}
 

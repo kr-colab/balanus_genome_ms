@@ -15,7 +15,7 @@ The extracted DNA of a single individual was sequenced on two SMRTcells of a Pac
 Sequel II machine at the University of Oregon's Genomics and Cell Characterization
 Core Facility (GC3F).
 These two sequencing runs yielded a total of 3.06 million reads with a read N50 of
-14.8 kbp.
+14.8\,kbp.
 
 \subsubsection*{Estimating genome size and heterozygosity}
 
@@ -29,7 +29,7 @@ using the \textsc{jellyfish} \texttt{histo} command.
 The final model of the diploid, genome-wide k-mer distribution was then performed
 using \textsc{GenomeScope2} version \texttt{2.0}
 \citep{ranallo-benavidez_genomescope_2020}.
-We estimated the \textit{B. crenatus} genome size to be 755,696,144 bp in length,
+We estimated the \textit{B. crenatus} genome size to be 755,696,144\,bp in length,
 with a heterozygosity of 2.25\%.
 
 \subsubsection*{Contig-level genome assembly}
@@ -37,7 +37,7 @@ with a heterozygosity of 2.25\%.
 We generated a contig-level genome assembly using \textsc{hifiasm} version
 \texttt{0.19.8-r603} \citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022},
 using strict parameters for the identification and purging of haplotig sequences.
-This assembly was generated using an estimated haploid genome size of 800 Mbp
+This assembly was generated using an estimated haploid genome size of 800\,Mbp
 (\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
 For handling haplotigs, we set the expected coverage at homozygous sites to
@@ -46,7 +46,7 @@ For handling haplotigs, we set the expected coverage at homozygous sites to
 to 25\% (\texttt{-s 0.25}).
 We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
 \citep{gurevich_quast_2013}, showing an assembly composed of 2,932 contigs, with a total
-length of 1.20 Gbp, and a contig N50 of 746 kbp.
+length of 1.20\,Gbp, and a contig N50 of 746\,kbp.
 Additionally, \textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023}
 revealed this assembly 94.96\% complete (with 19.64\% duplicates) against the
 \texttt{arthropoda\_odb10} reference ortholog dataset from \textsc{BUSCO}
@@ -63,8 +63,8 @@ across the six possible frames, which were then mapped against the NCBI \texttt{
 \texttt{SwissProt} databases.
 We retained only sequences assigned to the order Thecostraca (NCBI taxid
 \texttt{116172}).
-This process removed 236 fragments spanning $\approx$ 19.7 Mbp, producing an assembly
-with 2,696 contigs, a total size of 1.18 Gbp, and a contig N50 of 758.4 kbp.
+This process removed 236 fragments spanning $\approx$ 19.7\,Mbp, producing an assembly
+with 2,696 contigs, a total size of 1.18\,Gbp, and a contig N50 of 758.4\,kbp.
 The resulting gene-completeness against the \texttt{arthropoda\_odb10} reference
 set was 94.57\% with 19.45\% duplicates.
 
@@ -85,7 +85,7 @@ Lastly, the assembly FASTA was processed to remove sequences tagged as haplotigs
 \texttt{get\_seqs}, only removing sequences at the ends of contigs (\texttt{-e}) and
 allowing the splitting of contigs (\texttt{-s}).
 The purging reduced the number of contigs in the assembly to 1,548, resulting in
-a total assembly size of 907.4 Mbp, a contig N50 of 925.5 kbp, and a gene-completeness
+a total assembly size of 907.4\,Mbp, a contig N50 of 925.5\,kbp, and a gene-completeness
 of 93.39\% with 3.16\% duplicates (against the \texttt{arthropoda\_odb10} reference
 set).
 
@@ -96,8 +96,8 @@ The purged contig-level assembly was then polished and self-corrected using
 First, we evaluated the assembly using \texttt{inspector.py}, mapping the PacBio HiFi
 reads against the assembly.
 The assembly was then corrected using \texttt{inspector-correct.py}.
-After polishing, the assembly contained 1,548 contigs, a total length of 907.3 Mbp,
-and a contig N50 of 925.6 kbp.
+After polishing, the assembly contained 1,548 contigs, a total length of 907.3\,Mbp,
+and a contig N50 of 925.6\,kbp.
 Gene-completeness against the \texttt{arthropoda\_odb10} reference set was 93.39\%
 with 3.26\% duplicates.
 
@@ -115,7 +115,7 @@ repeat resolution algorithm (\texttt{--repeats}).
 After running \textsc{ragout}, we only kept the \textit{B. crenatus} sequences that
 were successfully aligned to \textit{B. glandula}.
 This scaffolded assembly was composed of 220 sequence fragments, with a total length
-of 851 Mbp, and a scaffold N50 of 5.58 Mbp.
+of 851\,Mbp, and a scaffold N50 of 5.58\,Mbp.
 Additionally, the assembly was 89.64\% gene-complete (with 2.37\% duplicates) when
 compared to the \texttt{arthropoda\_odb10} reference set.
 
@@ -129,10 +129,10 @@ search term for \textsc{RepeatMasker} version \texttt{4.1.2}
 \citep{smit_repeatmasker_2013}, clustered the final TE library to reduce redundancy
 (\texttt{-c yes}), and generated a soft-masked FASTA as output (\texttt{-d yes}).
 Similar to \textit{B. glandula}, the repeat annotation for \textit{B. crenatus}
-revealed a highly repetitive genome, with 494.0 Mbp (58.03\%) of the assembly
+revealed a highly repetitive genome, with 494.0\,Mbp (58.03\%) of the assembly
 masked.
 Moreover, the largest proportion of identified repeats remained unclassified,
-289.4 Mbp or 40.0\% of the assembly, further highlighting the lack of
+289.4\,Mbp or 40.0\% of the assembly, further highlighting the lack of
 barnacle-representative sequences in public repeat databases.
 \vspace{0.2cm}
 
@@ -279,7 +279,7 @@ We exported both variant and invariant sites (\texttt{-b}) for downstream compat
 The resulting gVCFs were then processed using a custom AWK command and \textsc{BCFtools}
 version \texttt{1.21} \citep{danecek_bcftools_2021} to recode deletions, remove missing
 alleles, and remove sites with over 25\% missing genotypes.
-Nucleotide diversity along 10 kbp windows was then calculated from the filtered VCF using
+Nucleotide diversity along 10\,kbp windows was then calculated from the filtered VCF using
 \textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
 allowing multiallelic sites to be used in the calculation
 (\texttt{--include\_multiallelic\_snps}).
