@@ -43,17 +43,17 @@ classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 We annotated protein-coding genes in the \bgla{} assembly using a combination of
 short-read RNAseq and long-read PacBio Iso-Seq data (see
 \nameref{sec:methods_protein_coding}).
-This process resulted in 20,234 protein-coding genes annotated, with a \textsc{BUSCO}
+This process resulted in 20{,}234 protein-coding genes annotated, with a \textsc{BUSCO}
 completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10} and
 \texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
 Comparing this annotation against the proteomes of four other barnacle species (see
-\nameref{sec:methods_orthologs}) assigned orthology to 16,978 (83.91\%) \bgla{}
-protein-coding genes, including 2,576 single-copy orthologs across all five species.
+\nameref{sec:methods_orthologs}) assigned orthology to 16{,}978 (83.91\%) \bgla{}
+protein-coding genes, including 2{,}576 single-copy orthologs across all five species.
 In addition to protein-coding genes, we also annotated non-coding elements in the
-genome, identifying 7,532 long, non-coding RNAs (lncRNA), 1,203 transfer RNAs (tRNA),
+genome, identifying 7{,}532 long, non-coding RNAs (lncRNA), 1{,}203 transfer RNAs (tRNA),
 and 24 ribosomal RNA (rRNA) genes.
 In total, across protein-coding and non-coding transcripts, we were able to annotate
-28,993 genes in the \bgla{} reference assembly.
+28{,}993 genes in the \bgla{} reference assembly.
 \vspace{0.2cm}
 
 Together, the high contiguity, gene-completeness, chromosome-level scaffolding,
@@ -124,7 +124,7 @@ We used the \textsc{phastCons} package \citep{siepel_evolutionarily_2005} on the
 \textsc{cactus} whole-genome alignment \citep{armstrong_progressive_2020} between
 six barnacle species to identify highly conserved sites in the Pacific acorn barnacle
 genome. Across the 16 putative chromosomes in the \textit{B. glandula} assembly,
-\textsc{phastCons} identified 196,141 highly conserved elements (HCEs), spanning
+\textsc{phastCons} identified 196{,}141 highly conserved elements (HCEs), spanning
 50.85\,Mbp (6.05\%) of the 16 assembled chromosomes.
 In \textit{B. glandula}, the HCEs had a mean length of 259.25\,bp (median: 42\,bp,
 standard deviation: 990.40\,bp).
@@ -205,8 +205,8 @@ of the broader selective regime acting on these large populations.
 To examine the rate of molecular evolution in protein-coding sequences, we calculated
 the pairwise ratio of non-synonymous to synonymous substitutions (\dnds) between
 \bgla{} and its congener, the wrinkled barnacle \textit{Balanus crenatus},
-using the codon counting approach described by \cite{nei1986_dnds}.
-We identified and aligned 9,082 single-copy orthologs between the two species.
+using the codon counting approach described by~\cite{nei1986_dnds}.
+We identified and aligned 9{,}082 single-copy orthologs between the two species.
 The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
 Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
 sequences in these barnacle genomes are under purifying selection, reflecting the
@@ -237,7 +237,7 @@ Specifically, we used polymorphism data from six \bgla{} individuals from the ce
 Oregon coast (see \nameref{sec:results_popgen}), comparing those against the orthologous
 coding sequences in the \textit{B. crenatus} outgroup.
 After removing alignments shorter than 100\,bp and those containing premature stop
-codons or frameshift mutations, we calculated the MK test for 7,374 orthologous
+codons or frameshift mutations, we calculated the MK test for 7{,}374 orthologous
 sequences between \bgla{} and \textit{B. crenatus}.
 \vspace{0.2cm}
 
@@ -262,7 +262,7 @@ biases.
 First, we calculated the Tarone-Greenland $\alpha$ estimator ($\alpha_\text{TG}$), a
 weighted estimator that corrects for the effects of averaging over a large number of
 genes \citep{stoletzki_estimation_2011}.
-Across our 7,374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
+Across our 7{,}374 genes, we calculated an $\alpha_\text{TG}$ of 0.540 ($95\%$ CI:
 0.534--0.550), which indicates that $\approx$ 54\% of non-synonymous substitutions in
 this \bgla{} population were fixed as a product of positive selection.
 Secondly, we calculated $\alpha$ using the asymptotic MK test ($\alpha_\text{asym}$),
@@ -317,7 +317,7 @@ as an avenue for future study in barnacles.
     \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
     \caption{\textbf{Signatures of positive selection in \balgla{}
         protein-coding genes.}
-        Selection on 7,374 protein-coding genes was assessed using the
+        Selection on 7{,}374 protein-coding genes was assessed using the
         McDonald-Kreitman test.
         X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
         right (NI $<1$) indicating sequences with an excess of non-synonymous
@@ -446,7 +446,7 @@ We used the annotated transcript sequences of our Pacific acorn barnacle genome
 to calculate the effective number of codons (ENC), a measure of the extent of
 departure from equal usage across synonymous codons \citep{wright_effective_1990,
 sun_improved_2013}. We calculated ENC across the coding sequences of
-16,904 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
+16{,}904 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
 standard deviation: 5.56, Figure~\ref{fig:codon_enc}). This ENC distribution
 indicates a codon usage bias stronger than that observed in \textit{Drosophila}
 (Figure~\ref{fig:sup_dmel_enc}), suggesting that a large portion of synonymous mutations
@@ -458,7 +458,7 @@ may not be neutral in this large barnacle population.
     \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
     \caption{\textbf{Codon usage biases in \balgla.}
         Distribution of the effective number of codons (ENC) across
-        16,904 \bgla{} protein-coding genes. Dashed light blue line
+        16{,}904 \bgla{} protein-coding genes. Dashed light blue line
         shows the mean ENC (43.1), while the dot-dashed dark blue
         line shows the median ENC (42.7)}
     \label{fig:codon_enc}
@@ -581,8 +581,8 @@ deviation: 0.0224; Figure~\ref{fig:sup_theta_ne}). Assuming a per-base,
 per-generation mutation rate ($\mu$) of $3\times10^{-9}$ (as estimated by
 \cite{nunez_footprints_2020} for the northern acorn barnacle \textit{S. balanoides})
 and using the relationship between \Ne{} and $\theta_\text{W}$, this yields a
-mean effective size of 5,137,172 (median: 5,289,211, standard deviation: 1,862,683),
-which is consistent with the expectation of large \Ne{} in this species.
+mean effective size of 5{,}137{,}172 (median: 5{,}289{,}211, standard deviation:
+1{,}862{,}683), which is consistent with the expectation of large \Ne{} in this species.
 \vspace{0.2cm}
 
 Additionally, we estimated \Ne{} through time using a coalescent-based
