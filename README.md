@@ -1,6 +1,9 @@
 # Barnacle genome paper
 
-Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper.
+Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper:
+
+> Rivera-Colón et al. (*in prep.*)
+> **The genome of the Pacific acorn barnacle provides insights into the evolution of extremely large populations**
 
 ## Contents
 

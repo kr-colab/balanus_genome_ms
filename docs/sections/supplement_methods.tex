@@ -29,7 +29,7 @@ using the \textsc{jellyfish} \texttt{histo} command.
 The final model of the diploid, genome-wide k-mer distribution was then performed
 using \textsc{GenomeScope2} version \texttt{2.0}
 \citep{ranallo-benavidez_genomescope_2020}.
-We estimated the \textit{B. crenatus} genome size to be 755,696,144\,bp in length,
+We estimated the \textit{B. crenatus} genome size to be 755{,}696{,}144\,bp in length,
 with a heterozygosity of 2.25\%.
 
 \subsubsection*{Contig-level genome assembly}
@@ -45,7 +45,7 @@ For handling haplotigs, we set the expected coverage at homozygous sites to
 (\texttt{--purge-max 40}), and the similarity threshold between duplicate haplotigs
 to 25\% (\texttt{-s 0.25}).
 We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
-\citep{gurevich_quast_2013}, showing an assembly composed of 2,932 contigs, with a total
+\citep{gurevich_quast_2013}, showing an assembly composed of 2{,}932 contigs, with a total
 length of 1.20\,Gbp, and a contig N50 of 746\,kbp.
 Additionally, \textsc{compleasm} version \texttt{0.12-r237} \citep{huang_compleasm_2023}
 revealed this assembly 94.96\% complete (with 19.64\% duplicates) against the
@@ -64,7 +64,7 @@ across the six possible frames, which were then mapped against the NCBI \texttt{
 We retained only sequences assigned to the order Thecostraca (NCBI taxid
 \texttt{116172}).
 This process removed 236 fragments spanning $\approx$ 19.7\,Mbp, producing an assembly
-with 2,696 contigs, a total size of 1.18\,Gbp, and a contig N50 of 758.4\,kbp.
+with 2{,}696 contigs, a total size of 1.18\,Gbp, and a contig N50 of 758.4\,kbp.
 The resulting gene-completeness against the \texttt{arthropoda\_odb10} reference
 set was 94.57\% with 19.45\% duplicates.
 
@@ -84,7 +84,7 @@ Haplotigs were then marked according to the empirical coverage cutoffs using the
 Lastly, the assembly FASTA was processed to remove sequences tagged as haplotigs using
 \texttt{get\_seqs}, only removing sequences at the ends of contigs (\texttt{-e}) and
 allowing the splitting of contigs (\texttt{-s}).
-The purging reduced the number of contigs in the assembly to 1,548, resulting in
+The purging reduced the number of contigs in the assembly to 1{,}548, resulting in
 a total assembly size of 907.4\,Mbp, a contig N50 of 925.5\,kbp, and a gene-completeness
 of 93.39\% with 3.16\% duplicates (against the \texttt{arthropoda\_odb10} reference
 set).
@@ -96,7 +96,7 @@ The purged contig-level assembly was then polished and self-corrected using
 First, we evaluated the assembly using \texttt{inspector.py}, mapping the PacBio HiFi
 reads against the assembly.
 The assembly was then corrected using \texttt{inspector-correct.py}.
-After polishing, the assembly contained 1,548 contigs, a total length of 907.3\,Mbp,
+After polishing, the assembly contained 1{,}548 contigs, a total length of 907.3\,Mbp,
 and a contig N50 of 925.6\,kbp.
 Gene-completeness against the \texttt{arthropoda\_odb10} reference set was 93.39\%
 with 3.26\% duplicates.
@@ -154,9 +154,9 @@ threshold for the mapping of parent (\texttt{-a 0.25}) and child sequences
 (\texttt{-s 0.25}), and enabled a post-liftover refinement of the transferred
 gene models (\texttt{-polish}).
 We also used the ``general'' splice model for \textsc{miniprot} (\texttt{-j 1}).
-This liftover successfully annotated 15,841 genes, including 15,904 protein-coding
+This liftover successfully annotated 15{,}841 genes, including 15{,}904 protein-coding
 transcripts, in the \textit{B. crenatus} assembly.
-While this is $\approx$ 5,000 fewer protein-coding genes than those annotated for
+While this is $\approx$ 5{,}000 fewer protein-coding genes than those annotated for
 \textit{B. glandula}, this annotation was still 82.63\% gene-complete, with 9.67\%
 duplicates, when compared to the \texttt{arthropoda\_odb10} reference ortholog set
 using \textsc{compleasm} \texttt{protein}.
@@ -172,7 +172,7 @@ This annotation was processed with \textsc{agat} version \texttt{1.4.3}
 \citep{dainat_another_2022} to filter out non-coding annotations, extract the longest 
 transcript as representative for the gene, and standardize gene and sequence IDs for
 downstream analysis.
-This RefSeq annotation contains 20,420 protein-coding genes and is 88.72\%
+This RefSeq annotation contains 20{,}420 protein-coding genes and is 88.72\%
 gene-complete, with 35.93\% duplicates, when validated against the
 \texttt{arthropoda\_odb10} reference ortholog dataset using \textsc{compleasm}
 \texttt{protein}.
@@ -194,7 +194,7 @@ the \textsc{LiftOn} software version \texttt{1.0.5} \citep{chao_lifton_2024},
 allowing the software to identify gene copies with a sequence similarity of 80\%
 (\texttt{-copies -sc 0.8}), and using the ``general'' splice model in
 \textsc{miniprot} (\texttt{-j 1}).
-This liftover process successfully annotated 23,035 protein-coding genes.
+This liftover process successfully annotated 23{,}035 protein-coding genes.
 The annotation was then processed with \textsc{agat} version \texttt{1.4.3} to
 extract the longest transcript as representative for the gene and to standardize gene
 and sequence IDs for downstream analysis.
@@ -222,7 +222,7 @@ In \textsc{BRAKER}, we enforced the recovery of orthologs from the Arthropod
 After running \textsc{BRAKER}, we processed the resulting annotation using \textsc{agat}
 to extract the longest transcript as representative for the gene and to standardize gene
 and sequence IDs for downstream analysis.
-This process annotated 16,098 protein-coding genes, and was 96.05\% gene-complete,
+This process annotated 16{,}098 protein-coding genes, and was 96.05\% gene-complete,
 with 16.36\% duplicates, after validation with \textsc{compleasm} against the
 \texttt{arthropoda\_odb10} reference ortholog dataset.
 
@@ -235,7 +235,7 @@ publicly available on the NCBI SRA database (Table~\ref{tab:sup_sra_data}).
 We followed the same methodology used for \textit{A. improvisus}: processing the
 short reads with \textsc{fastp}, aligning to the genome with \textsc{hisat2}, annotating
 with \textsc{BRAKER}, and processing the resulting annotation with \textsc{agat}.
-This approach resulted in the annotation of 10,504 protein-coding genes, which
+This approach resulted in the annotation of 10{,}504 protein-coding genes, which
 produced an annotation that was 97.53\% gene-complete, with 14.02\% duplicate sequences
 when compared to the \texttt{arthropoda\_odb10} reference ortholog dataset.
 However, given the comparatively smaller number of annotated sequences, and the
@@ -255,7 +255,7 @@ and clean the IDs of the extracted coding sequences.
 We calculated codon usage biases using the \textsc{cubar} R package version
 \texttt{1.2.0} \citep{liu_cubar_2026}.
 We filtered coding sequences using the \texttt{check\_cds} function, ensuring the
-presence of canonical start and stop codons, retaining sequences for 13,521 genes.
+presence of canonical start and stop codons, retaining sequences for 13{,}521 genes.
 Then we calculated the distribution of observed codons using the
 \texttt{count\_codons} function.
 Lastly, we calculated the effective number of codons (ENC) observed in the

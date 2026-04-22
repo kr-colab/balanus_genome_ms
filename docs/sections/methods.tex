@@ -160,7 +160,7 @@ For identifying and correctly phasing haplotype sequences, we set the expected c
 at homozygous sites (\texttt{--hom-cov 68}) and the upper bound of coverage to purging
 duplicates (\texttt{--purge-max 68}) at 68x, along with setting the similarity threshold
 between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
-This assembly was composed of 2,218 contigs, with a total length of 1.29\,Gbp, and a contig
+This assembly was composed of 2{,}218 contigs, with a total length of 1.29\,Gbp, and a contig
 N50 of 1.16\,Mbp.
 \vspace{0.2cm}
 
@@ -229,8 +229,8 @@ mapping the PacBio HiFi reads against the assembly.
 (87.94\% for larger contigs) and a quality value (QV) of 30.49.
 It additionally identified 742 structural errors larger than 50\,bp, including
 357 haplotype switches, 303 sequence expansions, and 16 inversions.
-Assessing smaller ($<$50\,bp) errors, \textsc{Inspector} identified 1,929 small-scale
-expansions, 1,756 small-scale collapses, and 15,618 base substitutions.
+Assessing smaller ($<$50\,bp) errors, \textsc{Inspector} identified 1{,}929 small-scale
+expansions, 1{,}756 small-scale collapses, and 15{,}618 base substitutions.
 After evaluation, the assembly was then processed using \texttt{inspector-correct.py}
 (Table~\ref{tab:sup_asm_stats}) to export the corrected scaffolds in FASTA format.
 
@@ -417,7 +417,7 @@ in \textsc{OrthoFinder}, inferring gene trees from multiple-sequence alignments
 version \texttt{2.4.1}, and building gene trees using \textsc{fasttree} version
 \texttt{2.1.11}. Additionally, we split paralogous claded below the root into
 separate orthogroups (\texttt{-y}). Across all genomes, we assigned $88.5\%$ of
-genes into 15,184 orthogroups, including 2,576 containing single-copy orthologs
+genes into 15{,}184 orthogroups, including 2{,}576 containing single-copy orthologs
 present in all five species.
 
 \subsection*{Conserved synteny analysis}
@@ -478,7 +478,7 @@ The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
 Lastly, we filtered all alignments shorter than 100\,bp.
 \vspace{0.2cm}
 
-After generating and processing alignments for the resulting 9,082 single-copy
+After generating and processing alignments for the resulting 9{,}082 single-copy
 orthologs, we calculated \dnds{} rates using a custom Python script
 (\texttt{pairwise\_dnds.py}).
 The script uses the \texttt{dnds} Python package version \texttt{2.1}
@@ -514,7 +514,7 @@ analysis.
 The resulting alignments were processed with \textsc{ClipKIT}, trimming the
 alignment by codons (\texttt{--codon}), and trimming sites above a gap threshold
 of 25\% (\texttt{--mode gappy}; \texttt{--gaps 0.25}).
-Alignments smaller than 100\,bp were also discarded, retaining sequences for 7,374 
+Alignments smaller than 100\,bp were also discarded, retaining sequences for 7{,}374 
 orthologs.
 \vspace{0.2cm}
 
@@ -527,7 +527,7 @@ respectively), between ingroup and outgroup sequences.
 We ran \textsc{MKado} three times, each time calculating a different variant of
 the MK test.
 First, we calculated the standard MK test \citep{mcdonald_adaptive_1991} for all
-7,374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating the
+7{,}374 orthologs using the \textsc{MKado} \texttt{batch} command, calculating the
 per-gene proportion of non-synonymous sites fixed by selection ($\alpha$;
 \citealp{smith_adaptive_2002}), Neutrality Index (NI;~\citealp{rand_excess_1996})
 and Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}).
@@ -593,7 +593,7 @@ average $\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window
 In addition to the seven allozyme loci, we repeated this analysis for all the 
 orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
 estimate of $\pi_{4}/\text{K}_\text{S}$.
-After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8,931 orthologs.
+After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8{,}931 orthologs.
 \vspace{0.2cm}
 
 To formally test each allozyme locus for departures from neutrality using both
@@ -629,7 +629,7 @@ alignment dead zones were omitted.
 We calculated codon usage biases on the \bgla{} coding sequences using the R package
 \textsc{cubar} version \texttt{1.2.0} \citep{liu_cubar_2026}.
 We first filtered coding sequences using the \texttt{check\_cds} function,
-ensuring the presence of canonical start and stop codons, retaining 16,904
+ensuring the presence of canonical start and stop codons, retaining 16{,}904
 sequences.
 Then we calculated the distribution of observed codons using the
 \texttt{count\_codons} function.
