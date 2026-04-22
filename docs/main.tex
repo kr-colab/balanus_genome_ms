@@ -58,7 +58,15 @@
 \urlstyle{same}
 
 % For the citations
-\usepackage[round]{natbib}
+% Creating custom formatting for the refererences
+\usepackage[backend=biber, style=authoryear, natbib=true,
+    sorting=nyt, doi=true, url=true, maxbibnames=5,
+    minbibnames=3, giveninits=true, dashed=false,
+    eprint=true, date=year, uniquename=init, isbn=false,
+    mincitenames=1, maxcitenames=3]{biblatex}
+\addbibresource{references/references.bib}
+% \AtEveryBibitem{\clearfield{language}\clearfield{langid}\clearfield{editor}}
+\DeclareNameAlias{sortname}{family-given}
 
 % Some aliases for text
 \newcommand{\dnds}{d\textsubscript{N}/d\textsubscript{S}\xspace}
@@ -129,8 +137,7 @@ empirical systems.
 % Clear a new page for the bibliography
 \clearpage
 
-\bibliographystyle{apalike}
-\bibliography{references/references}
+\printbibliography
 
 % Supplements
 \clearpage
