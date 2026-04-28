@@ -43,9 +43,9 @@ classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
 We annotated protein-coding genes in the \bgla{} assembly using a combination of
 short-read RNAseq and long-read PacBio Iso-Seq data (see
 \nameref{sec:methods_protein_coding}).
-This process resulted in 20{,}234 protein-coding genes annotated, with a \textsc{BUSCO}
-completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10} and
-\texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
+This process resulted in 20{,}234 protein-coding genes annotated, which had a
+\textsc{BUSCO} completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10}
+and \texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
 Comparing this annotation against the proteomes of four other barnacle species (see
 \nameref{sec:methods_orthologs}) assigned orthology to 16{,}978 (83.91\%) \bgla{}
 protein-coding genes, including 2{,}576 single-copy orthologs across all five species.
@@ -108,12 +108,12 @@ scaffolds larger than 1\,Mbp (Table~\ref{tab:sup_popgen_stats}). Among these sit
 9.08 million (2.89\%) were heterozygous in the reference individual, including 8.73
 million SNPs and 356 thousand indels.
 In total, this variation represents a mean density of 14.66 heterozygous sites per kbp
-(median: 6 per kbp; standard deviation: 19.86). Moreover, we observed nearly 400
-thousand variant sites within protein-coding sequences, including 144 thousand
-non-synonymous point mutations.
-In this reference individual, transcripts had a mean of 7.74 (median: 3, standard
-deviation: 14.97) non-synonymous variants, indicating considerable coding variation
-segregating within a single individual.
+(median: 6 per kbp; standard deviation: 19.86).
+Moreover, we observed nearly 400 thousand variant sites within protein-coding sequences,
+including 144 thousand non-synonymous point mutations.
+Transcripts in the reference individual had a mean of 7.74 (median: 3, standard
+deviation: 14.97) non-synonymous heterozygous variants, indicating considerable coding
+variation segregating within a single individual.
 Even from this single genome, the sheer volume of heterozygosity underscores
 the exceptionally large population sizes of this species and foreshadows
 the extreme diversity observed at the population level.
@@ -188,10 +188,10 @@ of the broader selective regime acting on these large populations.
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
     \caption{\textbf{Highly conserved elements in the \balgla{} assembly.}
         \textbf{A.} Proportion of annotated features in the whole genome
-        (left column) and \textsc{phastCons}-conserved elements (right column). Values
-        are shown only for elements with proportions larger than 0.01. Sites that overlap
-        more than one non-intergenic annotation type are represented by the ``multiple''
-        feature.
+        (left column) and the 50.85 Mbp spanning \textsc{phastCons}-conserved elements
+        (right column). Values are shown only for elements with proportions larger than
+        0.01. Sites that overlap more than one non-intergenic annotation type are
+        represented by the ``multiple'' feature.
         \textbf{B.} Enrichment of the annotated features in the highly conserved
         elements compared to the genome-wide background, calculated as the $\log_2$ of
         the relative enrichment. The $\log_2$ enrichment values for each of the 16
@@ -233,9 +233,9 @@ related to neuronal activity and sleep regulation in \textit{Drosophila}
 We expanded on our \dnds{} measures of positive selection in protein-coding sequences
 in the \bgla{} genome by incorporating population-level polymorphism using the
 McDonald-Kreitman (MK) test \citep{mcdonald_adaptive_1991}.
-Specifically, we used polymorphism data from six \bgla{} individuals from the central
-Oregon coast (see \nameref{sec:results_popgen}), comparing those against the orthologous
-coding sequences in the \textit{B. crenatus} outgroup.
+Specifically, we used polymorphism data derived from a population panel of six \bgla{}
+individuals from the central Oregon coast (see \nameref{sec:results_popgen}), comparing
+those against the orthologous coding sequences in the \textit{B. crenatus} outgroup.
 After removing alignments shorter than 100\,bp and those containing premature stop
 codons or frameshift mutations, we calculated the MK test for 7{,}374 orthologous
 sequences between \bgla{} and \textit{B. crenatus}.
@@ -328,7 +328,7 @@ as an avenue for future study in barnacles.
         Points in red show the 444 genes significant after \textit{p}-value correction
         showing an excess of fixed non-synonymous substitutions indicating positive
         selection.
-        Points in green show the one significant gene with an excess of non-synonymous
+        Point in green show the one significant gene with an excess of non-synonymous
         polymorphism.}
     \label{fig:mkTest}
 \end{figure}
@@ -345,12 +345,12 @@ Prior allozyme work in \bgla{} itself is more limited but also revealing:
 Alaska, and while broad-scale differentiation was low ($\text{F}_\text{LT} = 0.023$),
 four of the five loci showed significant allele-frequency heterogeneity at microgeographic
 scales --- including heterogeneity at \textit{Mpi} across a single 1-m intertidal transect.
-These allozyme-era observations left open the question of whether the microgeographic
+These allozyme-era observations left the open question of whether the microgeographic
 signal reflects protein-level selection, drift among sweepstakes-limited recruitment
 cohorts \citep{hedgecock_does_1994}, or some combination of the two.
 With chromosome-level assemblies now available for both \bgla{} and \textit{B. crenatus},
-together with population-level polymorphism data, we can revisit these classic allozyme
-loci at molecular resolution.
+together with population-level polymorphism data, we can revisit these key loci at an
+increased molecular resolution.
 To do so, we identified orthologs to seven of these classic allozyme loci
 in our assembly (Table~\ref{tab:sup_allozymes}), including
 alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
@@ -393,7 +393,7 @@ test (HKA; \citealp{hudson_test_1987}). For each locus we assembled a full-lengt
 between the sequences of \bgla{} and \textit{B. crenatus}, spanning the gene body, including
 introns, plus 5\,kbp of flanking sequence on either side.
 This alignment was then augmented with the \bgla{} ingroup polymorphism derived from our
-population panel.
+central Oregon population panel.
 Testing each allozyme locus against the pooled remainder under the segregating-sites variant
 of the test (Table~\ref{tab:sup_hka}), only \textit{Me.1} showed a nominally significant deviation
 ($p = 0.032$, uncorrected for multiple comparisons across seven loci), exhibiting a deficit
