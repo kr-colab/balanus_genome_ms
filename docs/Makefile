@@ -8,7 +8,7 @@ all: $(TEX).pdf
 
 $(TEX).pdf: $(TEX).tex references/references.bib
 	pdflatex -interaction=nonstopmode $(TEX).tex
-	bibtex $(TEX)
+	biber $(TEX)
 	pdflatex -interaction=nonstopmode $(TEX).tex
 	pdflatex -interaction=nonstopmode $(TEX).tex
 	rm -f $(INTERMEDIATES)
