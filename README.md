@@ -2,8 +2,9 @@
 
 Working repository for the Pacific acorn barnacle (*Balanus glandula*) genome paper:
 
-> Rivera-Colón et al. (*in prep.*)
+> Rivera-Colón, *et al*. (2026)
 > **The genome of the Pacific acorn barnacle provides insights into the evolution of extremely large populations**
+> *bioRxiv*. [DOI: 10.64898/2026.04.27.721231](https://doi.org/10.64898/2026.04.27.721231)
 
 ## Contents
 
