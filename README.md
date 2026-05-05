@@ -22,8 +22,9 @@ of this directory.
 
 ```sh
 cd docs/
-make         # generate PDF (main.pdf)
-make clean   # remove build artifacts
+make             # generate PDF (main.pdf)
+make submission  # generate the PDFs for journal submission (submission_main.pdf & submission_sups.pdf)
+make clean       # remove build artifacts
 ```
 
 ## Authors
