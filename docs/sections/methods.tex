@@ -1,7 +1,5 @@
 \section*{Materials and Methods}
 
-% @Scott: could you verify the sequencing info?
-
 \subsection*{DNA and RNA sequencing}
 
 \subsubsection*{High-molecular weight DNA and PacBio sequencing}
@@ -9,17 +7,14 @@
 For genome sequencing using PacBio Hi-Fi reads, we sampled several \balgla{}
 individuals from the docks in the Oregon Institute of Marine Biology, in Charleston,
 Oregon, USA (43.346 N, 124.325 W). Individuals were hand collected at low tide in
-February 2023. High-molecular weight (HMW) DNA was extracted from the dissected
-testes using the PacBio Nanobind tissue kit (PacBio) and quality checked using
+February 2023. High-molecular weight (HMW) DNA was extracted using the PacBio Nanobind
+tissue kit (PacBio) and quality checked using
 fluorometric quantification of concentration (Qubit; Invitrogen) and fragment
 length distribution (Fragment Analyzer; Advanced Analytical). The extracted DNA
 of a single individual was sequenced on three SMRTcells of a PacBio Sequel
 II machine at the University of Oregon's Genomics and Cell Characterization Core
 Facility (GC3F). These three sequencing runs yielded a total of 5.93 million
 reads with a read N50 of 12.4\,kbp.
-% Some of this happened before me, so we might need some more details on the
-% library and sequencing, e.g., library prep? specific machine?
-
 \subsubsection*{Chromosome conformation capture}
 
 We generated chromosome conformation capture (Hi-C) libraries from a \textit{B.
@@ -30,7 +25,6 @@ of Oregon's GC3F, yielding 414.3 million read pairs.
 
 \subsubsection*{ONT ultra-long read sequencing}
 
-% TODO: library info?
 The HMW DNA from a \bgla{} individual collected from Cape Perpetua,
 Oregon, USA in August 2023 was extracted using the QIAGEN Genomic-Tips 20/G kit,
 processed using an Ultra-Long DNA Sequencing Kit and sequenced
@@ -422,18 +416,23 @@ present in all five species.
 
 \subsection*{Conserved synteny analysis}
 
-We calculated conserved synteny between barnacle genomes using the
-\textsc{genespace} version \texttt{1.3.1} software \citep{lovell_genespace_2022}.
-We used our \textsc{OrthoFinder} analysis as input for \textsc{genespace}, subsetting
-to only include orthologs for \bgla, \textit{A. amphitrite}, and \textit{P.
-pollicipes} using the \texttt{genomeID} parameter in the \texttt{init\_genespace}
-function. We set the minimum number of genes pairs required to define a syntenic
-block to two (\texttt{blkSize=2}) to identify synteny across smaller/more
-fragmented genomic regions across these highly-diverged species. Lastly, we
-generated a riparian plot for the three genomes using the \texttt{plot\_riparian}
-function, only plotting sequences larger than 5 Mb (\texttt{minChrLen2plot}),
-and setting \textit{A. amphitrite} as the reference for ordering the chromosomes
-(\texttt{ref}).
+We identified regions of conserved synteny between barnacle genomes using the software
+\textsc{Synolog} version \texttt{1.0} \citep{madrigal_synolog_2026}.
+First, we used the \texttt{synolog\_cctl.py} script to build a new \textsc{Synolog}
+cache (\texttt{new}).
+The assembly and annotation information for the target genomes (\bgla{},
+\textit{A. amphitrite}, and \textit{P. pollicipes}) were then added to this cache
+using the \texttt{species}, \texttt{annotation}, \texttt{genes}, and
+\texttt{integration} commands.
+After the cache was populated, we used the \texttt{synolog\_blastctl.py} to run
+and manage pairwise sequence comparisons between all species, using \textsc{blastp}
+version \texttt{2.15.0}.
+The core \textsc{Synolog} algorithm was then executed using the \texttt{synolog\_run.py}
+script.
+Genome-wide synteny plots were generated using the \texttt{synolog\_plot.py genome}
+command, plotting only orthologs identified in all species (\texttt{--span}), coloring
+orthologs by their chromosome of origin (\texttt{--color 0}), and only plotting
+sequences larger than 5\,Mbp (\texttt{--min 5e6}).
 
 \subsection*{Identifying highly-conserved elements}
 
@@ -540,92 +539,9 @@ Lastly, we calculated the Tarone-Greenland weighted estimator
 \textsc{MKado}'s \texttt{--alpha-tg}, which provides an unbiased estimator of
 genome-wide $\alpha$ when comparing across multiple genes.
 
-\subsection*{Assessment of classic allozyme loci}
-
-We identified the \bgla{} orthologs to the seven classic allozyme loci first
-characterized in barnacles by \cite{flowerdew_electrophoretic_1983}.
-First, we obtained representative sequences for these seven allozyme proteins
-(Table~\ref{tab:sup_allozymes}), which we then aligned against the annotated
-\bgla{} proteins using \textsc{blastp} version \texttt{2.15.0}, as implemented
-in \textsc{BLAST+}.
-The best \textsc{BLAST} hit, based on both sequence identity and e-value, was
-then assigned as the representative \bgla{} ortholog.
-Transcript IDs and genomic coordinates of these orthologs are shown in
-Table~\ref{tab:sup_allozymes}.
-\vspace{0.2cm}
-
-To characterize patterns of molecular evolution in these allozyme loci, we first
-calculated pairwise \dnds{} between the \bgla{} allozyme transcript sequences and
-their corresponding ortholog in \textit{B. crenatus}, following the same approach
-described above for all orthologs.
-We also implemented the McDonald-Kreitman test and associated statistics using a
-similar approach as described above for all genome-wide orthologs.
-However, to ensure we recovered results for all seven allozymes, we removed
-individual polymorphic sequences containing frameshift mutations instead of removing
-the whole ortholog altogether.
-The patterns of divergence and polymorphism were then calculated on any remaining
-sequences.
-\vspace{0.2cm}
-
-We additionally explored a regime of balancing selection on these allozyme genes by
-calculating the patterns of synonymous nucleotide diversity (in the form of $\pi$ at
-4-fold degenerate sites; $\pi_{4}$) and synonymous substitution rate (\Ks{}) along
-the gene sequences.
-To achieve this, we first used a custom Python script (\texttt{pairwise\_Ks.py}) to
-calculate \Ks{} using the alignments between \bgla{} and \textit{B. crenatus}.
-The script parses the alignment and, using the \texttt{dnds} Python package version
-\texttt{2.1} \citep{qalieh_dnds}, calculates the number of
-synonymous sites (S\textsubscript{C}) and synonymous substitutions
-(S\textsubscript{D}) at each aligned codon.
-The final output reports S\textsubscript{C}, S\textsubscript{D}, and their rate
-$\text{S}_\text{C}/\text{S}_\text{D}$ (i.e., \Ks{}) at each site according to the
-values of its corresponding codon.
-To calculate synonymous diversity, we used the central Oregon polymorphism data.
-We used \textsc{pixy} to calculate per-site (\texttt{--window\_size 1}) $\pi$ at
-4-fold degenerate sites spanning the allozyme coding sequences (specified with
-\texttt{--sites\_file}).
-Lastly, we used another custom script (\texttt{process\_pi4\_Ks.R}) to aggregate
-the \Ks{} and $\pi_{4}$ values.
-Values were aggregated along 99\,bp (33 codons) windows, with a step size of 24\,bp
-(8 codons), filtering out windows with data for fewer than three codons.
-At each window, we calculated the average, Jukes-Cantor corrected \Ks{}, the
-average $\pi_{4}$, and their ratio ($\pi_{4}/\text{K}_\text{S}$) for each window.
-In addition to the seven allozyme loci, we repeated this analysis for all the 
-orthologs between \bgla{} and \textit{B. crenatus} in order to get a genome-wide
-estimate of $\pi_{4}/\text{K}_\text{S}$.
-After filtering, we calculated $\pi_{4}/\text{K}_\text{S}$ for 8{,}931 orthologs.
-\vspace{0.2cm}
-
-To formally test each allozyme locus for departures from neutrality using both
-polymorphism and divergence, we applied the Hudson-Kreitman-Aguad\'{e} (HKA) test
-\citep{hudson_test_1987} and its sliding-window extension
-\citep{kreitman_inferring_1991}, as implemented in the \textsc{sliding\_hka}
-Python package \citep{kern_hka}. 
-For each of the seven allozyme loci we constructed a per-locus full-length multiple
-sequence alignment spanning the gene body plus 5\,kbp of flanking sequence on either side.
-Coding regions were aligned codon-aware using the existing CDS alignments between
-\bgla{} and \textit{B. crenatus} from the MK analysis; intronic and
-intergenic flanks were aligned pairwise with \textsc{lastz} version 1.04.52
-\citep{harris_lastz} under permissive sister-species parameters
-(\texttt{--seed=match8} \texttt{--hspthresh=1500} \texttt{--gappedthresh=1000}
-\texttt{--ydrop=9400} \texttt{--inner=2000}); the two tracks were stitched together
-in genomic coordinates.
-Per-sample ingroup haplotype sequences for the same windows were extracted
-via \textsc{bcftools} \texttt{consensus} (\texttt{-H 1,2}) against the filtered
-all-sites VCFs, then profile-aligned onto the stitched reference alignment
-with \textsc{mafft} \texttt{--add} \texttt{--keeplength}
-\texttt{--adjustdirectionaccurately} \citep{katoh_mafft_2013}.
-For the classic HKA test each locus was tested against the pool of the remaining
-six under the segregating-sites variant;
-$T+1$ was estimated jointly across all seven loci.
-CDS columns were treated codon-aware (Nei-Gojobori synonymous-site denominator and
-path-based synonymous classification), while non-coding columns were treated per-site
-as fully silent, following the 1991 convention. For the sliding-window
-diagnostic we used a window width of 500 silent sites; windows anchored in
-alignment dead zones were omitted.
-
 \subsection*{Codon usage biases}
 
+\comment{TODO: Update this with the new methods.}
 We calculated codon usage biases on the \bgla{} coding sequences using the R package
 \textsc{cubar} version \texttt{1.2.0} \citep{liu_cubar_2026}.
 We first filtered coding sequences using the \texttt{check\_cds} function,
@@ -792,6 +708,8 @@ BioProject \texttt{PRJNA1434535}.
 Copies of the bioinformatic scripts used for analysis and the raw files used to generate
 this document are available on GitHub
 (\url{https://github.com/kr-colab/balanus_genome_ms}).
-Additional copies of the final assembly and annotation files for each species are
-available on \comment{TBD}.
+Additional copies of the final assembly and annotation files for \bgla{} and 
+\textit{B. crenatus} available on Dryad (\url{https://doi.org/10.5061/dryad.pvmcvdp21 }).
+\comment{Note: NCBI, GitHub, and Dryad repositories are currently private.
+Reviewer links are available upon request.}
 

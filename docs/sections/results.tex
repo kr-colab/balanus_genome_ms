@@ -2,11 +2,6 @@
 
 \subsection*{Genome assembly and annotation}
 
-% Angel: Reduced the genome assembly and annotation sections, previously two different
-% sections with multiple paragraphs each, to just this one section. It skips some of the
-% details present in the methods, whole still describing the general details of the
-% assembly and annotation.
-
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle
 using PacBio HiFi long reads and Hi-C data.
 Preliminary k-mer assessment of the HiFi reads revealed an expected genome
@@ -64,15 +59,17 @@ population genomic and comparative analyses.
 \subsection*{Conserved architecture across barnacle genomes}
 
 To assess large-scale structural conservation across barnacle genomes, we performed
-a conserved synteny analysis using the software \textsc{Genespace}
-\citep{lovell_genespace_2022}.
-We compared our \bgla{} genome against the chromosome-level genome assemblies of the
+a conserved synteny analysis using \textsc{Synolog} \citep{madrigal_synolog_2026}.
+We compared our \bgla{} genome against the chromosome-level assemblies of the
 striped barnacle \textit{Amphibalanus amphitrite} \citep[Balanidae;][]{han_new_2024}
 and the gooseneck barnacle \textit{Pollicipes pollicipes}
 \citep[Pollicipedidae;][]{bernot_chromosome-level_2022}.
 These genomes display conservation in their large-scale organization, including
 one-to-one correspondence between 16 putatively orthologous chromosomes across the
-three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding
+three species (Figure~\ref{fig:synteny}).
+Smaller deviations from this one-to-one relationship likely represent assembly errors
+are not reflective to changes in chromosomal evolution in these species.
+Observing this strong correspondance shows that our scaffolding
 of the \bgla{} assembly likely reflects the biological structure of
 the genome and is not the product of technical artifacts, and further suggests
 conservation of genome architecture across barnacles spanning $\approx$ 165 Mya
@@ -86,13 +83,12 @@ rearrangements have not been a major driver of diversification in barnacles.
     \centering
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
-        Genome-wide riparian plots showing one-to-one correspondence across
+        Genome-wide synteny plots showing one-to-one correspondence across
         16 putatively orthologous chromosomes between the genomes of \balgla{}
         (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes
         pollicipes} (bottom).
-        Each set of colored lines shows syntenic orthologous genes across the three
-        assemblies, colored according to their chromosome of origin.
-        Chromosomes are drawn according to their order in \textit{A. amphitrite}.
+        Each colored line shows protein-coding orthologs across the three
+        assemblies, colored according to their chromosome of origin in \bgla{}.
         Cladogram on the left shows the evolutionary relationship among the three
         species.}
     \label{fig:synteny}
@@ -153,10 +149,6 @@ Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enric
 2.14, median: 2.04, standard deviation: 0.96), likely reflecting the strong functional
 constraints on these sequences.
 \vspace{0.2cm}
-
-% Angel: Following one of Scott's comments, trying to minimize some of the more
-% discussion-y text here. Still kept some of the comparisons I thought were a bit more relevant.
-% We can put any of that text back if needed.
 
 The enrichment among conserved elements in \bgla{} mirrors patterns observed across other
 groups of organisms.
@@ -323,7 +315,7 @@ as an avenue for future study in barnacles.
         right (NI $<1$) indicating sequences with an excess of non-synonymous
         substitutions indicative of positive selection.
         Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
-        The dashed and dot-dashed lines show the raw ($p<0.05$) and Bonferroni corrected
+        The dashed and dot-dashed lines show the raw ($p<0.05$) and Bonferroni-corrected
         ($p<6.20\times10^{-6}$) significance thresholds, respectively.
         Points in red show the 444 genes significant after \textit{p}-value correction
         showing an excess of fixed non-synonymous substitutions indicating positive
@@ -333,115 +325,9 @@ as an avenue for future study in barnacles.
     \label{fig:mkTest}
 \end{figure}
 
-\subsection*{Non-neutral evolution in the classic allozyme loci}
-
-In the northern acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
-have been extensively linked to spatial heterogeneity and local adaptation
-\citep{flowerdew_electrophoretic_1983,nunez_footprints_2020,rand_ecological_2002,
-schmidt_environmental_2000,flight_allozyme_2012,veliz_regional_2004}.
-Prior allozyme work in \bgla{} itself is more limited but also revealing:
-\cite{hedgecock_temporal_1994} surveyed five polymorphic loci (including
-\textit{Mpi} and \textit{Gpi}) across ten localities from central California to
-Alaska, and while broad-scale differentiation was low ($\text{F}_\text{LT} = 0.023$),
-four of the five loci showed significant allele-frequency heterogeneity at microgeographic
-scales --- including heterogeneity at \textit{Mpi} across a single 1-m intertidal transect.
-These allozyme-era observations left the open question of whether the microgeographic
-signal reflects protein-level selection, drift among sweepstakes-limited recruitment
-cohorts \citep{hedgecock_does_1994}, or some combination of the two.
-With chromosome-level assemblies now available for both \bgla{} and \textit{B. crenatus},
-together with population-level polymorphism data, we can revisit these key loci at an
-increased molecular resolution.
-To do so, we identified orthologs to seven of these classic allozyme loci
-in our assembly (Table~\ref{tab:sup_allozymes}), including
-alcohol dehydrogenase (\textit{Adh}), glucose-6-phosphate isomerase (\textit{Gpi}), two
-different copies of the NADP-dependent malic enzyme (\textit{Me.1} and \textit{Me.2}),
-mannose-6-phosphate isomerase (\textit{Mpi}), phosphoglucomutase (\textit{Pgm}), and
-superoxide dismutase (\textit{Sod}).
-\vspace{0.2cm}
-
-When compared against the \textit{B. crenatus} orthologous sequences, all seven loci show
-\dnds{} less than one (Table~\ref{tab:sup_allozymes_dnds}), in agreement with our genome-wide
-estimates, suggesting that they are evolving under purifying selection (but see
-\nameref{sec:discussion_dnds_mkt}).
-Assessing these loci using the MK test reveals different selection regimes acting on these
-loci.
-Among the seven allozyme loci, only \textit{Gpi} and \textit{Me.2} show a significant MK
-test result (corrected $p < 0.05$), showing deviation from the expected number of synonymous
-and non-synonymous divergence and polymorphism under neutrality
-(Table~\ref{tab:sup_allozymes_mkt}).
-For both of these genes, both the NI and DoS statistics show that this deviation is due to
-an excess of non-synonymous substitutions, suggesting that these sequences evolved under
-a regime of positive selection.
-The $\alpha$ statistic additionally shows that the majority of non-synonymous
-substitutions in these two genes, 76.2\% for \textit{Gpi} and 71.9\% for \textit{Me.2},
-reached fixation as the product of directional positive selection.
-Both estimates sit meaningfully above the genome-wide asymptotic estimate
-($\alpha_\text{asym} = 0.610$), placing these two classic allozyme loci among the more
-rapidly evolving protein-coding sequences in the \bgla{} genome.
-Among the remaining loci, \textit{Mpi} shows the largest excess of polymorphism
-relative to divergence (NI = 1.575), though the MK test is not significant after
-correction ($p = 0.443$).
-Examination of synonymous diversity ($\pi_{4}$) relative to synonymous divergence
-($\text{K}_\text{S}$) in sliding windows along each allozyme coding sequence reveals
-localized elevations at all seven loci, with outlier windows tending to fall within
-single exons (Figure~\ref{fig:sup_gw_piks}; Figure~\ref{fig:sup_allozyme_piks}).
-\vspace{0.2cm}
-
-To test the seven allozyme loci for departures from neutrality at the level of within-species
-polymorphism relative to between-species divergence, we applied the Hudson-Kreitman-Aguad\'{e}
-test (HKA; \citealp{hudson_test_1987}). For each locus we assembled a full-length alignment
-between the sequences of \bgla{} and \textit{B. crenatus}, spanning the gene body, including
-introns, plus 5\,kbp of flanking sequence on either side.
-This alignment was then augmented with the \bgla{} ingroup polymorphism derived from our
-central Oregon population panel.
-Testing each allozyme locus against the pooled remainder under the segregating-sites variant
-of the test (Table~\ref{tab:sup_hka}), only \textit{Me.1} showed a nominally significant deviation
-($p = 0.032$, uncorrected for multiple comparisons across seven loci), exhibiting a deficit
-of polymorphism relative to its divergence --- the direction expected under a recent selective
-sweep or strong purifying constraint at linked sites.
-% \vspace{0.2cm}
-
-The two MK outliers, \textit{Gpi} and \textit{Me.2}, did not reach significance individually
-under the classic HKA test, but both showed direction-consistent excess polymorphism
-relative to divergence. To visualize where along each locus the signal concentrates we
-applied the sliding-window HKA diagnostic \citep{kreitman_inferring_1991}, which
-displays local departures from the neutral expectation but does not yield a formal
-significance threshold, using a window of 500 silent sites centered on each nucleotide
-position (Figure~\ref{fig:sliding_hka}).
-Both \textit{Me.2} and \textit{Pgm} show observed silent diversity exceeding the
-divergence-scaled neutral expectation across multiple sub-regions of the gene body, with
-the largest excesses localized to coding and intronic windows rather than spread
-uniformly. These localized peaks are consistent with selection acting
-heterogeneously along the gene body at these loci, similar to the pattern observed
-for \textit{Mpi} in \textit{S. balanoides} (see Figure~\ref{fig:sup_sliding_hka}
-for the full set of seven loci).
-
-% Sliding HKA main figure
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_pgm.pdf}\hfill
-    \includegraphics[width=0.48\textwidth]{figures/sliding_hka_me2.pdf}
-    \caption{\textbf{Sliding-window HKA diagnostic at \textit{Pgm} and \textit{Me.2}
-        allozyme loci.}
-        For each locus we show observed mean ingroup pairwise silent diversity ($\pi$;
-        solid black line) alongside the divergence-scaled neutral expectation
-        ($\textit{D} / (T+1)$; dashed grey line), both computed in sliding windows
-        of 500 silent sites centered on each nucleotide position. $T + 1$ is a joint
-        estimate pooled across all seven allozyme loci. Windows anchored in alignment
-        dead zones (positions where \textit{B. glandula} and \textit{B. crenatus} could
-        not be homologized; greys boxes) are omitted. The gene structure track below each
-        panel shows exons (filled black blocks), untranslated regions (open outlined blocks),
-        and introns (thin black baseline). Both loci exhibit sub-regions where
-        observed $\pi$ stands meaningfully above the expected curve, the pattern
-        predicted under balancing selection or recent positive selection on standing
-        variation at linked sites.}
-    \label{fig:sliding_hka}
-\end{figure}
-
-% Low priority, but could we get a scaled version of the figure in which the text is a bit larger?
-
 \subsection*{Barnacle genes show a biased use of synonymous codons}
 
+    \comment{TODO: Update this with the new results.}
 We used the annotated transcript sequences of our Pacific acorn barnacle genome
 to calculate the effective number of codons (ENC), a measure of the extent of
 departure from equal usage across synonymous codons \citep{wright_effective_1990,
@@ -457,6 +343,7 @@ may not be neutral in this large barnacle population.
     \centering
     \includegraphics[width=0.4\textwidth]{figures/codon_bias.pdf}
     \caption{\textbf{Codon usage biases in \balgla.}
+        \comment{TODO: Update this with the new results.}
         Distribution of the effective number of codons (ENC) across
         16{,}904 \bgla{} protein-coding genes. Dashed light blue line
         shows the mean ENC (43.1), while the dot-dashed dark blue
@@ -466,7 +353,8 @@ may not be neutral in this large barnacle population.
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}\label{sec:results_popgen}
 
-We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast.
+We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast
+using Illumina short reads.
 After removal of two samples with poor quality sequences, and the stringent filtering of
 sites with low coverage, low quality, and/or missing genotypes, we retained a total of
 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%)
@@ -488,6 +376,8 @@ is an order of magnitude higher than that observed in diverse \textit{Drosophila
 populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
 \vspace{0.2cm}
 
+\comment{TODO: mention something about the centromeres, recombination,
+and linked selection.}
 Along each chromosome, we did not observe any strong correlation between the density
 of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and
 $\pi$, particularly not at the scale of 10\,kbp (Figure~\ref{fig:genome_pi};
@@ -527,7 +417,7 @@ genotypes located within repetitive intervals in the reference
 Looking at diversity across the genome, we observed an overall reduction in $\pi$
 at putatively functional sites. For example, the mean $\pi$ in sequences spanning
 annotated CDSs is 0.0302 (median: 0.0270, standard deviation: 0.0221;
-Figure~\ref{fig:feature_pi}; Figure~\ref{fig:sup_pi_hist}; Table~\ref{tab:sup_feature_pi}),
+Figure~\ref{fig:feature_pi}; Table~\ref{tab:sup_feature_pi}),
 which represents a $\approx1.6\times$ reduction in diversity when compared to the
 genome-wide average. A reduction in diversity of similar magnitude is also observed
 in the sequences of lncRNAs ($1.4\times$) and 5' UTRs ($1.3\times$). The largest reduction
