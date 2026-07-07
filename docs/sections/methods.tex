@@ -416,18 +416,23 @@ present in all five species.
 
 \subsection*{Conserved synteny analysis}
 
-We calculated conserved synteny between barnacle genomes using the
-\textsc{genespace} version \texttt{1.3.1} software \citep{lovell_genespace_2022}.
-We used our \textsc{OrthoFinder} analysis as input for \textsc{genespace}, subsetting
-to only include orthologs for \bgla, \textit{A. amphitrite}, and \textit{P.
-pollicipes} using the \texttt{genomeID} parameter in the \texttt{init\_genespace}
-function. We set the minimum number of genes pairs required to define a syntenic
-block to two (\texttt{blkSize=2}) to identify synteny across smaller/more
-fragmented genomic regions across these highly-diverged species. Lastly, we
-generated a riparian plot for the three genomes using the \texttt{plot\_riparian}
-function, only plotting sequences larger than 5 Mb (\texttt{minChrLen2plot}),
-and setting \textit{A. amphitrite} as the reference for ordering the chromosomes
-(\texttt{ref}).
+We identified regions of conserved synteny between barnacle genomes using the software
+\textsc{Synolog} version \texttt{1.0} \citep{madrigal_synolog_2026}.
+First, we used the \texttt{synolog\_cctl.py} script to build a new \textsc{Synolog}
+cache (\texttt{new}).
+The assembly and annotation information for the target genomes (\bgla{},
+\textit{A. amphitrite}, and \textit{P. pollicipes}) were then added to this cache
+using the \texttt{species}, \texttt{annotation}, \texttt{genes}, and
+\texttt{integration} commands.
+After the cache was populated, we used the \texttt{synolog\_blastctl.py} to run
+and manage pairwise sequence comparisons between all species, using \textsc{blastp}
+version \texttt{2.15.0}.
+The core \textsc{Synolog} algorithm was then executed using the \texttt{synolog\_run.py}
+script.
+Genome-wide synteny plots were generated using the \texttt{synolog\_plot.py genome}
+command, plotting only orthologs identified in all species (\texttt{--span}), coloring
+orthologs by their chromosome of origin (\texttt{--color 0}), and only plotting
+sequences larger than 5\,Mbp (\texttt{--min 5e6}).
 
 \subsection*{Identifying highly-conserved elements}
 

@@ -59,15 +59,17 @@ population genomic and comparative analyses.
 \subsection*{Conserved architecture across barnacle genomes}
 
 To assess large-scale structural conservation across barnacle genomes, we performed
-a conserved synteny analysis using the software \textsc{Genespace}
-\citep{lovell_genespace_2022}.
-We compared our \bgla{} genome against the chromosome-level genome assemblies of the
+a conserved synteny analysis using \textsc{Synolog} \citep{madrigal_synolog_2026}.
+We compared our \bgla{} genome against the chromosome-level assemblies of the
 striped barnacle \textit{Amphibalanus amphitrite} \citep[Balanidae;][]{han_new_2024}
 and the gooseneck barnacle \textit{Pollicipes pollicipes}
 \citep[Pollicipedidae;][]{bernot_chromosome-level_2022}.
 These genomes display conservation in their large-scale organization, including
 one-to-one correspondence between 16 putatively orthologous chromosomes across the
-three species (Figure~\ref{fig:synteny}). This finding shows that our scaffolding
+three species (Figure~\ref{fig:synteny}).
+Smaller deviations from this one-to-one relationship likely represent assembly errors
+are not reflective to changes in chromosomal evolution in these species.
+Observing this strong correspondance shows that our scaffolding
 of the \bgla{} assembly likely reflects the biological structure of
 the genome and is not the product of technical artifacts, and further suggests
 conservation of genome architecture across barnacles spanning $\approx$ 165 Mya
@@ -81,13 +83,12 @@ rearrangements have not been a major driver of diversification in barnacles.
     \centering
     \includegraphics[width=0.8\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
-        Genome-wide riparian plots showing one-to-one correspondence across
+        Genome-wide synteny plots showing one-to-one correspondence across
         16 putatively orthologous chromosomes between the genomes of \balgla{}
         (top), \textit{Amphibalanus amphitrite} (middle), and \textit{Pollicipes
         pollicipes} (bottom).
-        Each set of colored lines shows syntenic orthologous genes across the three
-        assemblies, colored according to their chromosome of origin.
-        Chromosomes are drawn according to their order in \textit{A. amphitrite}.
+        Each colored line shows protein-coding orthologs across the three
+        assemblies, colored according to their chromosome of origin in \bgla{}.
         Cladogram on the left shows the evolutionary relationship among the three
         species.}
     \label{fig:synteny}
@@ -148,10 +149,6 @@ Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enric
 2.14, median: 2.04, standard deviation: 0.96), likely reflecting the strong functional
 constraints on these sequences.
 \vspace{0.2cm}
-
-% Angel: Following one of Scott's comments, trying to minimize some of the more
-% discussion-y text here. Still kept some of the comparisons I thought were a bit more relevant.
-% We can put any of that text back if needed.
 
 The enrichment among conserved elements in \bgla{} mirrors patterns observed across other
 groups of organisms.
@@ -329,6 +326,8 @@ as an avenue for future study in barnacles.
 \end{figure}
 
 \subsection*{Non-neutral evolution in the classic allozyme loci}
+
+\commentauth{Angel}{Remove?}
 
 In the northern acorn barnacle \textit{Semibalanus balanoides}, a set of allozyme loci
 have been extensively linked to spatial heterogeneity and local adaptation
