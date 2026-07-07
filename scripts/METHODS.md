@@ -541,10 +541,20 @@ Identify orthologous genes across barnacle genomes using `OrthoFinder` version `
 
 `scripts/comparative_genomics/synteny`:
 
-* `run_genespace.R`
+* `synolog_cache.sh`
 
-Take the output from `OrthoFinder` and identify synteny blocks using `Genespace`
-version `1.3.1`. Plot the riparian plots across orthologous chromosomes.
+Manages a species cache in `Synolog` version `1.0`. Uses the `synolog_cctl.py`
+script to create a new cache, and adds a new species with its corresponding
+annotation and gene sequences.
+
+* `synolog_blasts.sh`
+
+Run and manage the pairwise `BLAST`s for an existing `Synolog` cache.
+
+* `synolog_run.sh`
+
+Run the main `Synolog` reference algorithm on the existing cache and `BLAST`
+results. Then, generate a genome-wide synteny plot using `synolog_plot.py`.
 
 ### Whole-genome alignment and conserved regions
 
