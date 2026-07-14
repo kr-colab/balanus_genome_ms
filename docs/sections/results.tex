@@ -81,6 +81,7 @@ rearrangements have not been a major driver of diversification in barnacles.
 % Synteny
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.9\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
         Genome-wide synteny plots showing one-to-one correspondence across
@@ -175,8 +176,9 @@ of the broader selective regime acting on these large populations.
 % \vspace{0.2cm}
 
 % Phastcons and enrichment
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
     \caption{\textbf{Highly conserved elements in the \balgla{} assembly.}
         \textbf{A.} Proportion of annotated features in the whole genome
@@ -271,6 +273,29 @@ Notably, this pervasive signal of positive selection stands in apparent tension 
 the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
 \vspace{0.2cm}
 
+% MK test volcano plot
+\begin{figure}[htbp]
+    \centering
+    \captionsetup{width=0.95\linewidth}
+    \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
+    \caption{\textbf{Signatures of positive selection in \balgla{}
+        protein-coding genes.}
+        Selection on 7{,}374 protein-coding genes was assessed using the
+        McDonald-Kreitman test.
+        X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
+        right (NI $<1$) indicating sequences with an excess of non-synonymous
+        substitutions indicative of positive selection.
+        Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
+        The dashed and dot-dashed lines show the raw ($p<0.05$) and Bonferroni-corrected
+        ($p<6.20\times10^{-6}$) significance thresholds, respectively.
+        Points in red show the 444 genes significant after \textit{p}-value correction
+        showing an excess of fixed non-synonymous substitutions indicating positive
+        selection.
+        Point in green show the one significant gene with an excess of non-synonymous
+        polymorphism.}
+    \label{fig:mkTest}
+\end{figure}
+
 Exploring the predicted function of the candidate genes identified in the MK analysis,
 our single candidate displaying an excess of polymorphism relative to divergence is a
 homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
@@ -303,52 +328,43 @@ While the exact functions of all of these candidate genes are unknown in \bgla{}
 highlight the diverse targets of selection in this system and their characterization serves
 as an avenue for future study in barnacles.
 
-% MK test volcano plot
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
-    \caption{\textbf{Signatures of positive selection in \balgla{}
-        protein-coding genes.}
-        Selection on 7{,}374 protein-coding genes was assessed using the
-        McDonald-Kreitman test.
-        X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
-        right (NI $<1$) indicating sequences with an excess of non-synonymous
-        substitutions indicative of positive selection.
-        Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
-        The dashed and dot-dashed lines show the raw ($p<0.05$) and Bonferroni-corrected
-        ($p<6.20\times10^{-6}$) significance thresholds, respectively.
-        Points in red show the 444 genes significant after \textit{p}-value correction
-        showing an excess of fixed non-synonymous substitutions indicating positive
-        selection.
-        Point in green show the one significant gene with an excess of non-synonymous
-        polymorphism.}
-    \label{fig:mkTest}
-\end{figure}
+\subsection*{Barnacle genes show biases in the use of synonymous codons}
 
-\subsection*{Barnacle genes show a biased use of synonymous codons}
+We compared biases in the usage and composition of synonymous codons in twelve metazoan
+genomes, including four barnacles (Table~\ref{tab:enc_summary}), to study the effects of
+translational selection in the context of large populations.
+Using the annotated transcript sequences in these genomes to calculate the effective number
+of codons (ENC), a measure of the extent of departure from equal usage across synonymous
+codons \citep{wright_effective_1990,sun_improved_2013}.
+In addition to ENC, we also estimated compositional biases by calculating both the overall
+coding sequence GC proportion, and the proportion of GC bases at third codon positions (GC3s).
+Across 16{,}217 genes in \bgla{}, we find a mean ENC of 43.17 (median: 42.84, standard
+deviation: 5.52; Figure~\ref{fig:codon_enc}A; Table~\ref{tab:enc_summary}).
+This number of effective codons is similar to the one observed across three other barnacle
+genomes (mean ENC ranging from 42.04 to 44.33; Table~\ref{tab:enc_summary}), highlighting a substantial bias in synonymous codon usage
+in barnacles when compared to other metazoans (Figure~\ref{fig:codon_enc}A).
 
-    \comment{TODO: Update this with the new results.}
-We used the annotated transcript sequences of our Pacific acorn barnacle genome
-to calculate the effective number of codons (ENC), a measure of the extent of
-departure from equal usage across synonymous codons \citep{wright_effective_1990,
-sun_improved_2013}. We calculated ENC across the coding sequences of
-16{,}904 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
+
+
+We calculated ENC across the coding sequences of
+16{,}217 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
 standard deviation: 5.56, Figure~\ref{fig:codon_enc}). This ENC distribution
 indicates a codon usage bias stronger than that observed in \textit{Drosophila}
 (Figure~\ref{fig:sup_dmel_enc}), suggesting that a large portion of synonymous mutations
 may not be neutral in this large barnacle population.
 
 % ENC codon bias
-\begin{figure}[htp]
+\begin{figure}[htbp]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.9\textwidth]{figures/codon_bias.pdf}
     \caption{\textbf{Codon usage biases in \balgla.}
         \textbf{A.} Genome-wide distribution of the effective number of codons (ENC)
-        in \bgla{} (\texttt{BalGla}) and other metazoan genomes, including the barnacles
-        \textit{B. crenatus} (\texttt{BalCre}), \textit{A. amphitrite} (\texttt{AmpAmp}),
-        and \textit{P. pollicipes} (\texttt{PolPol}). The vertical lines
-        show the 50\textsuperscript{th} quantile (median) of the distribution,
-        while the crosses show the mean value.
+        in \bgla{} (\texttt{BalGla}) and other metazoan genomes (see Table~\ref{tab:enc_summary}),
+        including the barnacles \textit{B. crenatus} (\texttt{BalCre}), \textit{A. amphitrite}
+        (\texttt{AmpAmp}), and \textit{P. pollicipes} (\texttt{PolPol}).
+        The vertical lines show the 50\textsuperscript{th} quantile (median) of the
+        distribution, while the crosses show the mean value.
         \textbf{B.} Distribution in the proportion of GC bases in coding sequences
         of 12 metazoan genomes. Vertical lines and crosses show the mean and median
         values, respectively.
@@ -362,34 +378,6 @@ may not be neutral in this large barnacle population.
         linear regression between expected and observed ENC distributions.}
     \label{fig:codon_enc}
 \end{figure}
-
-% Requires \usepackage{booktabs} in the preamble.
-\begin{table}[ht]
-\centering
-\caption{\comment{Add number of genes.} Length-filtered summary statistics (CDS $\geq$ 300 bp, within 2 SD of the per-species mean length) for the effective number of codons (ENC), GC proportion, and GC proportion at the third codon position (GC3s).}
-\label{tab:enc_summary}
-\begin{tabular}{lllrrrrrrrrr}
-\toprule
- & & & \multicolumn{3}{c}{ENC} & \multicolumn{3}{c}{GC} & \multicolumn{3}{c}{GC3s} \\
-\cmidrule(lr){4-6} \cmidrule(lr){7-9} \cmidrule(lr){10-12}
-Genome          & Species                                & NCBI Accession             & Mean & Median & StDev & Mean & Median & StDev & Mean & Median & StDev \\
-\midrule
-\texttt{BalGla} & \balgla{}                              & This study                 & 43.17 & 42.84 & 5.52 & 0.645 & 0.648 & 0.061 & 0.781 & 0.796 & 0.102 \\
-\texttt{BalCre} & \textit{Balanus crenatus}              & This study                 & 42.23 & 41.40 & 4.78 & 0.645 & 0.649 & 0.055 & 0.815 & 0.837 & 0.093 \\
-\texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \texttt{GCF\_019059575.1}  & 44.33 & 43.93 & 5.05 & 0.632 & 0.636 & 0.054 & 0.775 & 0.792 & 0.099 \\
-\texttt{PolPol} & \textit{Pollicipes pollicipes}         & \texttt{GCF\_011947565.3}  & 42.04 & 41.57 & 4.56 & 0.644 & 0.648 & 0.049 & 0.829 & 0.845 & 0.082 \\
-\texttt{DroMel} & \textit{Drosophila melanogaster}       & \texttt{GCF\_000001215.4}  & 49.97 & 50.47 & 3.99 & 0.534 & 0.540 & 0.053 & 0.630 & 0.640 & 0.110 \\
-\texttt{AnoGam} & \textit{Anopheles gambiae}             & \texttt{GCF\_943734735.2}  & 48.43 & 48.92 & 5.09 & 0.556 & 0.566 & 0.062 & 0.667 & 0.688 & 0.136 \\
-\texttt{CaeBre} & \textit{Caenorhabditis brenneri}       & \texttt{GCA\_964036135.1}  & 50.95 & 51.55 & 3.21 & 0.436 & 0.430 & 0.045 & 0.411 & 0.399 & 0.088 \\
-\texttt{MagGig} & \textit{Magallana gigas}               & \texttt{GCF\_963853765.1}  & 53.34 & 53.66 & 2.58 & 0.442 & 0.441 & 0.043 & 0.433 & 0.426 & 0.085 \\
-\texttt{StrPur} & \textit{Strongylocentrotus purpuratus} & \texttt{GCF\_000002235.5}  & 53.92 & 54.39 & 2.68 & 0.481 & 0.480 & 0.035 & 0.489 & 0.486 & 0.079 \\
-\texttt{BraLan} & \textit{Branchiostoma lanceolatum}     & \texttt{GCF\_035083965.1}  & 51.20 & 51.78 & 3.57 & 0.537 & 0.536 & 0.043 & 0.620 & 0.619 & 0.095 \\
-\texttt{CioInt} & \textit{Ciona intestinalis}            & \texttt{GCF\_018327825.1}  & 52.49 & 52.75 & 2.66 & 0.424 & 0.422 & 0.037 & 0.369 & 0.367 & 0.069 \\
-\texttt{HomSap} & \textit{Homo sapiens}                  & \texttt{GCF\_000001405.40} & 49.39 & 50.57 & 4.51 & 0.538 & 0.541 & 0.087 & 0.593 & 0.603 & 0.163 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}\label{sec:results_popgen}
 
@@ -432,8 +420,9 @@ genotypes located within repetitive intervals in the reference
 \vspace{0.2cm}
 
 % Genome-wide pi & repeat and gene density
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=1.0\textwidth]{figures/genome_pi.pdf}
     \caption{\textbf{Nucleotide diversity ($\pi$) and coding and repeat density
         along the \balgla{} genome.}
@@ -487,8 +476,9 @@ highly effective in this population, consistent with theoretical predictions for
 species with large effective population sizes.
 
 % Distribution of pi for different features in the genome
-\begin{figure}[ht]
+\begin{figure}[htbp]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.6\textwidth]{figures/feature_pi.pdf}
     \caption{\textbf{Nucleotide diversity ($\pi$) across genomic
         features in Oregon \balgla.}
