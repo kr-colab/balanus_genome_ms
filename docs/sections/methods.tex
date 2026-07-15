@@ -383,7 +383,7 @@ according to their location relative to nearby genes using \texttt{FEELnc\_class
 \vspace{0.2cm}
 
 After their annotation, all three non-coding RNA classes were separately processed
-using the \textsc{agat} in order to sort features by chromosomal coordinates, add
+using \textsc{agat} in order to sort features by chromosomal coordinates, add
 missing features, add biotypes, standardize IDs, and merge records into a single GFF file.
 
 \subsection*{Identifying orthologous gene families}\label{sec:methods_orthologs}
@@ -541,20 +541,36 @@ genome-wide $\alpha$ when comparing across multiple genes.
 
 \subsection*{Codon usage biases}
 
-\comment{TODO: Update this with the new methods.}
 We calculated codon usage biases on the \bgla{} coding sequences using the R package
 \textsc{cubar} version \texttt{1.2.0} \citep{liu_cubar_2026}.
-We first filtered coding sequences using the \texttt{check\_cds} function,
-ensuring the presence of canonical start and stop codons, retaining 16{,}904
-sequences.
-Then we calculated the distribution of observed codons using the
-\texttt{count\_codons} function.
-Lastly, we used the \texttt{get\_enc} function to calculate codon usage biases
-in the empirical codon distribution using the effective number of codons (ENC)
-metric, which captures the deviation from equal codon usage across synonymous
-codons \citep{wright_effective_1990}.
+Before running \textsc{cubar}, we processed the annotation to extract only the longest
+isoform for each gene using \textsc{agat}'s \texttt{agat\_sp\_keep\_longest\_isoform.pl}
+and \texttt{agat\_sp\_extract\_sequences.pl}.
+In \textsc{cubar}, we first filtered coding sequences using the \texttt{check\_cds}
+function, ensuring the presence of canonical start and stop codons.
+To prevent known biases in small coding sequences, we then removed transcripts smaller
+than 300\,bp and those above and below two standard deviations of the mean transcript
+length.
+This process retained 16{,}217 sequences in \bgla{}.
+After obtaining the empirical codon distribution using the \texttt{count\_codons} function,
+we then used \texttt{get\_enc} to calculate codon usage biases using the effective number
+of codons (ENC) metric, which captures the deviation from equal codon usage across
+synonymous codons \citep{wright_effective_1990}.
 More specifically, we calculated an improved implementation of ENC, accounting for
 usage differences across different codon subfamilies \citep{sun_improved_2013}.
+In addition to ENC, we calculated GC proportions using the following \textsc{cubar}
+functions: \texttt{get\_gc} for coding sequence-wide GC proportion, \texttt{get\_gc3s}
+for GC proportion at 3rd codon sites (GC3s), and \texttt{get\_gc4d} for GC proportion
+at 4-fold degenerate sites (GC4d).
+Lastly, we used Wright's curve (\wrightenc, were $s$ denotes GC3s;
+\citealp{wright_effective_1990}) to determine the expected distribution of the number of
+effective codons given a given GC3s distribution.
+At each gene, we calculated its deviation from this empirical ENC distribution using
+$\text{ENC}_{dev} = (\text{ENC}_{exp} - \text{ENC}_{obs}) / \text{ENC}_{exp}$,
+as well as a linear regression of $\text{ENC}_{obs}$ given $\text{ENC}_{exp}$ using
+\texttt{R}'s \texttt{lm} function.
+We compared the ENC results in \bgla{} by calculating empirical and expected ENC
+distributions for 11 other metazoan genomes, as specified in Table~\ref{tab:sup_enc_summary}.
 
 \subsection*{Genetic variation in the \balgla{} reference}\label{sec:methods_ref_geno}
 

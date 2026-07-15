@@ -330,28 +330,63 @@ as an avenue for future study in barnacles.
 
 \subsection*{Barnacle genes show biases in the use of synonymous codons}
 
-We compared biases in the usage and composition of synonymous codons in twelve metazoan
-genomes, including four barnacles (Table~\ref{tab:enc_summary}), to study the effects of
+We compared biases in the usage and composition of synonymous codons in 12 metazoan
+genomes, including four barnacles (Table~\ref{tab:sup_enc_summary}), to study the effects of
 translational selection in the context of large populations.
-Using the annotated transcript sequences in these genomes to calculate the effective number
+Using the annotated transcript sequences in these genomes we calculated the effective number
 of codons (ENC), a measure of the extent of departure from equal usage across synonymous
 codons \citep{wright_effective_1990,sun_improved_2013}.
 In addition to ENC, we also estimated compositional biases by calculating both the overall
 coding sequence GC proportion, and the proportion of GC bases at third codon positions (GC3s).
 Across 16{,}217 genes in \bgla{}, we find a mean ENC of 43.17 (median: 42.84, standard
-deviation: 5.52; Figure~\ref{fig:codon_enc}A; Table~\ref{tab:enc_summary}).
+deviation: 5.52; Figure~\ref{fig:codon_enc}A;~Table~\ref{tab:sup_enc_summary}).
 This number of effective codons is similar to the one observed across three other barnacle
-genomes (mean ENC ranging from 42.04 to 44.33; Table~\ref{tab:enc_summary}), highlighting a substantial bias in synonymous codon usage
-in barnacles when compared to other metazoans (Figure~\ref{fig:codon_enc}A).
+genomes (mean ENC ranging from 42.04 to 44.33; Table~\ref{tab:sup_enc_summary}), highlighting a
+substantial bias in synonymous codon usage in barnacles when compared to other metazoans
+(Figure~\ref{fig:codon_enc}A).
+A similar trend is observed when compared nucleotide composition in barnacle coding sequences
+when compared to other metazoans.
+All four barnacle genomes studied showed coding sequence GC content of $\approx64\%$, 10 to 20\%
+higher than the other studied genomes (Figure~\ref{fig:codon_enc}B;~Table~\ref{tab:sup_enc_summary}).
+The higher coding GC proportion in barnacles is also observed when looking at the GC proportion
+at 3rd codon positions and at 4-fold degenerate sites (Figure~\ref{fig:sup_coding_gc}).
+\vspace{0.2cm}
 
+We explored the selective basis of the increased bias in codon usage in barnacle genomes by
+comparing the empirical ENC distribution against a theoretical expectation.
+In its original definition of the ENC statistic, \cite{wright_effective_1990} devised a relationship
+between GC3s and ENC, resulting in an expected number of effective codons for a given GC content.
+Deviations from this expectation, specifically observing a smaller number of effective codons
+than expected, suggest the presence of strong translational selection acting on the genome.
+After testing this relationship across the 12 metazoan genomes, we observe that the reduction in
+the number of effective codons observed in barnacles can in most cases be explained by their coding
+GC proportion (Figure~\ref{fig:sup_enc_gc3s}; Figure~\ref{fig:sup_enc_reg}), suggesting a codon usage
+bias driven by neutral processes.
+In \bgla{} specifically, we observed a moderate deviation when comparing the empirical ENC distribution
+against Wright's curve (Figure~\ref{fig:codon_enc}C); however, when comparing the linear relationship
+between observed and expected ENC, a better fit for GC biased genomes such as \bgla{}, we do observe a
+reduction in the model's slope and coefficient of determination ($\text{R}^2$; Figure~\ref{fig:codon_enc}D).
+This poorer fit of the model indicates a smaller than expected number of effective codons, and
+suggests the presence of strong translational selection acting on the genome and the potential
+non-neutrality of at least some synonymous codons in large \bgla{} populations.
+\vspace{0.2cm}
 
-
-We calculated ENC across the coding sequences of
-16{,}217 \bgla{} genes, finding a mean of 43.1 effective codons (median: 42.7,
-standard deviation: 5.56, Figure~\ref{fig:codon_enc}). This ENC distribution
-indicates a codon usage bias stronger than that observed in \textit{Drosophila}
-(Figure~\ref{fig:sup_dmel_enc}), suggesting that a large portion of synonymous mutations
-may not be neutral in this large barnacle population.
+Comparing the ENC and GC3s distribution in relation to population size highlights some interesting
+patterns.
+Evidence for selection-driven codon usage biases is observed for some hyper-diverse, large population
+species, e.g., the nematode \textit{Caenorhabditis brenneri}, the Pacific oyster \textit{Magallana gigas},
+and the European lancelet \textit{Branchiostoma lanceolatum} (Figure~\ref{fig:sup_enc_gc3s};
+Figure~\ref{fig:sup_enc_reg}; Table~\ref{tab:sup_enc_models}).
+More moderate deviation is observed for other diverse species, e.g, the malaria mosquito
+\textit{Anopheles gambiae} and the tunicate \textit{Ciona intestinalis}.
+In contrast, in three of our studied barnacles (\textit{B. crenatus}, \textit{A. amphitrite},
+and \textit{P. pollicipes}), the observed codon usage biases appear are indistinguishable from
+neutral compositional processes.
+In \bgla{}, evidence for non-neutral codon usage biases is moderate to strong depending on the
+method used.
+Overall, while we do not observe a clear relationship between population size and codon usage biases
+in the studied genomes, the lineage-specific patterns described here provide an unexplored avenue
+of study of the efficacy and breadth of selection in highly diverse genomes.
 
 % ENC codon bias
 \begin{figure}[htbp]
@@ -360,7 +395,7 @@ may not be neutral in this large barnacle population.
     \includegraphics[width=0.9\textwidth]{figures/codon_bias.pdf}
     \caption{\textbf{Codon usage biases in \balgla.}
         \textbf{A.} Genome-wide distribution of the effective number of codons (ENC)
-        in \bgla{} (\texttt{BalGla}) and other metazoan genomes (see Table~\ref{tab:enc_summary}),
+        in \bgla{} (\texttt{BalGla}) and other metazoan genomes (see Table~\ref{tab:sup_enc_summary}),
         including the barnacles \textit{B. crenatus} (\texttt{BalCre}), \textit{A. amphitrite}
         (\texttt{AmpAmp}), and \textit{P. pollicipes} (\texttt{PolPol}).
         The vertical lines show the 50\textsuperscript{th} quantile (median) of the
@@ -451,7 +486,7 @@ which represents a $\approx1.6\times$ reduction in diversity when compared to th
 genome-wide average. A reduction in diversity of similar magnitude is also observed
 in the sequences of lncRNAs ($1.4\times$) and 5' UTRs ($1.3\times$). The largest reduction
 in diversity when compared to the genome-wide background was observed in tRNAs, with
-$\pi$ $\approx$ $4.3\times$ lower than the genomic background and consistent with the
+$\pi~\approx4.3\times$ lower than the genomic background and consistent with the
 strong functional constraint evidenced by their enrichment in highly conserved elements.
 In contrast to most other elements of the genome, introns display a relative increase in
 diversity, with a mean $\pi$ of 0.0646 (median: 0.0650, standard deviation: 0.0299),
