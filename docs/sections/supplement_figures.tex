@@ -3,6 +3,7 @@
 % k-mer distribution of the raw hi-fi reads
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.8\textwidth]{figures/sups_kmers.png}
     \supfigurecaption{\textbf{\textsc{GenomeScope} profile of the raw PacBio HiFi
         data.} Distribution of 21-mers shows an estimated genome size of
@@ -14,6 +15,7 @@
 % Hi-C contact map
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=1.0\textwidth]{figures/sups_hic.pdf}
     \supfigurecaption{\textbf{Hi-C contact map of the \balgla{} assembly.}
         The contact map shows the assembly following manual curation in
@@ -29,6 +31,7 @@
 % dN/dS
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.7\textwidth]{figures/dnds.pdf}
     \supfigurecaption{\textbf{Distribution of the pairwise rate of non-synonymous
         to synonymous substitutions (\dnds{}).}
@@ -45,6 +48,7 @@
 % Direction of selection.
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.7\textwidth]{figures/sups_mkt_dos.pdf}
     \supfigurecaption{\textbf{Distribution of per-gene direction of selection values.}
         The distribution shows Direction of Selection (DoS) calculated across 7{,}056
@@ -59,26 +63,73 @@
     \label{fig:sup_dos}
 \end{figure}
 
-% Codon usage biases vs Drosophila
+% Coding GC, GC3s, and GC4d
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/sups_dmel_codons.pdf}
-    \supfigurecaption{\textbf{Comparing codon usage biases between barnacles and
-        fruit flies.}
-        The distribution of effective number of codons (ENC) between genes in the
-        Pacific acorn barnacle (\balgla{}; \texttt{BalGla}) and the fruit fly
-        (\textit{Drosophila melanogaster}; \texttt{DroMel}). Barnacles show a
-        mean ENC of 43.1 (median: 42.7, standard deviation: 5.56), while the mean
-        ENC in flies is 50.1 (median: 50.6, standard deviation: 3.95).
-        This distribution shows stronger biases in codon usage in \bgla{} than the
-        one observed in \textit{D. melanogaster}, consistent with the expectation
-        of large \Ne{} and strong selection in barnacle populations.}
-    \label{fig:sup_dmel_enc}
+    \captionsetup{width=0.95\linewidth}
+    \includegraphics[width=1.0\textwidth]{figures/sups_coding_gc.pdf}
+    \supfigurecaption{\textbf{Distribution of coding GC proportions across metazoan
+        genomes.}
+        Top, middle, and bottom panels show the GC proportions coding sequence-wide,
+        at 3rd codon positions (GC3s), and at 4-fold degerate sites (GC4d),
+        respectively.
+        Distribution are shown across 12 metazoan genomes, including four barnacles:
+        \bgla{} (\texttt{BalGla}), \textit{B. crenatus} (\texttt{BalCre}),
+        \textit{A. amphitrite} (\texttt{AmpAmp}), and \textit{P. pollicipes}
+        (\texttt{PolPol}).
+        See Table~\ref{tab:sup_enc_summary} for additional description of the
+        genomes.}
+    \label{fig:sup_coding_gc}
+\end{figure}
+
+% ENC vs GC3s
+\begin{figure}[ht]
+    \centering
+    \captionsetup{width=0.95\linewidth}
+    \includegraphics[width=1.0\textwidth]{figures/sups_enc_gc3s.png}
+    \supfigurecaption{\textbf{Relationship between effective codons and GC content.}
+        Nc-plots showing the relationship between GC proportion at 3rd codon positions
+        (GC3s; X-axis) and the effective number of codons (ENC; Y-axis) for 12
+        metazoan genomes.
+        At each panel, each point represents a single gene.
+        The black curve shows the expected relationship between GC3s and ENC, according
+        to Wright's curve: \wrightenc{}, where $s$ denotes GC3s.
+        The ``mean dev'' annotation shows the mean deviation in ENC from the theoretical
+        expectation.
+        Higher values show a larger proportion of genes showing a smaller than expected
+        number of effective codons, a putative signature of translational selection.
+        See Table~\ref{tab:sup_enc_summary} for additional description of the
+        genomes.}
+    \label{fig:sup_enc_gc3s}
+\end{figure}
+
+% Exp vs Obs ENC
+\begin{figure}[ht]
+    \centering
+    \captionsetup{width=0.95\linewidth}
+    \includegraphics[width=1.0\textwidth]{figures/sups_enc_regression.png}
+    \supfigurecaption{\textbf{Relationship between the expected and observed number of
+        effective codons.}
+        Plots show the observed effective number of codons (ENC; Y-axis) as a function
+        of the expected ENC (X-axis), as defined by Wright's curve, for 12 metazoan
+        genomes.
+        At each panel, points represents single genes.
+        Dashed line shows the one-to-one relationship, while the solid black line
+        shows the linear regression.
+        Annotations in the plot show the regression's slope and coefficient of
+        determination ($\text{R}^2$).
+        Small ($\ll1$) slopes and low $\text{R}^2$ show a reduction in the observed
+        number of effective codons when compared to the theoretical expectation,
+        a potential signature of translational selection.
+        See Table~\ref{tab:sup_enc_summary} for additional description of the
+        genomes.}
+    \label{fig:sup_enc_reg}
 \end{figure}
 
 % Pi vs Drosophila.
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.7\textwidth]{figures/sups_dmel_pi.pdf}
     \supfigurecaption{\textbf{Comparing nucleotide diversity ($\pi$) between
         barnacles and fruit flies.}
@@ -96,6 +147,7 @@
 % Pairwise correlation among different genomic feature and diversity metrics.
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=1.0\textwidth]{figures/sups_pi_pairplot.png}
     \supfigurecaption{\textbf{Pairplot of genomic features and genetic variation
         in Oregon \balgla{}.}
@@ -113,6 +165,7 @@
 % Theta_W Ne
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.7\textwidth]{figures/sups_theta_ne.pdf}
     \supfigurecaption{\textbf{Effective population (\Ne) size estimation
         of \balgla{} based on the Watterson's estimator ($\theta_\text{W}$).}
@@ -127,6 +180,7 @@
 % msmc2 Ne
 \begin{figure}[ht]
     \centering
+    \captionsetup{width=0.95\linewidth}
     \includegraphics[width=0.9\textwidth]{figures/sups_msmc2_ne.pdf}
     \supfigurecaption{\textbf{Coalescent estimation of the effective
     population (\Ne) size estimation of \balgla{}.}
