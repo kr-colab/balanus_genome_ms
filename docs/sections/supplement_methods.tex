@@ -242,30 +242,6 @@ However, given the comparatively smaller number of annotated sequences, and the
 resulting reduction in the number of orthologous sequences recovered when incorporating
 this species, we excluded \textit{C. mitella} from most downstream analyses.
 
-\subsection*{Codon usage biases in \textit{Drosophila melanogaster}}
-
-\comment{TODO: Update this with the new methods.}
-As a comparison against barnacles, we calculated codon usage biases in the fruit
-fly \textit{D. melanogaster}.
-To do this, we first downloaded the reference annotation from NCBI RefSeq
-(Release 6 plus ISO1 MT, NCBI accession: \texttt{GCF\_000001215.4};
-Table~\ref{tab:sup_ncbi_genomes}).
-We processed the annotation using \textsc{agat} version \texttt{1.4.3}
-\citep{dainat_another_2022} to select the longest isoform per gene
-and clean the IDs of the extracted coding sequences.
-We calculated codon usage biases using the \textsc{cubar} R package version
-\texttt{1.2.0} \citep{liu_cubar_2026}.
-We filtered coding sequences using the \texttt{check\_cds} function, ensuring the
-presence of canonical start and stop codons, retaining sequences for 13{,}521 genes.
-Then we calculated the distribution of observed codons using the
-\texttt{count\_codons} function.
-Lastly, we calculated the effective number of codons (ENC) observed in the
-empirical codon distribution using the \texttt{get\_enc} function.
-This statistic determines the bias in codon usage in the form of the deviation from
-equal codon usage across synonymous codons \citep{wright_effective_1990}, using the 
-adjustments by~\cite{sun_improved_2013} to account for usage differences across
-different codon subfamilies.
-
 \subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
 
 \comment{TODO: Update this with the new methods.}
