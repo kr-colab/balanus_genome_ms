@@ -1,87 +1,14 @@
 \documentclass[11pt]{article}
-\usepackage{graphicx} % Required for inserting images
-\usepackage[utf8]{inputenc}
-\usepackage[letterpaper,margin=1.0in]{geometry}
-%% Some formatting stuff
-\usepackage{authblk}
-\usepackage{fancyhdr}
-\usepackage{lineno}
-\usepackage{siunitx}
-\usepackage{hyperref}
-\usepackage{booktabs}
-\usepackage{textgreek}
+
+% Shared packages, settings, and macros (see preamble.tex)
+\input{preamble}
+
+% Document-specific settings for the submission main text
 \usepackage{setspace}
 \usepackage{xr-hyper}
-\setlength{\headheight}{13.59999pt}
-\pagestyle{fancy}
-\fancyhead[R]{\textbf{Rivera-Col\'{o}n \textit{et al.} 2026 - \textit{B. glandula} genome}}
 \fancyfoot[C]{\thepage}
-% for figures
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage{breakcites}
-\usepackage{nameref}
-\usepackage{amsmath}
-\usepackage{lipsum}
-\usepackage{rotating}
-\usepackage{xspace}
-\usepackage{fixltx2e}
-% for highlighting text
-\usepackage{xcolor}
-\usepackage{soul}
-\usepackage[dvipsnames]{xcolor}
-
-% For supplemental figure and table numbering
-\newcounter{supfigure}
-\newcounter{suptable}
-
-% Commands for supplemental tables and figures
-\newcommand{\suptablecaption}[1]{%
-    \refstepcounter{suptable}% Step forward our supplemental counter
-    \renewcommand{\thetable}{S\arabic{suptable}}% Temporarily change table numbering
-    \caption{#1}%
-    \renewcommand{\thetable}{\arabic{table}}% Restore normal table numbering
-}
-
-\newcommand{\supfigurecaption}[1]{%
-    \refstepcounter{supfigure}% Step forward our supplemental counter
-    \renewcommand{\thefigure}{S\arabic{supfigure}}% Temporarily change figure numbering
-    \caption{#1}%
-    \renewcommand{\thefigure}{\arabic{figure}}% Restore normal figure numbering
-}
-
-% Colors for hyperlinks and other things
-\hypersetup{
-    colorlinks=true,
-    citecolor=MidnightBlue,
-    urlcolor=RoyalBlue,
-    linkcolor=Blue
-}
-\setstcolor{Red}
-\urlstyle{same}
-
 % External references to the supplements document
 \externaldocument{submission_sups}
-
-% For the citations
-% Creating custom formatting for the refererences
-\usepackage[backend=biber, style=authoryear, natbib=true,
-    sorting=nyt, doi=true, url=true, maxbibnames=5,
-    minbibnames=3, giveninits=true, dashed=false,
-    eprint=true, date=year, uniquename=init, isbn=false,
-    mincitenames=1, maxcitenames=3]{biblatex}
-\addbibresource{references/references.bib}
-% \AtEveryBibitem{\clearfield{language}\clearfield{langid}\clearfield{editor}}
-\DeclareNameAlias{sortname}{family-given}
-
-% Some aliases for text
-\newcommand{\dnds}{d\textsubscript{N}/d\textsubscript{S}\xspace}
-\newcommand{\balgla}{\textit{Balanus glandula}\xspace}
-\newcommand{\bgla}{\textit{B. glandula}\xspace}
-\newcommand{\Ne}{N\textsubscript{e}\xspace}
-\newcommand{\Ks}{K\textsubscript{S}\xspace}
-\newcommand{\comment}[1]{{\color{PineGreen} #1}}
-\newcommand{\commentauth}[2]{{\color{RedViolet} \underline{#1:} #2}}
 
 \title{The genome of the {Pacific} acorn barnacle provides insights into
     the evolution of extremely large populations}
