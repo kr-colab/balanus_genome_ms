@@ -23,7 +23,7 @@ We used k-mers to estimate the size and heterozygosity of the \textit{B.
 crenatus} genome.
 First, we counted k-mers present in the PacBio HiFi reads using
 \textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, counting
-21-mers (\texttt{--mer-len 21}) present in both strands (\texttt{--canonical}).
+21-mers (\texttt{-{}-mer-len 21}) present in both strands (\texttt{-{}-canonical}).
 These counts were then used to generate an empirical distribution of 21-mers
 using the \textsc{jellyfish} \texttt{histo} command.
 The final model of the diploid, genome-wide k-mer distribution was then performed
@@ -38,11 +38,11 @@ We generated a contig-level genome assembly using \textsc{hifiasm} version
 \texttt{0.19.8-r603} \citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022},
 using strict parameters for the identification and purging of haplotig sequences.
 This assembly was generated using an estimated haploid genome size of 800\,Mbp
-(\texttt{--hg-size 800m}), dropping k-mers observed over ten times the average coverage
-(\texttt{-D 10.0}), and allowing scaffolding (\texttt{--dual-scaf}).
+(\texttt{-{}-hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-D 10.0}), and allowing scaffolding (\texttt{-{}-dual-scaf}).
 For handling haplotigs, we set the expected coverage at homozygous sites to
-40x (\texttt{--hom-cov 40}), the upper bound of coverage to purging duplicates to 40x
-(\texttt{--purge-max 40}), and the similarity threshold between duplicate haplotigs
+40x (\texttt{-{}-hom-cov 40}), the upper bound of coverage to purging duplicates to 40x
+(\texttt{-{}-purge-max 40}), and the similarity threshold between duplicate haplotigs
 to 25\% (\texttt{-s 0.25}).
 We assessed the contiguity of this assembly using \textsc{quast} version \texttt{5.2.0}
 \citep{gurevich_quast_2013}, showing an assembly composed of 2{,}932 contigs, with a total
@@ -110,8 +110,8 @@ Using \textsc{cactus} version \texttt{2.9.7} we aligned the chromosome-level
 exporting the output alignments in MAF format.
 After alignment, we used the \textsc{ragout} version \texttt{2.3} software
 \citep{kolmogorov_ragout_2018} to perform reference-based scaffolding, disabling
-the breaking of input sequences (\texttt{--solid-scaffolds}) and enabling the
-repeat resolution algorithm (\texttt{--repeats}).
+the breaking of input sequences (\texttt{-{}-solid-scaffolds}) and enabling the
+repeat resolution algorithm (\texttt{-{}-repeats}).
 After running \textsc{ragout}, we only kept the \textit{B. crenatus} sequences that
 were successfully aligned to \textit{B. glandula}.
 This scaffolded assembly was composed of 220 sequence fragments, with a total length
@@ -218,7 +218,7 @@ annotate the genome using the evidence from both the RNAseq alignments and the
 Arthropod representative protein sequences from \textsc{OrthoDBv11}
 \citep{kriventseva_orthodb_2019,zdobnov_orthodb_2021}.
 In \textsc{BRAKER}, we enforced the recovery of orthologs from the Arthropod
-\textsc{BUSCO} dataset in the annotation (\texttt{--busco\_lineage=arthropoda\_odb10}).
+\textsc{BUSCO} dataset in the annotation (\texttt{-{}-busco\_lineage=arthropoda\_odb10}).
 After running \textsc{BRAKER}, we processed the resulting annotation using \textsc{agat}
 to extract the longest transcript as representative for the gene and to standardize gene
 and sequence IDs for downstream analysis.
@@ -260,5 +260,5 @@ alleles, and remove sites with over 25\% missing genotypes.
 Nucleotide diversity along 10\,kbp windows was then calculated from the filtered VCF using
 \textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
 allowing multiallelic sites to be used in the calculation
-(\texttt{--include\_multiallelic\_snps}).
+(\texttt{-{}-include\_multiallelic\_snps}).
 
