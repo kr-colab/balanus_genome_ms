@@ -723,6 +723,14 @@ Calculate three different versions of the McDonald-Kreitman test using the
 2. Asymptotic MK test (Messer & Petrov 2013)
 3. Tarone-Greenland estimator (Stoletzki and Eyre-Walker, 2011)
 
+* `topgo_enrichment.R`
+
+Run a gene ontology (GO) term enrichment on the set of candidate genes under
+positive selection (as determined by `MKado`) using `topGO` version
+`2.62.0`.
+Requires a functional annotation with GO terms (available from `EnTAP`) and
+an existing GO term database (here from `GO.db` version `3.22.0`).
+
 ### Codon usage biases
 
 `scripts/comparative_genomics/codon_usage`
