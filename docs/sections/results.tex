@@ -82,7 +82,7 @@ rearrangements have not been a major driver of diversification in barnacles.
 \begin{figure}[ht]
     \centering
     \captionsetup{width=0.95\linewidth}
-    \includegraphics[width=0.9\textwidth]{figures/synteny.pdf}
+    \includegraphics[width=0.95\textwidth]{figures/synteny.pdf}
     \caption{\textbf{Conserved synteny across barnacle genomes.}
         Genome-wide synteny plots showing one-to-one correspondence across
         16 putatively orthologous chromosomes between the genomes of \balgla{}
@@ -238,7 +238,7 @@ sequences between \bgla{} and \textit{B. crenatus}.
 Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
 deviation from the expected proportion of non-synonymous and synonymous substitutions
 and polymorphisms, following \textit{p}-value correction for multiple testing
-(Figure~\ref{fig:mkTest}).
+(Figure~\ref{fig:mkTest}A).
 We additionally calculated the Neutrality Index (NI;~\citealp{rand_excess_1996}) and
 Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}) at each ortholog.
 We observed a mean NI value of 0.745 (median: 0.554; standard deviation: 1.079) and
@@ -247,6 +247,10 @@ Both of these statistics show that on average, and in contrast with our measurem
 of \dnds{} (see \nameref{sec:discussion_dnds_mkt}), protein-coding sequences in \bgla{}
 exhibit an excess of non-synonymous substitutions, suggesting that they are evolving
 under positive directional selection when compared to the outgroup sequence.
+Moreover, the near absence of genes displaying a significant excess in non-synonymous
+polymorphism (NI $>1$) reflect a reduction the proportion of slightly deleterious
+variants segregating in the population, suggesting the presence of highly efficacious
+background selection.
 \vspace{0.2cm}
 
 In addition to NI and DoS, we calculated $\alpha$, a measure of the proportion
@@ -277,25 +281,33 @@ the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discus
 \begin{figure}[htbp]
     \centering
     \captionsetup{width=0.95\linewidth}
-    \includegraphics[width=0.4\textwidth]{figures/mkTest.pdf}
+    \includegraphics[width=0.95\textwidth]{figures/mkTest.pdf}
     \caption{\textbf{Signatures of positive selection in \balgla{}
         protein-coding genes.}
-        Selection on 7{,}374 protein-coding genes was assessed using the
+        \textbf{A.} Selection on 7{,}374 protein-coding genes was assessed using the
         McDonald-Kreitman test.
         X-axis denotes the $-\log_{10}$ of the Neutrality Index, with values on the
-        right (NI $<1$) indicating sequences with an excess of non-synonymous
-        substitutions indicative of positive selection.
-        Y-axis denotes the $-\log_{10}$ \textit{p}-value of the McDonald-Kreitman test.
+        right (NI $<1$) indicating excess of non-synonymous substitutions indicative of
+        positive selection.
+        Y-axis denotes the $-\log_{10}$ $p$-value of the McDonald-Kreitman test.
         The dashed and dot-dashed lines show the raw ($p<0.05$) and Bonferroni-corrected
         ($p<6.20\times10^{-6}$) significance thresholds, respectively.
-        Points in red show the 444 genes significant after \textit{p}-value correction
-        showing an excess of fixed non-synonymous substitutions indicating positive
-        selection.
+        Points in red show the 444 candidates under positive selection, genes with a
+        significant excess of fixed non-synonymous substitutions.
         Point in green show the one significant gene with an excess of non-synonymous
-        polymorphism.}
+        polymorphism.
+        \textbf{B.} Significant GO term enrichment among the candidates under
+        positive selection in the McDonald-Kreitman test.
+        $p_\text{elim}$ denotes the $p$-value calculated from \textsc{topGO}'s
+        \texttt{elim} algorithm \citep{alexa_topgo_2006}, which accounts for redundancy
+        among GO terms.
+        Top, middle, and bottom panels show the top four terms with the largest
+        enrichment among the candidates under selection among the three main GO categories:
+        biological processes, cellular component, and molecular function.}
     \label{fig:mkTest}
 \end{figure}
 
+\comment{Update to GO terms here.}
 Exploring the predicted function of the candidate genes identified in the MK analysis,
 our single candidate displaying an excess of polymorphism relative to divergence is a
 homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
@@ -419,14 +431,14 @@ of study of the efficacy and breadth of selection in highly diverse genomes.
 We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast
 using Illumina short reads.
 After removal of two samples with poor quality sequences, and the stringent filtering of
-sites with low coverage, low quality, and/or missing genotypes, we retained a total of
+sites with low coverage, low quality, and/or missing genotypes, we recovered a total of
 111.6 million genotyped sites (Table~\ref{tab:sup_popgen_stats}), 21.4 million (19.16\%)
-of which were variant in the retained individuals.
+of which were variant in the six retained samples.
 Among these variant sites, we recovered 20.5 million point mutations, 4.86\% of which 
 were multiallelic in just these six individuals.
 In total, the amount of polymorphism observed in our sampling translates to a mean
-density of 41.05 variant sites per kbp (median: 29, standard deviation: 40.82).
-Moreover, 1.12 million of these variant sites (5.23\%) were located in coding sequences.
+density of 41.1 variant sites per kbp (median: 29, standard deviation: 40.82).
+Moreover, 1.1 million of these variant sites (5.23\%) were located in coding sequences.
 These coding variants included 360 thousand missense (non-synonymous) mutations,
 corresponding to a mean of 18.93 non-synonymous variants per transcript
 (median: 10, standard deviation: 28.50).
@@ -434,9 +446,10 @@ Overall, these represent a substantial proportion of coding variation segregatin
 this central Oregon population.
 This \bgla{} population displayed a mean genome-wide nucleotide
 diversity ($\pi$) of 0.0506 (median: 0.0531, standard deviation: 0.0188;
-Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}), a degree of diversity that
-is an order of magnitude higher than that observed in diverse \textit{Drosophila}
+Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}), a degree of diversity
+that is an order of magnitude higher than that observed in diverse \textit{Drosophila}
 populations in Sub-Saharan Africa (Figure~\ref{fig:sup_dmel_pi}).
+\comment{Add human and anopheles comparison}
 \vspace{0.2cm}
 
 \comment{TODO: mention something about the centromeres, recombination,
@@ -444,13 +457,14 @@ and linked selection.}
 Along each chromosome, we did not observe any strong correlation between the density
 of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and
 $\pi$, particularly not at the scale of 10\,kbp (Figure~\ref{fig:genome_pi};
-Figure~\ref{fig:sup_pi_pairplot}). However, stronger relationships are likely present
-at smaller genomic intervals (see below). The strongest correlation was, as expected,
-observed between the density of segregating sites within 10\,kbp windows and $\pi$
-(Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}). The proportion of
-segregating sites in itself was not correlated with the density of particular genomic
-features, except for repeats; however, this is likely an artifact of the masking of
-genotypes located within repetitive intervals in the reference
+Figure~\ref{fig:sup_pi_pairplot}).
+However, stronger relationships are likely present at other genomic intervals given
+the differences in diversity seen across genetic elements (see below).
+The strongest correlation was, expectedly, observed between the density of segregating sites
+within 10\,kbp windows and $\pi$ (Spearman's $\rho$: 0.706; Figure~\ref{fig:sup_pi_pairplot}).
+The proportion of segregating sites in itself was not correlated with the density of
+particular genomic features, except for repeats; however, this is likely an artifact of the
+masking of genotypes located within repetitive intervals in the reference
 (see \nameref{sec:methods_popgen}).
 \vspace{0.2cm}
 
