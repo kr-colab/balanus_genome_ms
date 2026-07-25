@@ -242,16 +242,17 @@ However, given the comparatively smaller number of annotated sequences, and the
 resulting reduction in the number of orthologous sequences recovered when incorporating
 this species, we excluded \textit{C. mitella} from most downstream analyses.
 
-\subsection*{Nucleotide diversity in \textit{Drosophila melanogaster}}
+\subsection*{Comparing barnacle genetic diversity against model systems}
 
-\comment{TODO: Update this with the new methods.}
-We calculated nucleotide diversity ($\pi$) in sub-Saharan populations of \textit{D.
-melanogaster} to establish a baseline for comparison against our central Oregon barnacle
-population.
-To achieve this, we first obtained the sequencing data for phase 2 of the Drosophila
-Population Genomics Project (DPGP2;~\citep{pool_population_2012,lack_dpgp_2016}).
-We processed the aligned FASTA files for all sub-Saharan samples (the `RG' population)
-to generate a VCF using the \textsc{snp-sites} version \texttt{2.5.1} software
+\subsubsection*{\textit{Drosophila melanogaster}}
+
+We calculated nucleotide diversity ($\pi$) in sub-Saharan populations of the fruit fly
+\textit{D. melanogaster} to establish a baseline for comparison against our central Oregon
+barnacle population.
+To achieve this, we first obtained the sequencing data for phase 2 of the \textit{Drosophila}
+Population Genomics Project (DPGP2;~\citealp{pool_population_2012,lack_dpgp_2016}).
+We processed the aligned FASTA files for all sub-Saharan samples (the `RG' population;
+N=27) to generate a VCF using the \textsc{snp-sites} version \texttt{2.5.1} software
 \citep{page_snp-sites_2016}.
 We exported both variant and invariant sites (\texttt{-b}) for downstream compatibility.
 The resulting gVCFs were then processed using a custom AWK command and \textsc{BCFtools}
@@ -261,4 +262,36 @@ Nucleotide diversity along 10\,kbp windows was then calculated from the filtered
 \textsc{pixy} version \texttt{2.0.0.beta12} \citep{korunes_pixy_2021,bailey_pixy2_2025},
 allowing multiallelic sites to be used in the calculation
 (\texttt{-{}-include\_multiallelic\_snps}).
+For comparing average $\pi$ across species, we removed any window with less than 10\%
+of available sites.
 
+\subsubsection*{\textit{Anopheles gambiae}}
+
+Comparing against another highly diverse invertebrate, we obtained genotypes from phase 3 of
+the \textit{Anopheles gambiae} 1000 Genomes Project (Ag1000G;~\citealp{ag1000g,ag1000g_ag3}).
+The genotypes in ZARR format were loaded as a per-chromosome \texttt{HaplotypeMatrix} in the
+software \textsc{pg\_gpu} version \texttt{0.1.1}~\citep{pope_gpu_2026}.
+Diversity was calculated on a subset of Ag1000G samples from Bangui in the Central African Republic (N=55).
+We applied an accessibility mask to remove both low-quality sites and to remove variants
+located in known \textit{An. gambiae} inversions (e.g., 2La, 2Rb, 2Rc).
+We then used \textsc{pg\_gpu}'s windowed statistics (\texttt{windowed\_analysis}) to calculate
+$\pi$ (\texttt{statistics=["pi"]}) in non-overlapping 10\,kbp windows (\texttt{window\_size=10000},
+\texttt{step\_size=10000}), accounting for the presence of masked sites (\texttt{span\_normalize=True}).
+For comparing average $\pi$, windows with less than 10\% of available sites were removed.
+
+\subsubsection*{\textit{Homo sapiens}}
+
+Similarly, we compared genetic diversity in \bgla{} against a large human cohort.
+For this, we used the human haplotypes from the high-coverage whole-genome sequencing
+release of the 1000 Genomes Project (1kGP;~\citealp{hg1kg_nygc}).
+Similar to the \textit{An. gambiae} analysis, we first loaded the 1kGP data as a
+\texttt{HaplotypeMatrix} in \textsc{pg\_gpu}.
+For the diversity calculation, we subsampled haplotypes to only includes Yoruba individuals (YRI),
+removing and removing any parent-offspring pairs according to the available pedigree information.
+In total, we retained 66 YRI individuals.
+We applied an accessibility mask to retain only high-mappability and non-duplicated regions of the
+genome, in accordance to the publicly available Genome-in-a-Bottle (GIAB) genome stratification
+features (GIAB version \texttt{3.6};~\citealp{dwarshuis_giab_2024}).
+Then, we calculated $\pi$ in 10\,kbp non-overlapping windows using \textsc{pg\_gpu}'s windowed
+analysis.
+For comparing average $\pi$ across species, windows with less than 10\% of available sites were removed.
