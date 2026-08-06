@@ -207,11 +207,11 @@ sequences in these barnacle genomes are under purifying selection, reflecting th
 expected evolutionary constraints on sequences of functional importance.
 \vspace{0.2cm}
 
-Of the nine thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are likely
-candidates for positive selection.
+Of the nine thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are
+likely candidates for positive selection.
 The predicted function of the majority ($>80\%$) of these genes is unknown; however,
-this is expected, since homology is likely harder to determine for fast-evolving sequences
-putatively under strong selection.
+this is expected, since homology is likely harder to determine for fast-evolving
+sequences putatively under strong selection.
 Despite this limitation, we found several genes with known function among our positive
 selection candidates, including a follistatin-A-like homolog, which is involved
 in myogenesis and muscle development in crustaceans \citep{yan_identification_2021}.
@@ -219,8 +219,8 @@ We also observed a homolog of gamma-interferon-inducible lysosomal thiol reducta
 which plays a role in crustacean innate immune response \citep{liu_involvement_2019}.
 Additionally, we found evidence of positive selection in homologs of tumor protein
 p53-inducible protein 11, which is involved in cell cycle regulation and is up-regulated
-in crabs after viral infection \citep{cheng_p53_2021}, as well as quiver gene homologs,
-related to neuronal activity and sleep regulation in \textit{Drosophila}
+in crabs after viral infection \citep{cheng_p53_2021}, as well as a Quiver homolog, a
+gene related to neuronal activity and sleep regulation in \textit{Drosophila}
 \citep{wang_quiver_2010}.
 \vspace{0.2cm}
 
@@ -231,22 +231,21 @@ Specifically, we used polymorphism data derived from a population panel of six \
 individuals from the central Oregon coast (see \nameref{sec:results_popgen}), comparing
 those against the orthologous coding sequences in the \textit{B. crenatus} outgroup.
 After removing alignments shorter than 100\,bp and those containing premature stop
-codons or frameshift mutations, we calculated the MK test for 7{,}374 orthologous
+codons and/or frameshift mutations, we calculated the MK test for 7{,}374 orthologous
 sequences between \bgla{} and \textit{B. crenatus}.
 \vspace{0.2cm}
 
 Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
 deviation from the expected proportion of non-synonymous and synonymous substitutions
-and polymorphisms, following \textit{p}-value correction for multiple testing
-(Figure~\ref{fig:mkTest}A).
+and polymorphisms (Figure~\ref{fig:mkTest}A).
 We additionally calculated the Neutrality Index (NI;~\citealp{rand_excess_1996}) and
 Direction of Selection (DoS;~\citealp{stoletzki_estimation_2011}) at each ortholog.
 We observed a mean NI value of 0.745 (median: 0.554; standard deviation: 1.079) and
 a mean DoS of 0.102 (median: 0.106; standard deviation: 0.131; Figure~\ref{fig:sup_dos}).
-Both of these statistics show that on average, and in contrast with our measurements
-of \dnds{} (see \nameref{sec:discussion_dnds_mkt}), protein-coding sequences in \bgla{}
-exhibit an excess of non-synonymous substitutions, suggesting that they are evolving
-under positive directional selection when compared to the outgroup sequence.
+Both of these statistics (NI $<1$ and DoS $>0$) show that on average, and in contrast
+with our measurements of \dnds{} (see \nameref{sec:discussion_dnds_mkt}), protein-coding
+sequences in \bgla{} exhibit an excess of non-synonymous substitutions, suggesting that
+they are evolving under positive directional selection when compared to the outgroup sequence.
 Moreover, the near absence of genes displaying a significant excess in non-synonymous
 polymorphism (NI $>1$) reflect a reduction the proportion of slightly deleterious
 variants segregating in the population, suggesting the presence of highly efficacious
@@ -268,8 +267,8 @@ which corrects for the presence of weakly deleterious non-synonymous polymorphis
 present at low frequency in the population \citep{messer_frequent_2013} which might
 obscure the signal of positive selection.
 We found a mean $\alpha_\text{asym}$ of 0.610 ($95\%$ CI: 0.610--0.622), a
-larger proportion than that observed in \textit{Drosophila} ($\alpha_\text{asym}$
-of 0.57; \citealp{haller_asymptoticmk_2017}).
+larger proportion than that observed in \textit{Drosophila} ($\alpha_\text{asym} = 0.57$)
+and humans ($\alpha_\text{asym} = 0.13$; \citealp{haller_asymptoticmk_2017,messer_frequent_2013}).
 Regardless of the metric used, both $\alpha_\text{TG}$ and $\alpha_\text{asym}$ agree
 that the majority of non-synonymous substitutions in this barnacle population are the
 outcome of directional positive selection.
@@ -308,14 +307,24 @@ the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discus
 \end{figure}
 
 \comment{Update to GO terms here.}
-Exploring the predicted function of the candidate genes identified in the MK analysis,
-our single candidate displaying an excess of polymorphism relative to divergence is a
-homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
-which has been observed as differentially expressed in response to osmotic stress in
-barnacles \citep{chandramouli_transcriptome_2015}.
-While its exact function in \bgla{} is unknown, the large excess of polymorphism
-observed (NI = 18.54) suggests strong balancing selection acting on this gene.
-Looking at the genes evolving under positive directional selection, we observe a homolog
+% Add the new supplemental figure.
+
+Exploring the predicted function of the candidate genes under positive selection
+identified in the MK test, we observe an enrichment for gene ontology (GO) terms involved in the building and remodeling of the cell surface and related functions
+(Figure~\ref{fig:mkTest}B).
+For example, among our most enriched GO terms, we observe terms related to adherens (adherens
+junction \texttt{GO:0005912}, zonula adherens assembly \texttt{GO:0045186}, protein localization
+to adherens junction \texttt{GO:0071896}, adherens junction maintenance \texttt{GO:0034334}),
+myosin (myosin II binding \texttt{GO:0045159}, myosin light chain binding \texttt{GO:0032027},
+myosin II filament organization \texttt{GO:0031038}),
+spectrin (spectrin binding \texttt{GO:0030507}, spectrin complex \texttt{GO:0008091}), and
+collagen (collagen trimer \texttt{GO:0005581}, complex of collagen trimers \texttt{GO:0098644}).
+In particular, within the collagen terms we observe the enrichment processes related to the
+molting of arthropod cuticles (e.g., molting cycle, collagen and cuticulin-based cuticle
+\texttt{GO:0018996}).
+
+% Bring this back to the GO terms. There are some strong links.
+a homolog
 to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
 factor essential for protein synthesis and, in humans, linked to the regulation of
 transcripts related to cell proliferation and growth \citep{lee_eif3_2015}.
@@ -336,6 +345,18 @@ LOC122363544.
 Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
 a member of a family of proteins known to play a role in crustacean immunity
 \citep{li_formin-like_2025}.
+
+Exploring the predicted function of the candidate genes identified in the MK analysis,
+our single candidate displaying an excess of polymorphism relative to divergence is a
+homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
+which has been observed as differentially expressed in response to osmotic stress in
+barnacles \citep{chandramouli_transcriptome_2015}.
+While its exact function in \bgla{} is unknown, the large excess of polymorphism
+observed (NI = 18.54) suggests strong balancing selection acting on this gene.
+% mention that this also relates to cytoskeleton stuff so it linked to the positive
+% selection genes from above.
+
+% Some other concluding remark
 While the exact functions of all of these candidate genes are unknown in \bgla{}, they
 highlight the diverse targets of selection in this system and their characterization serves
 as an avenue for future study in barnacles.
@@ -443,7 +464,7 @@ These coding variants included 360 thousand missense (non-synonymous) mutations,
 corresponding to a mean of 18.93 non-synonymous variants per transcript
 (median: 10, standard deviation: 28.50).
 Overall, these represent a substantial proportion of coding variation segregating in
-this central Oregon population.
+central Oregon.
 This \bgla{} population displayed a mean genome-wide nucleotide
 diversity ($\pi$) of 0.0506 (median: 0.0531, standard deviation: 0.0188;
 Figure~\ref{fig:genome_pi}; Table~\ref{tab:sup_feature_pi}).
@@ -472,9 +493,8 @@ strong linked selection, in which regions of reduced diversity are the result
 of differences in the recombination landscape (e.g., reduction in recombination
 in centromeric regions).
 Describing recombination in detail this species should thus be a focus of future studies
-in order to characterize how selection and linkage shape genetic diversity along the
-genome in \bgla{}.
-
+in order to characterize how highly efficacious selection and linkage shape genetic
+diversity along the genome in \bgla{}.
 \vspace{0.2cm}
 
 % Genome-wide pi & repeat and gene density
