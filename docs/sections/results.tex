@@ -215,7 +215,7 @@ sequences putatively under strong selection.
 Despite this limitation, we found several genes with known function among our positive
 selection candidates, including a follistatin-A-like homolog, which is involved
 in myogenesis and muscle development in crustaceans \citep{yan_identification_2021}.
-We also observed a homolog of gamma-interferon-inducible lysosomal thiol reductase,
+We also observed a homolog of $\gamma$-interferon-inducible lysosomal thiol reductase,
 which plays a role in crustacean innate immune response \citep{liu_involvement_2019}.
 Additionally, we found evidence of positive selection in homologs of tumor protein
 p53-inducible protein 11, which is involved in cell cycle regulation and is up-regulated
@@ -276,6 +276,81 @@ Notably, this pervasive signal of positive selection stands in apparent tension 
 the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
 \vspace{0.2cm}
 
+\comment{@Andy, take a look at this section. I reworked it based on the GO analysis,
+but I want a second pair of eyes. It feels a bit listly to me at the moment.}
+We explored the predicted function of the candidate genes under positive selection
+identified in the MK test by performing a gene ontology (GO) enrichment analysis on the
+367 candidates with available functional annotation
+(Figure~\ref{fig:mkTest}B;~Figure~\ref{fig:sup_go}).
+Among our most enriched GO terms, we observe terms related to the plasma membrane (lateral
+plasma membrane \texttt{GO:0016328}, apical plasma membrane \texttt{GO:0016324}, plasma membrane
+protein complex \texttt{GO:0098797}),
+adherens (adherens junction \texttt{GO:0005912}, zonula adherens assembly \texttt{GO:0045186},
+protein localization to adherens junction \texttt{GO:0071896}, adherens junction maintenance
+\texttt{GO:0034334}),
+myosin (myosin II binding \texttt{GO:0045159}, myosin light chain binding \texttt{GO:0032027},
+myosin II filament organization \texttt{GO:0031038}),
+spectrin (spectrin binding \texttt{GO:0030507}, spectrin complex \texttt{GO:0008091}), and
+collagen (collagen trimer \texttt{GO:0005581}, complex of collagen trimers \texttt{GO:0098644})
+In particular, within the collagen terms we observe the enrichment processes related to the
+molting of arthropod cuticles (e.g., molting cycle, collagen and cuticulin-based cuticle
+\texttt{GO:0018996}).
+Overall, these enrichment terms suggest there is strong directional selection in \bgla{}
+in genes involved in the building and remodeling of the cell surface, interactions with the
+extracelluar matrix, cell-cell adhesion, and related functions.
+\vspace{0.2cm}
+
+Several of our candidates under strong positive selection are direct components of or linked to
+the significantly enriched GO terms.
+For example, two of our top candidates are non-muscle myosin heavy chain and myosin-VIIa homologs,
+both showing a very large fraction of non-synonymous substitutions fixed by positive selection,
+$\alpha$ of 0.961 and 0.940, respectively.
+There is additional evidence of positive selection on proteins with known direct interactions,
+such as the components of the spectrin heterodimer, spectrin $\beta$ chain ($\alpha = 0.898$) and
+spectrin $\alpha$ chain ($\alpha = 0.895$), the integrin heterodimer, integrin $\alpha$
+($\alpha$ = 0.793) and integrin $\beta$ ($\alpha = 0.810$), as well as non-muscle myosin heavy
+chain ($\alpha = 0.961$; seen above) and its direct activator Rho-associated protein kinase 1
+(ROCK1;~$\alpha = 0.939$).
+Observing evidence of positive selection on interacting pairs is strongly suggestive of the
+coevolution of these sequences, in a compensatory or correlated fashion; however, future research
+is required to fully characterize the molecular interactions produced by these non-synonymous
+substitutions in \bgla{}.
+\comment{Keep this here or new section?}
+Interestingly, our single candidate showing an excess of polymorphism relative to divergence
+is a homolog of tubulin $\alpha$-1C chain-like, a major constituent of microtubules---thus
+directly linked to the cell-remodeling mechanisms under positive selection---which has been
+additionally observed as differentially expressed in response to osmotic stress in barnacles
+\citep{chandramouli_transcriptome_2015}.
+While its exact function in \bgla{} is unknown, the large excess of polymorphism
+observed (NI = 18.54) suggests strong balancing selection acting on this gene despite strong
+positive selection on the overall cell-remodeling machinery.
+\vspace{0.2cm}
+
+\comment{This is more or less what we had in the previous version of the text. Mostly talking
+about the top genes based on alpha and the overlap with dNdS}
+Outside of this cell remodeling/cell adhesion core, the remaining candidates of selection appear
+to largely be functionally heterogenous.
+The gene displaying the largest proportion of non-synonymous substitutions fixed by
+positive selection among the sequences studied is a homolog to the Eukaryotic translation initiation
+factor 3 subunit L ($\alpha = 0.988$), a component of an initiation factor essential for protein
+synthesis and, in humans, linked to the regulation of transcripts related to cell proliferation and
+growth \citep{lee_eif3_2015}.
+Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
+also shows strong signals of positive selection ($\alpha = 0.917$).
+Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like
+7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
+\citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
+($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
+\citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
+\citep{fan_male_2007}.
+Further highlighting the discrepancy between the tests of selection, only a single
+significant gene in the MK test overlaps with our candidates of selection in
+the \dnds{} analysis, a homolog to \textit{A. amphitrite}'s uncharacterized locus
+LOC122363544.
+Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
+a member of a family of proteins known to play a role in crustacean immunity
+\citep{li_formin-like_2025}.
+
 % MK test volcano plot
 \begin{figure}[htbp]
     \centering
@@ -305,62 +380,6 @@ the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discus
         biological processes, cellular component, and molecular function.}
     \label{fig:mkTest}
 \end{figure}
-
-We explored the predicted function of the candidate genes under positive selection
-identified in the MK test by performing a gene ontology (GO) enrichment analysis on the
-367 candidates with available functional annotation
-(Figure~\ref{fig:mkTest}B;~Figure~\ref{fig:sup_go}).
-Among our most enriched GO terms, we observe terms related to adherens (adherens
-junction \texttt{GO:0005912}, zonula adherens assembly \texttt{GO:0045186}, protein localization
-to adherens junction \texttt{GO:0071896}, adherens junction maintenance \texttt{GO:0034334}),
-myosin (myosin II binding \texttt{GO:0045159}, myosin light chain binding \texttt{GO:0032027},
-myosin II filament organization \texttt{GO:0031038}),
-spectrin (spectrin binding \texttt{GO:0030507}, spectrin complex \texttt{GO:0008091}), and
-collagen (collagen trimer \texttt{GO:0005581}, complex of collagen trimers \texttt{GO:0098644}).
-In particular, within the collagen terms we observe the enrichment processes related to the
-molting of arthropod cuticles (e.g., molting cycle, collagen and cuticulin-based cuticle
-\texttt{GO:0018996}).
-Overall, these enrichment terms suggest there is strong directional selection in \bgla{}
-in genes involved in the building and remodeling of the cell surface, interactions with the
-extracelluar matrix, cell-cell adhesion, and related functions.
-
-% Bring this back to the GO terms. There are some strong links.
-a homolog
-to the Eukaryotic translation initiation factor 3 subunit L, a component of an initiation
-factor essential for protein synthesis and, in humans, linked to the regulation of
-transcripts related to cell proliferation and growth \citep{lee_eif3_2015}.
-This gene shows the largest proportion of non-synonymous substitutions fixed by
-positive selection among the sequences studied ($\alpha = 0.988$).
-Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
-also shows strong signals of positive selection ($\alpha = 0.917$).
-Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like
-7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
-\citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
-($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
-\citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
-\citep{fan_male_2007}.
-Further highlighting the discrepancy between the tests of selection, only a single
-significant gene in the MK test overlaps with our candidates of selection in
-the \dnds{} analysis, a homolog to \textit{A. amphitrite}'s uncharacterized locus
-LOC122363544.
-Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
-a member of a family of proteins known to play a role in crustacean immunity
-\citep{li_formin-like_2025}.
-
-Exploring the predicted function of the candidate genes identified in the MK analysis,
-our single candidate displaying an excess of polymorphism relative to divergence is a
-homolog of tubulin alpha-1C chain-like, a major constituent of microtubules
-which has been observed as differentially expressed in response to osmotic stress in
-barnacles \citep{chandramouli_transcriptome_2015}.
-While its exact function in \bgla{} is unknown, the large excess of polymorphism
-observed (NI = 18.54) suggests strong balancing selection acting on this gene.
-% mention that this also relates to cytoskeleton stuff so it linked to the positive
-% selection genes from above.
-
-% Some other concluding remark
-While the exact functions of all of these candidate genes are unknown in \bgla{}, they
-highlight the diverse targets of selection in this system and their characterization serves
-as an avenue for future study in barnacles.
 
 \subsection*{Barnacle genes show biases in the use of synonymous codons}
 
