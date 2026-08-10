@@ -276,32 +276,23 @@ Notably, this pervasive signal of positive selection stands in apparent tension 
 the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
 \vspace{0.2cm}
 
-\comment{@Andy, take a look at this section. I reworked it based on the GO analysis,
-but I want a second pair of eyes. It feels a bit listly to me at the moment.}
 We explored the predicted function of the candidate genes under positive selection
 identified in the MK test by performing a gene ontology (GO) enrichment analysis on the
 367 candidates with available functional annotation
 (Figure~\ref{fig:mkTest}B;~Figure~\ref{fig:sup_go}).
-Among our most enriched GO terms, we observe terms related to the plasma membrane (lateral
-plasma membrane \texttt{GO:0016328}, apical plasma membrane \texttt{GO:0016324}, plasma membrane
-protein complex \texttt{GO:0098797}),
-adherens (adherens junction \texttt{GO:0005912}, zonula adherens assembly \texttt{GO:0045186},
-protein localization to adherens junction \texttt{GO:0071896}, adherens junction maintenance
-\texttt{GO:0034334}),
-myosin (myosin II binding \texttt{GO:0045159}, myosin light chain binding \texttt{GO:0032027},
-myosin II filament organization \texttt{GO:0031038}),
-spectrin (spectrin binding \texttt{GO:0030507}, spectrin complex \texttt{GO:0008091}), and
-collagen (collagen trimer \texttt{GO:0005581}, complex of collagen trimers \texttt{GO:0098644})
-In particular, within the collagen terms we observe the enrichment processes related to the
-molting of arthropod cuticles (e.g., molting cycle, collagen and cuticulin-based cuticle
-\texttt{GO:0018996}).
-Overall, these enrichment terms suggest there is strong directional selection in \bgla{}
-in genes involved in the building and remodeling of the cell surface, interactions with the
-extracelluar matrix, cell-cell adhesion, and related functions.
+The most enriched GO terms describe a coherent set of cellular functions, spanning the
+plasma membrane, adherens junctions, myosin and spectrin complexes, and collagen trimers
+(Figure~\ref{fig:mkTest}B;~Figure~\ref{fig:sup_go}).
+Among the collagen-related terms, we additionally observe the enrichment of processes
+related to the molting of arthropod cuticles (e.g., molting cycle, collagen and
+cuticulin-based cuticle).
+Together, these enrichment patterns suggest strong directional selection in \bgla{}
+on genes involved in the building and remodeling of the cell surface, interactions with
+the extracellular matrix, cell-cell adhesion, and related functions.
 \vspace{0.2cm}
 
-Several of our candidates under strong positive selection are direct components of or linked to
-the significantly enriched GO terms.
+Several of our candidates under strong positive selection are direct components of these
+enriched functions.
 For example, two of our top candidates are non-muscle myosin heavy chain and myosin-VIIa homologs,
 both showing a very large fraction of non-synonymous substitutions fixed by positive selection,
 $\alpha$ of 0.961 and 0.940, respectively.
@@ -315,41 +306,25 @@ Observing evidence of positive selection on interacting pairs is strongly sugges
 coevolution of these sequences, in a compensatory or correlated fashion; however, future research
 is required to fully characterize the molecular interactions produced by these non-synonymous
 substitutions in \bgla{}.
-\comment{Keep this here or new section?}
-Interestingly, our single candidate showing an excess of polymorphism relative to divergence
-is a homolog of tubulin $\alpha$-1C chain-like, a major constituent of microtubules---thus
-directly linked to the cell-remodeling mechanisms under positive selection---which has been
-additionally observed as differentially expressed in response to osmotic stress in barnacles
-\citep{chandramouli_transcriptome_2015}.
-While its exact function in \bgla{} is unknown, the large excess of polymorphism
-observed (NI = 18.54) suggests strong balancing selection acting on this gene despite strong
-positive selection on the overall cell-remodeling machinery.
 \vspace{0.2cm}
 
-\comment{This is more or less what we had in the previous version of the text. Mostly talking
-about the top genes based on alpha and the overlap with dNdS}
-Outside of this cell remodeling/cell adhesion core, the remaining candidates of selection appear
-to largely be functionally heterogenous.
-The gene displaying the largest proportion of non-synonymous substitutions fixed by
-positive selection among the sequences studied is a homolog to the Eukaryotic translation initiation
-factor 3 subunit L ($\alpha = 0.988$), a component of an initiation factor essential for protein
-synthesis and, in humans, linked to the regulation of transcripts related to cell proliferation and
-growth \citep{lee_eif3_2015}.
-Another member of this component, Eukaryotic translation initiation factor 3 subunit B,
-also shows strong signals of positive selection ($\alpha = 0.917$).
-Among other candidates showing large $\alpha$, we find a homolog to transmembrane channel-like
-7 ($\alpha = 0.985$), which has been linked to osmoregulation in crustaceans
-\citep{liu_osmoregulatory_2025}, and a homolog to patched domain-containing protein 3-like
-($\alpha = 0.983$), a key patterning gene essential to development in \textit{Drosophila}
-\citep{bolatto_spatial_2015} which exhibits male germline-specific expression in mammals
-\citep{fan_male_2007}.
-Further highlighting the discrepancy between the tests of selection, only a single
-significant gene in the MK test overlaps with our candidates of selection in
-the \dnds{} analysis, a homolog to \textit{A. amphitrite}'s uncharacterized locus
-LOC122363544.
-Based on sequence similarity, LOC122363544 is a putative homolog of formin-like protein 3,
-a member of a family of proteins known to play a role in crustacean immunity
-\citep{li_formin-like_2025}.
+Outside of this cell remodeling and adhesion core, the remaining candidates of selection
+appear largely functionally heterogeneous, spanning protein synthesis, osmoregulation,
+and development (e.g., homologs of eukaryotic translation initiation factor 3 subunits
+L and B, transmembrane channel-like 7, and patched domain-containing protein 3-like,
+all with $\alpha > 0.9$; \citealp{lee_eif3_2015,liu_osmoregulatory_2025,bolatto_spatial_2015}).
+Of these candidates, only a single significant gene in the MK test also appears among our
+candidates of selection in the \dnds{} analysis --- a putative homolog of formin-like
+protein 3, a member of a family of proteins known to play a role in crustacean immunity
+\citep{li_formin-like_2025} --- further highlighting the discrepancy between the two
+tests of selection.
+Finally, our single candidate showing a significant excess of polymorphism relative to
+divergence is a homolog of tubulin $\alpha$-1C chain-like, a major constituent of
+microtubules and thus directly linked to the cell-remodeling machinery under positive
+selection.
+The large excess of polymorphism at this gene (NI = 18.54) instead suggests balancing
+selection, and this homolog has additionally been observed as differentially expressed
+in response to osmotic stress in barnacles \citep{chandramouli_transcriptome_2015}.
 
 % MK test volcano plot
 \begin{figure}[htbp]
