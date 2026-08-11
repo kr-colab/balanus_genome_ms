@@ -725,14 +725,16 @@ First, we estimated the long-term average \Ne{} in this population based on the
 estimates of $\theta_\text{W}$ along 10\,kbp windows using \textsc{pixy}, and using the
 relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
-by~\citet{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+by~\citet{nunez_footprints_2020} for the northern acorn barnacle
+\textit{Semibalanus balanoides}.
 Using this relationship, we calculated \Ne{} along these 10\,kbp windows, obtaining a
 distribution of effective size along the genome.
 \vspace{0.1cm}
 
-We additionally estimated the effective size of the population using the \textsc{msmc2}
-software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
-\textsc{DemInfHelper} program version \texttt{0.1.1} \citep{forest_popsize_2024}.
+Using the same set of filtered genotypes, we additionally estimated the coalescent-based
+effective size of the population using the \textsc{msmc2} software version \texttt{2.1.4}
+\citep{dutheil_msmc_2020}, as implemented in the \textsc{DemInfHelper} program version
+\texttt{0.1.1} \citep{forest_popsize_2024}.
 We ran \textsc{msmc2} with 25 iterations (\texttt{-i 25}), using the default
 time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
 in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
