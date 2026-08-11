@@ -20,7 +20,7 @@ contained 841.2\,Mbp (80.61\%) of the total sequence, and likely represent 16 ch
 This karyotype number, N=16, is in agreement with that observed for other species in the
 genus \textit{Balanus} \citep{austin_chromosome_1958} and other acorn barnacles in the
 family Balanidae \citep{han_new_2024}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Following assembly, we annotated and masked repeat sequences in the genome using
 \textsc{EarlGrey} \citep{baril_earl_2024}.
@@ -33,7 +33,7 @@ representative barnacle sequences among reference repeat databases, further refl
 status of barnacles as a genomically understudied group.
 Among the classified repeats, DNA and LINE elements were the two most abundant
 classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We annotated protein-coding genes in the \bgla{} assembly using a combination of
 short-read RNAseq and long-read PacBio Iso-Seq data (see
@@ -49,7 +49,7 @@ genome, identifying 7{,}532 long, non-coding RNAs (lncRNA), 1{,}203 transfer RNA
 and 24 ribosomal RNA (rRNA) genes.
 In total, across protein-coding and non-coding transcripts, we were able to annotate
 28{,}993 genes in the \bgla{} reference assembly.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Together, the high contiguity, gene-completeness, chromosome-level scaffolding,
 and comprehensive annotation of this assembly make it among the most complete genomic
@@ -125,7 +125,7 @@ Across the 16 putative chromosomes in the \textit{B. glandula} assembly, \textsc
 identified 196{,}141 HCEs, spanning 50.85\,Mbp (6.05\%) of the 16 assembled chromosomes.
 In \textit{B. glandula}, the HCEs had a mean length of 259.25\,bp (median: 42\,bp,
 standard deviation: 990.40\,bp).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Following the identification of HCEs, we compared their sequence composition against
 the genome-wide background (Figure~\ref{fig:phastcons}).
@@ -149,7 +149,7 @@ conservation of protein-coding genes among barnacle genomes.
 Similarly, tRNAs exhibit $\approx$4-fold enrichment in HCEs (mean $\log_2$ enrichment:
 2.14, median: 2.04, standard deviation: 0.96), likely reflecting the strong functional
 constraints on these sequences.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The enrichment among conserved elements in \bgla{} mirrors patterns observed across other
 groups of organisms.
@@ -173,26 +173,7 @@ Overall, the conservation of functional elements across barnacle genomes indicat
 that purifying selection has been effective at maintaining functionally constrained sequences
 despite the highly repetitive nature of the genome, a pattern we revisit in the context
 of the broader selective regime acting on these large populations.
-% \vspace{0.2cm}
-
-% Phastcons and enrichment
-\begin{figure}[htbp]
-    \centering
-    \captionsetup{width=0.95\linewidth}
-    \includegraphics[width=0.9\textwidth]{figures/phastcons.pdf}
-    \caption{\textbf{Highly conserved elements in the \balgla{} assembly.}
-        \textbf{A.} Proportion of annotated features in the whole genome
-        (left column) and the 50.85 Mbp spanning \textsc{phastCons}-conserved elements
-        (right column). Values are shown only for elements with proportions larger than
-        0.01. Sites that overlap more than one non-intergenic annotation type are
-        represented by the ``multiple'' feature.
-        \textbf{B.} Enrichment of the annotated features in the highly conserved
-        elements compared to the genome-wide background, calculated as the $\log_2$ of
-        the relative enrichment. The $\log_2$ enrichment values for each of the 16
-        chromosomes are shown as points. The diamonds in the boxplot indicate the
-        mean enrichment across the genome.}
-    \label{fig:phastcons}
-\end{figure}
+% \vspace{0.1cm}
 
 \subsection*{Patterns of molecular evolution reflect positive selection in protein-coding genes}
 
@@ -205,7 +186,7 @@ The mean pairwise \dnds{} was 0.206 (median: 0.158, standard deviation: 0.191;
 Figure~\ref{fig:sup_dnds}). This ratio indicates that, on average, coding
 sequences in these barnacle genomes are under purifying selection, reflecting the
 expected evolutionary constraints on sequences of functional importance.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Of the nine thousand genes assessed, 70 (0.77\%) displayed a \dnds{} $>$ 1, and are
 likely candidates for positive selection.
@@ -222,7 +203,7 @@ p53-inducible protein 11, which is involved in cell cycle regulation and is up-r
 in crabs after viral infection \citep{cheng_p53_2021}, as well as a Quiver homolog, a
 gene related to neuronal activity and sleep regulation in \textit{Drosophila}
 \citep{wang_quiver_2010}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We expanded on our \dnds{} measures of positive selection in protein-coding sequences
 in the \bgla{} genome by incorporating population-level polymorphism using the
@@ -233,7 +214,7 @@ those against the orthologous coding sequences in the \textit{B. crenatus} outgr
 After removing alignments shorter than 100\,bp and those containing premature stop
 codons and/or frameshift mutations, we calculated the MK test for 7{,}374 orthologous
 sequences between \bgla{} and \textit{B. crenatus}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Four hundred and forty-four (444, 6.02\%) of these orthologs showed a significant
 deviation from the expected proportion of non-synonymous and synonymous substitutions
@@ -250,7 +231,7 @@ Moreover, the near absence of genes displaying a significant excess in non-synon
 polymorphism (NI $>1$) reflect a reduction the proportion of slightly deleterious
 variants segregating in the population, suggesting the presence of highly efficacious
 background selection.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 In addition to NI and DoS, we calculated $\alpha$, a measure of the proportion
 of non-synonymous substitutions fixed by positive selection \citep{smith_adaptive_2002}.
@@ -274,7 +255,7 @@ that the majority of non-synonymous substitutions in this barnacle population ar
 outcome of directional positive selection.
 Notably, this pervasive signal of positive selection stands in apparent tension with
 the low genome-wide \dnds{}, a discordance we address in the \nameref{sec:discussion}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We explored the predicted function of the candidate genes under positive selection
 identified in the MK test by performing a gene ontology (GO) enrichment analysis on the
@@ -288,7 +269,7 @@ cuticulin-based cuticle).
 Together, these enrichment patterns suggest strong directional selection in \bgla{}
 on genes involved in the building and remodeling of the cell surface, interactions with
 the extracellular matrix, cell-cell adhesion, and related functions.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Several of our candidates under strong positive selection are direct components of these
 enriched functions.
@@ -305,7 +286,7 @@ Observing evidence of positive selection on interacting pairs is strongly sugges
 coevolution of these sequences, in a compensatory or correlated fashion; however, future research
 is required to fully characterize the molecular interactions produced by these non-synonymous
 substitutions in \bgla{}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Outside of this cell remodeling and adhesion core, the remaining candidates of selection
 appear largely functionally heterogeneous, spanning protein synthesis, osmoregulation,
@@ -377,7 +358,7 @@ All four barnacle genomes studied showed coding sequence GC content of $\approx6
 higher than the other studied genomes (Figure~\ref{fig:codon_enc}B;~Table~\ref{tab:sup_enc_summary}).
 The higher coding GC proportion in barnacles is also observed when looking at the GC proportion
 at 3rd codon positions and at 4-fold degenerate sites (Figure~\ref{fig:sup_coding_gc}).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We explored the selective basis of the increased bias in codon usage in barnacle genomes by
 comparing the empirical ENC distribution against a theoretical expectation.
@@ -398,7 +379,24 @@ as \bgla{}, we do observe a reduction in the model's slope and coefficient of de
 This poorer fit of the model indicates a smaller than expected number of effective codons, and
 suggests the presence of strong translational selection acting on the genome and the potential
 non-neutrality of at least some synonymous codons in large \bgla{} populations.
-\vspace{0.2cm}
+\vspace{0.1cm}
+
+Comparing the ENC and GC3s distribution in relation to population size highlights some
+interesting patterns.
+Evidence for selection-driven codon usage biases is observed for some hyper-diverse, large
+population species, e.g., the nematode \textit{Caenorhabditis brenneri}, the Pacific oyster
+\textit{Magallana gigas}, and the European lancelet \textit{Branchiostoma lanceolatum}
+(Figure~\ref{fig:sup_enc_gc3s}; Figure~\ref{fig:sup_enc_reg}; Table~\ref{tab:sup_enc_models}).
+More moderate deviation is observed for other diverse species, e.g, the malaria mosquito
+\textit{Anopheles gambiae} and the tunicate \textit{Ciona intestinalis}.
+In contrast, in three of our studied barnacles (\textit{B. crenatus}, \textit{A. amphitrite},
+and \textit{P. pollicipes}), the observed codon usage biases appear are indistinguishable from
+neutral compositional processes.
+In \bgla{}, evidence for non-neutral codon usage biases is moderate to strong depending on the
+method used.
+Overall, while we do not observe a clear relationship between population size and codon usage
+biases in the 12 studied genomes, the lineage-specific patterns described here provide an
+unexplored avenue of study of the efficacy and breadth of selection in highly diverse genomes.
 
 % ENC codon bias
 \begin{figure}[htbp]
@@ -426,23 +424,6 @@ non-neutrality of at least some synonymous codons in large \bgla{} populations.
     \label{fig:codon_enc}
 \end{figure}
 
-Comparing the ENC and GC3s distribution in relation to population size highlights some
-interesting patterns.
-Evidence for selection-driven codon usage biases is observed for some hyper-diverse, large
-population species, e.g., the nematode \textit{Caenorhabditis brenneri}, the Pacific oyster
-\textit{Magallana gigas}, and the European lancelet \textit{Branchiostoma lanceolatum}
-(Figure~\ref{fig:sup_enc_gc3s}; Figure~\ref{fig:sup_enc_reg}; Table~\ref{tab:sup_enc_models}).
-More moderate deviation is observed for other diverse species, e.g, the malaria mosquito
-\textit{Anopheles gambiae} and the tunicate \textit{Ciona intestinalis}.
-In contrast, in three of our studied barnacles (\textit{B. crenatus}, \textit{A. amphitrite},
-and \textit{P. pollicipes}), the observed codon usage biases appear are indistinguishable from
-neutral compositional processes.
-In \bgla{}, evidence for non-neutral codon usage biases is moderate to strong depending on the
-method used.
-Overall, while we do not observe a clear relationship between population size and codon usage
-biases in the 12 studied genomes, the lineage-specific patterns described here provide an
-unexplored avenue of study of the efficacy and breadth of selection in highly diverse genomes.
-
 \subsection*{Barnacle populations exhibit elevated genetic polymorphism}\label{sec:results_popgen}
 
 We sequenced the whole genomes of eight \bgla{} individuals from the central Oregon coast
@@ -469,7 +450,7 @@ observed in \textit{Anopheles gambiae} mosquitos, a species known for their high
 levels of polymorphism, $\approx7\times$ higher than the diversity in Sub-Saharan
 populations of \textit{Drosophila melanogaster}, and $\approx48\times$ higher than the
 diversity observed in large human cohorts~(Figure~\ref{fig:sup_pi_comp}).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Along each chromosome, we did not observe any strong correlation between the density
 of specific genomic features (e.g., CDSs, lncRNAs, tRNAs, introns, and repeats) and
@@ -491,7 +472,7 @@ in centromeric regions).
 Describing recombination in detail this species should thus be a focus of future studies
 in order to characterize how highly efficacious selection and linkage shape genetic
 diversity along the genome in \bgla{}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 % Genome-wide pi & repeat and gene density
 \begin{figure}[htbp]
@@ -530,7 +511,7 @@ strong functional constraint evidenced by their enrichment in highly conserved e
 In contrast to most other elements of the genome, introns display a relative increase in
 diversity, with a mean $\pi$ of 0.0646 (median: 0.0650, standard deviation: 0.0299),
 approximately $1.3\times$ higher than the genome-wide average.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Zooming in further on coding sequences, we explored the patterns of $\pi$
 at 0-fold degenerate ($\pi_{0}$), in which any mutation produces a non-synonymous
@@ -577,7 +558,7 @@ per-generation mutation rate ($\mu$) of $3\times10^{-9}$ (as estimated by
 and using the relationship between \Ne{} and $\theta_\text{W}$, this yields a
 mean effective size of 5{,}137{,}172 (median: 5{,}289{,}211, standard deviation:
 1{,}862{,}683), which is consistent with the expectation of large \Ne{} in this species.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Additionally, we estimated \Ne{} through time using a coalescent-based
 approach with \textsc{msmc2} \citep{dutheil_msmc_2020}. This estimate also placed
