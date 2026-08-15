@@ -61,14 +61,14 @@ were sequenced at an estimated depth of $\approx$ 60x.
 \subsubsection*{Genome size and heterozygosity estimation}
 
 We estimated the genome size and heterozygosity of the \bgla{}
-genome using k-mers. First, we used the \texttt{count} command of the
+genome using $k$-mers. First, we used the \texttt{count} command of the
 \textsc{jellyfish} software version \texttt{2.2.10} \citep{marcais_fast_2011}
-to count the unique k-mers present in the PacBio HiFi reads. We counted k-mers
+to count the unique $k$-mers present in the PacBio HiFi reads. We counted $k$-mers
 of size 21 (\texttt{-{}-mer-len 21}) present in both strands (\texttt{-{}-canonical}).
-From these counts, we then generated an empirical k-mer distribution using
+From these counts, we then generated an empirical $k$-mer distribution using
 \textsc{jellyfish}'s \texttt{histo} command. Finally, we used
 \textsc{GenomeScope2} version \texttt{2.0} \citep{ranallo-benavidez_genomescope_2020}
-to model the distribution of k-mers in the diploid genome (\texttt{-{}-ploidy 2})
+to model the distribution of $k$-mers in the diploid genome (\texttt{-{}-ploidy 2})
 based on the empirical counts.
 
 \subsubsection*{Base contig-level genome assembly}
@@ -148,7 +148,7 @@ This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.1
 including our filtered PacBio HiFi reads as well as the ultra-long ONT
 (\texttt{-{}-ul}).
 This assembly was done using an estimated haploid genome size of 800\,Mbp
-(\texttt{-{}-hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-{}-hg-size 800m}), dropping $k$-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{-{}-dual-scaf}).
 For identifying and correctly phasing haplotype sequences, we set the expected coverage
 at homozygous sites (\texttt{-{}-hom-cov 68}) and the upper bound of coverage to purging
@@ -241,6 +241,27 @@ an initial consensus masking library. We provided this initial consensus library
 \textsc{RepeatMasker} version \texttt{4.1.2} \citep{smit_repeatmasker_2013}. In addition,
 we clustered the final TE library to reduce redundancy (\texttt{-c yes}) and generated a
 soft-masked genome (\texttt{-d yes}).
+\vspace{0.1cm}
+
+Since the homology-based repeat classification from \textsc{EarlGrey} produces a large
+fraction of unknown elements ($>$30\% of the assembly), we ran additional classification
+steps on this unknown subset of identified repeats.
+First, we ran \textsc{TEsorter} version \texttt{1.5.1} \citep{zhang_tesorter_2022},
+searching against the \texttt{REXdb} version \texttt{3.1} metazoan repeat domain
+database \citep{neumann_rexdb_2019} using \textsc{HMMER} version \texttt{3.4}
+\citep{eddy_hmmer_2011}.
+The resulting unknown fraction was then classified using \textsc{DeepTE} (commit
+\href{https://github.com/LiLabAtVT/DeepTE/commit/1f76ff9da6e1dbfbb771868cdd0e149ec41457a2}{\texttt{1f76ff9}};
+\citealp{yan_deepte_2020}), which uses a convolutional neutral network pre-trained on
+the $k$-mers of known repeats for TE classification.
+We ran \textsc{DeepTE} in two rounds.
+First, we ran \texttt{DeepTE\_domain.py} to perform domain assignment on these unknown
+sequences, using \textsc{HMMER} to search against the supplied \texttt{minifam} database.
+For the second round, we ran the main classification using \texttt{DeepTE.py},
+supplying the found domains to the main classifier (\texttt{-modify}), searching against
+the pre-trained Metazoan model set (\texttt{-m Metazoan},~\texttt{-sp M}; archived
+2019/12/13), and setting a stricter probability threshold of 80\% for filtering
+classified repeats (\texttt{-prop\_thr 0.8}).
 
 \subsubsection*{Annotation of protein-coding genes}\label{sec:methods_protein_coding}
 
@@ -265,9 +286,9 @@ sorted using \textsc{samtools}.
 Using this aligned RNAseq data, we annotated protein-coding genes using \textsc{BRAKER}
 version \texttt{3.0.8} \citep{gabriel_braker3_2024}. We ran \textsc{BRAKER} in
 \texttt{ETP} mode \citep{bruna_genemark-etp_2024}, providing both RNAseq alignments
-(\texttt{-{}-bams}) and Arthropod protein sequences (\texttt{-{}-prot\_seq}) as evidence.
+(\texttt{-{}-bams}) and Arthropod protein sequences (\texttt{-{}-prot\_seq}) as input.
 We also used the Arthropod dataset from \textsc{BUSCO} \citep{simao_busco_2015} to
-enforce this set of orthologs as hints for \textsc{Augustus} \citep{stanke_using_2008}
+enforce a set of orthologs as hints for \textsc{Augustus} \citep{stanke_using_2008}
 and reduce the number of missing single-copy orthologs in the final annotation
 (\texttt{-{}-busco\_lineage arthropoda\_odb10}). After running \textsc{BRAKER}, we assessed
 the quality of the generated annotation using \textsc{compleasm} version \texttt{0.2.5}

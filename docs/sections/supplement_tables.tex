@@ -61,30 +61,41 @@
 \end{table}
 
 % Repeat annotation
-\begin{table}[ht]
-    \centering
-    \suptablecaption{\textbf{High-level repeat annotation of the \balgla{}
-        assembly.} Repeats were annotated with the \textsc{EarlGrey} software.}
+\begin{table}[htbp]
+\centering
+\suptablecaption{\textbf{High-level repeat annotation of the \balgla{}
+        assembly.}
+            Repeats were first identified with the \textsc{EarlGrey} software.
+            The classification is the merge of \textsc{EarlGrey}'s homology-based
+            assignment, followed by the re-classification of unknown elements by
+            \textsc{TEsorter} and \textsc{DeepTE}.
+            Coverage is the total number of masked sites per class; ``\% Genome''
+            is the coverage divided by assembly size (1{,}043{,}519{,}078\,bp).}
+    \label{tab:sup_repeat_summary}
+    \sisetup{group-separator={,}, group-minimum-digits=4}
     \begin{tabular}{lrrrr}
         \toprule
-        Classification &
-            \shortstack{Number of \\ sites (bp)} &
-            \shortstack{Count of \\ elements} &
-            \shortstack{Proportion of \\ the genome} &
-            \shortstack{Number of \\ distinct elements} \\
+            Classification &
+                {Coverage (bp)} &
+                {Count} &
+                {\% Genome} &
+                \shortstack{Distinct \\ elements} \\
         \midrule
-        DNA                       & 88{,}203{,}702  & 217{,}040 & 0.08 & 335     \\
-        LINE                      & 95{,}553{,}328  & 199{,}835 & 0.09 & 511     \\
-        LTR                       & 39{,}476{,}928  & 87{,}021  & 0.04 & 362     \\
-        \shortstack[l]{Other (Simple Repeat, \\
-          ~~Microsatellite, RNA)} & 37{,}933{,}124  & 77{,}043  & 0.04 & 112     \\
-        Penelope                  & 25{,}187{,}297  & 61{,}172  & 0.02 & 112     \\
-        Rolling Circle            & 6{,}897{,}773   & 17{,}411  & 0.01 & 45      \\
-        SINE                      & 828{,}944       & 2{,}039   & 0.00 & 6       \\
-        Unclassified              & 404{,}513{,}462 & 966{,}499 & 0.39 & 1{,}520 \\
-        \bottomrule
+            DNA                                        & 379178613 & 895512  & 36.34 & 35 \\
+            LINE                                       & 107103442 & 223314  & 10.26 & 20 \\
+            LTR                                        &  50161694 & 120887  &  4.81 &  8 \\
+            \shortstack[l]{Other (Simple Repeat, \\
+                ~~Microsatellite, RNA)}                &  37359678 &  74786  &  3.58 &  3 \\
+            Penelope                                   &  25833119 &  65921  &  2.48 &  4 \\
+            Rolling Circle                             &  22238826 &  42257  &  2.13 &  1 \\
+            Retroposon                                 &   2095328 &   5834  &  0.20 &  2 \\
+            SINE                                       &   1253619 &   4437  &  0.12 &  3 \\
+            DIRS                                       &   1184091 &   1285  &  0.11 &  2 \\
+            Unclassified                               &  61450725 & 148647  &  5.89 &  1 \\
+            \midrule
+            Total                                      & 687859135 & 1582880 & 65.92 & 79 \\
+    \bottomrule
     \end{tabular}
-    \label{tab:sup_earlgrey_summary}
 \end{table}
 
 % Stats about polymorphism in the reference individual and the popgen samples.

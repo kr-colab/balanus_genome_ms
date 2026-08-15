@@ -24,15 +24,21 @@ family Balanidae \citep{han_new_2024}.
 
 Following assembly, we annotated and masked repeat sequences in the genome using
 \textsc{EarlGrey} \citep{baril_earl_2024}.
-This analysis identified 698.6\,Mbp (66.94\%) of the assembly as repetitive elements
-(Table~\ref{tab:sup_earlgrey_summary});
+This analysis identified 687.9\,Mbp (65.92\%) of the assembly as repetitive elements;
 however, the majority of these, 404.5\,Mbp (38.76\% of the assembly), were unable to
 be classified among the major repeat families.
-This large fraction of unclassified repeats is likely the product of the small number of
-representative barnacle sequences among reference repeat databases, further reflecting the
-status of barnacles as a genomically understudied group.
-Among the classified repeats, DNA and LINE elements were the two most abundant
-classes, comprising 8.45\% and 9.16\% of the total assembly, respectively.
+This large fraction of unclassified repeats is likely the product of the small number
+of representative barnacle sequences among reference repeat databases, further reflecting
+the status of barnacles as a genomically understudied group.
+We proceeded to re-classify this large fraction of unknown repeat elements using
+\textsc{TEsorter} \citep{zhang_tesorter_2022}, followed by \textsc{DeepTE}
+\citep{yan_deepte_2020},
+which reduced the fraction of unclassified elements to only 5.89\% of the total assembly.
+This classification approach identified DNA repeat elements as the most common repeat
+class in the \bgla{} genome, comprising 36.3\% of the total assembly
+(Table~\ref{tab:sup_repeat_summary}).
+LINEs and LTRs were the second and third most common repeat types, comprising 10.26\%
+and 4.81\% of the assembly, respectively.
 \vspace{0.1cm}
 
 We annotated protein-coding genes in the \bgla{} assembly using a combination of
