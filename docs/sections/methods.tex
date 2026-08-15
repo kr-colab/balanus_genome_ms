@@ -61,14 +61,14 @@ were sequenced at an estimated depth of $\approx$ 60x.
 \subsubsection*{Genome size and heterozygosity estimation}
 
 We estimated the genome size and heterozygosity of the \bgla{}
-genome using k-mers. First, we used the \texttt{count} command of the
+genome using $k$-mers. First, we used the \texttt{count} command of the
 \textsc{jellyfish} software version \texttt{2.2.10} \citep{marcais_fast_2011}
-to count the unique k-mers present in the PacBio HiFi reads. We counted k-mers
+to count the unique $k$-mers present in the PacBio HiFi reads. We counted $k$-mers
 of size 21 (\texttt{-{}-mer-len 21}) present in both strands (\texttt{-{}-canonical}).
-From these counts, we then generated an empirical k-mer distribution using
+From these counts, we then generated an empirical $k$-mer distribution using
 \textsc{jellyfish}'s \texttt{histo} command. Finally, we used
 \textsc{GenomeScope2} version \texttt{2.0} \citep{ranallo-benavidez_genomescope_2020}
-to model the distribution of k-mers in the diploid genome (\texttt{-{}-ploidy 2})
+to model the distribution of $k$-mers in the diploid genome (\texttt{-{}-ploidy 2})
 based on the empirical counts.
 
 \subsubsection*{Base contig-level genome assembly}
@@ -92,7 +92,7 @@ a new \textsc{blobtools} database, using the \texttt{create} command, specifying
 contig-level assembly as our reference sequence (\texttt{-{}-fasta}), the NCBI
 taxonomic identifier for \bgla{} (\texttt{-{}-taxid 110520}), and the NCBI reference
 taxonomy files (\texttt{-{}-taxdump}, downloaded on 2023/12/13).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 To add depth of coverage to this database, we aligned our PacBio HiFi sequencing
 reads to our base, contig-level reference assembly using \textsc{minimap2} version
@@ -102,7 +102,7 @@ configuration (\texttt{-x map-hifi}) and exporting alignments in SAM format
 \textsc{samtools} version \texttt{1.18} \citep{li_sequence_2009}. The processed
 alignments were then added to the \textsc{blobtools} database using the \texttt{add}
 command.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We performed taxonomic assignment of each sequence in the assembly by first aligning
 our contigs against NCBI's non-redundant (\texttt{nr}) database (downloaded on
@@ -115,7 +115,7 @@ were then added to the \textsc{blobtools} database using the \texttt{add} comman
 specifying the rule for taxonomic assignment (\texttt{-{}-taxrule bestsumorder}).
 Using this approach, the \textsc{blobtools} database provides a single taxonomic
 assignment to each contig.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Following taxonomic assignment of the assembled contigs, we used
 \textsc{blobtools}'s \texttt{filter} command to obtain the IDs of sequencing
@@ -127,7 +127,7 @@ using a given taxonomic assignment rule (\texttt{-{}-param bestsumorder\_class})
 then used the (\texttt{-{}-invert}) option to specify that we wished to export the
 IDs of reads matching this assignment (i.e., keeping only reads specific to the
 barnacle class Thecostraca).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Lastly, we used the IDs of the Thecostraca-assigned reads to filter our raw
 PacBio HiFi FASTQ file using the \texttt{subseq} command from the \textsc{seqtk}
@@ -148,7 +148,7 @@ This optimized assembly was generated using \textsc{hifiasm} version \texttt{0.1
 including our filtered PacBio HiFi reads as well as the ultra-long ONT
 (\texttt{-{}-ul}).
 This assembly was done using an estimated haploid genome size of 800\,Mbp
-(\texttt{-{}-hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-{}-hg-size 800m}), dropping $k$-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{-{}-dual-scaf}).
 For identifying and correctly phasing haplotype sequences, we set the expected coverage
 at homozygous sites (\texttt{-{}-hom-cov 68}) and the upper bound of coverage to purging
@@ -156,7 +156,7 @@ duplicates (\texttt{-{}-purge-max 68}) at 68x, along with setting the similarity
 between duplicate haplotigs to 25\% (\texttt{-s 0.25}).
 This assembly was composed of 2{,}218 contigs, with a total length of 1.29\,Gbp, and a contig
 N50 of 1.16\,Mbp.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Following the initial assembly of contigs, we purged haplotig sequences using the
 \textsc{purge\_dups} software version \texttt{1.2.5} \citep{guan_identifying_2020}.
@@ -183,7 +183,7 @@ setting the minimum alignment score to output to zero (\texttt{-T 0}), skipping 
 rescue (\texttt{-S}), mate pairing (\texttt{-P}), and setting the smallest query
 coordinate as primary for split alignments (\texttt{-5}). Alignments were converted
 to BAM format using \textsc{samtools} version \texttt{1.18}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We processed the aligned Hi-C data using \textsc{pairtools} version \texttt{1.0.2}
 \citep{open2c_pairtools_2023}, following the Dovetail analysis pipeline
@@ -197,7 +197,7 @@ duplicate reads using \textsc{pairtools} \texttt{dedup -{}-mark-dups}. Finally, 
 \textsc{pairtools} \texttt{split} to process the data into a BAM file of valid
 alignments and a ``pairs'' file with the read pairs forming the contact map. The
 resulting alignment BAM was sorted and indexed using \textsc{samtools}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The processed Hi-C alignments were used to scaffold the genome using the \textsc{YaHS}
 software version \texttt{1.2a.1} \citep{zhou_yahs_2023}. Since our assembly consisted of
@@ -241,6 +241,27 @@ an initial consensus masking library. We provided this initial consensus library
 \textsc{RepeatMasker} version \texttt{4.1.2} \citep{smit_repeatmasker_2013}. In addition,
 we clustered the final TE library to reduce redundancy (\texttt{-c yes}) and generated a
 soft-masked genome (\texttt{-d yes}).
+\vspace{0.1cm}
+
+Since the homology-based repeat classification from \textsc{EarlGrey} produces a large
+fraction of unknown elements ($>$30\% of the assembly), we ran additional classification
+steps on this unknown subset of identified repeats.
+First, we ran \textsc{TEsorter} version \texttt{1.5.1} \citep{zhang_tesorter_2022},
+searching against the \texttt{REXdb} version \texttt{3.1} metazoan repeat domain
+database \citep{neumann_rexdb_2019} using \textsc{HMMER} version \texttt{3.4}
+\citep{eddy_hmmer_2011}.
+The resulting unknown fraction was then classified using \textsc{DeepTE} (commit
+\href{https://github.com/LiLabAtVT/DeepTE/commit/1f76ff9da6e1dbfbb771868cdd0e149ec41457a2}{\texttt{1f76ff9}};
+\citealp{yan_deepte_2020}), which uses a convolutional neutral network pre-trained on
+the $k$-mers of known repeats for TE classification.
+We ran \textsc{DeepTE} in two rounds.
+First, we ran \texttt{DeepTE\_domain.py} to perform domain assignment on these unknown
+sequences, using \textsc{HMMER} to search against the supplied \texttt{minifam} database.
+For the second round, we ran the main classification using \texttt{DeepTE.py},
+supplying the found domains to the main classifier (\texttt{-modify}), searching against
+the pre-trained Metazoan model set (\texttt{-m Metazoan},~\texttt{-sp M}; archived
+2019/12/13), and setting a stricter probability threshold of 80\% for filtering
+classified repeats (\texttt{-prop\_thr 0.8}).
 
 \subsubsection*{Annotation of protein-coding genes}\label{sec:methods_protein_coding}
 
@@ -249,7 +270,7 @@ annotate protein-coding genes, combining evidence from short-read RNAseq data, P
 IsoSeq long reads, and protein sequences. For protein-level evidence, we downloaded the
 Arthropoda and Crustacea partitions of \textsc{OrthoDB} version \texttt{11}
 \citep{kriventseva_orthodb_2019,zdobnov_orthodb_2021}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 When processing the short-read data, we first filtered and processed the raw RNAseq
 Illumina reads using \textsc{fastp} version \texttt{0.23.4} \citep{chen_fastp_2018,
@@ -260,20 +281,20 @@ reads to the \bgla{} assembly using \textsc{hisat2} version \texttt{2.2.1}
 \citep{kim_graph-based_2019}, exporting alignments tailored for \textit{de novo}
 transcriptome assemblers (\texttt{-{}-dta}). The alignments were further processed and
 sorted using \textsc{samtools}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Using this aligned RNAseq data, we annotated protein-coding genes using \textsc{BRAKER}
 version \texttt{3.0.8} \citep{gabriel_braker3_2024}. We ran \textsc{BRAKER} in
 \texttt{ETP} mode \citep{bruna_genemark-etp_2024}, providing both RNAseq alignments
-(\texttt{-{}-bams}) and Arthropod protein sequences (\texttt{-{}-prot\_seq}) as evidence.
+(\texttt{-{}-bams}) and Arthropod protein sequences (\texttt{-{}-prot\_seq}) as input.
 We also used the Arthropod dataset from \textsc{BUSCO} \citep{simao_busco_2015} to
-enforce this set of orthologs as hints for \textsc{Augustus} \citep{stanke_using_2008}
+enforce a set of orthologs as hints for \textsc{Augustus} \citep{stanke_using_2008}
 and reduce the number of missing single-copy orthologs in the final annotation
 (\texttt{-{}-busco\_lineage arthropoda\_odb10}). After running \textsc{BRAKER}, we assessed
 the quality of the generated annotation using \textsc{compleasm} version \texttt{0.2.5}
 \citep{huang_compleasm_2023} in \texttt{protein} mode, using the Arthropod ortholog set
 as reference (\texttt{-{}-lineage arthropoda\_odb10}).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 In parallel, we annotated protein-coding genes using the PacBio IsoSeq data, aligning it
 to the assembly using \textsc{minimap2} version \texttt{2.26-r1175} (\texttt{-x splice:hq})
@@ -284,7 +305,7 @@ IsoSeq data (\texttt{-{}-bam}) and Arthropod protein sequences (\texttt{-{}-prot
 evidence, and enforcing the \textsc{BUSCO} Arthropod reference set in the annotation
 (\texttt{-{}-busco\_lineage arthropoda\_odb10}). Lastly, we used \textsc{compleasm}
 \texttt{protein} to assess the completeness of the annotation.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Once the RNAseq- and IsoSeq-based \textsc{BRAKER} annotations were completed, we merged
 the two using \textsc{TSEBRA} \citep{gabriel_tsebra_2021}. As recommended by published
@@ -311,7 +332,7 @@ Isoforms were then filtered using \texttt{sqanti3\_filter} using the default rul
 except that we retained mono-exonic transcripts.
 Lastly, we rescued filtered transcripts and isoforms using \texttt{sqanti3\_rescue},
 rescuing all isoform types (\texttt{-{}-mode "full"}) and using default parameters.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The rescued isoforms from \textsc{sqanti3} were processed using \textsc{TransDecoder}
 version \texttt{5.7.1} \citep{hass_transdecoder} to identify protein-coding sequences
@@ -327,7 +348,7 @@ results using \texttt{TransDecoder.Predict}.
 Predicted transcripts were mapped back to the genome and to the isoform annotation
 using the \textsc{TransDecoder} auxiliary scripts, filtering whole transcripts and
 isoforms lacking homology and coding predictions.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Lastly, we merged this curated isoform annotation with our \textsc{braker} annotation
 using the \textsc{tacoRNA} software version \texttt{0.7.3} \citep{niknafs_taco_2017}.
@@ -364,7 +385,7 @@ annotated using the \textsc{tRNAscan-SE} software version \texttt{2.0.12}
 \citep{chan_trnascan-se_2021}. We specified the annotation of eukaryotic tRNA motifs
 (\texttt{-E}) and reporting the source of all sequence hits in the outputs
 (\texttt{-{}-hitsrc}). We removed pseudogenized tRNA copies from downstream analyses.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 For annotating lncRNAs, we first re-aligned our PacBio IsoSeq transcripts to the
 assembly using \textsc{minimap2} (using the \texttt{-ax splice:hq} option). Then, we
@@ -380,7 +401,7 @@ present in the reference protein-coding gene annotation. We then used
 modeling the coding potential against a non-coding fraction of the genome
 (\texttt{-{}-mode=intergenic}). Lastly, we classified candidate non-coding transcripts
 according to their location relative to nearby genes using \texttt{FEELnc\_classifier}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 After their annotation, all three non-coding RNA classes were separately processed
 using \textsc{agat} in order to sort features by chromosomal coordinates, add
@@ -400,7 +421,7 @@ and the gooseneck barnacle (\textit{Pollicipes pollicipes};
 See \nameref{sec:sup_methods_barnacle_rna} for additional details.
 For all species, we used the longest isoform as representative for each gene for
 all downstream analyses.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We identified orthologs across the protein-coding genes of these five genomes using
 \textsc{OrthoFinder} version \texttt{3.1.0} \citep{emms_orthofinder_2015,
@@ -451,7 +472,7 @@ Lastly, we calculated conservation scores on the aligned sequences using
 \texttt{phastCons}.
 We exported the coordinates (\texttt{-{}-most-conserved}) and assigned
 log-odd scores (\texttt{-{}-scores}) to the HCEs.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We used a custom Python script (\texttt{tally\_phastcon\_elements.py}) to
 annotate and calculate the enrichment of known annotated features present in
@@ -475,7 +496,7 @@ iterations of re-alignments (\texttt{-iterate=3}).
 The MSAs were then processed using \textsc{ClipKIT} version \texttt{2.7.0}
 \citep{steenwyk2020_clipkit}, trimming the alignment by codons (\texttt{-{}-codon}).
 Lastly, we filtered all alignments shorter than 100\,bp.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 After generating and processing alignments for the resulting 9{,}082 single-copy
 orthologs, we calculated \dnds{} rates using a custom Python script
@@ -515,7 +536,7 @@ alignment by codons (\texttt{-{}-codon}), and trimming sites above a gap thresho
 of 25\% (\texttt{-{}-mode gappy}; \texttt{-{}-gaps 0.25}).
 Alignments smaller than 100\,bp were also discarded, retaining sequences for 7{,}374 
 orthologs.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The MK test and associated statistics were calculated using the \textsc{MKado}
 version \texttt{0.2.0} software \citep{mkado_2026}.
@@ -611,7 +632,7 @@ Lastly, we used the \textsc{mosdepth} software version \texttt{0.3.10}
 covered at specified coverage thresholds (\texttt{-{}-thresholds "1,3,5,10,20"}).
 After filtering and processing alignments, the reference individual retained a mean
 depth of coverage of 50.88x (median: 47.94x, standard deviation: 100.32x).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Genotypes were called from these alignments using the standard \textsc{bcftools} version
 \texttt{1.21} \citep{danecek_bcftools_2021} genotyping pipeline, consisting of the
@@ -627,7 +648,7 @@ For the \texttt{call} command, we used the updated calling model
 probabilities (\texttt{-{}-annotate "GQ,GP"}).
 Additionally, we used the \textsc{bcftools} \texttt{norm} command to join adjacent SNPs
 and indels into single multiallelic sites.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 After calling genotypes, we filtered the resulting variants using \textsc{bcftools}.
 Using the \texttt{filter} command, we removed sites (both variant and invariant) with
@@ -641,7 +662,7 @@ We also removed sites with more than two alleles using (\texttt{-{}-max-alleles 
 the \texttt{view} command.
 Lastly, we merged all the files together in a single genome-wide VCF using
 \textsc{bcftools} \texttt{concat}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We classified the effects of heterozygous variants present in the reference genome using
 \textsc{snpEff} version \texttt{5.2} \citep{cingolani_program_2012}.
@@ -700,7 +721,7 @@ diversity. We calculated both nucleotide diversity ($\pi$) and Watterson's Theta
 We allowed multiallelic sites to be used in the calculations
 (\texttt{-{}-include\_multiallelic\_snps}), limiting the calculation to sites present in our
 input VCF file (\texttt{-{}-sites\_file}).
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 We performed additional diversity calculations with \textsc{pixy} on different regions
 of interest in the genome.
@@ -725,14 +746,16 @@ First, we estimated the long-term average \Ne{} in this population based on the
 estimates of $\theta_\text{W}$ along 10\,kbp windows using \textsc{pixy}, and using the
 relationship $\text{N}_\text{e} = \theta_\text{W}/4\mu$.
 We used the per-base per-generation mutation rate ($\mu$) of $3\times10^{-9}$ estimated
-by~\citet{nunez_footprints_2020} for the acorn barnacle \textit{Semibalanus balanoides}.
+by~\citet{nunez_footprints_2020} for the northern acorn barnacle
+\textit{Semibalanus balanoides}.
 Using this relationship, we calculated \Ne{} along these 10\,kbp windows, obtaining a
 distribution of effective size along the genome.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
-We additionally estimated the effective size of the population using the \textsc{msmc2}
-software version \texttt{2.1.4} \citep{dutheil_msmc_2020}, as implemented in the
-\textsc{DemInfHelper} program version \texttt{0.1.1} \citep{forest_popsize_2024}.
+Using the same set of filtered genotypes, we additionally estimated the coalescent-based
+effective size of the population using the \textsc{msmc2} software version \texttt{2.1.4}
+\citep{dutheil_msmc_2020}, as implemented in the \textsc{DemInfHelper} program version
+\texttt{0.1.1} \citep{forest_popsize_2024}.
 We ran \textsc{msmc2} with 25 iterations (\texttt{-i 25}), using the default
 time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep the inference
 in generations instead of years), and a $\mu$ of $3\times10^{-9}$.

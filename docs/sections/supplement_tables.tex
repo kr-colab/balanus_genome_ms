@@ -21,16 +21,16 @@
             \shortstack{Hi-C \\ scaffolds} &
             \shortstack{Curated \\ assembly} \\
         \midrule
-        Sequence length (Mbp)          & 1.64        & 1.05        & 1.05    & 1.04    \\
-        Fragments (N)                  & 4{,}212     & 1{,}342     & 650     & 592     \\
-        Contig N50 (Mbp)               & 0.734       & 1.35        & 1.18    & 1.18    \\
-        Scaffold N50 (Mbp)             & \texttt{NA} & \texttt{NA} & 50.96   & 51.41   \\
-        \textsc{BUSCO} complete (\%).  & 95.66       & 93.88       & 93.98   & 94.08   \\
-        \textsc{BUSCO} single (\%)     & 45.31       & 89.04       & 89.24   & 89.44   \\
-        \textsc{BUSCO} duplicates (\%) & 50.35       & 4.84        & 4.74    & 4.64    \\
-        \textsc{BUSCO} fragmented (\%) & 0.79        & 1.18        & 0.89    & 0.89    \\
-        \textsc{BUSCO} missing (\%)    & 3.55        & 4.94        & 5.13    & 5.03    \\
-        \textsc{BUSCO} size (N)        & 1{,}013     & 1{,}013     & 1{,}013 & 1{,}013 \\
+        Sequence length (Mbp)          & 1.64        & 1.05        & 1.05       & 1.04 \\
+        Fragments (N)                  & \num{4212}  & \num{1342}  & 650        & 592 \\
+        Contig N50 (Mbp)               & 0.734       & 1.35        & 1.18       & 1.18 \\
+        Scaffold N50 (Mbp)             & \texttt{NA} & \texttt{NA} & 50.96      & 51.41 \\
+        \textsc{BUSCO} complete (\%).  & 95.66       & 93.88       & 93.98      & 94.08 \\
+        \textsc{BUSCO} single (\%)     & 45.31       & 89.04       & 89.24      & 89.44 \\
+        \textsc{BUSCO} duplicates (\%) & 50.35       & 4.84        & 4.74       & 4.64 \\
+        \textsc{BUSCO} fragmented (\%) & 0.79        & 1.18        & 0.89       & 0.89 \\
+        \textsc{BUSCO} missing (\%)    & 3.55        & 4.94        & 5.13       & 5.03 \\
+        \textsc{BUSCO} size (N)        & \num{1013}  & \num{1013}  & \num{1013} & \num{1013} \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_asm_stats}
@@ -49,42 +49,52 @@
             \texttt{arthropoda\_odb10} &
             \texttt{crustacea\_odb12} \\
         \midrule
-        \textsc{BUSCO} complete (\%)   & 93.58   & 84.77 \\
-        \textsc{BUSCO} single (\%)     & 79.76   & 72.66 \\
-        \textsc{BUSCO} duplicates (\%) & 13.82   & 12.11 \\
-        \textsc{BUSCO} fragmented (\%) & 1.78    & 4.10  \\
-        \textsc{BUSCO} missing (\%)    & 4.64    & 11.13 \\
-        \textsc{BUSCO} size (N)        & 1{,}013 & 1{,}536 \\
+        \textsc{BUSCO} complete (\%)   & 93.58      & 84.77 \\
+        \textsc{BUSCO} single (\%)     & 79.76      & 72.66 \\
+        \textsc{BUSCO} duplicates (\%) & 13.82      & 12.11 \\
+        \textsc{BUSCO} fragmented (\%) & 1.78       & 4.10 \\
+        \textsc{BUSCO} missing (\%)    & 4.64       & 11.13 \\
+        \textsc{BUSCO} size (N)        & \num{1013} & \num{1536} \\
         \bottomrule
     \end{tabular}
     \label{tab:sup_annot_stats}
 \end{table}
 
 % Repeat annotation
-\begin{table}[ht]
-    \centering
-    \suptablecaption{\textbf{High-level repeat annotation of the \balgla{}
-        assembly.} Repeats were annotated with the \textsc{EarlGrey} software.}
+\begin{table}[htbp]
+\centering
+\suptablecaption{\textbf{High-level repeat annotation of the \balgla{}
+        assembly.}
+            Repeats were first identified with the \textsc{EarlGrey} software.
+            The classification is the merge of \textsc{EarlGrey}'s homology-based
+            assignment, followed by the re-classification of unknown elements by
+            \textsc{TEsorter} and \textsc{DeepTE}.
+            Coverage is the total number of masked sites per class; ``\% Genome''
+            is the coverage divided by assembly size (1{,}043{,}519{,}078\,bp).}
+    \label{tab:sup_repeat_summary}
     \begin{tabular}{lrrrr}
         \toprule
-        Classification &
-            \shortstack{Number of \\ sites (bp)} &
-            \shortstack{Count of \\ elements} &
-            \shortstack{Proportion of \\ the genome} &
-            \shortstack{Number of \\ distinct elements} \\
+            Classification &
+                Coverage (bp) &
+                Count &
+                \% Genome &
+                \shortstack{Distinct \\ elements} \\
         \midrule
-        DNA                       & 88{,}203{,}702  & 217{,}040 & 0.08 & 335     \\
-        LINE                      & 95{,}553{,}328  & 199{,}835 & 0.09 & 511     \\
-        LTR                       & 39{,}476{,}928  & 87{,}021  & 0.04 & 362     \\
-        \shortstack[l]{Other (Simple Repeat, \\
-          ~~Microsatellite, RNA)} & 37{,}933{,}124  & 77{,}043  & 0.04 & 112     \\
-        Penelope                  & 25{,}187{,}297  & 61{,}172  & 0.02 & 112     \\
-        Rolling Circle            & 6{,}897{,}773   & 17{,}411  & 0.01 & 45      \\
-        SINE                      & 828{,}944       & 2{,}039   & 0.00 & 6       \\
-        Unclassified              & 404{,}513{,}462 & 966{,}499 & 0.39 & 1{,}520 \\
-        \bottomrule
+            DNA                                        & \num{379178613} & \num{895512}  & 36.34 & 35 \\
+            LINE                                       & \num{107103442} & \num{223314}  & 10.26 & 20 \\
+            LTR                                        & \num{50161694}  & \num{120887}  &  4.81 &  8 \\
+            \shortstack[l]{Other (Simple Repeat, \\
+                ~~Microsatellite, RNA)}                & \num{37359678}  & \num{74786}   &  3.58 &  3 \\
+            Penelope                                   & \num{25833119}  & \num{65921}   &  2.48 &  4 \\
+            Rolling Circle                             & \num{22238826}  & \num{42257}   &  2.13 &  1 \\
+            Retroposon                                 & \num{2095328}   & \num{5834}    &  0.20 &  2 \\
+            SINE                                       & \num{1253619}   & \num{4437}    &  0.12 &  3 \\
+            DIRS                                       & \num{1184091}   & \num{1285}    &  0.11 &  2 \\
+            Unclassified                               & \num{61450725}  & \num{148647}  &  5.89 &  1 \\
+            \midrule
+            Total                                      & \num{687859135} & \num{1582880} & 65.92 & 79 \\
+    \bottomrule
     \end{tabular}
-    \label{tab:sup_earlgrey_summary}
 \end{table}
 
 % Stats about polymorphism in the reference individual and the popgen samples.
@@ -97,22 +107,22 @@
             Reference Individual &
             Cape Perpetua (N=6) \\
         \midrule
-        Reference sequence length (bp)      & 904{,}940{,}360 & 904{,}940{,}360 \\
-        Genotyped sites post-filtering (bp) & 314{,}105{,}136 & 111{,}668{,}206 \\
-        Total variant sites (bp)            & 9{,}081{,}889   & 21{,}395{,}217  \\
-        Percent variant sites (\%)          & 2.89            & 19.16           \\
-        SNPs (N)                            & 8{,}725{,}877   & 20{,}501{,}788  \\
-        Indels (N)                          & 356{,}012       & 893{,}429       \\
-        Multiallelic SNPs (N)               & \texttt{NA}     & 996{,}103       \\
-        Percent multiallelic SNPs (\%)      & \texttt{NA}     & 4.86            \\
-        Mean variant sites per kbp (N)      & 14.66           & 41.05           \\
-        Median variant sites per kbp (N)    & 6               & 29              \\
-        St Dev variant sites per kbp (N)    & 19.86           & 40.82           \\
-        Variant sites in CDSs (N)           & 398{,}773       & 1{,}118{,}874   \\
-        Percent variants in CDS (\%)        & 4.69            & 5.23            \\
-        Mean variants per CDS (N)           & 4.34            & 12.19           \\
-        Median variants per CDS (N)         & 1               & 6               \\
-        St Dev variants per CDS (N)         & 11.75           & 25.84           \\
+        Reference sequence length (bp)      & \num{904940360} & \num{904940360} \\
+        Genotyped sites post-filtering (bp) & \num{314105136} & \num{111668206} \\
+        Total variant sites (bp)            & \num{9081889}   & \num{21395217} \\
+        Percent variant sites (\%)          & 2.89            & 19.16 \\
+        SNPs (N)                            & \num{8725877}   & \num{20501788} \\
+        Indels (N)                          & \num{356012}    & \num{893429} \\
+        Multiallelic SNPs (N)               & \texttt{NA}     & \num{996103} \\
+        Percent multiallelic SNPs (\%)      & \texttt{NA}     & 4.86 \\
+        Mean variant sites per kbp (N)      & 14.66           & 41.05 \\
+        Median variant sites per kbp (N)    & 6               & 29 \\
+        St Dev variant sites per kbp (N)    & 19.86           & 40.82 \\
+        Variant sites in CDSs (N)           & \num{398773}    & \num{1118874} \\
+        Percent variants in CDS (\%)        & 4.69            & 5.23 \\
+        Mean variants per CDS (N)           & 4.34            & 12.19 \\
+        Median variants per CDS (N)         & 1               & 6 \\
+        St Dev variants per CDS (N)         & 11.75           & 25.84 \\
         \bottomrule
     \end{tabular}
 \label{tab:sup_popgen_stats}
@@ -142,16 +152,16 @@
             \shortstack{St Dev $\log_2$ \\ enrichment} &
             \shortstack{Number of \\ chromosomes} \\
     \midrule
-        3' UTR     & 2{,}358{,}104   & $2.80\mathrm{e}{-3}$ & 152{,}598      & $3.00\mathrm{e}{-3}$ & $-0.0861$    & 0.0332       & 0.508        & 16 \\
-        5' UTR     & 530{,}151       & $6.30\mathrm{e}{-4}$ & 27{,}679       & $5.44\mathrm{e}{-4}$ & $-0.292$     & $-0.332$     & 0.453        & 16 \\
-        CDS        & 16{,}273{,}411  & 0.0193               & 2{,}225{,}138  & 0.0438               & 0.752        & 0.984        & 0.926        & 16 \\
-        TE         & 370{,}573{,}528 & 0.441                & 17{,}505{,}920 & 0.344                & $-0.359$     & $-0.305$     & 0.180        & 16 \\
-        intergenic & 196{,}612{,}776 & 0.234                & 10{,}688{,}761 & 0.210                & $-0.167$     & $-0.178$     & 0.167        & 16 \\
-        intron     & 111{,}562{,}654 & 0.133                & 8{,}575{,}960  & 0.169                & 0.419        & 0.297        & 0.432        & 16 \\
-        lncRNA     & 2{,}211{,}027   & $2.63\mathrm{e}{-3}$ & 130{,}744      & $2.57\mathrm{e}{-3}$ & $-0.174$     & $-0.133$     & 0.567        & 16 \\
-        multiple   & 141{,}022{,}121 & 0.168                & 11{,}537{,}936 & 0.227                & 0.418        & 0.438        & 0.167        & 16 \\
-        rRNA       & 2{,}106         & $2.50\mathrm{e}{-6}$ & 0.000          & 0.000                & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & 6  \\
-        tRNA       & 20{,}220        & $2.40\mathrm{e}{-5}$ & 5{,}162        & $1.02\mathrm{e}{-4}$ & 2.143        & 2.041        & 0.959        & 16 \\
+        3' UTR     & \num{2358104}   & $2.80\mathrm{e}{-3}$ & \num{152598}   & $3.00\mathrm{e}{-3}$ & $-0.0861$    & 0.0332       & 0.508        & 16 \\
+        5' UTR     & \num{530151}    & $6.30\mathrm{e}{-4}$ & \num{27679}    & $5.44\mathrm{e}{-4}$ & $-0.292$     & $-0.332$     & 0.453        & 16 \\
+        CDS        & \num{16273411}  & 0.0193               & \num{2225138}  & 0.0438               & 0.752        & 0.984        & 0.926        & 16 \\
+        TE         & \num{370573528} & 0.441                & \num{17505920} & 0.344                & $-0.359$     & $-0.305$     & 0.180        & 16 \\
+        intergenic & \num{196612776} & 0.234                & \num{10688761} & 0.210                & $-0.167$     & $-0.178$     & 0.167        & 16 \\
+        intron     & \num{111562654} & 0.133                & \num{8575960}  & 0.169                & 0.419        & 0.297        & 0.432        & 16 \\
+        lncRNA     & \num{2211027}   & $2.63\mathrm{e}{-3}$ & \num{130744}   & $2.57\mathrm{e}{-3}$ & $-0.174$     & $-0.133$     & 0.567        & 16 \\
+        multiple   & \num{141022121} & 0.168                & \num{11537936} & 0.227                & 0.418        & 0.438        & 0.167        & 16 \\
+        rRNA       & \num{2106}      & $2.50\mathrm{e}{-6}$ & 0.000          & 0.000                & \texttt{NaN} & \texttt{NaN} & \texttt{NaN} & 6 \\
+        tRNA       & \num{20220}     & $2.40\mathrm{e}{-5}$ & \num{5162}     & $1.02\mathrm{e}{-4}$ & 2.143        & 2.041        & 0.959        & 16 \\
    \bottomrule
 \end{tabular}
 \end{sidewaystable}
@@ -179,18 +189,18 @@
         Mean & Median & StDev &
         Mean & Median & StDev \\
     \midrule
-    \texttt{BalGla} & \balgla{}                              &  16{,}217 & 43.17 & 42.84 & 5.52 & 0.645 & 0.648 & 0.061 & 0.781 & 0.796 & 0.102 \\
-    \texttt{BalCre} & \textit{Balanus crenatus}              &   7{,}675 & 42.23 & 41.40 & 4.78 & 0.645 & 0.649 & 0.055 & 0.815 & 0.837 & 0.093 \\
-    \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       &  25{,}242 & 44.33 & 43.93 & 5.05 & 0.632 & 0.636 & 0.054 & 0.775 & 0.792 & 0.099 \\
-    \texttt{PolPol} & \textit{Pollicipes pollicipes}         &  17{,}607 & 42.04 & 41.57 & 4.56 & 0.644 & 0.648 & 0.049 & 0.829 & 0.845 & 0.082 \\
-    \texttt{DroMel} & \textit{Drosophila melanogaster}       &  12{,}312 & 49.97 & 50.47 & 3.99 & 0.534 & 0.540 & 0.053 & 0.630 & 0.640 & 0.110 \\
-    \texttt{AnoGam} & \textit{Anopheles gambiae}             &  11{,}804 & 48.43 & 48.92 & 5.09 & 0.556 & 0.566 & 0.062 & 0.667 & 0.688 & 0.136 \\
-    \texttt{CaeBre} & \textit{Caenorhabditis brenneri}       &  22{,}904 & 50.95 & 51.55 & 3.21 & 0.436 & 0.430 & 0.045 & 0.411 & 0.399 & 0.088 \\
-    \texttt{MagGig} & \textit{Magallana gigas}               &  24{,}963 & 53.34 & 53.66 & 2.58 & 0.442 & 0.441 & 0.043 & 0.433 & 0.426 & 0.085 \\
-    \texttt{StrPur} & \textit{Strongylocentrotus purpuratus} &  25{,}759 & 53.92 & 54.39 & 2.68 & 0.481 & 0.480 & 0.035 & 0.489 & 0.486 & 0.079 \\
-    \texttt{BraLan} & \textit{Branchiostoma lanceolatum}     &  23{,}301 & 51.20 & 51.78 & 3.57 & 0.537 & 0.536 & 0.043 & 0.620 & 0.619 & 0.095 \\
-    \texttt{CioInt} & \textit{Ciona intestinalis}            &  14{,}370 & 52.49 & 52.75 & 2.66 & 0.424 & 0.422 & 0.037 & 0.369 & 0.367 & 0.069 \\
-    \texttt{HomSap} & \textit{Homo sapiens}                  &  21{,}573 & 49.39 & 50.57 & 4.51 & 0.538 & 0.541 & 0.087 & 0.593 & 0.603 & 0.163 \\
+    \texttt{BalGla} & \balgla{}                              & \num{16217} & 43.17 & 42.84 & 5.52 & 0.645 & 0.648 & 0.061 & 0.781 & 0.796 & 0.102 \\
+    \texttt{BalCre} & \textit{Balanus crenatus}              & \num{7675}  & 42.23 & 41.40 & 4.78 & 0.645 & 0.649 & 0.055 & 0.815 & 0.837 & 0.093 \\
+    \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \num{25242} & 44.33 & 43.93 & 5.05 & 0.632 & 0.636 & 0.054 & 0.775 & 0.792 & 0.099 \\
+    \texttt{PolPol} & \textit{Pollicipes pollicipes}         & \num{17607} & 42.04 & 41.57 & 4.56 & 0.644 & 0.648 & 0.049 & 0.829 & 0.845 & 0.082 \\
+    \texttt{DroMel} & \textit{Drosophila melanogaster}       & \num{12312} & 49.97 & 50.47 & 3.99 & 0.534 & 0.540 & 0.053 & 0.630 & 0.640 & 0.110 \\
+    \texttt{AnoGam} & \textit{Anopheles gambiae}             & \num{11804} & 48.43 & 48.92 & 5.09 & 0.556 & 0.566 & 0.062 & 0.667 & 0.688 & 0.136 \\
+    \texttt{CaeBre} & \textit{Caenorhabditis brenneri}       & \num{22904} & 50.95 & 51.55 & 3.21 & 0.436 & 0.430 & 0.045 & 0.411 & 0.399 & 0.088 \\
+    \texttt{MagGig} & \textit{Magallana gigas}               & \num{24963} & 53.34 & 53.66 & 2.58 & 0.442 & 0.441 & 0.043 & 0.433 & 0.426 & 0.085 \\
+    \texttt{StrPur} & \textit{Strongylocentrotus purpuratus} & \num{25759} & 53.92 & 54.39 & 2.68 & 0.481 & 0.480 & 0.035 & 0.489 & 0.486 & 0.079 \\
+    \texttt{BraLan} & \textit{Branchiostoma lanceolatum}     & \num{23301} & 51.20 & 51.78 & 3.57 & 0.537 & 0.536 & 0.043 & 0.620 & 0.619 & 0.095 \\
+    \texttt{CioInt} & \textit{Ciona intestinalis}            & \num{14370} & 52.49 & 52.75 & 2.66 & 0.424 & 0.422 & 0.037 & 0.369 & 0.367 & 0.069 \\
+    \texttt{HomSap} & \textit{Homo sapiens}                  & \num{21573} & 49.39 & 50.57 & 4.51 & 0.538 & 0.541 & 0.087 & 0.593 & 0.603 & 0.163 \\
     \bottomrule
     \end{tabular}
 \end{sidewaystable}
@@ -223,18 +233,18 @@
         Mean & Median & StDev & Min & Max &
         Slope & Intercept & $\text{R}^2$ \\
     \midrule
-    \texttt{BalGla} & \bgla{}                  & 16{,}217 & 0.065 & 0.053 & 0.090 & $-0.344$ & 0.571 & 0.580 & 16.18 & 0.492 \\
-    \texttt{BalCre} & \textit{B. crenatus}     &  7{,}675 & 0.040 & 0.044 & 0.052 & $-0.235$ & 0.382 & 0.725 & 10.19 & 0.844 \\
-    \texttt{AmpAmp} & \textit{A. amphitrite}   & 25{,}242 & 0.052 & 0.055 & 0.047 & $-0.225$ & 0.517 & 0.747 & 9.27  & 0.868 \\
-    \texttt{PolPol} & \textit{P. pollicipes}   & 17{,}607 & 0.025 & 0.032 & 0.054 & $-0.265$ & 0.436 & 0.746 & 9.77  & 0.806 \\
-    \texttt{DroMel} & \textit{D. melanogaster} & 12{,}312 & 0.092 & 0.092 & 0.039 & $-0.125$ & 0.356 & 0.754 & 8.44  & 0.760 \\
-    \texttt{AnoGam} & \textit{A. gambiae}      & 11{,}804 & 0.074 & 0.075 & 0.040 & $-0.184$ & 0.480 & 0.779 & 7.58  & 0.871 \\
-    \texttt{CaeBre} & \textit{C. brenneri}     & 22{,}904 & 0.107 & 0.100 & 0.057 & $-0.079$ & 0.518 & 0.436 & 26.00 & 0.175 \\
-    \texttt{MagGig} & \textit{M. gigas}        & 24{,}963 & 0.079 & 0.076 & 0.040 & $-0.108$ & 0.567 & 0.560 & 20.89 & 0.330 \\
-    \texttt{StrPur} & \textit{S. purpuratus}   & 25{,}759 & 0.088 & 0.083 & 0.037 & $-0.287$ & 0.465 & 0.853 & 3.51  & 0.358 \\
-    \texttt{BraLan} & \textit{B. lanceolatum}  & 23{,}301 & 0.085 & 0.082 & 0.046 & $-0.166$ & 0.487 & 0.642 & 15.17 & 0.624 \\
-    \texttt{CioInt} & \textit{C. intestinalis} & 14{,}370 & 0.060 & 0.057 & 0.038 & $-0.156$ & 0.428 & 0.591 & 19.45 & 0.588 \\
-    \texttt{HomSap} & \textit{H. sapiens}      & 21{,}573 & 0.086 & 0.091 & 0.046 & $-0.201$ & 0.486 & 0.693 & 11.83 & 0.818 \\
+    \texttt{BalGla} & \bgla{}                  & \num{16217} & 0.065 & 0.053 & 0.090 & $-0.344$ & 0.571 & 0.580 & 16.18 & 0.492 \\
+    \texttt{BalCre} & \textit{B. crenatus}     & \num{7675}  & 0.040 & 0.044 & 0.052 & $-0.235$ & 0.382 & 0.725 & 10.19 & 0.844 \\
+    \texttt{AmpAmp} & \textit{A. amphitrite}   & \num{25242} & 0.052 & 0.055 & 0.047 & $-0.225$ & 0.517 & 0.747 & 9.27  & 0.868 \\
+    \texttt{PolPol} & \textit{P. pollicipes}   & \num{17607} & 0.025 & 0.032 & 0.054 & $-0.265$ & 0.436 & 0.746 & 9.77  & 0.806 \\
+    \texttt{DroMel} & \textit{D. melanogaster} & \num{12312} & 0.092 & 0.092 & 0.039 & $-0.125$ & 0.356 & 0.754 & 8.44  & 0.760 \\
+    \texttt{AnoGam} & \textit{A. gambiae}      & \num{11804} & 0.074 & 0.075 & 0.040 & $-0.184$ & 0.480 & 0.779 & 7.58  & 0.871 \\
+    \texttt{CaeBre} & \textit{C. brenneri}     & \num{22904} & 0.107 & 0.100 & 0.057 & $-0.079$ & 0.518 & 0.436 & 26.00 & 0.175 \\
+    \texttt{MagGig} & \textit{M. gigas}        & \num{24963} & 0.079 & 0.076 & 0.040 & $-0.108$ & 0.567 & 0.560 & 20.89 & 0.330 \\
+    \texttt{StrPur} & \textit{S. purpuratus}   & \num{25759} & 0.088 & 0.083 & 0.037 & $-0.287$ & 0.465 & 0.853 & 3.51  & 0.358 \\
+    \texttt{BraLan} & \textit{B. lanceolatum}  & \num{23301} & 0.085 & 0.082 & 0.046 & $-0.166$ & 0.487 & 0.642 & 15.17 & 0.624 \\
+    \texttt{CioInt} & \textit{C. intestinalis} & \num{14370} & 0.060 & 0.057 & 0.038 & $-0.156$ & 0.428 & 0.591 & 19.45 & 0.588 \\
+    \texttt{HomSap} & \textit{H. sapiens}      & \num{21573} & 0.086 & 0.091 & 0.046 & $-0.201$ & 0.486 & 0.693 & 11.83 & 0.818 \\
     \bottomrule
     \end{tabular}
 \end{table}
@@ -259,16 +269,16 @@
             Mean & Median & StDev \\
         \midrule
         % Feature                            meanPi   medianPi               sdPi     nWinds     meanWinLen   MedWinLen   sdWinLen      nBP              meanWinBP     medWinBP  sdWinBP
-        \shortstack[l]{Genome\\wide}       & 0.0506 & 0.0531               & 0.0188 & 44{,}599 & 9{,}998.570 & 10{,}000 & 103.774     & 93{,}583{,}599 & 2{,}098.334 & 1{,}932 & 821.464     \\
-        Intergenic                         & 0.0507 & 0.0526               & 0.0210 & 29{,}219 & 7{,}688.054 & 10{,}000 & 3531.991    & 45{,}677{,}153 & 1{,}563.269 & 1{,}431 & 956.166     \\
-        CDS                                & 0.0302 & 0.0270               & 0.0221 & 78{,}630 & 270.688     & 161      & 405.314     & 9{,}447{,}233  & 120.148     & 80      & 163.758     \\
-        Intron                             & 0.0646 & 0.0650               & 0.0299 & 67{,}638 & 2{,}182.716 & 686      & 5{,}257.832 & 34{,}345{,}262 & 507.781     & 209     & 1{,}090.025 \\
-        5' UTR                             & 0.0398 & 0.0338               & 0.0309 & 6{,}013  & 153.063     & 114      & 148.787     & 424{,}412      & 70.582      & 54      & 63.678      \\
-        3' UTR                             & 0.0489 & 0.0468               & 0.0294 & 8{,}218  & 648.360     & 542      & 485.406     & 2{,}083{,}933  & 253.582     & 210     & 194.076     \\
-        lncRNA                             & 0.0341 & 0.0302               & 0.0246 & 27{,}168 & 399.958     & 184      & 511.811     & 4{,}557{,}588  & 167.756     & 91      & 200.540     \\
-        tRNA                               & 0.0118 & $5.21\mathrm{e}{-3}$ & 0.0236 & 430      & 66.177      & 72       & 16.982      & 13{,}804       & 32.102      & 32      & 14.305      \\
-        \shortstack[l]{0-fold\\degenerate} & 0.0107 & $2.92\mathrm{e}{-3}$ & 0.0178 & 75{,}895 & 269.321     & 162      & 401.035     & 5{,}397{,}246  & 71.115      & 46      & 96.221      \\
-        \shortstack[l]{4-fold\\degenerate} & 0.0790 & 0.0750               & 0.0483 & 39{,}170 & 281.364     & 176      & 380.879     & 1{,}410{,}361  & 36.006      & 23      & 46.585      \\
+        \shortstack[l]{Genome\\wide}       & 0.0506 & 0.0531               & 0.0188 & \num{44599} & \num{9998.570} & \num{10000} & 103.774        & \num{93583599} & \num{2098.334} & \num{1932} & 821.464 \\
+        Intergenic                         & 0.0507 & 0.0526               & 0.0210 & \num{29219} & \num{7688.054} & \num{10000} & \num{3531.991} & \num{45677153} & \num{1563.269} & \num{1431} & 956.166 \\
+        CDS                                & 0.0302 & 0.0270               & 0.0221 & \num{78630} & 270.688        & 161         & 405.314        & \num{9447233}  & 120.148        & 80         & 163.758 \\
+        Intron                             & 0.0646 & 0.0650               & 0.0299 & \num{67638} & \num{2182.716} & 686         & \num{5257.832} & \num{34345262} & 507.781        & 209        & \num{1090.025} \\
+        5' UTR                             & 0.0398 & 0.0338               & 0.0309 & \num{6013}  & 153.063        & 114         & 148.787        & \num{424412}   & 70.582         & 54         & 63.678 \\
+        3' UTR                             & 0.0489 & 0.0468               & 0.0294 & \num{8218}  & 648.360        & 542         & 485.406        & \num{2083933}  & 253.582        & 210        & 194.076 \\
+        lncRNA                             & 0.0341 & 0.0302               & 0.0246 & \num{27168} & 399.958        & 184         & 511.811        & \num{4557588}  & 167.756        & 91         & 200.540 \\
+        tRNA                               & 0.0118 & $5.21\mathrm{e}{-3}$ & 0.0236 & \num{430}   & 66.177         & 72          & 16.982         & \num{13804}    & 32.102         & 32         & 14.305 \\
+        \shortstack[l]{0-fold\\degenerate} & 0.0107 & $2.92\mathrm{e}{-3}$ & 0.0178 & \num{75895} & 269.321        & 162         & 401.035        & \num{5397246}  & 71.115         & 46         & 96.221 \\
+        \shortstack[l]{4-fold\\degenerate} & 0.0790 & 0.0750               & 0.0483 & \num{39170} & 281.364        & 176         & 380.879        & \num{1410361}  & 36.006         & 23         & 46.585 \\
     \bottomrule
     \end{tabular}
 \end{sidewaystable}
@@ -284,18 +294,18 @@
         \toprule
             Genome & Species & NCBI accession \\
         \midrule
-            \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \texttt{GCF\_019059575.1}  \\
-            \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \texttt{GCA\_037642225.1}  \\
-            \texttt{AmpImp} & \textit{Amphibalanus improvisus}       & \texttt{GCA\_964274985.1}  \\
-            \texttt{CapMit} & \textit{Capitulum mitella}             & \texttt{GCA\_030062745.1}  \\
-            \texttt{PolPol} & \textit{Pollicipes pollicipes}         & \texttt{GCF\_011947565.3}  \\
-            \texttt{DroMel} & \textit{Drosophila melanogaster}       & \texttt{GCF\_000001215.4}  \\
-            \texttt{AnoGam} & \textit{Anopheles gambiae}             & \texttt{GCF\_943734735.2}  \\
-            \texttt{CaeBre} & \textit{Caenorhabditis brenneri}       & \texttt{GCA\_964036135.1}  \\
-            \texttt{MagGig} & \textit{Magallana gigas}               & \texttt{GCF\_963853765.1}  \\
-            \texttt{StrPur} & \textit{Strongylocentrotus purpuratus} & \texttt{GCF\_000002235.5}  \\
-            \texttt{BraLan} & \textit{Branchiostoma lanceolatum}     & \texttt{GCF\_035083965.1}  \\
-            \texttt{CioInt} & \textit{Ciona intestinalis}            & \texttt{GCF\_018327825.1}  \\
+            \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \texttt{GCF\_019059575.1} \\
+            \texttt{AmpAmp} & \textit{Amphibalanus amphitrite}       & \texttt{GCA\_037642225.1} \\
+            \texttt{AmpImp} & \textit{Amphibalanus improvisus}       & \texttt{GCA\_964274985.1} \\
+            \texttt{CapMit} & \textit{Capitulum mitella}             & \texttt{GCA\_030062745.1} \\
+            \texttt{PolPol} & \textit{Pollicipes pollicipes}         & \texttt{GCF\_011947565.3} \\
+            \texttt{DroMel} & \textit{Drosophila melanogaster}       & \texttt{GCF\_000001215.4} \\
+            \texttt{AnoGam} & \textit{Anopheles gambiae}             & \texttt{GCF\_943734735.2} \\
+            \texttt{CaeBre} & \textit{Caenorhabditis brenneri}       & \texttt{GCA\_964036135.1} \\
+            \texttt{MagGig} & \textit{Magallana gigas}               & \texttt{GCF\_963853765.1} \\
+            \texttt{StrPur} & \textit{Strongylocentrotus purpuratus} & \texttt{GCF\_000002235.5} \\
+            \texttt{BraLan} & \textit{Branchiostoma lanceolatum}     & \texttt{GCF\_035083965.1} \\
+            \texttt{CioInt} & \textit{Ciona intestinalis}            & \texttt{GCF\_018327825.1} \\
             \texttt{HomSap} & \textit{Homo sapiens}                  & \texttt{GCF\_000001405.40} \\
         \bottomrule
     \end{tabular}

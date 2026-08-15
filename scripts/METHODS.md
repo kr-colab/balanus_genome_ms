@@ -280,6 +280,18 @@ Crustacean repeat sequences as the starting consensus library for an initial mas
 and using "`arthropoda`" as the initial search term for `RepeatMasker` version
 `4.1.2`.
 
+* `run_TEsorter.sh`
+
+Re-annotate the repeat library produced by `EarlGrey` using `TEsorter` version
+`1.5.1`.
+
+* `run_DeepTE.sh`
+
+Annotate the unknown fraction of the repeat library using `DeepTE` (commit
+`1f76ff9`) against the pre-trained Metazoan model set. It runs two steps.
+First it does a domain search. The identified domains were then propagated
+into a regular classification run.
+
 #### Annotating protein coding genes.
 
 The directory `scripts/genome_annotation/braker` contains various scripts for

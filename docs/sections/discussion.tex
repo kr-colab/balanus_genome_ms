@@ -12,7 +12,7 @@ In accordance, we observe a barnacle genome with extreme levels of genetic diver
 both at the individual and population level (Figure~\ref{fig:sup_kmers};
 Table~\ref{tab:sup_popgen_stats}), a substantial proportion of which is located in
 coding sequences.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Similarly, large populations are expected to experience an increase in the efficacy of
 purifying selection, which is expected to reduce the levels of diversity and increase 
@@ -37,7 +37,7 @@ We observe this pattern as well: in this central Oregon population, the majority
 (54 to 61\%, depending on the metric of $\alpha$ used) of non-synonymous substitutions
 reached fixation due to positive selection, a proportion higher than that observed in
 diverse \textit{Drosophila} populations \citep{haller_asymptoticmk_2017}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 In large enough populations, selection should be efficacious enough that its effects
 extend to synonymous sites, where substitutions are normally considered neutral.
@@ -45,21 +45,24 @@ This could result in a bias in the usage of synonymous codons, as different codo
 favored over others due to GC biases, mRNA stability, tRNA abundance, and other factors
 \citep{galtier_codon_2018,presnyak_codon_2015}.
 These effects are observed in the \bgla{} assembly in the form of reduction in the
-effective number of codons seen across protein-coding genes (Figure~\ref{fig:codon_enc}).
-On average, \bgla{} uses $\approx$ 43 out of 61 available codons, a greater reduction
-than that observed in \textit{D. melanogaster} (Figure~\ref{fig:sup_dmel_enc}).
-This strong bias in codon usage further reflects an increase in the efficacy of natural
-selection due to the large size of Pacific acorn barnacle populations.
+effective number of codons seen across protein-coding genes.
+On average, \bgla{} uses $\approx$ 43 out of 61 available codons, a greater reduction than
+that observed in other metazoan genomes (Figure~\ref{fig:codon_enc};
+Table~\ref{tab:sup_enc_summary}).
+There is moderate evidence that this bias is not the product of compositional neutral
+processes (Figure~\ref{fig:sup_enc_gc3s};~Figure~\ref{fig:sup_enc_reg}), suggesting an
+increase in the efficacy of natural selection due to the large size of Pacific acorn
+barnacle populations.
 Moreover, these biases put into question the neutrality of at least some synonymous
 substitutions in this system, which could have important ramifications for the study of
 molecular evolution; however, the extent of these effects remain presently unknown and
 should be the subject of future study.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 In contrast, the distribution of transposable and repeat elements in the
 \bgla{} assembly was unexpected, as we find a highly repetitive genome
 composed of over 60\% repeats (Figure~\ref{fig:genome_pi};
-Table~\ref{tab:sup_earlgrey_summary}).
+Table~\ref{tab:sup_repeat_summary}).
 Previous work has shown that purifying selection plays a key role in the accumulation
 and fixation of transposable elements \citep{merel_relaxed_2025,langmuller_genomic_2023,
 bourque_ten_2018}, following the expectation that repetitive sequences are, on average,
@@ -95,7 +98,7 @@ positive selection ($\alpha_\text{asym}$ = 0.610).
 At first glance, these results appear contradictory: how can coding sequences be
 under strong purifying selection while simultaneously showing pervasive adaptive
 evolution?
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The resolution lies in the fact that \dnds{} and the McDonald-Kreitman test measure
 fundamentally different quantities. The \dnds{} ratio averages across all
@@ -112,7 +115,7 @@ species with many weakly deleterious non-synonymous variants segregating at
 appreciable frequencies, this can inflate the non-synonymous divergence and distort
 estimates of selection \citep{li_reverse_2008}. By explicitly separating
 polymorphism from fixation, the McDonald-Kreitman test avoids this conflation.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 \citet{li_reverse_2008} compared the performance of \dnds{} and the McDonald-Kreitman
 test across human, \textit{Drosophila}, and yeast genomes and found that the two
@@ -124,7 +127,7 @@ lower-diversity human and yeast datasets, the pattern was reversed. This finding
 suggests that the statistical power of the McDonald-Kreitman test is greatest in
 high-polymorphism species, making it particularly well suited for systems like
 barnacles where segregating variation is abundant.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The pattern we observe in \bgla{} is thus consistent with theoretical expectations
 for large populations: strong purifying selection efficiently removes the majority
@@ -138,7 +141,7 @@ Our estimate of $\alpha_\text{asym}$ of 0.610 in \bgla{} is comparable to
 or slightly higher than that in \textit{Drosophila}, consistent with the expectation
 that the even larger effective population size in barnacles further increases the
 efficacy of both modes of selection.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 \subsection*{Barnacles as models for evolution at biological extremes}
 
@@ -156,15 +159,15 @@ among the most constrained sites in the genome, exceeds the genome-wide diversit
 observed in these \textit{Drosophila} populations.
 While elevated, this level of diversity is not unique to barnacles.
 Similar magnitudes of genome-wide $\pi$ ($\approx10^{-2}$) have been observed
-in other eukaryotic taxa, including corals \citep{meziere_corals_2025}, parasitic
-nematodes \citep{stevens_nematodes_2023}, bivalves \citep{liu_bivalves_2025},
-mosquitoes \citep{kent_aedes_2025,ag1000g}, and lancelets \citep{braso-vives_highly_2026}.
+in other metazoan taxa, including corals \citep{meziere_corals_2025}, bivalves
+\citep{liu_bivalves_2025}, mosquitoes \citep{kent_aedes_2025,ag1000g}, nematodes
+\citep{teterina_nematodes_2023}, and lancelets \citep{braso-vives_highly_2026}.
 Moreover, as with other marine invertebrates, barnacle life history traits are likely
 direct drivers of the elevated polymorphism observed, as factors such as large census
 sizes, small propagule size, large brood size, long larval dispersal, and broad geographic
 distribution have been positively correlated with high genetic diversity in these
 organisms \citep{leffler_revisiting_2012,romiguier_comparative_2014}.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 The magnitude of diversity observed in \bgla{} solidly places them among
 hyperpolymorphic populations, those exhibiting diversity above 5\%
@@ -185,7 +188,7 @@ This observation reiterates the importance of future studies of genetic diversit
 of this species over its whole geographic range, providing some insights on
 the mechanisms that maintain population and species boundaries in the presence
 of extreme genetic diversity.
-\vspace{0.2cm}
+\vspace{0.1cm}
 
 Beyond species boundaries, the extreme diversity observed in barnacles also speaks to
 a long-standing question in population genetics: the relationship between effective
