@@ -4,11 +4,11 @@
 
 We assembled a chromosome-level reference genome for the Pacific acorn barnacle
 using PacBio HiFi long reads and Hi-C data.
-Preliminary k-mer assessment of the HiFi reads revealed an expected genome
+Preliminary $k$-mer assessment of the HiFi reads revealed an expected genome
 size of $\approx$ 845\,Mbp, with a heterozygosity of over 3\% (Figure~\ref{fig:sup_kmers}).
 After purging haplotigs, scaffolding, and polishing the sequences (see
-\nameref{sec:methods_assembly}), the final assembly was composed of 592 fragments, and 
-had a total sequence length of 1.04\,Gbp and a scaffold N50 of 51.41\,Mbp
+\nameref{sec:methods_assembly}), the curated assembly was composed of 592 fragments,
+and had a total sequence length of 1.04\,Gbp and a scaffold N50 of 51.41\,Mbp
 (Table~\ref{tab:sup_asm_stats}).
 The assembly was 94.08\% gene-complete, with 4.64\% duplicates, for the
 \texttt{arthropoda\_odb10} \textsc{BUSCO} dataset
@@ -30,10 +30,9 @@ be classified among the major repeat families.
 This large fraction of unclassified repeats is likely the product of the small number
 of representative barnacle sequences among reference repeat databases, further reflecting
 the status of barnacles as a genomically understudied group.
-We proceeded to re-classify this large fraction of unknown repeat elements using
-\textsc{TEsorter} \citep{zhang_tesorter_2022}, followed by \textsc{DeepTE}
-\citep{yan_deepte_2020},
-which reduced the fraction of unclassified elements to only 5.89\% of the total assembly.
+Re-classification of this unknown fraction by \textsc{TEsorter}
+\citep{zhang_tesorter_2022} and \textsc{DeepTE} \citep{yan_deepte_2020} reduced the
+fraction of unclassified elements to only 5.89\% of the total assembly.
 This classification approach identified DNA repeat elements as the most common repeat
 class in the \bgla{} genome, comprising 36.3\% of the total assembly
 (Table~\ref{tab:sup_repeat_summary}).
@@ -42,14 +41,13 @@ and 4.81\% of the assembly, respectively.
 \vspace{0.1cm}
 
 We annotated protein-coding genes in the \bgla{} assembly using a combination of
-short-read RNAseq and long-read PacBio Iso-Seq data (see
-\nameref{sec:methods_protein_coding}).
+short-read RNAseq and long-read PacBio Iso-Seq data.
 This process resulted in 20{,}234 protein-coding genes annotated, which had a
 \textsc{BUSCO} completeness of 93.58\% and 84.77\% for the \texttt{arthropoda\_odb10}
 and \texttt{crustacea\_odb12} datasets, respectively (Table~\ref{tab:sup_annot_stats}).
-Comparing this annotation against the proteomes of four other barnacle species (see
-\nameref{sec:methods_orthologs}) assigned orthology to 16{,}978 (83.91\%) \bgla{}
-protein-coding genes, including 2{,}576 single-copy orthologs across all five species.
+Comparing this annotation against the proteomes of four other barnacle species assigned
+orthology to 16{,}978 (83.91\%) \bgla{} protein-coding genes, including 2{,}576
+single-copy orthologs across all five species.
 In addition to protein-coding genes, we also annotated non-coding elements in the
 genome, identifying 7{,}532 long, non-coding RNAs (lncRNA), 1{,}203 transfer RNAs (tRNA),
 and 24 ribosomal RNA (rRNA) genes.

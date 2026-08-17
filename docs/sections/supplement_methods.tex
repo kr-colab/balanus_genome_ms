@@ -19,14 +19,14 @@ These two sequencing runs yielded a total of 3.06 million reads with a read N50 
 
 \subsubsection*{Estimating genome size and heterozygosity}
 
-We used k-mers to estimate the size and heterozygosity of the \textit{B.
+We used $k$-mers to estimate the size and heterozygosity of the \textit{B.
 crenatus} genome.
-First, we counted k-mers present in the PacBio HiFi reads using
+First, we counted $k$-mers present in the PacBio HiFi reads using
 \textsc{jellyfish} version \texttt{2.2.10} \citep{marcais_fast_2011}, counting
 21-mers (\texttt{-{}-mer-len 21}) present in both strands (\texttt{-{}-canonical}).
 These counts were then used to generate an empirical distribution of 21-mers
 using the \textsc{jellyfish} \texttt{histo} command.
-The final model of the diploid, genome-wide k-mer distribution was then performed
+The final model of the diploid, genome-wide $k$-mer distribution was then performed
 using \textsc{GenomeScope2} version \texttt{2.0}
 \citep{ranallo-benavidez_genomescope_2020}.
 We estimated the \textit{B. crenatus} genome size to be 755{,}696{,}144\,bp in length,
@@ -38,7 +38,7 @@ We generated a contig-level genome assembly using \textsc{hifiasm} version
 \texttt{0.19.8-r603} \citep{cheng_haplotype-resolved_2021,cheng_haplotype-resolved_2022},
 using strict parameters for the identification and purging of haplotig sequences.
 This assembly was generated using an estimated haploid genome size of 800\,Mbp
-(\texttt{-{}-hg-size 800m}), dropping k-mers observed over ten times the average coverage
+(\texttt{-{}-hg-size 800m}), dropping $k$-mers observed over ten times the average coverage
 (\texttt{-D 10.0}), and allowing scaffolding (\texttt{-{}-dual-scaf}).
 For handling haplotigs, we set the expected coverage at homozygous sites to
 40x (\texttt{-{}-hom-cov 40}), the upper bound of coverage to purging duplicates to 40x

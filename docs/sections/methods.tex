@@ -244,7 +244,7 @@ soft-masked genome (\texttt{-d yes}).
 \vspace{0.1cm}
 
 Since the homology-based repeat classification from \textsc{EarlGrey} produces a large
-fraction of unknown elements ($>$30\% of the assembly), we ran additional classification
+fraction of unknown elements ($>$35\% of the assembly), we ran additional classification
 steps on this unknown subset of identified repeats.
 First, we ran \textsc{TEsorter} version \texttt{1.5.1} \citep{zhang_tesorter_2022},
 searching against the \texttt{REXdb} version \texttt{3.1} metazoan repeat domain
@@ -350,13 +350,13 @@ using the \textsc{TransDecoder} auxiliary scripts, filtering whole transcripts a
 isoforms lacking homology and coding predictions.
 \vspace{0.1cm}
 
-Lastly, we merged this curated isoform annotation with our \textsc{braker} annotation
+Lastly, we merged this curated isoform annotation with our \textsc{BRAKER} annotation
 using the \textsc{tacoRNA} software version \texttt{0.7.3} \citep{niknafs_taco_2017}.
 First, we used \texttt{taco\_run} to merge the two annotations, disabling the filter
 by expression levels (\texttt{-{}-filter-min-expr "0.0"}).
 The merged annotation was then compared to the reference genome and annotation using
 \texttt{taco\_refcomp} to ensure overlap of the merged transcripts.
-The final annotation was processed using the \textsc{agat} software version \texttt{1.4.3}
+The final annotation was processed using \textsc{agat} version \texttt{1.4.3}
 \citep{dainat_another_2022} to sort by genomic coordinates, add missing annotation features,
 and standardize annotation IDs.
 We performed quality control of the merged annotation by assessing gene-completeness
@@ -440,13 +440,13 @@ present in all five species.
 We identified regions of conserved synteny between barnacle genomes using the software
 \textsc{Synolog} version \texttt{1.0} \citep{madrigal_synolog_2026}.
 First, we used the \texttt{synolog\_cctl.py} script to build a new \textsc{Synolog}
-cache (\texttt{new}).
-The assembly and annotation information for the target genomes (\bgla{},
+cache (\texttt{new} command).
+The assembly and annotation for the target genomes (\bgla{},
 \textit{A. amphitrite}, and \textit{P. pollicipes}) were then added to this cache
 using the \texttt{species}, \texttt{annotation}, \texttt{genes}, and
 \texttt{integration} commands.
 After the cache was populated, we used the \texttt{synolog\_blastctl.py} to run
-and manage pairwise sequence comparisons between all species, using \textsc{blastp}
+pairwise sequence comparisons between all species, using \textsc{blastp}
 version \texttt{2.15.0}.
 The core \textsc{Synolog} algorithm was then executed using the \texttt{synolog\_run.py}
 script.
@@ -761,18 +761,3 @@ time segments (\texttt{-p 1*2+25*1+1*2+1*3}), a generation time of 1 (to keep th
 in generations instead of years), and a $\mu$ of $3\times10^{-9}$.
 We estimated historical \Ne{} for our six Cape Perpetua individuals; however since
 our genotypes were not phased, we ran \textsc{msmc2} for each individual separately.
-
-\subsection*{Data availability}
-
-The raw sequencing data for the assembly and annotation of the \bgla{} and \textit{B.
-crenatus} genomes is available on NCBI under BioProject \texttt{PRJNA1378260}.
-Raw whole-genome sequencing data for central Oregon \bgla{} samples is available on NCBI
-BioProject \texttt{PRJNA1434535}.
-Copies of the bioinformatic scripts used for analysis and the raw files used to generate
-this document are available on GitHub
-(\url{https://github.com/kr-colab/balanus_genome_ms}).
-Additional copies of the final assembly and annotation files for \bgla{} and 
-\textit{B. crenatus} available on Dryad (\url{https://doi.org/10.5061/dryad.pvmcvdp21 }).
-\comment{Note: NCBI, GitHub, and Dryad repositories are currently private.
-Reviewer links are available upon request.}
-
